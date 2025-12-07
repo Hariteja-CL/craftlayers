@@ -1,0 +1,4718 @@
+[
+  {
+    "Chart / Accent (optional but recommended)": {
+      "modes": {
+        "Mode 1": {
+          "ColorAccent1": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "color",
+            "$libraryName": "",
+            "$collectionName": "Color Styles",
+            "$value": "{Pastel.Periwinkle.400}"
+          },
+          "ColorAccent2": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "color",
+            "$libraryName": "",
+            "$collectionName": "Color Styles",
+            "$value": "{Pastel.Green.400}"
+          },
+          "ColorAccent3": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "color",
+            "$libraryName": "",
+            "$collectionName": "Color Styles",
+            "$value": "{Pastel.Yellow.400}"
+          },
+          "ColorAccent4": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "color",
+            "$libraryName": "",
+            "$collectionName": "Color Styles",
+            "$value": "{Pastel.Coral.400}"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Color Styles": {
+      "modes": {
+        "Large": {
+          "Grey Scale": {
+            "Gray0": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#ffffff"
+            },
+            "Gray1000": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#000000"
+            },
+            "Gray 800 (Text)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#18191a"
+            },
+            "Gray 700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#2b2d2e"
+            },
+            "Gray 600": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#383b3c"
+            },
+            "Gray 500": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "minimum dark color",
+              "$type": "color",
+              "$value": "#505355"
+            },
+            "Gray 400": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Place holders",
+              "$type": "color",
+              "$value": "#73787a"
+            },
+            "Gray 300 (S)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "For strocks and outlines",
+              "$type": "color",
+              "$value": "#a1a6a8"
+            },
+            "Gray200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#d5dbde"
+            },
+            "Gray 100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f0f4f5"
+            },
+            "Gray 20(Bg)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f8fafb"
+            },
+            "Gray 10": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#fcfcfd"
+            }
+          },
+          "Primary": {
+            "Main": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff3e0"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe0b2"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffcc80"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffb74d"
+              },
+              "400": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/500 (p)"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffa726"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e69500"
+              },
+              "700": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/900"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#cc8400"
+              },
+              "500 (p)": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/500 (p)"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffa500"
+              }
+            }
+          },
+          "Warning": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f9ead1"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f7b84f"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#c4851c"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#936415"
+            },
+            "500 (p)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f5a623"
+            }
+          },
+          "Success": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#e5fff1"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#65d7a1"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0d8041"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0a5d30"
+            },
+            "500 (p)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0fa251"
+            }
+          },
+          "Error": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#ffdbe2"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#c0334d"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#8d001a"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#6a0013"
+            },
+            "500 (P)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#b00020"
+            }
+          },
+          "Info": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#e5f2ff"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#3395ff"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0062cc"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#004999"
+            },
+            "500 (P)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#007aff"
+            }
+          },
+          "Pastel": {
+            "Green": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f1faf4"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e7f8f0"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#c9edd8"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a4e3c2"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#81d7ae"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#5fcb9b"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#38b784"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#159a6f"
+              }
+            },
+            "Teal": {
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e5faf8"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#bdf1ec"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#91e6de"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#65dbd0"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#3dd1c2"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#22b7ab"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#0c9d94"
+              },
+              "100 2": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e8f9f6"
+              }
+            },
+            "Blue": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f3f8fe"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#eaf6fd"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#d4eefb"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#bee6f9"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#76c1fa"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#50a9ee"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#2d92e2"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#1b79b1"
+              }
+            },
+            "Periwinkle": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f5f7ff"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f4f6fd"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e1e8fa"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#cfdbf7"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a7b6f7"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#8d9bf3"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#6e7ee2"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#515fc9"
+              }
+            },
+            "Purple": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f7f3ff"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f5f1fa"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e8dbf4"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#dac7ed"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#b39ddb"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a682d7"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#885cd0"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#6d3aae"
+              }
+            },
+            "Magenta": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff0fa"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fdedf7"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f7d1ec"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f3b4e1"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e3a2d9"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#da82c3"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#c961a4"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a03d80"
+              }
+            },
+            "Pink": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff5f9"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fde9f2"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f8cce5"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f2afd8"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f48fb1"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f06292"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ec407a"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#b83b77"
+              }
+            },
+            "Coral": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff4ef"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff0ec"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffdad2"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffc2b2"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffb4a2"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ff9b85"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f2785c"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#d65739"
+              }
+            },
+            "Orange": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff7e6"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff3e6"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe1c7"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffd0a9"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffbd89"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffaa6a"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ff974b"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e67f32"
+              }
+            },
+            "Yellow": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fffbea"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fffbe3"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff4bc"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe995"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffdd6c"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffd247"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffc624"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e6a900"
+              }
+            }
+          },
+          "Selected": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "boolean",
+            "$value": true
+          }
+        },
+        "Mode": {
+          "Grey Scale": {
+            "Gray0": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#ffffff"
+            },
+            "Gray1000": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#000000"
+            },
+            "Gray 800 (Text)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#18191a"
+            },
+            "Gray 700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#2b2d2e"
+            },
+            "Gray 600": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#383b3c"
+            },
+            "Gray 500": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "minimum dark color",
+              "$type": "color",
+              "$value": "#505355"
+            },
+            "Gray 400": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Place holders",
+              "$type": "color",
+              "$value": "#73787a"
+            },
+            "Gray 300 (S)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "For strocks and outlines",
+              "$type": "color",
+              "$value": "#a1a6a8"
+            },
+            "Gray200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#d5dbde"
+            },
+            "Gray 100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f0f4f5"
+            },
+            "Gray 20(Bg)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f8fafb"
+            },
+            "Gray 10": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#fcfcfd"
+            }
+          },
+          "Primary": {
+            "Main": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff3e0"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe0b2"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffcc80"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffb74d"
+              },
+              "400": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/500 (p)"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffa726"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e69500"
+              },
+              "700": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/900"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#cc8400"
+              },
+              "500 (p)": {
+                "$codeSyntax": {
+                  "WEB": "Primary/Teal/500 (p)"
+                },
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffa500"
+              }
+            }
+          },
+          "Warning": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f9ead1"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f7b84f"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#c4851c"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#936415"
+            },
+            "500 (p)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#f5a623"
+            }
+          },
+          "Success": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#e5fff1"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#65d7a1"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0d8041"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0a5d30"
+            },
+            "500 (p)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0fa251"
+            }
+          },
+          "Error": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#ffdbe2"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#c0334d"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#8d001a"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#6a0013"
+            },
+            "500 (P)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#b00020"
+            }
+          },
+          "Info": {
+            "100": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#e5f2ff"
+            },
+            "200": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#3395ff"
+            },
+            "700": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#0062cc"
+            },
+            "900": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#004999"
+            },
+            "500 (P)": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$value": "#007aff"
+            }
+          },
+          "Pastel": {
+            "Green": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f1faf4"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e7f8f0"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#c9edd8"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a4e3c2"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#81d7ae"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#5fcb9b"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#38b784"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#159a6f"
+              }
+            },
+            "Teal": {
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e5faf8"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#bdf1ec"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#91e6de"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#65dbd0"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#3dd1c2"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#22b7ab"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#0c9d94"
+              },
+              "100 2": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e8f9f6"
+              }
+            },
+            "Blue": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f3f8fe"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#eaf6fd"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#d4eefb"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#bee6f9"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#76c1fa"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#50a9ee"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#2d92e2"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#1b79b1"
+              }
+            },
+            "Periwinkle": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f5f7ff"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f4f6fd"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e1e8fa"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#cfdbf7"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a7b6f7"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#8d9bf3"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#6e7ee2"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#515fc9"
+              }
+            },
+            "Purple": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f7f3ff"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f5f1fa"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e8dbf4"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#dac7ed"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#b39ddb"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a682d7"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#885cd0"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#6d3aae"
+              }
+            },
+            "Magenta": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff0fa"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fdedf7"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f7d1ec"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f3b4e1"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e3a2d9"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#da82c3"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#c961a4"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#a03d80"
+              }
+            },
+            "Pink": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff5f9"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fde9f2"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f8cce5"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f2afd8"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f48fb1"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f06292"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ec407a"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#b83b77"
+              }
+            },
+            "Coral": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff4ef"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff0ec"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffdad2"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffc2b2"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffb4a2"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ff9b85"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#f2785c"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#d65739"
+              }
+            },
+            "Orange": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff7e6"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff3e6"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe1c7"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffd0a9"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffbd89"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffaa6a"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ff974b"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e67f32"
+              }
+            },
+            "Yellow": {
+              "50": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fffbea"
+              },
+              "100": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fffbe3"
+              },
+              "200": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#fff4bc"
+              },
+              "300": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffe995"
+              },
+              "400": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffdd6c"
+              },
+              "500": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffd247"
+              },
+              "600": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#ffc624"
+              },
+              "700": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$type": "color",
+                "$value": "#e6a900"
+              }
+            }
+          },
+          "Selected": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "boolean",
+            "$value": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "Container Layout": {
+      "modes": {
+        "Large": {
+          "ContainerMaxWidthSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile / small container width",
+            "$type": "float",
+            "$value": 720
+          },
+          "ContainerMaxWidthMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet / medium container width",
+            "$type": "float",
+            "$value": 960
+          },
+          "ContainerMaxWidthLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Default dashboard width",
+            "$type": "float",
+            "$value": 1200
+          },
+          "ContainerMaxWidthXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Large desktop container width",
+            "$type": "float",
+            "$value": 1440
+          },
+          "BreakpointSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile breakpoint",
+            "$type": "float",
+            "$value": 480
+          },
+          "BreakpointMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet breakpoint",
+            "$type": "float",
+            "$value": 768
+          },
+          "BreakpointLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Laptop breakpoint",
+            "$type": "float",
+            "$value": 1024
+          },
+          "BreakpointXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Desktop breakpoint",
+            "$type": "float",
+            "$value": 1280
+          },
+          "ContainerMaxWidth2Xl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$value": 1600
+          },
+          "ContainerGap": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "ContainerPadding": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          }
+        },
+        "Medium": {
+          "ContainerMaxWidthSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile / small container width",
+            "$type": "float",
+            "$value": 720
+          },
+          "ContainerMaxWidthMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet / medium container width",
+            "$type": "float",
+            "$value": 960
+          },
+          "ContainerMaxWidthLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Default dashboard width",
+            "$type": "float",
+            "$value": 1200
+          },
+          "ContainerMaxWidthXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Large desktop container width",
+            "$type": "float",
+            "$value": 1440
+          },
+          "BreakpointSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile breakpoint",
+            "$type": "float",
+            "$value": 480
+          },
+          "BreakpointMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet breakpoint",
+            "$type": "float",
+            "$value": 768
+          },
+          "BreakpointLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Laptop breakpoint",
+            "$type": "float",
+            "$value": 1024
+          },
+          "BreakpointXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Desktop breakpoint",
+            "$type": "float",
+            "$value": 1280
+          },
+          "ContainerMaxWidth2Xl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$value": 1600
+          },
+          "ContainerGap": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "ContainerPadding": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          }
+        },
+        "Small": {
+          "ContainerMaxWidthSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile / small container width",
+            "$type": "float",
+            "$value": 720
+          },
+          "ContainerMaxWidthMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet / medium container width",
+            "$type": "float",
+            "$value": 960
+          },
+          "ContainerMaxWidthLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Default dashboard width",
+            "$type": "float",
+            "$value": 1200
+          },
+          "ContainerMaxWidthXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Large desktop container width",
+            "$type": "float",
+            "$value": 1440
+          },
+          "BreakpointSm": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Mobile breakpoint",
+            "$type": "float",
+            "$value": 480
+          },
+          "BreakpointMd": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Tablet breakpoint",
+            "$type": "float",
+            "$value": 768
+          },
+          "BreakpointLg": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Laptop breakpoint",
+            "$type": "float",
+            "$value": 1024
+          },
+          "BreakpointXl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Desktop breakpoint",
+            "$type": "float",
+            "$value": 1280
+          },
+          "ContainerMaxWidth2Xl": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$value": 1600
+          },
+          "ContainerGap": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "ContainerPadding": {
+            "$scopes": [
+              "WIDTH_HEIGHT"
+            ],
+            "$description": "Ultrawide / analytics container width",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Cursor / Interaction": {
+      "modes": {
+        "Mode 1": {
+          "CursorDefault": {
+            "$type": "string",
+            "$value": "default"
+          },
+          "CursorPointer": {
+            "$type": "string",
+            "$value": "pointer"
+          },
+          "CursorText": {
+            "$type": "string",
+            "$value": "text"
+          },
+          "CursorNotAllowed": {
+            "$type": "string",
+            "$value": "not-allowed"
+          },
+          "CursorAiAction": {
+            "$type": "string",
+            "$value": "crosshair"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Ellevation": {
+      "modes": {
+        "Mode 1": {
+          "ElevationNone": {
+            "$type": "string",
+            "$value": "None"
+          },
+          "ElevationSm": {
+            "$type": "string",
+            "$value": "0 1px 2px rgba(0,0,0,0.12)"
+          },
+          "ElevationMd": {
+            "$type": "string",
+            "$value": "0 4px 8px rgba(0,0,0,0.16)"
+          },
+          "ElevationLg": {
+            "$type": "string",
+            "$value": "0 8px 24px rgba(0,0,0,0.20)"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Focus / Accessibility": {
+      "modes": {
+        "Mode 1": {
+          "FocusRingColor": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "color",
+            "$libraryName": "",
+            "$collectionName": "Color Styles",
+            "$value": "{Primary.Main.200}"
+          },
+          "FocusRingWidth": {
+            "$type": "float",
+            "$value": 2
+          },
+          "FocusRingOffset": {
+            "$type": "float",
+            "$value": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "Font tokens": {
+      "modes": {
+        "large": {
+          "En-font-size-h1": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global48}"
+          },
+          "En-font-size-h2": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "En-font-size-h3": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global28}"
+          },
+          "En-font-size-h4": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "En-font-size-headline": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "En-font-size-body": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "En-font-size-body-sm": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global14}"
+          },
+          "En-font-size-caption": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "En-font-size-footnote": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "FontFamilyBase": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Primary font family (Poppins)",
+            "$type": "string",
+            "$value": "\"Poppins, sans-serif\""
+          },
+          "FontFamilyMonospace": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Code/metrics font (Roboto Mono)",
+            "$type": "string",
+            "$value": "\"Roboto Mono, monospace\""
+          },
+          "FontWeightRegular": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Regular (400) text weight",
+            "$type": "float",
+            "$value": 400
+          },
+          "FontWeightMedium": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Medium (500) text weight",
+            "$type": "float",
+            "$value": 500
+          },
+          "FontWeightSemibold": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Semibold (600)",
+            "$type": "float",
+            "$value": 600
+          },
+          "FontWeightBold": {
+            "$codeSyntax": {
+              "WEB": "FontWeightBold",
+              "ANDROID": "FontWeightBold",
+              "iOS": "FontWeightBold"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Bold (700)",
+            "$type": "float",
+            "$value": 700
+          },
+          "LineHeightTight": {
+            "$codeSyntax": {
+              "WEB": "LineHeightTight",
+              "ANDROID": "LineHeightTight",
+              "iOS": "LineHeightTight"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Tight line height (110%)",
+            "$type": "float",
+            "$value": 110
+          },
+          "LineHeightNormal": {
+            "$codeSyntax": {
+              "WEB": "LineHeightNormal",
+              "ANDROID": "LineHeightNormal",
+              "iOS": "LineHeightNormal"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Default body line height (140%)",
+            "$type": "float",
+            "$value": 140
+          },
+          "LineHeightRelaxed": {
+            "$codeSyntax": {
+              "WEB": "LineHeightRelaxed",
+              "ANDROID": "LineHeightRelaxed",
+              "iOS": "LineHeightRelaxed"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Comfortable paragraph spacing (160%)",
+            "$type": "float",
+            "$value": 160
+          },
+          "LetterSpacingTight": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingTight",
+              "ANDROID": "LetterSpacingTight",
+              "iOS": "LetterSpacingTight"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Tight tracking (-1%)",
+            "$type": "string",
+            "$value": "-1%"
+          },
+          "LetterSpacingNormal": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingNormal",
+              "ANDROID": "LetterSpacingNormal",
+              "iOS": "LetterSpacingNormal"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Normal tracking (0%)",
+            "$type": "string",
+            "$value": "0%"
+          },
+          "LetterSpacingWide": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingWide",
+              "ANDROID": "LetterSpacingWide",
+              "iOS": "LetterSpacingWide"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Wide tracking (+1%)",
+            "$type": "string",
+            "$value": "1%"
+          }
+        },
+        "Medium": {
+          "En-font-size-h1": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "En-font-size-h2": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "En-font-size-h3": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "En-font-size-h4": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global18}"
+          },
+          "En-font-size-headline": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global18}"
+          },
+          "En-font-size-body": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global14}"
+          },
+          "En-font-size-body-sm": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "En-font-size-caption": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "En-font-size-footnote": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "FontFamilyBase": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Primary font family (Poppins)",
+            "$type": "string",
+            "$value": "\"Poppins, sans-serif\""
+          },
+          "FontFamilyMonospace": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Code/metrics font (Roboto Mono)",
+            "$type": "string",
+            "$value": "\"Roboto Mono, monospace\""
+          },
+          "FontWeightRegular": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Regular (400) text weight",
+            "$type": "float",
+            "$value": 400
+          },
+          "FontWeightMedium": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Medium (500) text weight",
+            "$type": "float",
+            "$value": 500
+          },
+          "FontWeightSemibold": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Semibold (600)",
+            "$type": "float",
+            "$value": 600
+          },
+          "FontWeightBold": {
+            "$codeSyntax": {
+              "WEB": "FontWeightBold",
+              "ANDROID": "FontWeightBold",
+              "iOS": "FontWeightBold"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Bold (700)",
+            "$type": "float",
+            "$value": 700
+          },
+          "LineHeightTight": {
+            "$codeSyntax": {
+              "WEB": "LineHeightTight",
+              "ANDROID": "LineHeightTight",
+              "iOS": "LineHeightTight"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Tight line height (110%)",
+            "$type": "float",
+            "$value": 110
+          },
+          "LineHeightNormal": {
+            "$codeSyntax": {
+              "WEB": "LineHeightNormal",
+              "ANDROID": "LineHeightNormal",
+              "iOS": "LineHeightNormal"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Default body line height (140%)",
+            "$type": "float",
+            "$value": 140
+          },
+          "LineHeightRelaxed": {
+            "$codeSyntax": {
+              "WEB": "LineHeightRelaxed",
+              "ANDROID": "LineHeightRelaxed",
+              "iOS": "LineHeightRelaxed"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Comfortable paragraph spacing (160%)",
+            "$type": "float",
+            "$value": 160
+          },
+          "LetterSpacingTight": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingTight",
+              "ANDROID": "LetterSpacingTight",
+              "iOS": "LetterSpacingTight"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Tight tracking (-1%)",
+            "$type": "string",
+            "$value": "-1%"
+          },
+          "LetterSpacingNormal": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingNormal",
+              "ANDROID": "LetterSpacingNormal",
+              "iOS": "LetterSpacingNormal"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Normal tracking (0%)",
+            "$type": "string",
+            "$value": "0%"
+          },
+          "LetterSpacingWide": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingWide",
+              "ANDROID": "LetterSpacingWide",
+              "iOS": "LetterSpacingWide"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Wide tracking (+1%)",
+            "$type": "string",
+            "$value": "1%"
+          }
+        },
+        "small": {
+          "En-font-size-h1": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global28}"
+          },
+          "En-font-size-h2": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "En-font-size-h3": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global18}"
+          },
+          "En-font-size-h4": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "En-font-size-headline": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global14}"
+          },
+          "En-font-size-body": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global14}"
+          },
+          "En-font-size-body-sm": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "En-font-size-caption": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$value": 0
+          },
+          "En-font-size-footnote": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$type": "float",
+            "$value": 0
+          },
+          "FontFamilyBase": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Primary font family (Poppins)",
+            "$type": "string",
+            "$value": "\"Poppins, sans-serif\""
+          },
+          "FontFamilyMonospace": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Code/metrics font (Roboto Mono)",
+            "$type": "string",
+            "$value": "\"Roboto Mono, monospace\""
+          },
+          "FontWeightRegular": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Regular (400) text weight",
+            "$type": "float",
+            "$value": 400
+          },
+          "FontWeightMedium": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Medium (500) text weight",
+            "$type": "float",
+            "$value": 500
+          },
+          "FontWeightSemibold": {
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Semibold (600)",
+            "$type": "float",
+            "$value": 600
+          },
+          "FontWeightBold": {
+            "$codeSyntax": {
+              "WEB": "FontWeightBold",
+              "ANDROID": "FontWeightBold",
+              "iOS": "FontWeightBold"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Bold (700)",
+            "$type": "float",
+            "$value": 700
+          },
+          "LineHeightTight": {
+            "$codeSyntax": {
+              "WEB": "LineHeightTight",
+              "ANDROID": "LineHeightTight",
+              "iOS": "LineHeightTight"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Tight line height (110%)",
+            "$type": "float",
+            "$value": 110
+          },
+          "LineHeightNormal": {
+            "$codeSyntax": {
+              "WEB": "LineHeightNormal",
+              "ANDROID": "LineHeightNormal",
+              "iOS": "LineHeightNormal"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Default body line height (140%)",
+            "$type": "float",
+            "$value": 140
+          },
+          "LineHeightRelaxed": {
+            "$codeSyntax": {
+              "WEB": "LineHeightRelaxed",
+              "ANDROID": "LineHeightRelaxed",
+              "iOS": "LineHeightRelaxed"
+            },
+            "$scopes": [
+              "TEXT_CONTENT",
+              "FONT_WEIGHT",
+              "FONT_SIZE",
+              "LINE_HEIGHT",
+              "LETTER_SPACING",
+              "PARAGRAPH_SPACING",
+              "PARAGRAPH_INDENT"
+            ],
+            "$description": "Comfortable paragraph spacing (160%)",
+            "$type": "float",
+            "$value": 160
+          },
+          "LetterSpacingTight": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingTight",
+              "ANDROID": "LetterSpacingTight",
+              "iOS": "LetterSpacingTight"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Tight tracking (-1%)",
+            "$type": "string",
+            "$value": "-1%"
+          },
+          "LetterSpacingNormal": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingNormal",
+              "ANDROID": "LetterSpacingNormal",
+              "iOS": "LetterSpacingNormal"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Normal tracking (0%)",
+            "$type": "string",
+            "$value": "0%"
+          },
+          "LetterSpacingWide": {
+            "$codeSyntax": {
+              "WEB": "LetterSpacingWide",
+              "ANDROID": "LetterSpacingWide",
+              "iOS": "LetterSpacingWide"
+            },
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Wide tracking (+1%)",
+            "$type": "string",
+            "$value": "1%"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Global Scale": {
+      "modes": {
+        "px": {
+          "Global0": {
+            "$description": "Base zero unit",
+            "$type": "float",
+            "$value": 0
+          },
+          "Global1": {
+            "$type": "float",
+            "$value": 1
+          },
+          "Global2": {
+            "$description": "2px unit for minimal adjustments",
+            "$type": "float",
+            "$value": 2
+          },
+          "Global4": {
+            "$description": "4px micro spacing unit",
+            "$type": "float",
+            "$value": 4
+          },
+          "Global8": {
+            "$description": "8px small spacing unit",
+            "$type": "float",
+            "$value": 8
+          },
+          "Global12": {
+            "$description": "12px micro offset",
+            "$type": "float",
+            "$value": 12
+          },
+          "Global14": {
+            "$type": "float",
+            "$value": 14
+          },
+          "Global16": {
+            "$description": "16px base spacing unit",
+            "$type": "float",
+            "$value": 16
+          },
+          "Global18": {
+            "$type": "float",
+            "$value": 18
+          },
+          "Global20": {
+            "$description": "20px tight padding baseline",
+            "$type": "float",
+            "$value": 20
+          },
+          "Global24": {
+            "$description": "24px large spacing unit",
+            "$type": "float",
+            "$value": 24
+          },
+          "Global28": {
+            "$type": "float",
+            "$value": 28
+          },
+          "Global32": {
+            "$description": "32px section gap",
+            "$type": "float",
+            "$value": 32
+          },
+          "Global36": {
+            "$type": "float",
+            "$value": 36
+          },
+          "Global40": {
+            "$description": "40px layout gutter",
+            "$type": "float",
+            "$value": 40
+          },
+          "Global44": {
+            "$type": "float",
+            "$value": 44
+          },
+          "Global48": {
+            "$description": "48px outer margin",
+            "$type": "float",
+            "$value": 48
+          },
+          "Global56": {
+            "$type": "float",
+            "$value": 56
+          },
+          "Global64": {
+            "$description": "64px section padding",
+            "$type": "float",
+            "$value": 64
+          },
+          "Global72": {
+            "$type": "float",
+            "$value": 72
+          },
+          "Global80": {
+            "$type": "float",
+            "$value": 80
+          },
+          "Global96": {
+            "$type": "float",
+            "$value": 96
+          },
+          "Global128": {
+            "$type": "float",
+            "$value": 128
+          },
+          "Global160": {
+            "$type": "float",
+            "$value": 160
+          },
+          "Global192": {
+            "$type": "float",
+            "$value": 192
+          },
+          "Global224": {
+            "$type": "float",
+            "$value": 224
+          },
+          "Global256": {
+            "$type": "float",
+            "$value": 256
+          },
+          "GlobalFull": {
+            "$type": "float",
+            "$value": 9999
+          }
+        }
+      }
+    }
+  },
+  {
+    "Grid Group": {
+      "modes": {
+        "Large": {
+          "GridGutterSm": {
+            "$description": "Compact column gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "GridGutterMd": {
+            "$description": "Standard grid gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "GridGutterLg": {
+            "$description": "Spacious grid layout",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "GridGutterXl": {
+            "$description": "Large dashboard grid",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global40}"
+          },
+          "ContainerPaddingX": {
+            "$description": "Horizontal container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "ContainerPaddingY": {
+            "$description": "Vertical container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          }
+        },
+        "Medium": {
+          "GridGutterSm": {
+            "$description": "Compact column gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "GridGutterMd": {
+            "$description": "Standard grid gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "GridGutterLg": {
+            "$description": "Spacious grid layout",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "GridGutterXl": {
+            "$description": "Large dashboard grid",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "ContainerPaddingX": {
+            "$description": "Horizontal container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "ContainerPaddingY": {
+            "$description": "Vertical container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          }
+        },
+        "Small": {
+          "GridGutterSm": {
+            "$description": "Compact column gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          },
+          "GridGutterMd": {
+            "$description": "Standard grid gap",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "GridGutterLg": {
+            "$description": "Spacious grid layout",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "GridGutterXl": {
+            "$description": "Large dashboard grid",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "ContainerPaddingX": {
+            "$description": "Horizontal container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "ContainerPaddingY": {
+            "$description": "Vertical container padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Motion": {
+      "modes": {
+        "Mode 1": {
+          "MotionDurationFast": {
+            "$scopes": [
+              "EFFECT_FLOAT"
+            ],
+            "$description": "Fast micro-interactions (100 ms)",
+            "$type": "float",
+            "$value": 100
+          },
+          "MotionDurationBase": {
+            "$scopes": [
+              "EFFECT_FLOAT"
+            ],
+            "$description": "Fast micro-interactions (100 ms)",
+            "$type": "float",
+            "$value": 200
+          },
+          "MotionDurationSlow": {
+            "$scopes": [
+              "EFFECT_FLOAT"
+            ],
+            "$description": "Fast micro-interactions (100 ms)",
+            "$type": "float",
+            "$value": 400
+          },
+          "MotionEasingStandard": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "string",
+            "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "MotionEasingEmphasized": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "string",
+            "$value": "cubic-bezier(0.4, 0, 0.6, 1)"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Opacity": {
+      "modes": {
+        "Mode 1": {
+          "String": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "string",
+            "$value": "0.5"
+          },
+          "OpacityOverlay": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "string",
+            "$value": "0.4"
+          },
+          "OpacityFocus": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$type": "string",
+            "$value": "0.1"
+          }
+        }
+      }
+    }
+  },
+  {
+    "radious": {
+      "modes": {
+        "PX": {
+          "RadiusNone": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "No rounding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global0}"
+          },
+          "RadiusSm": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "Small control radius (chips, inputs)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global4}"
+          },
+          "RadiusMd": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "Default component radius",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          },
+          "RadiusLg": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "Modals, cards, and panels",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "RadiusXl": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "Large surfaces / hero containers",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "RadiusFull": {
+            "$scopes": [
+              "CORNER_RADIUS"
+            ],
+            "$description": "Full-round (avatars, pills)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{GlobalFull}"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Semantic Color Tokens": {
+      "modes": {
+        "Mode 1": {
+          "🧱 Surface & Background": {
+            "ColorBgPage": {
+              "$codeSyntax": {
+                "WEB": "🧱 Surface & Background/ColorBgPage"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Page or dashboard background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "ColorBgSurface": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Default surface background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorBgSubtle": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Secondary surface tone",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 20(Bg)}"
+            },
+            "ColorBgInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray1000}"
+            },
+            "ColorBgOverlay": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 800 (Text)}"
+            }
+          },
+          "Text": {
+            "ColorTextPrimary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 700}"
+            },
+            "ColorTextSecondary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 400}"
+            },
+            "ColorTextTertiary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 300 (S)}"
+            },
+            "ColorTextInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorTextLink": {
+              "$codeSyntax": {
+                "WEB": "Text/ColorTextLink"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            }
+          },
+          "🧱 Border": {
+            "ColorBorderDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray200}"
+            },
+            "ColorBorderMuted": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 100}"
+            },
+            "ColorBorderFocus": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 600}"
+            }
+          },
+          "💠 Interactive & Primary Actions": {
+            "ColorBgInteractiveDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.500 (p)}"
+            },
+            "ColorBgInteractiveHover": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveActive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveDisabled": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 400}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            }
+          },
+          "States": {
+            "StateInfoBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Blue.100}"
+            },
+            "StateInfoText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Info.700}"
+            },
+            "StateSuccessBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Teal.100}"
+            },
+            "StateSuccessText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Success.700}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "StateWarningBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Yellow.100}"
+            },
+            "StateWarningText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Warning.700}"
+            },
+            "StateDangerBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Pink.100}"
+            },
+            "StateDangerText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Error.700}"
+            }
+          }
+        },
+        "Medium": {
+          "🧱 Surface & Background": {
+            "ColorBgPage": {
+              "$codeSyntax": {
+                "WEB": "🧱 Surface & Background/ColorBgPage"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Page or dashboard background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "ColorBgSurface": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Default surface background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorBgSubtle": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Secondary surface tone",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 20(Bg)}"
+            },
+            "ColorBgInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray1000}"
+            },
+            "ColorBgOverlay": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 800 (Text)}"
+            }
+          },
+          "Text": {
+            "ColorTextPrimary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 700}"
+            },
+            "ColorTextSecondary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 400}"
+            },
+            "ColorTextTertiary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 300 (S)}"
+            },
+            "ColorTextInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorTextLink": {
+              "$codeSyntax": {
+                "WEB": "Text/ColorTextLink"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            }
+          },
+          "🧱 Border": {
+            "ColorBorderDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray200}"
+            },
+            "ColorBorderMuted": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 100}"
+            },
+            "ColorBorderFocus": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 600}"
+            }
+          },
+          "💠 Interactive & Primary Actions": {
+            "ColorBgInteractiveDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.500 (p)}"
+            },
+            "ColorBgInteractiveHover": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveActive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveDisabled": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 400}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            }
+          },
+          "States": {
+            "StateInfoBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Blue.100}"
+            },
+            "StateInfoText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Info.700}"
+            },
+            "StateSuccessBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Teal.100}"
+            },
+            "StateSuccessText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Success.700}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "StateWarningBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Yellow.100}"
+            },
+            "StateWarningText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Warning.700}"
+            },
+            "StateDangerBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Pink.100}"
+            },
+            "StateDangerText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Error.700}"
+            }
+          }
+        },
+        "Small": {
+          "🧱 Surface & Background": {
+            "ColorBgPage": {
+              "$codeSyntax": {
+                "WEB": "🧱 Surface & Background/ColorBgPage"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Page or dashboard background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "ColorBgSurface": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Default surface background",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorBgSubtle": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "Secondary surface tone",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 20(Bg)}"
+            },
+            "ColorBgInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray1000}"
+            },
+            "ColorBgOverlay": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 800 (Text)}"
+            }
+          },
+          "Text": {
+            "ColorTextPrimary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 800 (Text)}"
+            },
+            "ColorTextSecondary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 600}"
+            },
+            "ColorTextTertiary": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 300 (S)}"
+            },
+            "ColorTextInverse": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 10}"
+            },
+            "ColorTextLink": {
+              "$codeSyntax": {
+                "WEB": "Text/ColorTextLink"
+              },
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            }
+          },
+          "🧱 Border": {
+            "ColorBorderDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray200}"
+            },
+            "ColorBorderMuted": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 100}"
+            },
+            "ColorBorderFocus": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 600}"
+            }
+          },
+          "💠 Interactive & Primary Actions": {
+            "ColorBgInteractiveDefault": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.500 (p)}"
+            },
+            "ColorBgInteractiveHover": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveActive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Primary.Main.700}"
+            },
+            "ColorBgInteractiveDisabled": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray 400}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            }
+          },
+          "States": {
+            "StateInfoBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Blue.100}"
+            },
+            "StateInfoText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Info.700}"
+            },
+            "StateSuccessBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Teal.100}"
+            },
+            "StateSuccessText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Success.700}"
+            },
+            "ColorTextInteractive": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Grey Scale.Gray0}"
+            },
+            "StateWarningBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Yellow.100}"
+            },
+            "StateWarningText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Warning.700}"
+            },
+            "StateDangerBg": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Pastel.Pink.100}"
+            },
+            "StateDangerText": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "Color Styles",
+              "$value": "{Error.700}"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "Shadows": {
+      "modes": {
+        "Mode 1": {
+          "ShadowColorSm": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Subtle depth for inputs, chips (E1) Gray700 @ 10 %",
+            "$type": "color",
+            "$value": "rgba(51, 51, 51, 0.1)"
+          },
+          "ShadowColorMd": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Card & dropdown shadow (E2) Gray700 @ 12 %",
+            "$type": "color",
+            "$value": "rgba(51, 51, 51, 0.12)"
+          },
+          "ShadowColorLg": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Modal & popover shadow (E3) Gray 800 14%",
+            "$type": "color",
+            "$value": "rgba(38, 38, 38, 0.14)"
+          },
+          "ShadowColorXl": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Drawer & overlay shadow (E4) Gray 800 14%",
+            "$type": "color",
+            "$value": "rgba(38, 38, 38, 0.18)"
+          },
+          "ShadowColor2Xl": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Toast & banner shadow (E5) gray900 20%",
+            "$type": "color",
+            "$value": "rgba(26, 26, 26, 0.2)"
+          },
+          "ShadowColor3Xl": {
+            "$scopes": [
+              "ALL_SCOPES"
+            ],
+            "$description": "Toast & banner shadow (E5) gray900 20%",
+            "$type": "color",
+            "$value": "rgba(13, 13, 13, 0.24)"
+          }
+        }
+      }
+    }
+  },
+  {
+    "space token": {
+      "modes": {
+        "Large": {
+          "Space2Xs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Extra-tight gap (icons, micro layouts)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global2}"
+          },
+          "SpaceXs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Very small spacing (labels, chips)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global4}"
+          },
+          "SpaceSm": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Compact padding or inline gaps",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          },
+          "SpaceMd": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Default component spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "SpaceLg": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Card or popup padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "SpaceXl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Section spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "Space2Xl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Large layout margin",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global48}"
+          },
+          "Space3XL": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Page-level padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global64}"
+          }
+        },
+        "Medium": {
+          "Space2Xs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Extra-tight gap (icons, micro layouts)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global2}"
+          },
+          "SpaceXs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Very small spacing (labels, chips)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global4}"
+          },
+          "SpaceSm": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Compact padding or inline gaps",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          },
+          "SpaceMd": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Default component spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "SpaceLg": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Card or popup padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "SpaceXl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Section spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          },
+          "Space2Xl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Large layout margin",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global32}"
+          },
+          "Space3XL": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Page-level padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global48}"
+          }
+        },
+        "Small": {
+          "Space2Xs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Extra-tight gap (icons, micro layouts)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global2}"
+          },
+          "SpaceXs": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Very small spacing (labels, chips)",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global2}"
+          },
+          "SpaceSm": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Compact padding or inline gaps",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global4}"
+          },
+          "SpaceMd": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Default component spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global8}"
+          },
+          "SpaceLg": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Card or popup padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global12}"
+          },
+          "SpaceXl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Section spacing",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global16}"
+          },
+          "Space2Xl": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Large layout margin",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global20}"
+          },
+          "Space3XL": {
+            "$scopes": [
+              "GAP",
+              "PARAGRAPH_SPACING"
+            ],
+            "$description": "Page-level padding",
+            "$type": "float",
+            "$libraryName": "",
+            "$collectionName": "Global Scale",
+            "$value": "{Global24}"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Z-Index / Layers": {
+      "modes": {
+        "Mode 1": {
+          "ZBase": {
+            "$type": "float",
+            "$value": 0
+          },
+          "ZDropdown": {
+            "$type": "float",
+            "$value": 1000
+          },
+          "ZSticky": {
+            "$type": "float",
+            "$value": 1020
+          },
+          "ZModal": {
+            "$type": "float",
+            "$value": 1300
+          },
+          "ZTooltip": {
+            "$type": "float",
+            "$value": 1500
+          },
+          "ZToast": {
+            "$type": "float",
+            "$value": 1600
+          }
+        }
+      }
+    }
+  }
+]

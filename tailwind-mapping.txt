@@ -1,0 +1,129 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      // 1. 🎨 Color Palette (Primitives + Semantics)
+      colors: {
+        // --- Primitives (The Raw Paint) ---
+        gray: {
+          0: "#ffffff",
+          10: "#fcfcfd",
+          20: "#f8fafb", // Special Bg token
+          100: "#f0f4f5",
+          200: "#d5dbde",
+          300: "#a1a6a8",
+          400: "#73787a",
+          500: "#505355",
+          600: "#383b3c",
+          700: "#2b2d2e",
+          800: "#18191a",
+          1000: "#000000",
+        },
+        primary: {
+          main: {
+            50: "#fff3e0",
+            100: "#ffe0b2",
+            200: "#ffcc80",
+            300: "#ffb74d",
+            400: "#ffa726", // Base Brand Color
+            500: "#ffa500",
+            600: "#e69500",
+            700: "#cc8400",
+          },
+        },
+        // Pastels for "Organic" Shapes
+        pastel: {
+          green: { 50: "#f1faf4", 100: "#e7f8f0", 500: "#5fcb9b" },
+          teal: { 100: "#e5faf8", 500: "#3dd1c2" },
+          blue: { 50: "#f3f8fe", 100: "#eaf6fd", 500: "#50a9ee" },
+          periwinkle: { 50: "#f5f7ff", 100: "#f4f6fd", 500: "#8d9bf3" },
+          purple: { 50: "#f7f3ff", 100: "#f5f1fa", 500: "#a682d7" },
+          pink: { 50: "#fff5f9", 100: "#fde9f2", 500: "#f06292" },
+          orange: { 50: "#fff7e6", 100: "#fff3e6", 500: "#ffaa6a" },
+        },
+        // Functional Status
+        info: { 100: "#e5f2ff", 500: "#007aff", 700: "#0062cc" },
+        success: { 100: "#e5fff1", 500: "#0fa251", 700: "#0d8041" },
+        warning: { 100: "#f9ead1", 500: "#f5a623", 700: "#c4851c" },
+        error: { 100: "#ffdbe2", 500: "#b00020", 700: "#8d001a" },
+
+        // --- Semantics (Usage Context) ---
+        // Usage: "bg-surface-page", "bg-surface-subtle"
+        surface: {
+          page: "#ffffff",      // {Grey Scale.Gray0}
+          DEFAULT: "#fcfcfd",   // {Grey Scale.Gray 10}
+          subtle: "#f8fafb",    // {Grey Scale.Gray 20}
+          overlay: "#18191a",   // {Grey Scale.Gray 800}
+          inverse: "#000000",   // {Grey Scale.Gray 1000}
+        },
+        // Usage: "text-content-primary", "text-content-link"
+        content: {
+          primary: "#2b2d2e",   // {Grey Scale.Gray 700}
+          secondary: "#73787a", // {Grey Scale.Gray 400}
+          tertiary: "#a1a6a8",  // {Grey Scale.Gray 300}
+          inverse: "#fcfcfd",   // {Grey Scale.Gray 10}
+          link: "#cc8400",      // {Primary.Main.700}
+        },
+        // Usage: "border-border-default"
+        border: {
+          DEFAULT: "#d5dbde",   // {Grey Scale.Gray200}
+          muted: "#f0f4f5",     // {Grey Scale.Gray 100}
+          focus: "#383b3c",     // {Grey Scale.Gray 600}
+        },
+      },
+
+      // 2. 🔠 Typography
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+        mono: ["Roboto Mono", "monospace"],
+      },
+      fontSize: {
+        // Semantic Header Sizes
+        h1: ["48px", { lineHeight: "110%", letterSpacing: "-1%" }],
+        h2: ["32px", { lineHeight: "110%", letterSpacing: "-1%" }],
+        h3: ["28px", { lineHeight: "110%", letterSpacing: "-0.5%" }],
+        h4: ["24px", { lineHeight: "110%" }],
+        headline: ["20px", { lineHeight: "140%" }],
+        body: ["16px", { lineHeight: "160%" }],
+        "body-sm": ["14px", { lineHeight: "160%" }],
+        caption: ["12px", { lineHeight: "160%" }],
+      },
+
+      // 3. 📏 Spacing & Sizing (Global Scale)
+      spacing: {
+        "2xs": "2px",
+        xs: "4px",
+        sm: "8px",
+        md: "16px",
+        lg: "24px",
+        xl: "32px",
+        "2xl": "48px",
+        "3xl": "64px", // For Section Gaps
+        container: "1440px",
+      },
+      borderRadius: {
+        sm: "4px",
+        md: "8px",
+        lg: "16px",    // Standard Card Radius
+        xl: "24px",
+        full: "9999px",
+      },
+      boxShadow: {
+        sm: "0 1px 2px rgba(51, 51, 51, 0.1)",
+        md: "0 4px 8px rgba(51, 51, 51, 0.12)",
+        lg: "0 8px 24px rgba(38, 38, 38, 0.14)", // Modal/Card Hover
+        xl: "0 12px 32px rgba(38, 38, 38, 0.18)",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
+
