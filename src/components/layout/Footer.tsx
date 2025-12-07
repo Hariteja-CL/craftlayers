@@ -1,6 +1,6 @@
 export function Footer() {
     return (
-        <footer className="container mx-auto px-6 py-12 text-center text-sm text-muted-foreground border-t max-w-[1440px] flex justify-between items-center">
+        <footer className="container mx-auto px-6 py-12 text-center text-sm text-muted-foreground border-t max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-6">
             <p>&copy; {new Date().getFullYear()} CraftLayers by Hariteja Nandipati</p>
             <div className="flex gap-6">
                 <a href="/about" className="hover:text-primary transition-colors">About</a>

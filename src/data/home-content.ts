@@ -42,7 +42,7 @@ export const homeContent = {
         avatar: "/assets/profile-new.png",
         social: {
             linkedin: "Connect me on Linkedin",
-            linkedinUrl: "https://linkedin.com/in/your-profile",
+            linkedinUrl: "https://www.linkedin.com/in/hariteja-nandipati",
         },
     },
 };

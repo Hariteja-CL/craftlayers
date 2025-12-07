@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -10,6 +12,8 @@ const links = [
 ];
 
 export function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <motion.header
             initial={{ y: -20, opacity: 0 }}
@@ -45,7 +49,44 @@ export function Navbar() {
                         </a>
                     ))}
                 </nav>
+
+                {/* Mobile Menu Toggle */}
+                <button
+                    className="md:hidden text-content-primary p-2"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
             </div>
+
+            {/* Mobile Nav Overlay */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="md:hidden bg-surface border-t border-border-muted overflow-hidden"
+                    >
+                        <nav className="flex flex-col p-6 gap-4">
+                            {links.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className={cn(
+                                        "text-base font-medium transition-colors hover:text-primary-500 py-2 block",
+                                        link.active ? "text-primary-500 font-semibold" : "text-content-secondary"
+                                    )}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.header>
     );
 }
