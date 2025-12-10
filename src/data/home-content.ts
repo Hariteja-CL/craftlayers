@@ -39,7 +39,7 @@ export const homeContent = {
         role: "Senior UX Designer | Design System Architect | Cyber Security",
         location: "Hyderabad, Telangana, India",
         bio: "Sr. Product & UX Designer with 8+ years in SaaS, Design Systems, and secure, data-driven UX. I blend usability and security to build intuitive, compliant, and scalable enterprise experiences.",
-        avatar: "/assets/profile-new.png",
+        avatar: "/assets/profile-new.png?v=2",
         social: {
             linkedin: "Connect me on Linkedin",
             linkedinUrl: "https://www.linkedin.com/in/hariteja-nandipati",

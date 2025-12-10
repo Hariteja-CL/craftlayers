@@ -1,0 +1,52 @@
+// app/data/home-content.ts
+
+export const homeContent = {
+  hero: {
+    headline: "Designing Clarity\nWhere Design, Security & AI Converge.",
+    subheadline: "One portfolio that blends user experience, trust, and intelligence.",
+  },
+  
+  // The 3 "Layer" Cards from your design
+  serviceCards: [
+    {
+      id: "design",
+      title: "Design Layer",
+      icon: "Palette", // Maps to Lucide-React Icon
+      description: "Human-centered UX for enterprise platforms.",
+      linkText: "Explore",
+      href: "/work/design",
+      activeColor: "primary", // Uses your Orange/Yellow tokens
+    },
+    {
+      id: "ai",
+      title: "AI Layer",
+      icon: "Sparkles",
+      description: "Exploring AI-driven design automation.",
+      linkText: "Explore",
+      href: "/work/ai",
+      activeColor: "success", // Uses your Green/Teal tokens
+    },
+    {
+      id: "security",
+      title: "Security Layer",
+      icon: "ShieldCheck",
+      description: "Building trust through secure design.",
+      linkText: "Explore",
+      href: "/work/security",
+      activeColor: "info", // Uses your Blue tokens
+    },
+  ],
+
+  profile: {
+    name: "Hariteja Nandipati",
+    role: "Senior UX Designer | Design System Architect | Cyber Security",
+    location: "Hyderabad, Telangana, India",
+    // Extracted exactly from your screenshot
+    bio: "Sr. Product & UX Designer with 8+ years in SaaS, Design Systems, and secure, data-driven UX. I blend usability and security to build intuitive, compliant, and scalable enterprise experiences.",
+    avatar: "/images/profile-hariteja.png", // Make sure to put your photo in public/images
+    social: {
+      linkedin: "Connect me on Linkedin",
+      linkedinUrl: "https://linkedin.com/in/your-profile", // Update this!
+    },
+  },
+};

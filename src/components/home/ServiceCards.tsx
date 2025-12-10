@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Palette, ShieldCheck, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { homeContent } from "@/data/home-content";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +9,9 @@ const iconMap = {
     Sparkles: Sparkles,
     ShieldCheck: ShieldCheck,
 };
+
+// Create a motion version of the router Link
+const MotionLink = motion(Link);
 
 export function ServiceCards() {
     return (
@@ -18,8 +22,9 @@ export function ServiceCards() {
                     const Icon = iconMap[card.icon as keyof typeof iconMap];
 
                     return (
-                        <motion.div
+                        <MotionLink
                             key={card.id}
+                            to={card.href}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -69,8 +74,7 @@ export function ServiceCards() {
                             </div>
 
                             <div className="mt-0">
-                                <a
-                                    href={card.href}
+                                <div
                                     className={cn(
                                         "inline-flex items-center gap-xs text-sm font-medium transition-colors duration-300",
                                         // Base: Gray Text
@@ -81,9 +85,9 @@ export function ServiceCards() {
                                 >
                                     Explore
                                     <ArrowRight className="h-4 w-4" />
-                                </a>
+                                </div>
                             </div>
-                        </motion.div>
+                        </MotionLink>
                     );
                 })}
             </div>
