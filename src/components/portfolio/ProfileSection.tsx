@@ -1,5 +1,6 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from '../ui/Avatar';
+import { Linkedin } from 'lucide-react';
 // Note: We'll use the SVGs as images for now since we haven't migrated them to React components
 // or we can import them if they are in assets.
 
@@ -37,7 +38,7 @@ export function ProfileSection() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-[#0077B5] font-medium hover:underline"
                         >
-                            <img src="/assets/images/linkedin.svg" alt="LinkedIn" className="w-6 h-6" />
+                            <Linkedin className="w-5 h-5 fill-current" />
                             Connect me on Linkedin
                         </a>
                         <span className="text-content-tertiary text-sm flex items-center gap-1">
