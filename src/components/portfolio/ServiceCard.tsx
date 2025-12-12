@@ -42,9 +42,7 @@ export function ServiceCard({
                     <p className="text-content-secondary text-base leading-relaxed">
                         {description}
                     </p>
-                    <div className="pt-2 text-[15px] font-medium text-gray-500 flex items-center gap-1 relative pl-0 group-hover:pl-1 transition-all">
-                        Explore <span className="text-xl leading-none px-1">.</span>
-                    </div>
+
                 </div>
             </div>
 
