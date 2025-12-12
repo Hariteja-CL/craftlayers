@@ -10,8 +10,8 @@ export function ProfileSection() {
 
                 {/* Profile Image */}
                 <div className="flex-shrink-0">
-                    <Avatar className="w-32 h-32 md:w-40 md:h-40 border-2 border-white shadow-md">
-                        <AvatarImage src="/assets/images/profile-hero.svg" alt="Hariteja" />
+                    <Avatar className="w-32 h-32 md:w-40 md:h-40 rounded-2xl border-2 border-white shadow-md">
+                        <AvatarImage src="/assets/images/profile-hero.svg" alt="Hariteja" className="object-cover" />
                         <AvatarFallback>HN</AvatarFallback>
                     </Avatar>
                 </div>
