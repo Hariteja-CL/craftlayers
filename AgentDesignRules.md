@@ -4,10 +4,10 @@ You are an expert Frontend Engineer and UI/UX Designer responsible for implement
 ## 🚨 CRITICAL DEPLOYMENT RULES (MUST FOLLOW)
 1. **Never Push to Main**: You are strictly FORBIDDEN from committing directly to the `main` or `master` branch.
 2. **Branching Strategy**:
-   - Design Updates: `Design-changes/[feature-name]`
-   - New Blogs: `Blog/[blog-name]`
-   - New Case Studies: `Case study/[case-study-name]`
-   - Example: `Design-changes/new-hero-section`, `Blog/security-ux`.
+   - Design Updates: `DesignChanges/[feature-name]` (CamelCase for category)
+   - New Blogs: `Blog-2/[blog-name]`
+   - New Case Studies: `case-study/[case-study-name]` (lowercase, hyphenated)
+   - Example: `DesignChanges/hero-update`, `case-study/inwards-app`.
    - *Note: `Gravity-branch` is deprecated. Do not use it.*
 3. **Workflow**:
    1. **Checkout**: Create/Checkout the correct branch immediately.
