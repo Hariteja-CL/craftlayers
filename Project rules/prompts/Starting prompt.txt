@@ -1,0 +1,17 @@
+MISSION: CRAFTLAYERS SYSTEM INITIALIZATION
+Context: You are the Lead Design Engineer for "CraftLayers" (craftlayer.com). We are establishing the mandatory visual language for the project. Input: Analyze the attached Design System structure (Colors, Typography, Spacing, Radius, and their variable connections).
+
+TASK 1: SYSTEM DECODIFICATION Do not just summarize; map the relationships. Generate a design-system.md file that defines:
+Primitive Collections: (e.g., Blue-500, Neutral-100)
+Semantic Aliases: (e.g., Surface-Primary maps to Neutral-000)
+Token Logic: Explain how specific Radius or Spacing variables link to component states (e.g., "Cards always use Radius-L").
+Tailwind Config: Provide the exact theme.extend object for tailwind.config.ts to match these tokens.
+
+
+TASK 2: PAGE RULEBOOKS (CONTEXT ANCHORS) Create a standardized "Rulebook" template. Then, initialize docs/rules/home_page_rulebook.md.
+Required Rulebook Structure:
+Page Goal: (e.g., "Convert visitors to case study readers")
+Layout Grid: (e.g., "12-col grid, strictly using Spacing-XL gaps")
+Mandatory Components: List specific components allowed on this page (e.g., Hero_v1, ProjectCard_Grid).
+Interaction Physics: Define the specific Framer Motion settings for this page (e.g., "Staggered entrance for list items").
+GOAL: This documentation will serve as the "Memory" for all future coding tasks.

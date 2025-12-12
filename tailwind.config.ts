@@ -1,67 +1,19 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    darkMode: ["class"],
     content: [
-        "./pages/**/*.{ts,tsx}",
-        "./components/**/*.{ts,tsx}",
-        "./app/**/*.{ts,tsx}",
-        "./src/**/*.{ts,tsx}",
         "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        container: {
-            center: true,
-            padding: "2rem",
-            screens: {
-                "2xl": "1400px",
-            },
-        },
         extend: {
+            // 1. 🎨 Color Palette (Primitives + Semantics)
             colors: {
-                // --- 1. Base Variables (Shadcn-compatible) ---
-                background: "var(--bg-app)", // Mapped to CSS var
-                foreground: "var(--text-primary)",
-
-                // --- 2. Semantics (Usage Context) ---
-                surface: {
-                    page: "var(--bg-app)",        // Gray0
-                    DEFAULT: "var(--bg-surface)", // Gray10
-                    subtle: "var(--bg-subtle)",   // Gray20
-                    overlay: "var(--bg-overlay)", // Gray800
-                    inverse: "var(--bg-inverse)", // Gray1000
-                },
-                content: {
-                    primary: "var(--text-primary)",   // Gray700
-                    secondary: "var(--text-secondary)", // Gray400
-                    tertiary: "var(--text-tertiary)",  // Gray300
-                    inverse: "var(--text-inverse)",   // Gray10
-                    link: "var(--text-link)",      // Primary700
-                },
-                border: {
-                    DEFAULT: "var(--border-default)",   // Gray200
-                    muted: "var(--border-muted)",     // Gray100
-                    focus: "var(--border-focus)",     // Gray600
-                },
-
-                // --- 3. Primitives (The Raw Paint) ---
-                primary: {
-                    DEFAULT: "#FFA500", // Orange-500
-                    foreground: "#FFFFFF",
-                    // Manual Palette
-                    50: "#fff3e0",
-                    100: "#ffe0b2",
-                    200: "#ffcc80",
-                    300: "#ffb74d",
-                    400: "#ffa726",
-                    500: "#ffa500",
-                    600: "#e69500",
-                    700: "#cc8400",
-                },
+                // --- Primitives (The Raw Paint) ---
                 gray: {
                     0: "#ffffff",
                     10: "#fcfcfd",
-                    20: "#f8fafb",
+                    20: "#f8fafb", // Special Bg token
                     100: "#f0f4f5",
                     200: "#d5dbde",
                     300: "#a1a6a8",
@@ -72,6 +24,19 @@ const config: Config = {
                     800: "#18191a",
                     1000: "#000000",
                 },
+                primary: {
+                    main: {
+                        50: "#fff3e0",
+                        100: "#ffe0b2",
+                        200: "#ffcc80",
+                        300: "#ffb74d",
+                        400: "#ffa726", // Base Brand Color
+                        500: "#ffa500",
+                        600: "#e69500",
+                        700: "#cc8400",
+                    },
+                },
+                // Pastels for "Organic" Shapes
                 pastel: {
                     green: { 50: "#f1faf4", 100: "#e7f8f0", 500: "#5fcb9b" },
                     teal: { 100: "#e5faf8", 500: "#3dd1c2" },
@@ -86,19 +51,58 @@ const config: Config = {
                 success: { 100: "#e5fff1", 500: "#0fa251", 700: "#0d8041" },
                 warning: { 100: "#f9ead1", 500: "#f5a623", 700: "#c4851c" },
                 error: { 100: "#ffdbe2", 500: "#b00020", 700: "#8d001a" },
+
+                // --- Semantics (Usage Context) ---
+                // Usage: "bg-surface-page", "bg-surface-subtle"
+                surface: {
+                    page: "#ffffff",      // {Grey Scale.Gray0}
+                    DEFAULT: "#fcfcfd",   // {Grey Scale.Gray 10}
+                    subtle: "#f8fafb",    // {Grey Scale.Gray 20}
+                    overlay: "#18191a",   // {Grey Scale.Gray 800}
+                    inverse: "#000000",   // {Grey Scale.Gray 1000}
+                },
+                // Usage: "text-content-primary", "text-content-link"
+                content: {
+                    primary: "#2b2d2e",   // {Grey Scale.Gray 700}
+                    secondary: "#73787a", // {Grey Scale.Gray 400}
+                    tertiary: "#a1a6a8",  // {Grey Scale.Gray 300}
+                    inverse: "#fcfcfd",   // {Grey Scale.Gray 10}
+                    link: "#cc8400",      // {Primary.Main.700}
+                },
+                // Usage: "border-border-default"
+                border: {
+                    DEFAULT: "#d5dbde",   // {Grey Scale.Gray200}
+                    muted: "#f0f4f5",     // {Grey Scale.Gray 100}
+                    focus: "#383b3c",     // {Grey Scale.Gray 600}
+                },
+
+                // 6. 🌈 Layer Theme System (Semantic)
+                layer: {
+                    design: {
+                        bg: "#fff7e6",    // {Pastel.Orange.50}
+                        text: "#ffa726",  // {Primary.Main.400}
+                        border: "#fff3e6",// {Pastel.Orange.100}
+                    },
+                    ai: {
+                        bg: "#f7f3ff",    // {Pastel.Purple.50}
+                        text: "#a682d7",  // {Pastel.Purple.500}
+                        border: "#f5f1fa",// {Pastel.Purple.100}
+                    },
+                    security: {
+                        bg: "#f3f8fe",    // {Pastel.Blue.50}
+                        text: "#50a9ee",  // {Pastel.Blue.500}
+                        border: "#eaf6fd",// {Pastel.Blue.100}
+                    },
+                },
             },
-            borderRadius: {
-                lg: "16px",    // Standard Card Radius
-                md: "8px",
-                sm: "4px",
-                xl: "24px",
-                full: "9999px",
-            },
+
+            // 2. 🔠 Typography
             fontFamily: {
                 sans: ["Poppins", "sans-serif"],
                 mono: ["Roboto Mono", "monospace"],
             },
             fontSize: {
+                // Semantic Header Sizes
                 h1: ["48px", { lineHeight: "110%", letterSpacing: "-1%" }],
                 h2: ["32px", { lineHeight: "110%", letterSpacing: "-1%" }],
                 h3: ["28px", { lineHeight: "110%", letterSpacing: "-0.5%" }],
@@ -108,6 +112,8 @@ const config: Config = {
                 "body-sm": ["14px", { lineHeight: "160%" }],
                 caption: ["12px", { lineHeight: "160%" }],
             },
+
+            // 3. 📏 Spacing & Sizing (Global Scale)
             spacing: {
                 "2xs": "2px",
                 xs: "4px",
@@ -118,6 +124,19 @@ const config: Config = {
                 "2xl": "48px",
                 "3xl": "64px", // For Section Gaps
                 container: "1440px",
+            },
+            borderRadius: {
+                sm: "4px",
+                md: "8px",
+                lg: "16px",    // Standard Card Radius
+                xl: "24px",
+                full: "9999px",
+            },
+            boxShadow: {
+                sm: "0 1px 2px rgba(51, 51, 51, 0.1)",
+                md: "0 4px 8px rgba(51, 51, 51, 0.12)",
+                lg: "0 8px 24px rgba(38, 38, 38, 0.14)", // Modal/Card Hover
+                xl: "0 12px 32px rgba(38, 38, 38, 0.18)",
             },
         },
     },
