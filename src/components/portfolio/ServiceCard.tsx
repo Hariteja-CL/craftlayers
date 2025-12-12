@@ -24,8 +24,8 @@ export function ServiceCard({
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between border-gray-100 hover:border-gray-200 shadow-sm transition-all duration-300 bg-white p-6 md:p-8 rounded-xl",
-                isActive ? "border-primary-main-400 ring-1 ring-primary-main-400" : "",
+                "cursor-pointer group h-full flex flex-col justify-between border-gray-100 hover:border-primary-main-400 shadow-sm transition-all duration-300 bg-white p-6 md:p-8 rounded-xl",
+                isActive ? "border-primary-main-400 ring-1 ring-primary-main-400" : "hover:shadow-primary-main-400/10",
                 className
             )}
         >
