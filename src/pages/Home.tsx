@@ -7,7 +7,7 @@ export function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="space-y-12">
+        <div className="space-y-4">
             <HeroSection />
 
             {/* Layers Grid Section */}
