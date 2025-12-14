@@ -4,6 +4,10 @@ import { ServiceCard } from '../components/portfolio/ServiceCard';
 import { ProfileSection } from '../components/portfolio/ProfileSection';
 
 
+import designIcon from '../assets/images/icon-design.svg';
+import aiIcon from '../assets/images/icon-ai.svg';
+import securityIcon from '../assets/images/icon-security.svg';
+
 export function Home() {
     const navigate = useNavigate();
 
@@ -31,7 +35,7 @@ export function Home() {
                         <ServiceCard
                             title="Design Layer"
                             description="Human-centered UX for complex enterprise platforms. Specializing in Design Systems that scale."
-                            icon={<img src="/assets/images/icon-design.svg" alt="" className="w-6 h-6" />}
+                            icon={<img src={designIcon} alt="Design" className="w-6 h-6" />}
                             variant="light"
                             onClick={() => navigate('/work/design')}
                             className="h-full min-h-[320px]"
@@ -43,7 +47,7 @@ export function Home() {
                         <ServiceCard
                             title="AI Layer"
                             description="Generative UI & Adaptive flows. Exploring how AI automates design without losing soul."
-                            icon={<img src="/assets/images/icon-ai.svg" alt="" className="w-6 h-6 invert opacity-90" />} // Invert icon for dark mode
+                            icon={<img src={aiIcon} alt="AI" className="w-6 h-6 invert opacity-90" />} // Invert icon for dark mode
                             variant="dark"
                             onClick={() => navigate('/work/ai')}
                             className="h-full min-h-[320px]"
@@ -55,7 +59,7 @@ export function Home() {
                         <ServiceCard
                             title="Security Layer"
                             description="Building trust through secure design patterns. Privacy UX & Identity management."
-                            icon={<img src="/assets/images/icon-security.svg" alt="" className="w-6 h-6" />}
+                            icon={<img src={securityIcon} alt="Security" className="w-6 h-6" />}
                             variant="light"
                             onClick={() => navigate('/work/security')}
                             className="h-full min-h-[280px]"
