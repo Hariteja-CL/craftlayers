@@ -89,25 +89,43 @@ export function About() {
                             </h3>
 
                             <div className="space-y-8 pl-2 border-l-2 border-dashed border-gray-100 ml-2">
-                                {/* Current Role */}
+                                {/* HCLTech */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-orange-500 shadow-sm" />
-                                    <div className="font-bold text-gray-900 text-lg">Senior UX Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">Current Role • Enterprise SaaS</div>
+                                    <div className="font-bold text-gray-900 text-lg">Sr. Designer</div>
+                                    <div className="text-sm text-gray-500 font-medium">HCLTech • Jul 2024 - Present</div>
+                                    <div className="text-xs text-gray-400 mt-1">CX Strategy & Research</div>
                                 </div>
 
-                                {/* Previous Role 1 */}
-                                <div className="pl-6 relative">
-                                    <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
-                                    <div className="font-bold text-gray-900 text-lg">Design System Architect</div>
-                                    <div className="text-sm text-gray-500 font-medium">2021 - 2023 • Scalable Libraries</div>
-                                </div>
-
-                                {/* Previous Role 2 */}
+                                {/* [24]7.ai */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
                                     <div className="font-bold text-gray-900 text-lg">Product Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">2018 - 2021 • Fintech Security</div>
+                                    <div className="text-sm text-gray-500 font-medium">[24]7.ai • Jun 2021 - Aug 2024</div>
+                                    <div className="text-xs text-gray-400 mt-1">Conversational AI & Enterprise SaaS</div>
+                                </div>
+
+                                {/* Freelance */}
+                                <div className="pl-6 relative">
+                                    <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
+                                    <div className="font-bold text-gray-900 text-lg">UX Design Consultant</div>
+                                    <div className="text-sm text-gray-500 font-medium">Freelance • Aug 2020 - Jun 2021</div>
+                                    <div className="text-xs text-gray-400 mt-1">Design Systems & Strategy</div>
+                                </div>
+
+                                {/* OpenText */}
+                                <div className="pl-6 relative">
+                                    <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
+                                    <div className="font-bold text-gray-900 text-lg">User Experience Designer</div>
+                                    <div className="text-sm text-gray-500 font-medium">OpenText • Mar 2020 - Jul 2020</div>
+                                </div>
+
+                                {/* Ray Business Technologies */}
+                                <div className="pl-6 relative">
+                                    <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
+                                    <div className="font-bold text-gray-900 text-lg">User Experience Designer</div>
+                                    <div className="text-sm text-gray-500 font-medium">Ray Business Technologies • May 2017 - Mar 2020</div>
+                                    <div className="text-xs text-gray-400 mt-1">Fintech & Web Applications</div>
                                 </div>
                             </div>
 
