@@ -2,87 +2,73 @@ import { useNavigate } from 'react-router-dom';
 import { HeroSection } from '../components/portfolio/HeroSection';
 import { ServiceCard } from '../components/portfolio/ServiceCard';
 import { ProfileSection } from '../components/portfolio/ProfileSection';
-import { BlogCard } from '../components/portfolio/BlogCard';
+
 
 export function Home() {
     const navigate = useNavigate();
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 pb-20">
             <HeroSection />
 
-            {/* Layers Grid Section */}
+            {/* Main Bento Grid Section */}
             <section id="work" className="px-6 max-w-container mx-auto">
-                <div className="mb-10 text-left">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">The Craft Layers</h2>
-                    <p className="text-content-primary text-lg mb-1">Where human-centered design meets technical intelligence.</p>
-                    <p className="text-content-secondary text-base">Select a layer to explore my work.</p>
+                {/* Section Header */}
+                <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div className="text-left">
+                        <h2 className="text-4xl font-extrabold text-[#1A1A1A] mb-2 tracking-tight">The Craft Layers</h2>
+                        <p className="text-gray-500 text-lg">My professional portfolio and personal brand ecosystem.</p>
+                    </div>
+                    <div className="text-gray-400 font-mono text-xs tracking-widest uppercase mb-1">
+                        EST. 2025
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
 
-                    {/* Design Layer */}
-                    <div className="lg:col-span-4">
+                    {/* Row 1, Item 1: Design Layer (Light, Large) */}
+                    <div className="md:col-span-5 lg:col-span-5">
                         <ServiceCard
                             title="Design Layer"
-                            description="Human-centered UX for enterprise platforms."
-                            icon={<div className="text-orange-400"><img src="/assets/images/icon-design.svg" alt="" className="w-6 h-6" /></div>}
+                            description="Human-centered UX for complex enterprise platforms. Specializing in Design Systems that scale."
+                            icon={<img src="/assets/images/icon-design.svg" alt="" className="w-6 h-6" />}
+                            variant="light"
                             onClick={() => navigate('/work/design')}
-                            className="h-full border border-gray-200"
+                            className="h-full min-h-[320px]"
                         />
                     </div>
 
-                    {/* AI Layer */}
-                    <div className="lg:col-span-4">
+                    {/* Row 1, Item 2: AI Layer (Dark, Large) */}
+                    <div className="md:col-span-7 lg:col-span-7">
                         <ServiceCard
                             title="AI Layer"
-                            description="Exploring AI-driven design automation."
-                            icon={<div className="text-yellow-500"><img src="/assets/images/icon-ai.svg" alt="" className="w-6 h-6" /></div>}
+                            description="Generative UI & Adaptive flows. Exploring how AI automates design without losing soul."
+                            icon={<img src="/assets/images/icon-ai.svg" alt="" className="w-6 h-6 invert opacity-90" />} // Invert icon for dark mode
+                            variant="dark"
                             onClick={() => navigate('/work/ai')}
-                            className="h-full border border-gray-200"
+                            className="h-full min-h-[320px]"
                         />
                     </div>
 
-                    {/* Security Layer */}
-                    <div className="lg:col-span-4">
+                    {/* Row 2, Item 1: Security Layer (Light, Small) */}
+                    <div className="md:col-span-4 lg:col-span-4">
                         <ServiceCard
                             title="Security Layer"
-                            description="Building trust through secure design."
-                            icon={<div className="text-green-500"><img src="/assets/images/icon-security.svg" alt="" className="w-6 h-6" /></div>}
+                            description="Building trust through secure design patterns. Privacy UX & Identity management."
+                            icon={<img src="/assets/images/icon-security.svg" alt="" className="w-6 h-6" />}
+                            variant="light"
                             onClick={() => navigate('/work/security')}
-                            className="h-full border border-gray-200"
+                            className="h-full min-h-[280px]"
                         />
+                    </div>
+
+                    {/* Row 2, Item 2: Profile Section (Custom, Wide) */}
+                    <div className="md:col-span-8 lg:col-span-8">
+                        <ProfileSection />
                     </div>
 
                 </div>
             </section>
-
-            {/* Latest Insights Section */}
-            <section className="px-6 py-20 max-w-container mx-auto">
-                <div className="flex items-center justify-between mb-10">
-                    <h2 className="text-3xl font-bold text-gray-900">Latest Insights</h2>
-                    <button
-                        onClick={() => navigate('/blog')}
-                        className="text-primary-main-400 font-medium hover:underline"
-                    >
-                        View all
-                    </button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <BlogCard
-                        title="Secure UX: Balancing Trust and Usability"
-                        excerpt="How to design security features that enhance rather than hinder the user experience. A deep dive into authentication patterns."
-                        category="Security"
-                        date="Oct 24, 2024"
-                        slug="/work/secure-ux"
-                        imageUrl="/assets/images/blog/secure-ux-cover.png"
-                    />
-                    {/* Placeholder for more posts if needed, using Layout's grid */}
-                </div>
-            </section>
-
-            <ProfileSection />
         </div>
     );
 }

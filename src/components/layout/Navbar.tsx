@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { Button } from '../ui/Button';
 import { cn } from '../ui/Button'; // Reuse utility
 
 const navItems = [
@@ -12,92 +9,45 @@ const navItems = [
 ];
 
 export function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
-    // Handle scroll effect for glassmorphism
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
-        <nav
-            className={cn(
-                "fixed top-0 z-50 w-full transition-all duration-300 border-b border-transparent",
-                scrolled
-                    ? "bg-surface/80 backdrop-blur-md border-border-muted shadow-sm py-3"
-                    : "bg-transparent py-5"
-            )}
-        >
-            <div className="container mx-auto px-6 h-full flex items-center justify-between">
-                {/* Logo */}
-                <Link to="/" className="text-xl font-bold tracking-tight text-content-primary">
-                    hariteja.<span className="text-content-secondary">design</span>
+        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[90%] md:w-auto">
+            <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-full px-2 py-2 flex items-center justify-between md:gap-2">
+
+                {/* Logo Section */}
+                <Link to="/" className="flex items-center gap-2 px-4 py-2 hover:bg-white/50 rounded-full transition-colors">
+                    <div className="w-2 h-2 rounded-full bg-orange-500" />
+                    <span className="font-bold text-gray-900 tracking-tight text-sm">CraftLayers</span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <div className="hidden md:flex items-center space-x-8">
+                <div className="hidden md:flex items-center bg-gray-100/50 rounded-full px-1 p-1">
                     {navItems.map((item) => (
                         <NavLink
                             key={item.name}
                             to={item.path}
                             className={({ isActive }) =>
                                 cn(
-                                    "text-sm font-medium transition-colors hover:text-primary-main-400",
-                                    isActive ? "text-primary-main-400" : "text-content-secondary"
+                                    "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                                    isActive
+                                        ? "bg-white text-gray-900 shadow-sm"
+                                        : "text-gray-500 hover:text-gray-900 hover:bg-white/50"
                                 )
                             }
                         >
                             {item.name}
                         </NavLink>
                     ))}
-                    <Button variant="solid" size="sm" asChild>
-                        <Link to="/contact">Let's Talk</Link>
-                    </Button>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-content-primary focus:outline-none"
-                    onClick={() => setIsOpen(!isOpen)}
+                {/* Contact Action */}
+                <Link
+                    to="/contact"
+                    className="flex items-center gap-2 bg-[#1A1A1A] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors"
                 >
-                    {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </button>
-            </div>
+                    Contact <span className="text-gray-400">✉</span>
+                </Link>
 
-            {/* Mobile Menu Overlay */}
-            {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-border-muted shadow-lg">
-                    <div className="flex flex-col p-6 space-y-4">
-                        {navItems.map((item) => (
-                            <NavLink
-                                key={item.name}
-                                to={item.path}
-                                className={({ isActive }) =>
-                                    cn(
-                                        "block text-base font-medium py-2 transition-colors",
-                                        isActive ? "text-primary-main-400" : "text-content-secondary"
-                                    )
-                                }
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {item.name}
-                            </NavLink>
-                        ))}
-                        <div className="pt-4 border-t border-border-muted">
-                            <Button className="w-full" asChild>
-                                <Link to="/contact" onClick={() => setIsOpen(false)}>
-                                    Let's Talk
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            </div>
         </nav>
     );
 }

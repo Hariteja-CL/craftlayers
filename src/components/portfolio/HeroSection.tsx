@@ -1,42 +1,25 @@
 
-
 export function HeroSection() {
     return (
-        <section className="relative px-6 py-20 md:py-32 max-w-container mx-auto">
-            <div className="flex flex-col-reverse md:flex-row items-center md:items-start justify-between gap-12">
-
-                {/* Text Content */}
-                <div className="flex-1 text-center md:text-left space-y-6">
-                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-content-primary">
-                        Designing Clarity
-                    </h1>
-
-                    <div className="text-xl md:text-2xl font-medium text-primary-main-400">
-                        Senior UX Designer | Design System Architect | Cyber Security
-                    </div>
-
-                    <p className="text-lg text-content-secondary max-w-2xl leading-relaxed mx-auto md:mx-0">
-                        Where human-centered design meets technical intelligence. I build comprehensive systems that bridge the gap between complex engineering and intuitive user experiences.
-                    </p>
-
-                    <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
-                        <a
-                            href="https://www.linkedin.com/in/hariteja-nandipati"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-6 py-3 bg-primary-main-400 text-white font-semibold rounded-lg hover:bg-primary-main-500 transition-colors"
-                        >
-                            Let's Connect
-                        </a>
-                        <a
-                            href="#work"
-                            className="px-6 py-3 border border-border-default text-content-primary font-medium rounded-lg hover:bg-surface-subtle transition-colors"
-                        >
-                            View Work
-                        </a>
-                    </div>
-                </div>
+        <section className="relative px-6 pt-12 pb-16 md:pt-24 md:pb-24 max-w-container mx-auto text-center md:text-left">
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-100 mb-8">
+                <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                </span>
+                <span className="text-xs font-bold text-orange-600 tracking-wider uppercase">Available for new projects</span>
             </div>
+
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#1A1A1A]">
+                Designing Clarity.
+                <br />
+                <span className="text-[#E2E8F0]">Converging AI & Trust.</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl leading-relaxed font-medium">
+                One portfolio that blends <span className="text-gray-900 border-b-2 border-orange-200">user experience</span>, <span className="text-gray-900 border-b-2 border-orange-200">trust</span>, and <span className="text-gray-900 border-b-2 border-orange-200">intelligence</span>.
+            </p>
         </section>
     );
 }

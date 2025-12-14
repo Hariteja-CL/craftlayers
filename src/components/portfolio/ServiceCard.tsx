@@ -16,38 +16,58 @@ export function ServiceCard({
     title,
     description,
     icon,
-    isActive = false,
+    variant = "light",
     onClick,
     className,
-}: ServiceCardProps) {
+}: ServiceCardProps & { variant?: "light" | "dark" }) {
+    const isDark = variant === "dark";
+
     return (
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between border-gray-100 hover:border-primary-main-400 shadow-sm transition-all duration-300 bg-white p-6 md:p-8 rounded-xl",
-                isActive ? "border-primary-main-400 ring-1 ring-primary-main-400" : "hover:shadow-primary-main-400/10",
+                "cursor-pointer group h-full flex flex-col justify-between transition-all duration-300 p-8 rounded-[2rem] border-0",
+                // Light Mode
+                !isDark && "bg-white text-gray-900 shadow-sm hover:shadow-md",
+                // Dark Mode
+                isDark && "bg-[#0B1121] text-white shadow-xl hover:shadow-2xl hover:bg-[#11192e]", // Deep Navy
                 className
             )}
         >
             <div className="space-y-6">
-                {/* Icon Container at top */}
+                {/* Icon Container */}
                 <div className={cn(
-                    "w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 bg-orange-50/50"
+                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300",
+                    isDark ? "bg-white/10" : "bg-orange-50"
                 )}>
                     {icon}
                 </div>
 
-                <div className="space-y-3">
-                    <CardTitle className="text-2xl font-bold text-gray-900">{title}</CardTitle>
-                    <p className="text-content-secondary text-base leading-relaxed">
+                <div className="space-y-2">
+                    <CardTitle className={cn(
+                        "text-2xl font-bold",
+                        isDark ? "text-white" : "text-gray-900"
+                    )}>
+                        {title}
+                    </CardTitle>
+                    <p className={cn(
+                        "text-base leading-relaxed font-medium",
+                        isDark ? "text-gray-400" : "text-gray-500"
+                    )}>
                         {description}
                     </p>
-
                 </div>
             </div>
 
-            <div className="mt-8 flex items-center text-sm font-medium text-gray-400 group-hover:text-primary-main-400 transition-colors">
-                Explore <ArrowRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+            <div className={cn(
+                "mt-8 flex items-center justify-between text-sm font-semibold tracking-wide uppercase",
+                isDark ? "text-orange-500" : "text-gray-900"
+            )}>
+                {isDark ? "EXP_02" : "Explore Case Studies"}
+                <ArrowRight className={cn(
+                    "h-5 w-5 transition-transform duration-300",
+                    "group-hover:translate-x-1"
+                )} />
             </div>
         </Card>
     );
