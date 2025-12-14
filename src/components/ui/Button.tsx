@@ -13,8 +13,8 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                solid: "bg-primary-main-400 text-white hover:bg-primary-main-500 hover:shadow-lg hover:shadow-primary-main-400/40 shadow-md shadow-primary-main-400/20 border border-transparent",
-                outline: "border border-border-DEFAULT bg-transparent text-content-primary hover:border-primary-main-400 hover:text-primary-main-400 hover:shadow-md hover:shadow-primary-main-400/10",
+                solid: "bg-primary-main-400 text-white hover:bg-primary-main-500 hover:shadow-[0_0_20px_rgba(255,107,0,0.4)] shadow-md shadow-primary-main-400/20 border border-transparent",
+                outline: "border border-border-DEFAULT bg-transparent text-content-primary hover:border-primary-main-400 hover:text-primary-main-400 hover:shadow-[0_0_15px_rgba(255,107,0,0.2)]",
                 ghost: "hover:bg-surface-subtle text-content-secondary hover:text-content-primary",
                 link: "text-primary-main-700 underline-offset-4 hover:underline p-0 h-auto active:scale-100",
             },

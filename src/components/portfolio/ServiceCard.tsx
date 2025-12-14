@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../ui/Card';
+import { Card, CardTitle } from '../ui/Card';
 import { cn } from '../ui/Button';
 
 interface ServiceCardProps {
@@ -24,35 +24,31 @@ export function ServiceCard({
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between border-transparent transition-all duration-300",
-                isActive ? "border-primary-main-400 ring-1 ring-primary-main-400" : "hover:border-primary-main-400",
+                "cursor-pointer group h-full flex flex-col justify-between border-gray-100 hover:border-primary-main-400 shadow-sm transition-all duration-300 bg-white p-6 md:p-8 rounded-xl",
+                isActive ? "border-primary-main-400 ring-1 ring-primary-main-400" : "hover:shadow-primary-main-400/10",
                 className
             )}
         >
-            <CardHeader>
+            <div className="space-y-6">
+                {/* Icon Container at top */}
                 <div className={cn(
-                    "w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors duration-300",
-                    "bg-gray-100 group-hover:bg-primary-main-400"
+                    "w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 bg-orange-50/50"
                 )}>
-                    {/* Icon Wrapper: Clone element to enforce color change or use CSS */}
-                    <div className="text-content-secondary group-hover:text-white transition-colors duration-300">
-                        {icon}
-                    </div>
+                    {icon}
                 </div>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
 
-            <CardContent>
-                <p className="text-content-secondary leading-relaxed">
-                    {description}
-                </p>
-            </CardContent>
+                <div className="space-y-3">
+                    <CardTitle className="text-2xl font-bold text-gray-900">{title}</CardTitle>
+                    <p className="text-content-secondary text-base leading-relaxed">
+                        {description}
+                    </p>
 
-            <CardFooter>
-                <div className="flex items-center text-sm font-medium text-content-tertiary group-hover:text-primary-main-400 group-hover:gap-2 transition-all duration-300">
-                    Explore <ArrowRight className="ml-1 h-4 w-4" />
                 </div>
-            </CardFooter>
+            </div>
+
+            <div className="mt-8 flex items-center text-sm font-medium text-gray-400 group-hover:text-primary-main-400 transition-colors">
+                Explore <ArrowRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+            </div>
         </Card>
     );
 }

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LayoutShell } from './components/layout/LayoutShell';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-
 import { BlogListing } from './pages/blog/BlogListing';
 import { BlogPost } from './pages/blog/BlogPost';
 import { Inwards } from './pages/work/Inwards';
@@ -32,9 +31,9 @@ function App() {
 
           {/* Dashboards (Done) */}
           <Route path="/contact" element={<div className="p-20 text-center">Contact Page (Coming Soon)</div>} />
-        </Route>
-      </Routes>
-    </Router>
+        </Route >
+      </Routes >
+    </Router >
   );
 }
 
