@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariteja Nandipati - Resume</title>
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --secondary: #6B7280;
+            --accent: #F97316;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f3f4f6;
+            color: var(--primary);
+            line-height: 1.5;
+            font-size: 11pt;
+        }
+
+        .page {
+            background: white;
+            width: 21cm;
+            min-height: 29.7cm;
+            margin: 2cm auto;
+            padding: 2cm;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 24pt;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+            color: #111827;
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact {
+            font-size: 9pt;
+            color: var(--secondary);
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .contact a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted var(--secondary);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 12pt;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+
+        /* Experience Items */
+        .job-item {
+            margin-bottom: 1rem;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.15rem;
+        }
+
+        .role {
+            font-weight: 700;
+            font-size: 11pt;
+            color: #111827;
+        }
+
+        .company {
+            font-weight: 600;
+            color: #4B5563;
+        }
+
+        .period {
+            font-family: monospace;
+            font-size: 9pt;
+            color: #9CA3AF;
+        }
+
+        .domain {
+            font-size: 9pt;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.25rem;
+            color: #374151;
+            font-size: 10pt;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1cm;
+        }
+
+        .skill-category strong {
+            display: block;
+            font-size: 9pt;
+            text-transform: uppercase;
+            color: #6B7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pill {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 9pt;
+            color: #374151;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1A1A1A;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .btn-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="btn-print" onclick="window.print()">Save as PDF</button>
+
+    <div class="page">
+        <header>
+            <h1>Hariteja Nandipati</h1>
+            <div class="subtitle">Senior UX Designer & Architect</div>
+            <div class="contact">
+                <span>Hyderabad, India</span>
+                <a href="https://craftlayers.com">craftlayers.com</a>
+                <a href="https://linkedin.com/in/hariteja-nandipati">linkedin.com/in/hariteja-nandipati</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 10pt; color: #4B5563;">
+                Senior UX Practitioner with 8+ years of experience specializing in complex enterprise ecosystems.
+                Expert in bridging Cognitive Science, System Architecture, and Security Protocols to build scalable,
+                high-trust user interfaces for B2B SaaS.
+            </p>
+        </header>
+
+        <section>
+            <h2>Experience</h2>
+
+            <!-- Enculture -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">Senior UX Designer <span class="company">at Enculture (NHR
+                            Technologies)</span></span>
+                    <span class="period">Jan 2024 - Present</span>
+                </div>
+                <span class="domain">B2B SaaS | Culture Analytics</span>
+                <ul>
+                    <li>Defining and executing the UX for a culture intelligence platform that empowers organizations to
+                        quantify and analyze metrics.</li>
+                    <li>Architecting a scalable design system (Craft Layers approach) to unify disparate analytics
+                        modules.</li>
+                    <li>Collaborating with engineering to implement pixel-perfect, accessible UI components.</li>
+                </ul>
+            </div>
+
+            <!-- Clinic Mantra -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">Product Designer, UI/UX <span class="company">at Clinic Mantra</span></span>
+                    <span class="period">Jan 2023 - Aug 2023</span>
+                </div>
+                <span class="domain">Healthcare Tech</span>
+                <ul>
+                    <li>Designed patient-centric interfaces for healthcare management systems.</li>
+                    <li>Streamlined appointment scheduling and medical record access flows efficiently for diverse user
+                        bases.</li>
+                </ul>
+            </div>
+
+            <!-- Estate96 -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">UX Design Consultant <span class="company">at Estate96 (Freelance)</span></span>
+                    <span class="period">Aug 2022 - Nov 2022</span>
+                </div>
+                <span class="domain">Smart Access Solutions</span>
+                <ul>
+                    <li>Consulted on the UX strategy for smart building access control interfaces.</li>
+                </ul>
+            </div>
+
+            <!-- Opia Labs -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">User Experience Designer <span class="company">at Opia Labs</span></span>
+                    <span class="period">Nov 2019 - Jul 2022</span>
+                </div>
+                <span class="domain">SaaS Platforms & Web Apps</span>
+                <ul>
+                    <li>Led design initiatives for multiple SaaS products, effectively transitioning vague concepts into
+                        shipped features.</li>
+                    <li>Developed responsive web applications focusing on data visualization and dashboard utility.</li>
+                </ul>
+            </div>
+
+            <!-- Foyr -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">User Experience Designer <span class="company">at Foyr</span></span>
+                    <span class="period">May 2017 - Nov 2019</span>
+                </div>
+                <span class="domain">Immersive Architecture Tech</span>
+                <ul>
+                    <li>Designed 3D-heavy interfaces for interior design and architecture professionals.</li>
+                    <li>Optimized complex rendering workflows into intuitive user journeys.</li>
+                </ul>
+            </div>
+
+            <!-- Instructor Role (Grouped) -->
+            <div class="job-item">
+                <div class="job-header">
+                    <span class="role">Design Instructor <span class="company">at Arena Animation / NICE</span></span>
+                    <span class="period">2010 - 2017</span>
+                </div>
+                <span class="domain">Education & Mentorship</span>
+                <ul>
+                    <li>Mentored over 100+ aspiring designers in Graphic Design, 3D Modeling, and Animation.</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <section>
+            <h2>Technical Expertise</h2>
+            <div class="skills-grid">
+                <div>
+                    <strong style="font-size: 9pt; color: #111827; display: block; margin-bottom: 0.5rem;">Core
+                        Stack</strong>
+                </div>
+                <div class="skill-list">
+                    <span class="pill">Figma</span>
+                    <span class="pill">React (UX)</span>
+                    <span class="pill">Tailwind CSS</span>
+                    <span class="pill">Storybook</span>
+                    <span class="pill">WCAG 2.2</span>
+                    <span class="pill">Jira</span>
+                </div>
+            </div>
+            <div class="skills-grid" style="margin-top: 0.75rem;">
+                <div>
+                    <strong
+                        style="font-size: 9pt; color: #111827; display: block; margin-bottom: 0.5rem;">Methodology</strong>
+                </div>
+                <div class="skill-list">
+                    <span class="pill">Design Systems</span>
+                    <span class="pill">Information Architecture</span>
+                    <span class="pill">Secure UX</span>
+                    <span class="pill">User Research</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
