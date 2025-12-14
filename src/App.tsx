@@ -17,7 +17,6 @@ function App() {
       <Routes>
         <Route element={<LayoutShell />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/work/secure-ux" element={<BlogPost />} />
           <Route path="/work/inwards" element={<Inwards />} />
@@ -31,9 +30,9 @@ function App() {
 
           {/* Dashboards (Done) */}
           <Route path="/contact" element={<div className="p-20 text-center">Contact Page (Coming Soon)</div>} />
-        </Route >
-      </Routes >
-    </Router >
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
