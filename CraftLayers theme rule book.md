@@ -47,5 +47,15 @@ We are moving away from traditional static portfolios to a dynamic, atmospheric 
 - **Light Theme**: Clean White (`#ffffff`) or Soft Blue (`#EBF2FA`) for "Design" or "Profile" cards.
 - **Text**: Stark Black (`#1A1A1A`) for headings, Cool Gray (`#64748b`) for body.
 
+## 7. Accessibility (WCAG Compliance)
+- **Contrast**:
+    - **Never** use `text-gray-400` or lighter for body text or essential labels on white backgrounds.
+    - Use `text-gray-500` (Contrast ~8:1) or darker for readable content.
+    - Ensure meaningful orange accents have sufficient contrast or are accompanied by other visual cues (icons, underlines).
+- **Semantic Structure**: Use correct heading levels (`h1` -> `h2` -> `h3`). Do not skip levels for styling purposes.
+- **Focus States**: All interactive elements (Inputs, Buttons, Cards with `onClick`) must have a visible focus ring (`focus:ring-2`).
+- **Alt Text**: All decorative images must have `alt=""`. All informational images must have descriptive `alt` text.
+- **Motion**: Ensure animations respect `prefers-reduced-motion` where possible, or are subtle enough not to cause vestibular issues.
+
 ---
 **When creating new pages or components, ALWAYS consult this rule book first.**

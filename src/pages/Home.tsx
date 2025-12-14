@@ -17,9 +17,9 @@ export function Home() {
                 <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="text-left">
                         <h2 className="text-4xl font-extrabold text-[#1A1A1A] mb-2 tracking-tight">The Craft Layers</h2>
-                        <p className="text-gray-500 text-lg">My professional portfolio and personal brand ecosystem.</p>
+                        <p className="text-gray-600 text-lg">My professional portfolio and personal brand ecosystem.</p>
                     </div>
-                    <div className="text-gray-400 font-mono text-xs tracking-widest uppercase mb-1">
+                    <div className="text-gray-500 font-mono text-xs tracking-widest uppercase mb-1">
                         EST. 2025
                     </div>
                 </div>

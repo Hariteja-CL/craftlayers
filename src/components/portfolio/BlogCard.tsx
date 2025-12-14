@@ -35,13 +35,13 @@ export function BlogCard({ title, excerpt, category, date, slug, imageUrl }: Blo
 
                 <div className="flex flex-col flex-grow p-5 space-y-4">
                     <div className="space-y-2 flex-grow">
-                        <div className="text-xs font-mono text-gray-400 uppercase tracking-widest">
+                        <div className="text-xs font-mono text-gray-500 uppercase tracking-widest">
                             {date}
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-primary-main-400 transition-colors">
                             {title}
                         </h3>
-                        <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
+                        <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
                             {excerpt}
                         </p>
                     </div>

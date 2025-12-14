@@ -23,14 +23,14 @@ export function Navbar() {
                 <div className="hidden md:flex items-center bg-gray-100/50 rounded-full px-1 p-1">
                     {navItems.map((item) => (
                         <NavLink
-                            key={item.name}
+                            key={item.path}
                             to={item.path}
                             className={({ isActive }) =>
                                 cn(
-                                    "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                                    "px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20",
                                     isActive
                                         ? "bg-white text-gray-900 shadow-sm"
-                                        : "text-gray-500 hover:text-gray-900 hover:bg-white/50"
+                                        : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
                                 )
                             }
                         >
@@ -42,9 +42,9 @@ export function Navbar() {
                 {/* Contact Action */}
                 <Link
                     to="/contact"
-                    className="flex items-center gap-2 bg-[#1A1A1A] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors"
+                    className="bg-[#1A1A1A] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-lg shadow-black/5 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
                 >
-                    Contact <span className="text-gray-400">✉</span>
+                    Contact
                 </Link>
 
             </div>

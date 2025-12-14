@@ -75,7 +75,7 @@ export function About() {
                         <div className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1">
                             Projects Shipped
                         </div>
-                        <div className="text-[10px] text-gray-500 font-medium">
+                        <div className="text-[10px] text-gray-400 font-medium">
                             11 Core Products + POCs
                         </div>
                     </div>
