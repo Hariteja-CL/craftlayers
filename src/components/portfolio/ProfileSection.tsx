@@ -3,7 +3,7 @@
 // Note: We'll use the SVGs as images for now since we haven't migrated them to React components
 // or we can import them if they are in assets.
 
-import profileHero from '../../assets/images/profile-hero.svg';
+import profileHero from '../../assets/images/profile.png';
 import linkedinIcon from '../../assets/images/linkedin.svg';
 
 export function ProfileSection() {
