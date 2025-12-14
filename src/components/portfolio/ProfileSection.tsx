@@ -25,9 +25,7 @@ export function ProfileSection() {
                         Senior UX Designer | Design System Architect | Cyber Security
                     </p>
                     <p className="text-content-secondary leading-relaxed mb-6 max-w-2xl">
-                        Sr. Product & UX Designer with 8+ years in SaaS, Design Systems, and secure,
-                        data-driven UX. I blend usability and security to build intuitive, compliant, and scalable
-                        enterprise experiences.
+                        CraftLayers is the professional portfolio and personal brand of Hariteja Nandipati, a Sr UX Designer. It serves as a showcase for case studies, design insights, and technical explorations in AI, Security, and User Experience.
                     </p>
 
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-6">
