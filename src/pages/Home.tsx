@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { HeroSection } from '../components/portfolio/HeroSection';
 import { ServiceCard } from '../components/portfolio/ServiceCard';
-import { ProfileSection } from '../components/portfolio/ProfileSection';
 
 export function Home() {
     const navigate = useNavigate();
@@ -12,6 +11,11 @@ export function Home() {
 
             {/* Layers Grid Section */}
             <section id="work" className="px-6 max-w-container mx-auto">
+                <div className="mb-10 text-center md:text-left">
+                    <h2 className="text-3xl font-bold text-content-primary mb-2 lowercase">craftlayers</h2>
+                    <p className="text-content-secondary text-lg">Select a layer to explore my work.</p>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
 
                     {/* Design Layer */}
@@ -51,7 +55,7 @@ export function Home() {
                 </div>
             </section>
 
-            <ProfileSection />
+
         </div>
     );
 }

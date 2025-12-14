@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LayoutShell } from './components/layout/LayoutShell';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { About } from './pages/About';
+
 import { BlogListing } from './pages/blog/BlogListing';
 import { BlogPost } from './pages/blog/BlogPost';
 import { Inwards } from './pages/work/Inwards';
@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route element={<LayoutShell />}>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/work/secure-ux" element={<BlogPost />} />
           <Route path="/work/inwards" element={<Inwards />} />
