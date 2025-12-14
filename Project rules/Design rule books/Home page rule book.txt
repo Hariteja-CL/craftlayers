@@ -92,3 +92,5 @@
       boxShadow: "0 12px 32px rgba(0,0,0,0.08)"
     }
     ```
+
+please keep primay color for outline while hover and change shadow to primary color for button component 
