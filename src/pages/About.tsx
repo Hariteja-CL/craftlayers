@@ -70,10 +70,13 @@ export function About() {
                     {/* Stat Card 2: Projects */}
                     <div className="bg-[#0B1121] p-8 rounded-[2rem] shadow-xl flex flex-col justify-center min-h-[160px] text-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                         <div className="text-4xl lg:text-5xl font-extrabold mb-2">
-                            50<span className="text-blue-500">+</span>
+                            22<span className="text-blue-500">+</span>
                         </div>
-                        <div className="text-xs font-bold text-gray-400 tracking-widest uppercase">
+                        <div className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-1">
                             Projects Shipped
+                        </div>
+                        <div className="text-[10px] text-gray-500 font-medium">
+                            11 Core Products + POCs
                         </div>
                     </div>
 
@@ -89,43 +92,45 @@ export function About() {
                             </h3>
 
                             <div className="space-y-8 pl-2 border-l-2 border-dashed border-gray-100 ml-2">
-                                {/* HCLTech */}
+
+                                {/* Enculture (NHR Technologies) */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-orange-500 shadow-sm" />
-                                    <div className="font-bold text-gray-900 text-lg">Sr. Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">HCLTech • Jul 2024 - Present</div>
-                                    <div className="text-xs text-gray-400 mt-1">CX Strategy & Research</div>
+                                    <div className="font-bold text-gray-900 text-lg">Senior UX Designer</div>
+                                    <div className="text-sm text-gray-500 font-medium">Enculture (NHR Technologies) • Jan 2024 - Present</div>
+                                    <div className="text-xs text-gray-400 mt-1">B2B SaaS | Culture Analytics & Insights</div>
                                 </div>
 
-                                {/* [24]7.ai */}
+                                {/* Clinic Mantra */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
-                                    <div className="font-bold text-gray-900 text-lg">Product Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">[24]7.ai • Jun 2021 - Aug 2024</div>
-                                    <div className="text-xs text-gray-400 mt-1">Conversational AI & Enterprise SaaS</div>
+                                    <div className="font-bold text-gray-900 text-lg">Product Designer, UI/UX</div>
+                                    <div className="text-sm text-gray-500 font-medium">Clinic Mantra • Jan 2023 - Aug 2023</div>
+                                    <div className="text-xs text-gray-400 mt-1">Healthcare Tech</div>
                                 </div>
 
-                                {/* Freelance */}
+                                {/* Estate96 (Freelance) */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
                                     <div className="font-bold text-gray-900 text-lg">UX Design Consultant</div>
-                                    <div className="text-sm text-gray-500 font-medium">Freelance • Aug 2020 - Jun 2021</div>
-                                    <div className="text-xs text-gray-400 mt-1">Design Systems & Strategy</div>
+                                    <div className="text-sm text-gray-500 font-medium">Estate96 (Freelance) • Aug 2022 - Nov 2022</div>
+                                    <div className="text-xs text-gray-400 mt-1">Smart Access Solutions</div>
                                 </div>
 
-                                {/* OpenText */}
+                                {/* Opia Labs */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
                                     <div className="font-bold text-gray-900 text-lg">User Experience Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">OpenText • Mar 2020 - Jul 2020</div>
+                                    <div className="text-sm text-gray-500 font-medium">Opia Labs • Nov 2019 - Jul 2022</div>
+                                    <div className="text-xs text-gray-400 mt-1">SaaS Platforms & Web Apps</div>
                                 </div>
 
-                                {/* Ray Business Technologies */}
+                                {/* Foyr */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 border-white bg-gray-200" />
                                     <div className="font-bold text-gray-900 text-lg">User Experience Designer</div>
-                                    <div className="text-sm text-gray-500 font-medium">Ray Business Technologies • May 2017 - Mar 2020</div>
-                                    <div className="text-xs text-gray-400 mt-1">Fintech & Web Applications</div>
+                                    <div className="text-sm text-gray-500 font-medium">Foyr • May 2017 - Nov 2019</div>
+                                    <div className="text-xs text-gray-400 mt-1">Immersive Architecture Tech</div>
                                 </div>
                             </div>
 
