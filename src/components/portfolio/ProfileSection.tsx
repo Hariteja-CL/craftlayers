@@ -42,7 +42,7 @@ export function ProfileSection() {
                         <span className="text-lg">in</span> Connect
                     </a>
                     <a href="/resume.html" target="_blank" className="bg-white border border-gray-200 text-gray-700 px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500/20">
-                        View/Print Resume
+                        My resume
                     </a>
                 </div>
             </div>
