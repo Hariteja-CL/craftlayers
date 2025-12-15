@@ -314,13 +314,14 @@
         @media print {
             @page {
                 size: A4;
-                margin: 1cm;
+                margin: 1.5cm 2cm;
+                /* Generous vertical margins to start/end pages cleanly */
             }
 
             body {
                 background: white;
-                font-size: 11pt;
-                /* Slightly increased for readability on paper */
+                font-size: 10.5pt;
+                /* Optimal for 2-page spread */
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -341,30 +342,45 @@
                 display: none !important;
             }
 
-            /* Adjust spacing for print specifically */
             header {
-                margin-bottom: 1.5rem;
-                padding-bottom: 1rem;
+                margin-bottom: 2rem;
+                padding-bottom: 1.5rem;
                 border-bottom: 1px solid #ddd;
             }
 
             section {
                 break-inside: avoid;
-                /* Try to keep sections together */
-                margin-bottom: 1.25rem;
+                margin-bottom: 2rem;
+                /* Increase spacing between sections */
+            }
+
+            /* Force page break before Education if it's getting squeezed */
+            section h2:contains('Education') {
+                page-break-before: auto;
             }
 
             h1 {
-                font-size: 24pt;
+                font-size: 26pt;
                 color: black;
+                margin-bottom: 0.5rem;
+            }
+
+            h2 {
+                margin-top: 1rem;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5rem;
+            }
+
+            /* Comfort spacing for reading */
+            li {
+                margin-bottom: 0.5rem;
             }
 
             a {
                 text-decoration: none;
-                color: #555;
+                color: #333;
             }
 
-            /* Remove background from pills to save ink and look cleaner */
             .pill,
             .contact-pill,
             .period {
