@@ -349,9 +349,15 @@
             }
 
             section {
-                break-inside: avoid;
+                break-inside: auto;
+                /* Allow breaking within long sections like Experience */
                 margin-bottom: 2rem;
-                /* Increase spacing between sections */
+            }
+
+            .job-item {
+                break-inside: avoid;
+                /* Don't break individual job blocks */
+                page-break-inside: avoid;
             }
 
             /* Force page break before Education if it's getting squeezed */
