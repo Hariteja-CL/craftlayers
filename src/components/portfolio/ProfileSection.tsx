@@ -41,8 +41,8 @@ export function ProfileSection() {
                     <a href="https://linkedin.com/in/hariteja-nandipati" className="bg-[#1A1A1A] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-orange-500/40">
                         <span className="text-lg">in</span> Connect
                     </a>
-                    <a href="#" className="bg-white border border-gray-200 text-gray-700 px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500/20">
-                        Download Resume
+                    <a href="/resume.html" target="_blank" className="bg-white border border-gray-200 text-gray-700 px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500/20">
+                        View/Print Resume
                     </a>
                 </div>
             </div>
