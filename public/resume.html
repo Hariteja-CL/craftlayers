@@ -312,8 +312,17 @@
         }
 
         @media print {
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+
             body {
-                background: none;
+                background: white;
+                font-size: 11pt;
+                /* Slightly increased for readability on paper */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
             .page {
@@ -321,18 +330,48 @@
                 margin: 0;
                 padding: 0;
                 width: 100%;
+                min-height: auto;
                 border-radius: 0;
+                border: none;
+                background: white;
             }
 
-            .btn-print {
-                display: none;
-            }
-
+            .btn-print,
             .blob {
-                opacity: 0.5;
+                display: none !important;
             }
 
-            /* Keep subtle blobl or hide if user prefers ink saving */
+            /* Adjust spacing for print specifically */
+            header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #ddd;
+            }
+
+            section {
+                break-inside: avoid;
+                /* Try to keep sections together */
+                margin-bottom: 1.25rem;
+            }
+
+            h1 {
+                font-size: 24pt;
+                color: black;
+            }
+
+            a {
+                text-decoration: none;
+                color: #555;
+            }
+
+            /* Remove background from pills to save ink and look cleaner */
+            .pill,
+            .contact-pill,
+            .period {
+                border: 1px solid #ccc;
+                background: transparent !important;
+                color: black !important;
+            }
         }
     </style>
 </head>
