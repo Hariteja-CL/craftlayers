@@ -14,7 +14,7 @@ export function HeroSection() {
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#1A1A1A]">
                 Designing Clarity.
                 <br />
-                <span className="text-gray-400">Converging AI & Trust.</span>
+                <span className="text-gray-500">Converging AI & Trust.</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-500 max-w-3xl leading-relaxed font-medium">
