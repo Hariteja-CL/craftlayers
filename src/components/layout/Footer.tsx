@@ -9,10 +9,10 @@ export function Footer() {
             <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
                 {/* Copyright */}
                 <div className="flex flex-col gap-2 max-w-md text-center md:text-left">
-                    <div className="text-content-tertiary text-sm">
+                    <div className="text-content-secondary text-sm">
                         &copy; {currentYear} Hariteja. All rights reserved.
                     </div>
-                    <p className="text-[10px] text-gray-400 leading-relaxed">
+                    <p className="text-[10px] text-gray-500 leading-relaxed">
                         CraftLayers is the professional portfolio and brand of Hariteja Nandipati, showcasing advanced UX design, system architecture, and security protocols. This site serves as a visual library for enterprise technology solutions and is not affiliated with any e-commerce marketplace.
                     </p>
                 </div>
