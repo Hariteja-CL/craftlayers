@@ -10,6 +10,7 @@ interface ServiceCardProps {
     isActive?: boolean;
     onClick?: () => void;
     className?: string;
+    badge?: string;
 }
 
 export function ServiceCard({
@@ -19,6 +20,7 @@ export function ServiceCard({
     variant = "light",
     onClick,
     className,
+    badge,
 }: ServiceCardProps & { variant?: "light" | "dark" }) {
     const isDark = variant === "dark";
 
@@ -26,7 +28,7 @@ export function ServiceCard({
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between transition-all duration-300 p-8 rounded-[2rem] border-0",
+                "cursor-pointer group h-full flex flex-col justify-between transition-all duration-300 p-8 rounded-[2rem] border-0 relative overflow-hidden",
                 // Light Mode
                 !isDark && "bg-white text-gray-900 shadow-sm hover:shadow-md",
                 // Dark Mode
@@ -34,6 +36,11 @@ export function ServiceCard({
                 className
             )}
         >
+            {badge && (
+                <div className="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-[10px] font-bold tracking-wider uppercase">
+                    {badge}
+                </div>
+            )}
             <div className="space-y-6">
                 {/* Icon Container */}
                 <div className={cn(
@@ -61,7 +68,7 @@ export function ServiceCard({
 
             <div className={cn(
                 "mt-8 flex items-center justify-between text-sm font-semibold tracking-wide uppercase",
-                isDark ? "text-orange-500" : "text-gray-900"
+                isDark ? "text-orange-50" : "text-gray-900"
             )}>
                 {isDark ? "EXP_02" : "Explore Case Studies"}
                 <ArrowRight className={cn(
