@@ -2,6 +2,7 @@
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { Toaster } from 'sonner';
 
 export function LayoutShell() {
     return (
@@ -23,6 +24,7 @@ export function LayoutShell() {
                 </main>
 
                 <Footer />
+                <Toaster position="bottom-right" richColors />
             </div>
         </div>
     );

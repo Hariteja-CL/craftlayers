@@ -5,11 +5,13 @@ import { About } from './pages/About';
 import { BlogListing } from './pages/blog/BlogListing';
 import { BlogPost } from './pages/blog/BlogPost';
 import { Inwards } from './pages/work/Inwards';
+import { Enculture } from './pages/work/Enculture';
 import { UserDashboard } from './pages/work/UserDashboard';
 import { TherapistDashboard } from './pages/work/TherapistDashboard';
 import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
+import { CultureDashboard } from './components/dashboard/CultureDashboard';
 
 function App() {
   return (
@@ -23,11 +25,13 @@ function App() {
           <Route path="/work/inwards" element={<Inwards />} />
           <Route path="/work/inwards/user" element={<UserDashboard />} />
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />
+          <Route path="/work/enculture" element={<Enculture />} />
 
           {/* Layer Pages */}
           <Route path="/work/design" element={<DesignLayers />} />
           <Route path="/work/ai" element={<AILayers />} />
           <Route path="/work/security" element={<SecurityLayers />} />
+          <Route path="/dashboard/culture" element={<CultureDashboard />} />
 
           {/* Dashboards (Done) */}
           <Route path="/contact" element={<div className="p-20 text-center">Contact Page (Coming Soon)</div>} />

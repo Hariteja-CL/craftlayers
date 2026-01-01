@@ -50,7 +50,8 @@ export function DesignLayers() {
                         title="Design System Ops"
                         description="Scalable component libraries for multi-product suites."
                         icon={<Layers className="w-8 h-8 text-gray-400" />}
-                        className="h-full hover:border-gray-400"
+                        className="h-full hover:border-gray-400 opacity-70"
+                        badge="Coming Soon"
                     />
                 </div>
             </section>
