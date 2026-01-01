@@ -52,7 +52,7 @@ export function ServiceCard({
                     </CardTitle>
                     <p className={cn(
                         "text-base leading-relaxed font-medium",
-                        isDark ? "text-gray-400" : "text-gray-500"
+                        isDark ? "text-gray-200" : "text-gray-500"
                     )}>
                         {description}
                     </p>
