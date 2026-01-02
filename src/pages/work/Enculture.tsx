@@ -5,7 +5,6 @@ import { Badge } from '../../components/ui/Badge';
 import { Card } from '../../components/ui/Card';
 import { motion } from 'framer-motion';
 import { DesignerNoteChip } from '../../components/ui/DesignerNoteChip';
-import { CaseStudyWalkthrough } from '../../components/portfolio/CaseStudyWalkthrough';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -73,9 +72,14 @@ export function Enculture() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="w-full"
+                        className="rounded-[2rem] overflow-hidden border border-indigo-100 shadow-xl bg-neutral-900 relative aspect-[21/9] flex items-center justify-center"
                     >
-                        <CaseStudyWalkthrough imageSrc="/assets/images/enculture_hero.png" />
+                        <img
+                            src="/assets/images/enculture_hero.png"
+                            alt="Enculture Agentic Dashboard UI"
+                            className="absolute inset-0 w-full h-full object-cover opacity-90"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 to-transparent" />
                     </motion.div>
                 </div>
             </section>

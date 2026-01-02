@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '../../lib/utils'; // Assuming you have a utility for class merging, if not I'll use template literals or local helper
-// If cn doesn't exist, I'll use standard string interpolation.
-// Checking recent file views, I haven't seen lib/utils but I've seen `cn` imported from `../ui/Button` in ServiceCard.tsx.
-// Let's verify where `cn` comes from. ServiceCard: import { cn } from '../ui/Button'; or sometimes utils.
-// I will stick to standard template literals if unsure, or define a local cn helper if complex.
-// Actually, I'll check Button.tsx or just define a simple helper or use clsx/tailwind-merge if I knew where it was.
-// ServiceCard line 4: import { cn } from '../ui/Button';. So I will import it from there.
-
 import { cn } from '../ui/Button';
 
 interface Hotspot {

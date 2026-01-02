@@ -3,9 +3,10 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 interface VisualViewProps {
     averageSentiment: number;
+    totalHeadcount: number;
 }
 
-export function VisualView({ averageSentiment }: VisualViewProps) {
+export function VisualView({ averageSentiment, totalHeadcount }: VisualViewProps) {
     // Generate a mock history ending with the current average
     const chartData = useMemo(() => {
         const history = [];
@@ -34,15 +35,23 @@ export function VisualView({ averageSentiment }: VisualViewProps) {
     }, [averageSentiment]);
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60">
-            <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-neutral-900">Sentiment Trends</h3>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 h-full flex flex-col">
+            <div className="flex items-center justify-between mb-8">
+                <div>
+                    <h3 className="text-lg font-semibold text-neutral-900 mb-1">Sentiment Trends</h3>
+                    <div className="flex items-baseline gap-2">
+                        <span className="text-4xl font-extrabold text-indigo-600 tracking-tight">
+                            {Math.round(averageSentiment)}%
+                        </span>
+                        <span className="text-sm font-medium text-neutral-500">Total Avg. (N={totalHeadcount})</span>
+                    </div>
+                </div>
                 <div className="px-3 py-1 bg-neutral-100 rounded-full text-xs font-medium text-neutral-600">
                     6 Month View
                 </div>
             </div>
 
-            <div className="h-64 w-full">
+            <div className="flex-1 w-full min-h-[350px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData}>
                         <defs>
