@@ -35,8 +35,14 @@ export function VisualView({ averageSentiment }: VisualViewProps) {
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60">
-            <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-neutral-900">Sentiment Trends</h3>
+            <div className="flex items-start justify-between mb-6">
+                <div>
+                    <h3 className="text-lg font-semibold text-neutral-900">Sentiment Trends</h3>
+                    <div className="text-3xl font-bold text-indigo-600 mt-1">
+                        {Math.round(averageSentiment)}%
+                        <span className="text-sm font-medium text-neutral-400 ml-2 font-normal">Total Avg.</span>
+                    </div>
+                </div>
                 <div className="px-3 py-1 bg-neutral-100 rounded-full text-xs font-medium text-neutral-600">
                     6 Month View
                 </div>
