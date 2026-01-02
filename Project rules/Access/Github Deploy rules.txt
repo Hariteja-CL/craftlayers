@@ -1,0 +1,88 @@
+Git link
+https://github.com/Hariteja-CL/craftlayers.git
+
+
+Gravity token
+
+<REDACTED_BY_AGENT>
+
+
+
+Use:
+
+gravity/<date>-<topic> for AI pushes
+
+fix/<topic> for manual fixes
+
+
+__________________________________________________________________________________________
+
+Prompt
+
+Mission: Update my GitHub repo by replacing the entire website with my new clean rebuild, but do it safely using a feature branch workflow.
+
+Hard rules (must follow)
+
+Do NOT push to main at any time.
+
+Work only on branch: Gravity-branch.
+
+No force-pushes. No history rewrite.
+
+The goal is a full replacement of the current repo content with the new build.
+
+Steps to execute
+
+Connect to GitHub repo: Hariteja-CL/craftlayers.
+
+Fetch and pull the latest main (read-only reference).
+
+Checkout (or create if missing) branch: Gravity-branch from main.
+
+Replace everything in the repo with my new rebuild:
+
+Remove existing pages/components/assets that are part of the old site.
+
+Keep only essential repo files like .gitignore, README.md (update if needed).
+
+Ensure the project is React component-based and production-ready.
+
+Validate locally before committing:
+
+Install dependencies
+
+Run build successfully
+
+Ensure homepage renders and routes load (no blank page)
+
+Commit with message:
+
+reset: replace site with clean rebuild
+
+Push changes to 
+design updates = Design-changes/*  branch
+New blogs = Blog/* branch
+New case study = Case study/* branch 
+
+
+Create a Pull Request:
+
+from: sent branch name
+
+to: main
+
+Title: Reset site: clean rebuild
+
+Description: Full replacement rebuild. Merge to update production.
+
+Stop after PR creation. Do not merge.
+
+Output required
+
+Link to the PR
+
+Confirm the latest commit hash on Gravity-branch
+
+Confirm build succeeded
+
+__________________________________________________________________________________________

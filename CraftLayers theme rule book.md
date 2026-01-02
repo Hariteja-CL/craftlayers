@@ -35,6 +35,10 @@ We are moving away from traditional static portfolios to a dynamic, atmospheric 
   - Headings: `font-extrabold`, `tracking-tight`.
   - Subtext: `text-gray-500`, `font-medium`.
   - Highlight Text: Use underlines (`border-b-2`) or subtle color accents (`text-orange-500`) instead of bolding everything.
+  - **Impact Badges**:
+    - **High Impact (Positive)**: Green Gradients (`from-green-500 to-green-600`).
+    - **Medium Impact**: Orange Gradients (`from-orange-400 to-orange-500`).
+    - **Low Impact**: Red Gradients (`from-red-500 to-red-600`).
 
 ## 5. Micro-interactions
 - **Hover**: ALL interactive elements must have a `transition-all duration-300`.
