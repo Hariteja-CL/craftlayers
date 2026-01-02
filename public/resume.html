@@ -314,14 +314,14 @@
         @media print {
             @page {
                 size: A4;
-                margin: 1.5cm 2cm;
-                /* Generous vertical margins to start/end pages cleanly */
+                margin: 0.8cm 1.5cm;
+                /* Reduced margins */
             }
 
             body {
                 background: white;
-                font-size: 10.5pt;
-                /* Optimal for 2-page spread */
+                font-size: 10pt;
+                /* Slightly smaller for density */
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -343,21 +343,26 @@
             }
 
             header {
-                margin-bottom: 2rem;
-                padding-bottom: 1.5rem;
+                margin-bottom: 1rem;
+                /* Reduced from 2rem */
+                padding-bottom: 1rem;
+                /* Reduced from 1.5rem */
                 border-bottom: 1px solid #ddd;
             }
 
             section {
                 break-inside: auto;
                 /* Allow breaking within long sections like Experience */
-                margin-bottom: 2rem;
+                margin-bottom: 1.25rem;
+                /* Reduced from 2rem */
             }
 
             .job-item {
                 break-inside: avoid;
                 /* Don't break individual job blocks */
                 page-break-inside: avoid;
+                margin-bottom: 1rem;
+                /* Added explicitly to control job spacing */
             }
 
             /* Force page break before Education if it's getting squeezed */
@@ -366,20 +371,23 @@
             }
 
             h1 {
-                font-size: 26pt;
+                font-size: 24pt;
+                /* Slightly smaller header */
                 color: black;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.25rem;
             }
 
             h2 {
-                margin-top: 1rem;
+                margin-top: 0.5rem;
                 border-bottom: 1px solid #eee;
-                padding-bottom: 0.5rem;
+                padding-bottom: 0.25rem;
+                margin-bottom: 0.75rem;
             }
 
             /* Comfort spacing for reading */
             li {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.2rem;
+                /* Reduced from 0.5rem */
             }
 
             a {
