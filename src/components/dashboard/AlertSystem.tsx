@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { AlertTriangle, Sparkles, MessageSquare } from 'lucide-react';
+import { AlertCircle, Sparkles, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sheet } from '../ui/Sheet';
 import profileHero from '../../assets/images/profile.png';
 import { InterventionChat, type Message } from './InterventionChat';
@@ -15,6 +16,10 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     // Lifted state to persist chat context
     const [chatHistory, setChatHistory] = useState<Message[]>([]);
+    const [showHotspot, setShowHotspot] = useState(false);
+
+    // Only show alert if critical
+    const visible = averageSentiment < 50;
 
     return (
         <>
