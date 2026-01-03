@@ -34,7 +34,7 @@ export function CultureDashboard() {
         );
     };
 
-    const [selectedDept, setSelectedDept] = useState<string | null>(null);
+    const [, setSelectedDept] = useState<string | null>(null);
 
     return (
         <div className="min-h-screen bg-neutral-50/50 p-8 space-y-8">
@@ -117,7 +117,7 @@ function HotspotOverlay() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + spot.id * 0.2 }}
                     >
-                        <div className="relative group cursor-pointer pointer-events-auto">
+                        <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto">
                             {/* Pulsing Dot */}
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform group-hover:scale-125 duration-300"></span>

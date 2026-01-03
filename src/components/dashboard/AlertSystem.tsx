@@ -48,10 +48,8 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
                         <div className="absolute -top-2 -right-2 w-4 h-4 z-20">
                             <div className="absolute z-50">
                                 <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group">
-                                    <div className="relative w-4 h-4">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white group-hover:scale-125 transition-transform duration-300 shadow-lg"></span>
-                                    </div>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white group-hover:scale-125 transition-transform duration-300 shadow-lg"></span>
 
                                     {/* Tooltip Card (Show on group hover) */}
                                     <div className="absolute top-8 right-0 w-72 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-[60]">
