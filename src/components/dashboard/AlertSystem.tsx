@@ -19,6 +19,9 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
     // Tooltip State (matching CultureDashboard interaction)
     const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
+    // Only show critical alert if sentiment is low
+    if (averageSentiment >= 50) return null;
+
     return (
         <>
             <div className="space-y-6">
