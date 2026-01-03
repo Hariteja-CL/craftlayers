@@ -62,7 +62,7 @@ export function Enculture() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-content-primary mb-1">Tech Stack</h4>
-                                    <p className="text-content-secondary">Groq (Llama 3), React</p>
+                                    <p className="text-content-secondary">OpenAI (GPT-4o), React</p>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-content-primary mb-1">Context</h4>
@@ -360,7 +360,7 @@ export function Enculture() {
                                         </p>
                                         <div className="flex gap-2">
                                             <Badge variant="outline" className="bg-white">Tool Calling</Badge>
-                                            <Badge variant="outline" className="bg-white">Llama 3</Badge>
+                                            <Badge variant="outline" className="bg-white">GPT-4o</Badge>
                                             <Badge variant="outline" className="bg-white">Vercel SDK</Badge>
                                         </div>
                                     </div>
