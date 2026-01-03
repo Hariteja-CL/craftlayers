@@ -3,13 +3,14 @@ import type { DepartmentMetric } from './CultureDashboard';
 interface DataViewProps {
     data: DepartmentMetric[];
     onUpdate: (id: string, field: keyof DepartmentMetric, value: any) => void;
+    onSelectDept: (id: string | null) => void;
 }
 
-export function DataView({ data, onUpdate }: DataViewProps) {
+export function DataView({ data, onUpdate, onSelectDept }: DataViewProps) {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 overflow-hidden">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 overflow-hidden h-full flex flex-col">
             <h3 className="text-lg font-semibold text-neutral-900 mb-4">Department Feedback Data</h3>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto flex-1">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b border-neutral-100 text-neutral-500 text-sm">
@@ -21,7 +22,11 @@ export function DataView({ data, onUpdate }: DataViewProps) {
                     </thead>
                     <tbody className="text-sm">
                         {data.map((item) => (
-                            <tr key={item.id} className="border-b border-neutral-50 last:border-0 hover:bg-neutral-50/50 transition-colors">
+                            <tr
+                                key={item.id}
+                                onClick={() => onSelectDept(item.id)}
+                                className="border-b border-neutral-50 last:border-0 hover:bg-neutral-50/50 transition-colors cursor-pointer"
+                            >
                                 <td className="py-3 px-2 text-neutral-900 font-bold">{item.department}</td>
                                 <td className="py-3 px-2 text-neutral-600 font-mono text-xs">{item.headcount}</td>
                                 <td className="py-3 px-2">

@@ -26,7 +26,7 @@ export function Sheet({ isOpen, onClose, title, children }: SheetProps) {
     if (!isVisible && !isOpen) return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-[100] flex justify-end">
             {/* Backdrop */}
             <div
                 className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
@@ -36,7 +36,7 @@ export function Sheet({ isOpen, onClose, title, children }: SheetProps) {
 
             {/* Panel */}
             <div
-                className={`relative w-full max-w-md h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                className={`relative w-full max-w-2xl h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
                     }`}
             >
                 <div className="flex flex-col h-full">
