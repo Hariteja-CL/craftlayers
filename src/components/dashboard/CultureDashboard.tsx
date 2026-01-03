@@ -8,6 +8,7 @@ import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
 import { PasswordGate } from '../ui/PasswordGate';
 
+
 export interface DepartmentMetric {
     id: string;
     department: string;
