@@ -8,6 +8,7 @@ import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
 import { PasswordGate } from '../ui/PasswordGate';
 import { X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export interface DepartmentMetric {
     id: string;
