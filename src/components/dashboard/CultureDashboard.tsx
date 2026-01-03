@@ -6,6 +6,7 @@ import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
+import { PasswordGate } from '../ui/PasswordGate';
 
 export interface DepartmentMetric {
     id: string;
@@ -80,43 +81,8 @@ export function CultureDashboard() {
                 <div className="pt-8 ml-10 lg:ml-0">
                     <LayerInsightTabs />
                 </div>
-                <Button
-                    variant="outline"
-                    onClick={() => window.location.href = '/work/enculture'}
-                    className="bg-white"
-                >
-                    Back to Case Study
-                </Button>
-            </header>
-
-            {/* Alert System (Floating/Overlay) - Global */}
-            <AlertSystem averageSentiment={averageSentiment} data={data} />
-
-            {/* Dashboard Content - Grid Area with Hotspots */}
-            <div className="relative ml-10 lg:ml-0">
-                {/* Hotspot Overlay */}
-                <HotspotOverlay />
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Left: Data Table */}
-                    <DataView
-                        data={data}
-                        onUpdate={handleUpdate}
-                        onSelectDept={setSelectedDept}
-                    />
-
-                    {/* Right: Visual Chart */}
-                    <div className="h-full flex flex-col">
-                        <VisualView averageSentiment={averageSentiment} />
-                    </div>
-                </div>
             </div>
-
-            {/* NEW: Layer Insight Pointers - OUTSIDE relative grid container */}
-            <div className="pt-8 ml-10 lg:ml-0">
-                <LayerInsightTabs />
-            </div>
-        </div>
+        </PasswordGate>
     );
 }
 
