@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
 import { PasswordGate } from '../ui/PasswordGate';
+import { X } from 'lucide-react';
 
 export interface DepartmentMetric {
     id: string;
@@ -88,6 +89,8 @@ export function CultureDashboard() {
 
 // Hotspot Overlay Component
 function HotspotOverlay() {
+    const [activeId, setActiveId] = useState<number | null>(null);
+
     // We hardcode positions based on the UI layout we know
     const hotspots = [
         {
@@ -115,52 +118,73 @@ function HotspotOverlay() {
                     <motion.div
                         key={spot.id}
                         className="absolute"
-                        style={{ top: spot.top, left: spot.left }}
+                        style={{ top: spot.top, left: spot.left, zIndex: activeId === spot.id ? 50 : 10 }}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + spot.id * 0.2 }}
                     >
-                        <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto">
+                        <div
+                            className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveId(activeId === spot.id ? null : spot.id);
+                            }}
+                        >
                             {/* Pulsing Dot */}
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform group-hover:scale-125 duration-300"></span>
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 ${activeId === spot.id ? 'hidden' : ''}`}></span>
+                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform duration-300 ${activeId === spot.id ? 'scale-125' : 'group-hover:scale-125'}`}></span>
 
                             {/* Tooltip */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                transition={{ duration: 0.2 }}
-                                className={`absolute mt-4 w-72 z-50 ${spot.align === 'left'
-                                    ? 'left-0'
-                                    : 'left-1/2 -translate-x-1/2'
-                                    }`}
-                            >
-                                <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto">
-                                    <div className="flex items-start gap-3 mb-3">
-                                        <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
-                                            <img src={profileHero} alt="Hariteja" className="w-full h-full object-cover" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-wide mt-1">
-                                                {spot.title}
-                                            </h3>
-                                            <p className="text-[10px] text-neutral-500 font-medium">Architect Note</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-sm text-neutral-600 leading-relaxed pl-11 -mt-2">
-                                        {spot.body}
-                                    </p>
-                                </div>
+                            <AnimatePresence>
+                                {activeId === spot.id && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        transition={{ duration: 0.2 }}
+                                        className={`absolute mt-4 w-72 cursor-default ${spot.align === 'left'
+                                            ? 'left-0'
+                                            : 'left-1/2 -translate-x-1/2'
+                                            }`}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 relative">
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveId(null);
+                                                }}
+                                                className="absolute top-2 right-2 p-1 text-neutral-400 hover:text-neutral-600 transition-colors rounded-full hover:bg-neutral-100"
+                                            >
+                                                <X className="w-3 h-3" />
+                                            </button>
 
-                                {/* Arrow Logic - visible on hover */}
-                                <div
-                                    className={`opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-white/90 absolute -top-2 ${spot.align === 'left'
-                                        ? 'left-4' // Arrow near the start for left-aligned
-                                        : 'left-1/2 -translate-x-1/2' // Centered
-                                        }`}
-                                />
-                            </motion.div>
+                                            <div className="flex items-start gap-3 mb-3">
+                                                <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
+                                                    <img src={profileHero} alt="Hariteja" className="w-full h-full object-cover" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-wide mt-1">
+                                                        {spot.title}
+                                                    </h3>
+                                                    <p className="text-[10px] text-neutral-500 font-medium">Architect Note</p>
+                                                </div>
+                                            </div>
+                                            <p className="text-sm text-neutral-600 leading-relaxed pl-11 -mt-2">
+                                                {spot.body}
+                                            </p>
+                                        </div>
+
+                                        {/* Arrow Logic */}
+                                        <div
+                                            className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-white/90 absolute -top-2 ${spot.align === 'left'
+                                                ? 'left-4'
+                                                : 'left-1/2 -translate-x-1/2'
+                                                }`}
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </motion.div>
                 ))}
