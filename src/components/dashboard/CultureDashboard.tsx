@@ -52,6 +52,9 @@ export function CultureDashboard() {
                 </Button>
             </header>
 
+            {/* Alert System (Floating/Overlay) - Global */}
+            <AlertSystem averageSentiment={averageSentiment} data={data} />
+
             {/* Dashboard Content - Grid Area with Hotspots */}
             <div className="relative ml-10 lg:ml-0">
                 {/* Hotspot Overlay */}
@@ -76,9 +79,6 @@ export function CultureDashboard() {
             <div className="pt-8 ml-10 lg:ml-0">
                 <LayerInsightTabs />
             </div>
-
-            {/* Alert System (Floating/Overlay) - Global */}
-            <AlertSystem averageSentiment={averageSentiment} data={data} />
         </div>
     );
 }

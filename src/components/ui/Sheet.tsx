@@ -26,7 +26,7 @@ export function Sheet({ isOpen, onClose, title, children }: SheetProps) {
     if (!isVisible && !isOpen) return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-[100] flex justify-end">
             {/* Backdrop */}
             <div
                 className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'
