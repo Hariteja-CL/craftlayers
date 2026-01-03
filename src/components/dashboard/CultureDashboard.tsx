@@ -81,7 +81,6 @@ export function CultureDashboard() {
                 <div className="pt-8 ml-10 lg:ml-0">
                     <LayerInsightTabs />
                 </div>
-
             </div>
         </PasswordGate>
     );
