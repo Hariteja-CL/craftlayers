@@ -37,11 +37,11 @@ export function VisualView({ averageSentiment }: VisualViewProps) {
     const chartColor = isCritical ? '#ef4444' : '#6366f1'; // Red-500 : Indigo-500
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 h-full flex flex-col">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60">
             <div className="flex items-start justify-between mb-6">
                 <div>
                     <h3 className="text-lg font-semibold text-neutral-900">Sentiment Trends</h3>
-                    <div className={`text-3xl font-bold mt-1 ${isCritical ? 'text-red-600' : 'text-indigo-600'}`}>
+                    <div className="text-3xl font-bold text-indigo-600 mt-1">
                         {Math.round(averageSentiment)}%
                         <span className="text-sm font-medium text-neutral-400 ml-2 font-normal">Total Avg.</span>
                     </div>

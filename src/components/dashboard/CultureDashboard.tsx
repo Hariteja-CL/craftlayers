@@ -6,7 +6,6 @@ import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
-import { PasswordGate } from '../ui/PasswordGate';
 
 export interface DepartmentMetric {
     id: string;
@@ -81,37 +80,70 @@ export function CultureDashboard() {
                 <div className="pt-8 ml-10 lg:ml-0">
                     <LayerInsightTabs />
                 </div>
+                <Button
+                    variant="outline"
+                    onClick={() => window.location.href = '/work/enculture'}
+                    className="bg-white"
+                >
+                    Back to Case Study
+                </Button>
+            </header>
+
+            {/* Alert System (Floating/Overlay) - Global */}
+            <AlertSystem averageSentiment={averageSentiment} data={data} />
+
+            {/* Dashboard Content - Grid Area with Hotspots */}
+            <div className="relative ml-10 lg:ml-0">
+                {/* Hotspot Overlay */}
+                <HotspotOverlay />
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Left: Data Table */}
+                    <DataView
+                        data={data}
+                        onUpdate={handleUpdate}
+                        onSelectDept={setSelectedDept}
+                    />
+
+                    {/* Right: Visual Chart */}
+                    <div className="h-full flex flex-col">
+                        <VisualView averageSentiment={averageSentiment} />
+                    </div>
+                </div>
             </div>
-        </PasswordGate>
+
+            {/* NEW: Layer Insight Pointers - OUTSIDE relative grid container */}
+            <div className="pt-8 ml-10 lg:ml-0">
+                <LayerInsightTabs />
+            </div>
+        </div>
     );
 }
 
 // Hotspot Overlay Component
 function HotspotOverlay() {
-    const [activeId, setActiveId] = useState<number | null>(null);
-
     // We hardcode positions based on the UI layout we know
     const hotspots = [
         {
             id: 1,
             title: "Dynamic Signal Detection",
             body: "The system monitors raw feedback streams in real-time, detecting sentiment dips below the 'Safety Threshold' (50%).",
-            top: "15%", // Header Row
-            left: "58%", // Sentiment Header
+            top: "48%", // Aligns with 'Design' row score
+            left: "19%", // Aligns with the score column
             align: 'left'
         },
         {
             id: 2,
             title: "Contextual Analysis",
             body: "Identifying key friction points (e.g., 'Burnout', 'Overtime') without revealing individual employee identities.",
-            top: "15%", // Header Row
-            left: "85%", // Top Themes Header
+            top: "50%",
+            left: "40%", // Moved closer to the 'Top Themes' column based on user feedback
             align: 'center'
         }
     ];
 
     return (
-        <div className="absolute inset-0 z-40 hidden lg:block pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none z-40 hidden lg:block">
             <AnimatePresence>
                 {hotspots.map((spot) => (
                     <motion.div
@@ -122,64 +154,47 @@ function HotspotOverlay() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + spot.id * 0.2 }}
                     >
-                        <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
-                            {/* Beacon Trigger */}
-                            <div
-                                onClick={() => setActiveId(activeId === spot.id ? null : spot.id)}
-                                className="relative flex items-center justify-center w-8 h-8 cursor-pointer group"
-                            >
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform group-hover:scale-125 duration-300"></span>
-                            </div>
+                        <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group pointer-events-auto">
+                            {/* Pulsing Dot */}
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform group-hover:scale-125 duration-300"></span>
 
                             {/* Tooltip */}
-                            <AnimatePresence>
-                                {activeId === spot.id && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        transition={{ duration: 0.2 }}
-                                        className={`absolute mt-4 w-72 z-50 ${spot.align === 'left'
-                                            ? 'left-0'
-                                            : 'left-1/2 -translate-x-1/2'
-                                            }`}
-                                    >
-                                        <div className="bg-white/95 backdrop-blur-md border border-neutral-200 p-5 rounded-2xl shadow-xl text-left relative">
-                                            {/* Close Button */}
-                                            <button
-                                                onClick={() => setActiveId(null)}
-                                                className="absolute top-3 right-3 text-neutral-400 hover:text-neutral-600 transition-colors"
-                                            >
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-                                            </button>
-
-                                            <div className="flex items-start gap-3 mb-3 pr-6">
-                                                <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
-                                                    <img src={profileHero} alt="Hariteja" className="w-full h-full object-cover" />
-                                                </div>
-                                                <div>
-                                                    <h3 className="text-xs font-bold text-indigo-900 uppercase tracking-wide mt-1">
-                                                        {spot.title}
-                                                    </h3>
-                                                    <p className="text-[10px] text-neutral-500 font-medium">Architect Note</p>
-                                                </div>
-                                            </div>
-                                            <p className="text-sm text-neutral-600 leading-relaxed pl-11 -mt-2">
-                                                {spot.body}
-                                            </p>
+                            <motion.div
+                                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                                className={`absolute mt-4 w-72 z-50 ${spot.align === 'left'
+                                    ? 'left-0'
+                                    : 'left-1/2 -translate-x-1/2'
+                                    }`}
+                            >
+                                <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto">
+                                    <div className="flex items-start gap-3 mb-3">
+                                        <div className="w-8 h-8 rounded-full border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
+                                            <img src={profileHero} alt="Hariteja" className="w-full h-full object-cover" />
                                         </div>
+                                        <div>
+                                            <h3 className="text-xs font-bold text-neutral-900 uppercase tracking-wide mt-1">
+                                                {spot.title}
+                                            </h3>
+                                            <p className="text-[10px] text-neutral-500 font-medium">Architect Note</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-neutral-600 leading-relaxed pl-11 -mt-2">
+                                        {spot.body}
+                                    </p>
+                                </div>
 
-                                        {/* Arrow Logic */}
-                                        <div
-                                            className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-white/95 absolute -top-2 ${spot.align === 'left'
-                                                ? 'left-4'
-                                                : 'left-1/2 -translate-x-1/2'
-                                                }`}
-                                        />
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                {/* Arrow Logic - visible on hover */}
+                                <div
+                                    className={`opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-white/90 absolute -top-2 ${spot.align === 'left'
+                                        ? 'left-4' // Arrow near the start for left-aligned
+                                        : 'left-1/2 -translate-x-1/2' // Centered
+                                        }`}
+                                />
+                            </motion.div>
                         </div>
                     </motion.div>
                 ))}
