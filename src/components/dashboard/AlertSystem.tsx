@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { AlertTriangle, Sparkles, MessageSquare } from 'lucide-react';
+import { AlertCircle, Sparkles, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sheet } from '../ui/Sheet';
 import profileHero from '../../assets/images/profile.png';
 import { InterventionChat, type Message } from './InterventionChat';
 import type { DepartmentMetric } from './CultureDashboard';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 
 interface AlertSystemProps {
     averageSentiment: number;
@@ -24,9 +26,10 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
             <AnimatePresence>
                 {visible && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 100 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         className="fixed top-24 left-1/2 -translate-x-1/2 z-[50] w-[90%] max-w-2xl"
                     >
                         <div className="bg-red-50/90 backdrop-blur-md border border-red-200 rounded-lg p-3 shadow-lg flex items-center justify-between gap-4">
@@ -44,7 +47,7 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
                             <div className="relative">
                                 <button
                                     onClick={() => setIsSheetOpen(true)}
-                                    className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm"
+                                    className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm whitespace-nowrap"
                                 >
                                     <Sparkles size={16} />
                                     Create Intervention Plan
@@ -120,11 +123,13 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
                     AI Agent connected to Live Data
                 </div>
                 {/* We pass the data and the persisted history */}
-                <InterventionChat
-                    currentData={data}
-                    messages={chatHistory}
-                    setMessages={setChatHistory}
-                />
+                <ErrorBoundary>
+                    <InterventionChat
+                        currentData={data}
+                        messages={chatHistory}
+                        setMessages={setChatHistory}
+                    />
+                </ErrorBoundary>
             </Sheet>
         </>
     );
