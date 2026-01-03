@@ -37,11 +37,48 @@ export function CultureDashboard() {
     const [, setSelectedDept] = useState<string | null>(null);
 
     return (
-        <div className="min-h-screen bg-neutral-50/50 p-8 space-y-8">
-            <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">Proactive Culture Dashboard</h1>
-                    <p className="text-neutral-500 mt-2">Monitor implementation of AI ethics and employee well-being in real-time.</p>
+        <PasswordGate scope="enculture_dashboard">
+            <div className="min-h-screen bg-neutral-50/50 p-8 space-y-8">
+                <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">Proactive Culture Dashboard</h1>
+                        <p className="text-neutral-500 mt-2">Monitor implementation of AI ethics and employee well-being in real-time.</p>
+                    </div>
+                    <Button
+                        variant="outline"
+                        onClick={() => window.location.href = '/work/enculture'}
+                        className="bg-white"
+                    >
+                        Back to Case Study
+                    </Button>
+                </header>
+
+                {/* Alert System (Floating/Overlay) - Global */}
+                <AlertSystem averageSentiment={averageSentiment} data={data} />
+
+                {/* Dashboard Content - Grid Area with Hotspots */}
+                <div className="relative ml-10 lg:ml-0">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Left: Data Table with Hotspots */}
+                        <div className="relative h-full">
+                            <HotspotOverlay />
+                            <DataView
+                                data={data}
+                                onUpdate={handleUpdate}
+                                onSelectDept={setSelectedDept}
+                            />
+                        </div>
+
+                        {/* Right: Visual Chart */}
+                        <div className="h-full flex flex-col">
+                            <VisualView averageSentiment={averageSentiment} />
+                        </div>
+                    </div>
+                </div>
+
+                {/* NEW: Layer Insight Pointers - OUTSIDE relative grid container */}
+                <div className="pt-8 ml-10 lg:ml-0">
+                    <LayerInsightTabs />
                 </div>
                 <Button
                     variant="outline"

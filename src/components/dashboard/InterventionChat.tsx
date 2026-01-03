@@ -37,7 +37,7 @@ const SUGGESTION_CHIPS = [
 ];
 
 const openai = createOpenAI({
-    apiKey: API_KEY,
+    apiKey: API_KEY || 'dummy-key', // Prevent crash if key is empty
 });
 
 export function InterventionChat({ currentData, messages: externalMessages, setMessages: setExternalMessages }: InterventionChatProps) {
@@ -93,19 +93,13 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
         const assistantMessageId = Date.now().toString() + '-' + Math.random().toString(36).substring(2, 9) + '-ai';
         setMessages(prev => [...prev, { id: assistantMessageId, role: 'assistant', content: '' }]);
 
+        // Create controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        console.log("🚀 REAL AI MODE: Calling OpenAI API...");
+
         try {
-            // console.log("🐛 DEBUG MODE: Forcing Simulation to test UI rendering...");
-            // // FORCE SIMULATION (Bypassing API for diagnosis)
-            // await runSimulationFallback(assistantMessageId);
-            // return;
-
-            if (!API_KEY || API_KEY === 'mock-key') {
-                console.log("⚠️ OpenAI API Key missing. Switching to SIMULATION MODE.");
-                await runSimulationFallback(assistantMessageId);
-                return;
-            }
-
-            console.log("🚀 REAL AI MODE: Calling OpenAI API...");
             const { textStream, toolCalls, toolResults } = await streamText({
                 model: openai('gpt-4o-mini'),
                 messages: history.map(m => ({
@@ -113,6 +107,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                     content: m.content,
                 })),
                 tools: {
+                    // ... tools config ...
                     suggest_intervention_plan: tool({
                         description: 'Generate a list of intervention actions based on the analysis.',
                         parameters: z.object({
@@ -143,7 +138,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                 temperature: 0,
                 // @ts-ignore - Required for client-side API calls
                 dangerouslyAllowBrowser: true,
-                abortSignal: AbortSignal.timeout(10000),
+                abortSignal: controller.signal,
             });
 
             let fullContent = '';
@@ -154,6 +149,13 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                     prev.map(m => m.id === assistantMessageId ? { ...m, content: fullContent } : m)
                 );
             }
+
+            // Clear timeout if stream completes (though minimal effect on logic flow)
+            clearTimeout(timeoutId);
+
+            // ... rest of logic ...
+
+
 
             const calls = await toolCalls;
             if (calls.length > 0) {

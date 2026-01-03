@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { AlertTriangle, Sparkles, MessageSquare } from 'lucide-react';
+import { AlertCircle, Sparkles, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sheet } from '../ui/Sheet';
 import profileHero from '../../assets/images/profile.png';
 import { InterventionChat, type Message } from './InterventionChat';
 import type { DepartmentMetric } from './CultureDashboard';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 
 interface AlertSystemProps {
     averageSentiment: number;
@@ -14,11 +16,10 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
     const [isSheetOpen, setIsSheetOpen] = useState(false);
     // Lifted state to persist chat context
     const [chatHistory, setChatHistory] = useState<Message[]>([]);
+    const [showHotspot, setShowHotspot] = useState(false);
 
     // Only show alert if critical
-    if (averageSentiment >= 50) {
-        return null;
-    }
+    const visible = averageSentiment < 50;
 
     return (
         <>
@@ -91,11 +92,13 @@ export function AlertSystem({ averageSentiment, data }: AlertSystemProps) {
                     AI Agent connected to Live Data
                 </div>
                 {/* We pass the data and the persisted history */}
-                <InterventionChat
-                    currentData={data}
-                    messages={chatHistory}
-                    setMessages={setChatHistory}
-                />
+                <ErrorBoundary>
+                    <InterventionChat
+                        currentData={data}
+                        messages={chatHistory}
+                        setMessages={setChatHistory}
+                    />
+                </ErrorBoundary>
             </Sheet>
         </>
     );

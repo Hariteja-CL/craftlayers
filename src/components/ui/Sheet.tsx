@@ -36,7 +36,7 @@ export function Sheet({ isOpen, onClose, title, children }: SheetProps) {
 
             {/* Panel */}
             <div
-                className={`relative w-full max-w-md h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                className={`relative w-full max-w-2xl h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
                     }`}
             >
                 <div className="flex flex-col h-full">
