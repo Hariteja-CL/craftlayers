@@ -91,16 +91,16 @@ function HotspotOverlay() {
             id: 1,
             title: "Dynamic Signal Detection",
             body: "The system monitors raw feedback streams in real-time, detecting sentiment dips below the 'Safety Threshold' (50%).",
-            top: "48%", // Aligns with 'Design' row score
-            left: "19%", // Aligns with the score column
+            top: "38%", // Design Row
+            left: "33%", // Sentiment Column (left edge)
             align: 'left'
         },
         {
             id: 2,
             title: "Contextual Analysis",
             body: "Identifying key friction points (e.g., 'Burnout', 'Overtime') without revealing individual employee identities.",
-            top: "50%",
-            left: "40%", // Moved closer to the 'Top Themes' column based on user feedback
+            top: "38%", // Design Row
+            left: "74%", // Feedback Loops Tag
             align: 'center'
         }
     ];

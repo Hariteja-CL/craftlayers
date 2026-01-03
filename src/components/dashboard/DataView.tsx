@@ -8,9 +8,9 @@ interface DataViewProps {
 
 export function DataView({ data, onUpdate, onSelectDept }: DataViewProps) {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 overflow-hidden">
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-neutral-200/60 overflow-hidden h-full flex flex-col">
             <h3 className="text-lg font-semibold text-neutral-900 mb-4">Department Feedback Data</h3>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto flex-1">
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="border-b border-neutral-100 text-neutral-500 text-sm">
