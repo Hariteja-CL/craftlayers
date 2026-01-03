@@ -57,16 +57,16 @@ export function CultureDashboard() {
 
             {/* Dashboard Content - Grid Area with Hotspots */}
             <div className="relative ml-10 lg:ml-0">
-                {/* Hotspot Overlay */}
-                <HotspotOverlay />
-
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Left: Data Table */}
-                    <DataView
-                        data={data}
-                        onUpdate={handleUpdate}
-                        onSelectDept={setSelectedDept}
-                    />
+                    {/* Left: Data Table with Hotspots */}
+                    <div className="relative h-full">
+                        <HotspotOverlay />
+                        <DataView
+                            data={data}
+                            onUpdate={handleUpdate}
+                            onSelectDept={setSelectedDept}
+                        />
+                    </div>
 
                     {/* Right: Visual Chart */}
                     <div className="h-full flex flex-col">
@@ -91,16 +91,16 @@ function HotspotOverlay() {
             id: 1,
             title: "Dynamic Signal Detection",
             body: "The system monitors raw feedback streams in real-time, detecting sentiment dips below the 'Safety Threshold' (50%).",
-            top: "50%", // Reverted vertical alignment to Design Row center
-            left: "45%", // Moved right to target Sentiment Input
+            top: "50%", // Design Row Center
+            left: "58%", // Target: Sentiment Input (Approx column 3 start)
             align: 'left'
         },
         {
             id: 2,
             title: "Contextual Analysis",
             body: "Identifying key friction points (e.g., 'Burnout', 'Overtime') without revealing individual employee identities.",
-            top: "50%", // Reverted vertical alignment
-            left: "75%", // Moved right to target Top Themes
+            top: "50%", // Design Row Center
+            left: "85%", // Target: Feedback Loops Tag (Column 4)
             align: 'center'
         }
     ];
