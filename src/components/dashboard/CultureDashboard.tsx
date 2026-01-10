@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DataView } from './DataView';
 import { VisualView } from './VisualView';
 import { ActionCard } from './ActionCard';
@@ -91,6 +91,13 @@ export function CultureDashboard() {
 function HotspotOverlay() {
     const [activeId, setActiveId] = useState<number | null>(null);
 
+    // Close on click outside
+    useEffect(() => {
+        const handleClickOutside = () => setActiveId(null);
+        window.addEventListener('click', handleClickOutside);
+        return () => window.removeEventListener('click', handleClickOutside);
+    }, []);
+
     // We hardcode positions based on the UI layout we know
     const hotspots = [
         {
@@ -148,16 +155,7 @@ function HotspotOverlay() {
                                             }`}
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 relative pr-8">
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setActiveId(null);
-                                                }}
-                                                className="absolute top-3 right-3 text-neutral-400 hover:text-neutral-600 transition-colors"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-                                            </button>
+                                        <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 relative">
 
 
                                             <div className="flex items-start gap-3 mb-3">
