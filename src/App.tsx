@@ -13,9 +13,12 @@ import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
 
+import { ScrollToTop } from './components/layout/ScrollToTop';
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route element={<LayoutShell />}>
           <Route path="/" element={<Home />} />
