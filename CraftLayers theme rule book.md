@@ -61,5 +61,6 @@ We are moving away from traditional static portfolios to a dynamic, atmospheric 
 - **Alt Text**: All decorative images must have `alt=""`. All informational images must have descriptive `alt` text.
 - **Motion**: Ensure animations respect `prefers-reduced-motion` where possible, or are subtle enough not to cause vestibular issues.
 
+
 ---
 **When creating new pages or components, ALWAYS consult this rule book first.**

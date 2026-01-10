@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DataView } from './DataView';
 import { VisualView } from './VisualView';
-import { AlertSystem } from './AlertSystem';
+import { ActionCard } from './ActionCard';
 import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayerInsightTabs } from './LayerInsightTabs';
@@ -55,8 +55,8 @@ export function CultureDashboard() {
                     </Button>
                 </header>
 
-                {/* Alert System (Floating/Overlay) - Global */}
-                <AlertSystem averageSentiment={averageSentiment} data={data} />
+                {/* Action Card (Conditional) */}
+                <ActionCard averageSentiment={averageSentiment} data={data} />
 
                 {/* Dashboard Content - Grid Area with Hotspots */}
                 <div className="relative ml-10 lg:ml-0">
