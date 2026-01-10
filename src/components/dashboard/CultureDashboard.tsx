@@ -132,7 +132,7 @@ function HotspotOverlay() {
                         >
                             {/* Pulsing Dot */}
                             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 ${activeId === spot.id ? 'hidden' : ''}`}></span>
-                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform duration-300 ${activeId === spot.id ? 'scale-125' : 'group-hover:scale-125'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform duration-300 ${activeId === spot.id ? 'scale-125' : ''}`}></span>
 
                             {/* Tooltip */}
                             <AnimatePresence>
@@ -148,7 +148,16 @@ function HotspotOverlay() {
                                             }`}
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 relative">
+                                        <div className="bg-white/90 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left ring-1 ring-black/5 relative pr-8">
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setActiveId(null);
+                                                }}
+                                                className="absolute top-3 right-3 text-neutral-400 hover:text-neutral-600 transition-colors"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                                            </button>
 
 
                                             <div className="flex items-start gap-3 mb-3">
