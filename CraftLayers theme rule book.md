@@ -61,5 +61,14 @@ We are moving away from traditional static portfolios to a dynamic, atmospheric 
 - **Alt Text**: All decorative images must have `alt=""`. All informational images must have descriptive `alt` text.
 - **Motion**: Ensure animations respect `prefers-reduced-motion` where possible, or are subtle enough not to cause vestibular issues.
 
+## 8. Dashboard & Data Visualization
+- **Sentiment Heat Map**:
+    - **High (>75%)**: Green/Teal.
+    - **Neutral (50-75%)**: Indigo/Primary.
+    - **Low (<50%)**: Red/Critical.
+- **Critical Actions**:
+    - Critical alerts (Low Sentiment) must use a **Small Action Card** pattern (Toast style, bottom-right), not large top banners.
+    - The sentiment value font size should be prominent (`text-5xl` minimum).
+
 ---
 **When creating new pages or components, ALWAYS consult this rule book first.**

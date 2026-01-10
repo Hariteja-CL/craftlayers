@@ -41,7 +41,7 @@ export function VisualView({ averageSentiment }: VisualViewProps) {
             <div className="flex items-start justify-between mb-6">
                 <div>
                     <h3 className="text-lg font-semibold text-neutral-900">Sentiment Trends</h3>
-                    <div className="text-3xl font-bold text-indigo-600 mt-1">
+                    <div className={`text-5xl font-bold mt-1 ${isCritical ? 'text-red-600' : 'text-indigo-600'}`}>
                         {Math.round(averageSentiment)}%
                         <span className="text-sm font-medium text-neutral-400 ml-2 font-normal">Total Avg.</span>
                     </div>
