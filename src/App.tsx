@@ -16,7 +16,6 @@ import { Governance } from './pages/work/Governance';
 
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
 
-import { ScrollToTop } from './components/layout/ScrollToTop';
 
 function App() {
   return (
