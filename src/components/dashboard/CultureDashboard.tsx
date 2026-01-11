@@ -98,23 +98,23 @@ function HotspotOverlay() {
         return () => window.removeEventListener('click', handleClickOutside);
     }, []);
 
-    // We hardcode positions to align with the DataView column headers
+    // We hardcode positions based on the UI layout we know
     const hotspots = [
         {
             id: 1,
             title: "Dynamic Signal Detection",
             body: "The system monitors raw feedback streams in real-time, detecting sentiment dips below the 'Safety Threshold' (50%).",
-            top: "84px", // Aligns with 'Sentiment' header (approx 24px padding + 28px title + 16px margin + 16px header center)
-            left: "62%", // Aligns with Sentiment column
-            align: 'center'
+            top: "48%", // Aligns with 'Design' row score
+            left: "19%", // Aligns with the score column
+            align: 'left'
         },
         {
             id: 2,
             title: "Contextual Analysis",
             body: "Identifying key friction points (e.g., 'Burnout', 'Overtime') without revealing individual employee identities.",
-            top: "84px", // Aligns with 'Top Themes' header
-            left: "88%", // Aligns with Top Themes column
-            align: 'right' // Tooltip shifts left to stay on screen
+            top: "50%",
+            left: "40%", // Moved closer to the 'Top Themes' column based on user feedback
+            align: 'center'
         }
     ];
 

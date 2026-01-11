@@ -51,7 +51,7 @@ export function VisualView({ averageSentiment }: VisualViewProps) {
                 </div>
             </div>
 
-            <div className="w-full h-[400px]">
+            <div className="w-full flex-1 min-h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData}>
                         <defs>
