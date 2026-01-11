@@ -52,15 +52,12 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
 
     const runSimulationFallback = async (existingMessageId?: string) => {
         console.log("⚠️ Starting Simulation Fallback...");
-        const simulationContent = "**System Signal Detected**\n\n*Analysis performed on aggregated department-level data to protect privacy.*\n\n**Findings:**\n• Design Dept Sentiment (45%) dropped below Critical Threshold (50%).\n• Top themes 'Burnout' and 'Feedback Loops' correlate with recent sprint velocity increase.";
-
         const simulationTool = {
             toolCallId: 'mock-' + Date.now(),
             toolName: 'suggest_intervention_plan',
             args: {},
             state: 'result' as const,
             result: {
-                analysis_briefing: simulationContent,
                 items: [
                     { id: '1', title: 'Design Sprint Retro', description: 'Rationale: Mitigate burnout by addressing project stressors identified in feedback loop.', team: 'Design', estimatedImpact: 'High' },
                     { id: '2', title: 'Workload Balancing', description: 'Rationale: Redistribution of tasks to align with capacity thresholds.', team: 'Design', estimatedImpact: 'High' }
@@ -72,7 +69,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
             // Update the existing "Thinking..." bubble
             setMessages(prev => prev.map(m =>
                 m.id === existingMessageId
-                    ? { ...m, content: simulationContent, toolInvocations: [simulationTool] }
+                    ? { ...m, content: '', toolInvocations: [simulationTool] }
                     : m
             ));
         } else {
@@ -80,7 +77,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
             setMessages(prev => [...prev, {
                 id: Date.now().toString() + '-sim',
                 role: 'assistant',
-                content: simulationContent,
+                content: '',
                 toolInvocations: [simulationTool]
             }]);
         }
@@ -111,7 +108,6 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                     suggest_intervention_plan: tool({
                         description: 'Generate a list of intervention actions based on the analysis.',
                         parameters: z.object({
-                            analysis_briefing: z.string().describe('Operational briefing starting with "**System Signal Detected**"'),
                             items: z.array(z.object({
                                 id: z.string().describe('Unique ID (e.g. action-1)'),
                                 title: z.string().describe('Action title'),
@@ -131,7 +127,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                                 team: item.department,       // Mapping department -> team
                                 estimatedImpact: item.impact // Mapping impact -> estimatedImpact
                             }));
-                            return { items: mappedItems, analysis_briefing: args.analysis_briefing };
+                            return { items: mappedItems };
                         },
                     }),
                 },
@@ -220,9 +216,6 @@ Your GOAL is to transform raw department data into a prescriptive JSON Action Pl
 * **ZERO CHAT MODE:** You are a Logic Engine, not a Chatbot. Do not output conversational text like "Here is your plan."
 * **MANDATORY TOOL USE:** You MUST call the tool "suggest_intervention_plan" immediately.
 * **PRIVACY FIREWALL:** You are analyzing aggregated department metrics. Never ask for individual names.
-* **Operational Briefing:** Put your findings/context in the "analysis_briefing" tool parameter.
-* **MANDATORY HEADER:** You MUST start the "analysis_briefing" with:
-  "**System Signal Detected**\n\n*Analysis performed on aggregated department-level data to protect privacy.*"
 
 ### 3. DYNAMIC BEHAVIOR (USER OVERRIDES)
 * **The Baseline:** Start by analyzing the lowest scoring metrics in the provided JSON data: ${JSON.stringify(currentData)}.
@@ -313,14 +306,8 @@ Your GOAL is to transform raw department data into a prescriptive JSON Action Pl
                                 <div key={tool.toolCallId} className="animate-in fade-in slide-in-from-bottom-2 duration-500 w-full">
                                     {tool.toolName === 'suggest_intervention_plan' && tool.result && (
                                         <div className="space-y-4">
-                                            {/* Render Briefing if in tool result */}
-                                            {tool.result.analysis_briefing && (
-                                                <div className="bg-neutral-50 px-4 py-3 rounded-2xl rounded-tl-sm border border-neutral-100 prose prose-sm max-w-none">
-                                                    {tool.result.analysis_briefing.split('\n').map((line: string, i: number) => (
-                                                        <p key={i} className={line.trim() === '' ? 'h-2' : 'my-1'}>{line}</p>
-                                                    ))}
-                                                </div>
-                                            )}
+                                            {/* Render Briefing if in tool result - REMOVED for Zero Chat Mode */}
+
                                             <ActionPlanWidget tasks={tool.result.items || []} />
                                         </div>
                                     )}
