@@ -58,6 +58,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
             args: {},
             state: 'result' as const,
             result: {
+                analysis_briefing: "Current metrics indicate a critical risk in the Design department due to sustained high workload and low psychological safety. The following interventions focus on immediate friction reduction and trust-building rituals to stabilize velocity.",
                 items: [
                     { id: '1', title: 'Design Sprint Retro', description: 'Rationale: Mitigate burnout by addressing project stressors identified in feedback loop.', team: 'Design', estimatedImpact: 'High' },
                     { id: '2', title: 'Workload Balancing', description: 'Rationale: Redistribution of tasks to align with capacity thresholds.', team: 'Design', estimatedImpact: 'High' }
@@ -90,6 +91,16 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
         const assistantMessageId = Date.now().toString() + '-' + Math.random().toString(36).substring(2, 9) + '-ai';
         setMessages(prev => [...prev, { id: assistantMessageId, role: 'assistant', content: '' }]);
 
+        // 🛑 STRICT MODE: Check for valid API Key before attempting call
+        if (!API_KEY || API_KEY === 'dummy-key') {
+            console.warn("⚠️ No valid API Key found. Skipping OpenAI call and using Simulation Mode.");
+            // Slight delay to simulate "thinking"
+            setTimeout(async () => {
+                await runSimulationFallback(assistantMessageId);
+            }, 1500);
+            return;
+        }
+
         // Create controller for timeout
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -108,6 +119,7 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                     suggest_intervention_plan: tool({
                         description: 'Generate a list of intervention actions based on the analysis.',
                         parameters: z.object({
+                            analysis_briefing: z.string().describe('A concise, strategic psychological analysis of WHY these interventions are needed. Focus on root causes (e.g., Burnout, Trust) based on the data.'),
                             items: z.array(z.object({
                                 id: z.string().describe('Unique ID (e.g. action-1)'),
                                 title: z.string().describe('Action title'),
@@ -127,7 +139,10 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
                                 team: item.department,       // Mapping department -> team
                                 estimatedImpact: item.impact // Mapping impact -> estimatedImpact
                             }));
-                            return { items: mappedItems };
+                            return {
+                                analysis_briefing: args.analysis_briefing,
+                                items: mappedItems
+                            };
                         },
                     }),
                 },
@@ -269,6 +284,16 @@ Your GOAL is to transform raw department data into a prescriptive JSON Action Pl
 
     return (
         <div className="flex flex-col h-full bg-white">
+            {/* Simulation Mode Indicator */}
+            {(!API_KEY || API_KEY === 'dummy-key') && (
+                <div className="bg-amber-50 border-b border-amber-100 px-4 py-2 flex items-center justify-between text-xs text-amber-800">
+                    <span className="font-medium flex items-center gap-2">
+                        <Sparkles className="w-3 h-3" />
+                        Simulation Mode Active
+                    </span>
+                    <span className="opacity-75">AI features simulated for demo purposes</span>
+                </div>
+            )}
             <div className="flex-1 space-y-6 p-4 overflow-y-auto" ref={scrollRef}>
                 {messages.filter(m => m.role !== 'system').map((msg) => (
                     <div
@@ -306,7 +331,18 @@ Your GOAL is to transform raw department data into a prescriptive JSON Action Pl
                                 <div key={tool.toolCallId} className="animate-in fade-in slide-in-from-bottom-2 duration-500 w-full">
                                     {tool.toolName === 'suggest_intervention_plan' && tool.result && (
                                         <div className="space-y-4">
-                                            {/* Render Briefing if in tool result - REMOVED for Zero Chat Mode */}
+                                            {/* Analysis Briefing - Structured Reasoning */}
+                                            {tool.result.analysis_briefing && (
+                                                <div className="bg-indigo-50/50 border border-indigo-100 p-4 rounded-xl">
+                                                    <div className="flex items-center gap-2 mb-2 text-indigo-900 font-semibold text-xs uppercase tracking-wider">
+                                                        <Sparkles className="w-3 h-3" />
+                                                        Strategic Analysis
+                                                    </div>
+                                                    <p className="text-sm text-indigo-800 leading-relaxed text-justify">
+                                                        {tool.result.analysis_briefing}
+                                                    </p>
+                                                </div>
+                                            )}
 
                                             <ActionPlanWidget tasks={tool.result.items || []} />
                                         </div>

@@ -45,14 +45,15 @@ export function DesignLayers() {
                         />
                     </div>
 
-                    {/* Placeholder */}
-                    <ServiceCard
-                        title="Design System Ops"
-                        description="Scalable component libraries for multi-product suites."
-                        icon={<Layers className="w-8 h-8 text-gray-400" />}
-                        className="h-full hover:border-gray-400 opacity-70"
-                        badge="Coming Soon"
-                    />
+                    {/* Governance Case Study */}
+                    <div onClick={() => navigate('/work/governance')} className="cursor-pointer">
+                        <ServiceCard
+                            title="Architecting Governance"
+                            description="Managing 'Vibe Coding' debt with a 3-tier token architecture."
+                            icon={<Layers className="w-8 h-8 text-indigo-500" />}
+                            className="h-full hover:border-indigo-400"
+                        />
+                    </div>
                 </div>
             </section>
         </div>
