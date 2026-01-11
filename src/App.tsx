@@ -12,6 +12,9 @@ import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
+import { Governance } from './pages/work/Governance';
+
+import { ScrollToTop } from './components/layout/ScrollToTop';
 
 import { ScrollToTop } from './components/layout/ScrollToTop';
 
@@ -29,6 +32,7 @@ function App() {
           <Route path="/work/inwards/user" element={<UserDashboard />} />
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />
           <Route path="/work/enculture" element={<Enculture />} />
+          <Route path="/work/governance" element={<Governance />} />
 
           {/* Layer Pages */}
           <Route path="/work/design" element={<DesignLayers />} />
