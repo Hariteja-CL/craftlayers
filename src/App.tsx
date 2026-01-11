@@ -14,14 +14,14 @@ import { SecurityLayers } from './pages/layers/SecurityLayers';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
 import { Governance } from './pages/work/Governance';
 
-import { ScrollToTop } from './components/layout/ScrollToTop';
+import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
 
 import { ScrollToTop } from './components/layout/ScrollToTop';
 
 function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <ScrollHandler />
       <Routes>
         <Route element={<LayoutShell />}>
           <Route path="/" element={<Home />} />
