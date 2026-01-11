@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DataView } from './DataView';
 import { VisualView } from './VisualView';
 import { ActionCard } from './ActionCard';
@@ -91,6 +91,13 @@ export function CultureDashboard() {
 function HotspotOverlay() {
     const [activeId, setActiveId] = useState<number | null>(null);
 
+    // Close on click outside
+    useEffect(() => {
+        const handleClickOutside = () => setActiveId(null);
+        window.addEventListener('click', handleClickOutside);
+        return () => window.removeEventListener('click', handleClickOutside);
+    }, []);
+
     // We hardcode positions based on the UI layout we know
     const hotspots = [
         {
@@ -132,7 +139,7 @@ function HotspotOverlay() {
                         >
                             {/* Pulsing Dot */}
                             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 ${activeId === spot.id ? 'hidden' : ''}`}></span>
-                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform duration-300 ${activeId === spot.id ? 'scale-125' : 'group-hover:scale-125'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-4 w-4 bg-indigo-600 border-2 border-white shadow-md transition-transform duration-300 ${activeId === spot.id ? 'scale-125' : ''}`}></span>
 
                             {/* Tooltip */}
                             <AnimatePresence>
