@@ -6,7 +6,7 @@ import { Toaster } from 'sonner';
 
 export function LayoutShell() {
     return (
-        <div className="min-h-screen flex flex-col bg-[#FDFDFD] font-sans text-content-primary antialiased relative selection:bg-orange-100 selection:text-orange-900">
+        <div className="min-h-screen flex flex-col bg-surface-page font-sans text-content-primary antialiased relative selection:bg-orange-100 selection:text-orange-900">
             {/* Atmospheric Depth Blobs */}
             <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-100/40 rounded-full blur-[120px] mix-blend-multiply opacity-70 animate-blob" />

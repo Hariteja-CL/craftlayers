@@ -1,0 +1,13 @@
+{
+    "name": "SaaS Platform",
+    "preferredTheme": "craftlayers-default-dark",
+    "density": "comfortable",
+    "motion": "standard",
+    "accessibilityLevel": "AA",
+    "intentBias": {
+        "primary": "brand",
+        "info": "semantic.info",
+        "destructive": "semantic.error",
+        "success": "semantic.success"
+    }
+}

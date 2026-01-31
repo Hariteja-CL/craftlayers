@@ -4,7 +4,7 @@
 
 @layer base {
 
-  /* Set Poppins as default font */
+  /* Set Inter as default font */
   body {
     @apply font-sans text-content-primary bg-surface overflow-x-hidden;
   }

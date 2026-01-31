@@ -7,36 +7,103 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            // 1. 🎨 Color Palette (Primitives + Semantics)
+            // 1. 🎨 Color Palette (Glass Light Theme + Legacy Mappings)
             colors: {
-                // --- Primitives (The Raw Paint) ---
-                gray: {
-                    0: "#ffffff",
-                    10: "#fcfcfd",
-                    20: "#f8fafb", // Special Bg token
-                    100: "#f0f4f5",
-                    200: "#d5dbde",
-                    300: "#a1a6a8",
-                    400: "#73787a",
-                    500: "#505355",
-                    600: "#383b3c",
-                    700: "#2b2d2e",
-                    800: "#18191a",
-                    1000: "#000000",
-                },
-                primary: {
-                    main: {
-                        50: "#fff3e0",
-                        100: "#ffe0b2",
-                        200: "#ffcc80",
-                        300: "#ffb74d",
-                        400: "#ffa726", // Base Brand Color
-                        500: "#ffa500",
-                        600: "#e69500",
-                        700: "#cc8400",
+                // New DS Tokens (Glass Light)
+                brand: {
+                    primary: {
+                        base: "#4f46e5",
+                        "on-base": "#ffffff",
+                        interaction: "#4338ca",
+                        background: "rgba(79, 70, 229, 0.1)",
+                        surface: "rgba(79, 70, 229, 0.05)",
+                    },
+                    secondary: {
+                        base: "#0891b2",
+                        "on-base": "#ffffff",
+                        interaction: "#0e7490",
+                        background: "rgba(6, 182, 212, 0.1)",
+                        surface: "rgba(6, 182, 212, 0.05)",
                     },
                 },
-                // Pastels for "Organic" Shapes
+                neutral: {
+                    surface: {
+                        "level-0": "rgba(255,255,255,0.9)",
+                        "level-1": "rgba(255, 255, 255, 0.8)",
+                        "level-2": "rgba(255, 255, 255, 0.6)",
+                        "level-3": "rgba(255, 255, 255, 0.4)",
+                        "level-4": "rgba(255, 255, 255, 0.2)",
+                    },
+                    text: {
+                        "high-contrast": "#0f172a",
+                        "medium-contrast": "#64748b",
+                        "low-contrast": "#94a3b8",
+                        disabled: "rgba(0, 0, 0, 0.3)",
+                        inverse: "#ffffff",
+                    },
+                },
+                semantic: {
+                    success: {
+                        text: "#059669",
+                        icon: "#10b981",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "#059669",
+                    },
+                    warning: {
+                        text: "#d97706",
+                        icon: "#f59e0b",
+                        background: "rgba(245, 158, 11, 0.1)",
+                        border: "#d97706",
+                    },
+                    error: {
+                        text: "#dc2626",
+                        icon: "#ef4444",
+                        background: "rgba(239, 68, 68, 0.1)",
+                        border: "#dc2626",
+                    },
+                    info: {
+                        text: "#2563eb",
+                        icon: "#3b82f6",
+                        background: "rgba(59, 130, 246, 0.1)",
+                        border: "#2563eb",
+                    },
+                },
+
+                // --- Legacy Mappings (Backward Compatibility) ---
+                // Mapping old semantic keys to new DS values
+                primary: {
+                    main: {
+                        50: "rgba(79, 70, 229, 0.05)", // brand.primary.surface
+                        100: "rgba(79, 70, 229, 0.1)", // brand.primary.background
+                        200: "rgba(79, 70, 229, 0.2)",
+                        300: "#6366f1",
+                        400: "#4f46e5", // brand.primary.base
+                        500: "#4338ca", // brand.primary.interaction
+                        600: "#3730a3",
+                        700: "#312e81",
+                    },
+                },
+                surface: {
+                    page: "rgba(255,255,255,0.9)", // neutral.surface.level-0
+                    DEFAULT: "rgba(255, 255, 255, 0.8)", // neutral.surface.level-1
+                    subtle: "rgba(255, 255, 255, 0.6)", // neutral.surface.level-2
+                    overlay: "rgba(0, 0, 0, 0.1)", // approximate overlay
+                    inverse: "#0f172a", // neutral.text.high-contrast or similar dark
+                },
+                content: {
+                    primary: "#0f172a", // neutral.text.high-contrast
+                    secondary: "#64748b", // neutral.text.medium-contrast
+                    tertiary: "#94a3b8", // neutral.text.low-contrast
+                    inverse: "#ffffff", // neutral.text.inverse
+                    link: "#4f46e5", // brand.primary.base
+                },
+                border: {
+                    DEFAULT: "rgba(0, 0, 0, 0.1)", // border.color.default
+                    muted: "rgba(0, 0, 0, 0.05)", // border.color.subtle
+                    focus: "#4f46e5", // border.color.interaction
+                },
+
+                // Retaining Pastel Palette for "Organic" Shapes/Badges as requested
                 pastel: {
                     green: { 50: "#f1faf4", 100: "#e7f8f0", 500: "#5fcb9b" },
                     teal: { 100: "#e5faf8", 500: "#3dd1c2" },
@@ -46,98 +113,76 @@ const config: Config = {
                     pink: { 50: "#fff5f9", 100: "#fde9f2", 500: "#f06292" },
                     orange: { 50: "#fff7e6", 100: "#fff3e6", 500: "#ffaa6a" },
                 },
-                // Functional Status
-                info: { 100: "#e5f2ff", 500: "#007aff", 700: "#0062cc" },
-                success: { 100: "#e5fff1", 500: "#0fa251", 700: "#0d8041" },
-                warning: { 100: "#f9ead1", 500: "#f5a623", 700: "#c4851c" },
-                error: { 100: "#ffdbe2", 500: "#b00020", 700: "#8d001a" },
-
-                // --- Semantics (Usage Context) ---
-                // Usage: "bg-surface-page", "bg-surface-subtle"
-                surface: {
-                    page: "#ffffff",      // {Grey Scale.Gray0}
-                    DEFAULT: "#fcfcfd",   // {Grey Scale.Gray 10}
-                    subtle: "#f8fafb",    // {Grey Scale.Gray 20}
-                    overlay: "#18191a",   // {Grey Scale.Gray 800}
-                    inverse: "#000000",   // {Grey Scale.Gray 1000}
-                },
-                // Usage: "text-content-primary", "text-content-link"
-                content: {
-                    primary: "#2b2d2e",   // {Grey Scale.Gray 700}
-                    secondary: "#73787a", // {Grey Scale.Gray 400}
-                    tertiary: "#a1a6a8",  // {Grey Scale.Gray 300}
-                    inverse: "#fcfcfd",   // {Grey Scale.Gray 10}
-                    link: "#cc8400",      // {Primary.Main.700}
-                },
-                // Usage: "border-border-default"
-                border: {
-                    DEFAULT: "#d5dbde",   // {Grey Scale.Gray200}
-                    muted: "#f0f4f5",     // {Grey Scale.Gray 100}
-                    focus: "#383b3c",     // {Grey Scale.Gray 600}
-                },
-
-                // 6. 🌈 Layer Theme System (Semantic)
-                layer: {
-                    design: {
-                        bg: "#fff7e6",    // {Pastel.Orange.50}
-                        text: "#ffa726",  // {Primary.Main.400}
-                        border: "#fff3e6",// {Pastel.Orange.100}
-                    },
-                    ai: {
-                        bg: "#f7f3ff",    // {Pastel.Purple.50}
-                        text: "#a682d7",  // {Pastel.Purple.500}
-                        border: "#f5f1fa",// {Pastel.Purple.100}
-                    },
-                    security: {
-                        bg: "#f3f8fe",    // {Pastel.Blue.50}
-                        text: "#50a9ee",  // {Pastel.Blue.500}
-                        border: "#eaf6fd",// {Pastel.Blue.100}
-                    },
+                // Retaining partial primary/gray scales if needed for specific hardcoded lookups,
+                // but usually the mappings above cover semantic usage.
+                // Keeping minimal gray needed for some untyped usages if any.
+                gray: {
+                    0: "#ffffff",
+                    50: "#f9fafb",
+                    100: "#f3f4f6",
+                    200: "#e5e7eb",
+                    300: "#d1d5db",
+                    400: "#9ca3af",
+                    500: "#6b7280",
+                    600: "#4b5563",
+                    700: "#374151",
+                    800: "#1f2937",
+                    900: "#111827",
                 },
             },
 
             // 2. 🔠 Typography
             fontFamily: {
-                sans: ["Poppins", "sans-serif"],
-                mono: ["Roboto Mono", "monospace"],
+                sans: ["Inter", "sans-serif"],
+                mono: ["JetBrains Mono", "monospace"],
             },
             fontSize: {
-                // Semantic Header Sizes
-                h1: ["48px", { lineHeight: "110%", letterSpacing: "-1%" }],
-                h2: ["32px", { lineHeight: "110%", letterSpacing: "-1%" }],
-                h3: ["28px", { lineHeight: "110%", letterSpacing: "-0.5%" }],
-                h4: ["24px", { lineHeight: "110%" }],
-                headline: ["20px", { lineHeight: "140%" }],
-                body: ["16px", { lineHeight: "160%" }],
-                "body-sm": ["14px", { lineHeight: "160%" }],
-                caption: ["12px", { lineHeight: "160%" }],
+                // New DS Sizes
+                "050": "0.75rem",
+                "075": "0.875rem",
+                "100": "1rem",
+                "200": "1.125rem",
+                "300": "1.25rem",
+                "400": "1.5rem",
+                "500": "1.875rem",
+                "600": "2.25rem",
+                "700": "3rem",
+                "800": "3.75rem",
+                "900": "3.75rem",
+                // Mapped Semantic Header Sizes
+                h1: ["3.75rem", { lineHeight: "1", letterSpacing: "-0.025em" }], // ~800/900
+                h2: ["3rem", { lineHeight: "1", letterSpacing: "-0.025em" }], // ~700
+                h3: ["2.25rem", { lineHeight: "1.25", letterSpacing: "-0.025em" }], // ~600
+                h4: ["1.875rem", { lineHeight: "1.25" }], // ~500
+                headline: ["1.5rem", { lineHeight: "1.5" }], // ~400
+                body: ["1rem", { lineHeight: "1.5" }], // ~100
+                "body-sm": ["0.875rem", { lineHeight: "1.5" }], // ~075
+                caption: ["0.75rem", { lineHeight: "1.5" }], // ~050
             },
 
-            // 3. 📏 Spacing & Sizing (Global Scale)
-            spacing: {
-                "2xs": "2px",
-                xs: "4px",
-                sm: "8px",
-                md: "16px",
-                lg: "24px",
-                xl: "32px",
-                "2xl": "48px",
-                "3xl": "64px", // For Section Gaps
-                container: "1440px",
-            },
+            // 3. 📏 Spacing & Sizing
+            // Extend default spacing with DS additions if needed, otherwise rely on defaults.
+            // DS Spacing: 025=2px, 050=4px, 100=8px, 150=12px, 200=16px...
+            // Tailwind defaults: 0.5=2px, 1=4px, 2=8px, 3=12px, 4=16px.
+            // We can map specific DS keys if used directly.
+
             borderRadius: {
                 sm: "4px",
                 md: "8px",
-                lg: "16px",    // Standard Card Radius
+                lg: "16px",
                 xl: "24px",
                 full: "9999px",
+                none: "0px",
             },
             boxShadow: {
-                sm: "0 1px 2px rgba(51, 51, 51, 0.1)",
-                md: "0 4px 8px rgba(51, 51, 51, 0.12)",
-                lg: "0 8px 24px rgba(38, 38, 38, 0.14)", // Modal/Card Hover
-                xl: "0 12px 32px rgba(38, 38, 38, 0.18)",
+                none: "none",
+                sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+                md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05)",
+                lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
             },
+
+            // 4. Animation
             animation: {
                 blob: "blob 7s infinite",
             },

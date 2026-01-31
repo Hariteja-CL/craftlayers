@@ -1,0 +1,13 @@
+{
+    "name": "Marketing Site",
+    "preferredTheme": "glass-light",
+    "density": "comfortable",
+    "motion": "expressive",
+    "accessibilityLevel": "AA",
+    "intentBias": {
+        "primary": "brand",
+        "info": "brand.secondary",
+        "destructive": "semantic.error",
+        "success": "brand"
+    }
+}

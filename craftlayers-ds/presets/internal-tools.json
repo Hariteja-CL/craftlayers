@@ -1,0 +1,13 @@
+{
+    "name": "Internal Tools / Dashboard",
+    "preferredTheme": "craftlayers-light",
+    "density": "compact",
+    "motion": "reduced",
+    "accessibilityLevel": "AA",
+    "intentBias": {
+        "primary": "neutral",
+        "info": "semantic.info",
+        "destructive": "semantic.error",
+        "success": "semantic.success"
+    }
+}
