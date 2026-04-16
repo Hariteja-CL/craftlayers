@@ -12,6 +12,9 @@ import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
+import { Works } from './pages/work/Works';
+import { AIAgentCaseStudy as AIAgent } from './pages/work/AIAgentCaseStudy';
+import { SecurityAgentCaseStudy as SecurityAgent } from './pages/work/SecurityAgentCaseStudy';
 import { Governance } from './pages/work/Governance';
 
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
@@ -27,6 +30,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/work/secure-ux" element={<BlogPost />} />
+          <Route path="/work" element={<Works />} />
+          <Route path="/work/agent-ai" element={<AIAgent />} />
+          <Route path="/work/agent-security" element={<SecurityAgent />} />
           <Route path="/work/inwards" element={<Inwards />} />
           <Route path="/work/inwards/user" element={<UserDashboard />} />
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />

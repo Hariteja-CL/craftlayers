@@ -12,19 +12,19 @@ export function DesignLayers() {
             {/* Hero */}
             <section className="bg-surface border-b border-border-muted py-20">
                 <div className="container mx-auto px-6 max-w-container">
-                    <Link to="/" className="inline-flex items-center text-sm font-medium text-content-secondary hover:text-primary-main-400 mb-8 transition-colors">
+                    <Link to="/" className="inline-flex items-center text-sm font-medium cl-text-secondary hover:cl-text-primary transition-colors mb-8">
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Home
                     </Link>
                     <div className="flex items-center gap-4 mb-4">
-                        <div className="p-3 rounded-2xl bg-layer-design-bg text-layer-design-text">
+                        <div className="p-3 rounded-2xl cl-bg-neutral-surface-level-2 cl-text-primary">
                             <Layers className="w-8 h-8" />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-content-primary">
+                        <h1 className="text-4xl md:text-5xl font-extrabold cl-text-primary">
                             Design Layer
                         </h1>
                     </div>
-                    <p className="text-xl text-content-secondary max-w-2xl leading-relaxed">
+                    <p className="text-xl cl-text-secondary max-w-2xl leading-relaxed">
                         Crafting intuitive, accessible, and scalable user experiences for complex enterprise ecosystems.
                     </p>
                 </div>

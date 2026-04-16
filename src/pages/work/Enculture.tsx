@@ -1,283 +1,217 @@
-import { ArrowLeft, Sparkles, Brain, Zap, MousePointerClick, ShieldCheck, Search } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '../../components/ui/Button';
-import { Badge } from '../../components/ui/Badge';
+import { useNavigate } from 'react-router-dom';
+import { V2CaseStudyTemplate } from '../../components/portfolio/V2CaseStudyTemplate';
 import { Card } from '../../components/ui/Card';
-import { motion } from 'framer-motion';
-import { DesignerNoteChip } from '../../components/ui/DesignerNoteChip';
-
-const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
-
-import { PasswordGate } from '../../components/ui/PasswordGate';
+import { Button } from '../../components/ui/Button';
+import { Zap, Search, Brain, ArrowRight, ShieldCheck, Activity, Monitor } from 'lucide-react';
 
 export function Enculture() {
     const navigate = useNavigate();
 
-    return (
-        <PasswordGate scope="enculture_casestudy">
-            <article className="pb-20">
-                {/* Case Study Hero */}
-                <section className="bg-surface-subtle border-b border-border-muted pt-12 pb-20 relative overflow-hidden">
-                    {/* Background Atmosphere */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-100/40 rounded-full blur-[100px] mix-blend-multiply animate-blob opacity-50 pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[100px] mix-blend-multiply animate-blob animation-delay-2000 opacity-50 pointer-events-none" />
-
-                    <div className="container mx-auto px-6 max-w-container relative z-10">
-                        <Link to="/work/ai" className="inline-flex items-center text-sm font-medium text-content-secondary hover:text-indigo-600 mb-8 transition-colors">
-                            <ArrowLeft className="mr-2 h-4 w-4" />
-                            Back to AI Layers
-                        </Link>
-
-                        <motion.div
-                            initial="hidden"
-                            animate="visible"
-                            variants={fadeUp}
-                            className="flex flex-col md:flex-row gap-8 items-start justify-between mb-12"
-                        >
-                            <div className="max-w-3xl">
-                                <div className="flex gap-2 mb-4">
-                                    <Badge variant="warning">AI Governance</Badge>
-                                    <Badge variant="secondary">Legacy Modernization</Badge>
-                                </div>
-                                <h1 className="text-3xl md:text-5xl font-extrabold text-content-primary mb-6 leading-tight tracking-tight">
-                                    AI-Mediated Governance: Solving Leadership Cognitive Drain
-                                </h1>
-                                <p className="text-xl text-content-secondary leading-relaxed">
-                                    Increasing <span className="text-indigo-600 font-semibold">Decision Velocity by 40%</span> via an AI-Driven "Action Engine."
-                                </p>
+    const sections = [
+        {
+            id: "context",
+            title: "Context",
+            content: (
+                <div className="space-y-4">
+                    <p>
+                        Enculture is an enterprise B2B SaaS platform where I served as Senior UX Designer with a heavy focus on Growth. I architected the <strong>"Enculture Action Engine"</strong>, a system that transforms passive metrics into prescriptive AI-driven insights for leadership teams.
+                    </p>
+                    <p className="text-sm border-l-2 cl-border-border-color-default pl-4 italic">
+                        "Winner of the Enculture Hackathon 2025 for building a live GenUI agent focused on retention strategies."
+                    </p>
+                </div>
+            )
+        },
+        {
+            id: "experience-gap",
+            title: "Experience Gap",
+            content: (
+                <ul className="space-y-4">
+                    <li className="flex gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Dashboard Stagnation:</strong> Traditional analytics provided data but no direction, leading to high churn rates in enterprise accounts.</p>
+                    </li>
+                    <li className="flex gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Friction-Heavy Funnels:</strong> Disconnection between marketing acquisition and product retention created a leaky user journey.</p>
+                    </li>
+                    <li className="flex gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Slow Dev Velocity:</strong> Bridging engineering requirements and user-centric prototypes was taking too many cycles, slowing down market validation.</p>
+                    </li>
+                </ul>
+            )
+        },
+        {
+            id: "role",
+            title: "Role",
+            content: (
+                <p className="font-medium cl-text-neutral-text-high-contrast">
+                    Senior UX Designer (Growth Focus): responsible for bridging complex engineering requirements with data-driven design strategies to drive retention.
+                </p>
+            )
+        },
+        {
+            id: "constraints",
+            title: "Constraints",
+            content: (
+                <ul className="space-y-4">
+                    <li className="flex gap-3 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Engineering:</strong> Deploy live React/TypeScript prototypes to validate marketing hypotheses efficiently.</p>
+                    </li>
+                    <li className="flex gap-3 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Execution:</strong> Must scale prescriptive insights across diverse B2B organizational structures.</p>
+                    </li>
+                    <li className="flex gap-3 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
+                        <p><strong>Market:</strong> Goal to reduce development cycles by ~45% while optimizing for user retention.</p>
+                    </li>
+                </ul>
+            )
+        },
+        {
+            id: "system-thinking",
+            title: "System Thinking",
+            content: (
+                <div className="space-y-6">
+                    <p>
+                        Moved from passive analytics to an <strong>Action-First Architecture</strong>. Instead of asking managers to interpret charts, the system uses agentic workflows to suggest specific interventions.
+                    </p>
+                    <div className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default p-8 rounded-3xl">
+                        <div className="grid md:grid-cols-3 gap-8 text-center">
+                            <div className="space-y-3">
+                                <Activity className="w-5 h-5 mx-auto opacity-50 transition-colors group-hover:text-blue-500" />
+                                <div className="font-bold text-sm">Signal Synthesis</div>
+                                <p className="text-[10px] opacity-60 uppercase tracking-widest">Real-time Stream</p>
                             </div>
-
-                            {/* Key Metrics */}
-                            <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-sm">
-                                <div>
-                                    <h4 className="font-bold text-content-primary mb-1">Impact</h4>
-                                    <p className="text-indigo-600 font-bold">+40% Velocity</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-content-primary mb-1">Role</h4>
-                                    <p className="text-content-secondary">Lead UX & Architect</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-content-primary mb-1">Duration</h4>
-                                    <p className="text-content-secondary">4 Months</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-content-primary mb-1">Key Result</h4>
-                                    <p className="text-content-secondary">Viewing to Executing <br />&lt; 5 Minutes</p>
-                                </div>
+                            <div className="space-y-3">
+                                <Brain className="w-5 h-5 mx-auto opacity-50" />
+                                <div className="font-bold text-sm">Prescriptive AI</div>
+                                <p className="text-[10px] opacity-60 uppercase tracking-widest">Action Mapping</p>
                             </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8 }}
-                            className="rounded-[2rem] overflow-hidden border border-indigo-100 shadow-xl bg-neutral-900 relative aspect-[21/9] flex items-center justify-center"
-                        >
-                            <img
-                                src="/assets/images/enculture_hero.png"
-                                alt="Enculture Action Engine UI"
-                                className="absolute inset-0 w-full h-full object-cover opacity-90"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 to-transparent" />
-                        </motion.div>
+                            <div className="space-y-3">
+                                <Zap className="w-5 h-5 mx-auto cl-text-brand-primary-base" />
+                                <div className="font-bold text-sm">Action Engine</div>
+                                <p className="text-[10px] opacity-60 uppercase tracking-widest">Growth Guardrails</p>
+                            </div>
+                        </div>
                     </div>
-                </section>
-
-                {/* Content Container */}
-                <div className="container mx-auto px-6 max-w-3xl mt-20 space-y-24">
-
-                    {/* Strategic Overview (The Hook) */}
-                    <motion.section
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                        className="space-y-8"
-                    >
-                        <div>
-                            <h2 className="text-3xl font-bold mb-6">Strategic Overview</h2>
-                            <p className="text-lg text-content-secondary leading-relaxed">
-                                Most organizational leaders were unable to use culture dashboards effectively. While the dashboards were data-rich, they were <strong>utility-poor</strong>. Leaders faced massive <strong>Cognitive Drain</strong> trying to analyze raw sentiment scores and brainstorm interventions while managing daily operations.
-                            </p>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <Card className="bg-red-50/50 border-red-100 p-6">
-                                <h3 className="font-bold text-lg text-red-900 mb-4">The Problem</h3>
-                                <ul className="space-y-3">
-                                    <li className="flex gap-2 items-start text-red-800/80 text-sm">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
-                                        Dashboards provided "What" but left the "How" to the user.
-                                    </li>
-                                    <li className="flex gap-2 items-start text-red-800/80 text-sm">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
-                                        Blank Page Syndrome halted action.
-                                    </li>
-                                </ul>
-                            </Card>
-                            <Card className="bg-indigo-50/50 border-indigo-100 p-6">
-                                <h3 className="font-bold text-lg text-indigo-900 mb-4">Business Goals (KPIs)</h3>
-                                <ul className="space-y-3">
-                                    <li className="flex gap-2 items-start text-indigo-800/80 text-sm">
-                                        <Sparkles className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                                        <strong>Reduce Energy Depletion:</strong> Minimize mental steps.
-                                    </li>
-                                    <li className="flex gap-2 items-start text-indigo-800/80 text-sm">
-                                        <Sparkles className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                                        <strong>Increase Actionability:</strong> Alerts Viewed vs Plans Created.
-                                    </li>
-                                    <li className="flex gap-2 items-start text-indigo-800/80 text-sm">
-                                        <Sparkles className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                                        <strong>Scalability:</strong> Logic across diverse units.
-                                    </li>
-                                </ul>
-                            </Card>
-                        </div>
-                    </motion.section>
-
-                    {/* Discovery & Research */}
-                    <motion.section
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                    >
-                        <h2 className="text-3xl font-bold mb-6">Discovery & Research Insights</h2>
-                        <div className="bg-white border border-neutral-100 p-8 rounded-3xl shadow-sm">
-                            <h4 className="font-bold text-neutral-900 mb-2">Methodology: Energy-Mapping Sessions</h4>
-                            <p className="text-content-secondary mb-6">
-                                I conducted sessions with executives to identify exactly where in their workflow "Decision Fatigue" was peaking.
-                            </p>
-
-                            <div className="p-6 bg-neutral-900 rounded-2xl text-white">
-                                <h4 className="font-bold text-indigo-400 mb-2 text-sm uppercase tracking-wider">Key Insight</h4>
-                                <p className="text-lg font-medium leading-relaxed">
-                                    "The primary friction wasn't understanding the data—it was the <strong>Blank Page Syndrome</strong> that followed. Leaders knew a 50% drop in sentiment was bad, but they didn't have the energy to draft a recovery plan from scratch."
+                </div>
+            )
+        },
+        {
+            id: "execution",
+            title: "Execution",
+            content: (
+                <ul className="space-y-4">
+                    <li className="flex gap-3">
+                        <CheckIcon />
+                        <p><strong>Live Prototyping:</strong> Designed and deployed React/TypeScript frontends directly into the dev cycle, reducing time-to-market validation by 45%.</p>
+                    </li>
+                    <li className="flex gap-3">
+                        <CheckIcon />
+                        <p><strong>Agentic Retention:</strong> Built GenUI agents that mutate based on user intent to proactively address churn signals.</p>
+                    </li>
+                    <li className="flex gap-3">
+                        <CheckIcon />
+                        <p><strong>Marketing Alignment:</strong> Synchronized product interfaces with digital marketing funnels to create a seamless acquisition-to-retention journey.</p>
+                    </li>
+                </ul>
+            )
+        },
+        {
+            id: "trade-offs",
+            title: "Trade-offs",
+            content: (
+                <div className="p-6 border cl-border-border-color-default rounded-2xl">
+                    <p className="font-bold cl-text-neutral-text-high-contrast mb-2">Automation vs. Interpretability</p>
+                    <p className="text-sm">In B2B growth, we chose "Prescriptive Actions" over generic "Drill-Downs". While it reduces total data visibility, it significantly increases decision-making speed for managers, which was the primary driver for retention.</p>
+                </div>
+            )
+        },
+        {
+            id: "output",
+            title: "Output",
+            content: (
+                <div className="space-y-4 text-center py-4">
+                    <div className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default p-10 rounded-[3rem] max-w-lg mx-auto">
+                        <Zap className="w-12 h-12 mx-auto mb-6 cl-text-brand-primary-base" />
+                        <p className="text-2xl font-bold mb-2">The Action Engine</p>
+                        <p className="text-sm cl-text-neutral-text-medium-contrast">A prescriptive SaaS growth system designed to transform behavioral signals into revenue-protecting actions.</p>
+                    </div>
+                </div>
+            )
+        },
+        {
+            id: "simulations",
+            title: "System Proof: Interactive Action Engine",
+            content: (
+                <div className="space-y-8 py-4">
+                    <p className="text-sm cl-text-neutral-text-medium-contrast">
+                        Experience the "Action Engine" live. Launch the functional dashboard to see how the prescriptive AI-driven insights are synthesized from raw behavioral metrics.
+                    </p>
+                    <div className="group relative max-w-2xl mx-auto">
+                        <div className="absolute -inset-0.5 cl-bg-brand-primary-base rounded-[2.5rem] opacity-0 group-hover:opacity-10 transition duration-500"></div>
+                        <Card className="relative p-10 cl-bg-neutral-surface-level-1 border cl-border-border-color-default rounded-[2.5rem] shadow-sm flex flex-col md:flex-row items-center gap-8">
+                            <div className="p-5 cl-bg-brand-primary-surface rounded-3xl cl-text-brand-primary-base shrink-0">
+                                <Activity className="w-8 h-8" />
+                            </div>
+                            <div className="flex-grow text-center md:text-left">
+                                <h4 className="text-2xl font-bold cl-text-primary mb-2">Launch Action Engine</h4>
+                                <p className="text-sm cl-text-secondary mb-6">
+                                    Functional simulation of the prescriptive logic layer. Features real-time retention monitoring and automated intervention drafting.
                                 </p>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Design Process: OOUX */}
-                    <motion.section
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                    >
-                        <h2 className="text-3xl font-bold mb-6">Design Process: OOUX Architecture</h2>
-                        <p className="text-lg text-content-secondary mb-8">
-                            To solve for energy depletion, I mapped the "Energy Flow." I defined "Sentiment" not as a number, but as a <strong>Trigger Object</strong> directly linked to an <strong>Action Object</strong>.
-                        </p>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="p-6 border border-neutral-200 rounded-2xl text-center">
-                                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Zap className="w-6 h-6 text-red-600" />
-                                </div>
-                                <h4 className="font-bold text-neutral-900">1. Trigger Object</h4>
-                                <p className="text-sm text-neutral-500 mt-2">Sentiment (The Signal)</p>
-                            </div>
-                            <div className="p-6 border border-neutral-200 rounded-2xl text-center">
-                                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <MousePointerClick className="w-6 h-6 text-green-600" />
-                                </div>
-                                <h4 className="font-bold text-neutral-900">2. Action Object</h4>
-                                <p className="text-sm text-neutral-500 mt-2">The Instructional Plan</p>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Final Solution: AI Translation Layer */}
-                    <motion.section
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={fadeUp}
-                        className="space-y-8"
-                    >
-                        <div className="space-y-6">
-                            <Badge variant="secondary" className="mb-4">Final Solution</Badge>
-                            <h2 className="text-3xl font-bold mb-4">The Bento-Task Hybrid</h2>
-                            <p className="text-lg text-content-secondary leading-relaxed">
-                                When the AI detects a critical drop, the data card transforms into a <strong>Task Card</strong>.
-                            </p>
-                        </div>
-
-                        {/* Interactive Link (The Demo) */}
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            className="p-12 bg-indigo-600 rounded-[3rem] text-center text-white cursor-pointer shadow-xl shadow-indigo-200 relative overflow-hidden group"
-                            onClick={() => navigate('/dashboard/culture')}
-                        >
-                            <div className="relative z-10">
-                                <h2 className="text-3xl font-bold mb-4">Launch 'Zero-Energy' Workflow</h2>
-                                <p className="text-indigo-100 text-lg mb-8 max-w-xl mx-auto">
-                                    See how the system detects a sentiment drop and automatically drafts a three-step intervention plan for validation.
-                                </p>
-                                <Button variant="solid" className="bg-white text-indigo-600 hover:bg-neutral-50 px-8 py-4 h-auto text-lg rounded-full">
-                                    Open Action Engine
+                                <Button 
+                                    onClick={() => navigate('/dashboard/culture')}
+                                    className="w-full md:w-fit justify-between gap-4"
+                                >
+                                    Enter Action Engine
+                                    <ArrowRight className="w-4 h-4" />
                                 </Button>
                             </div>
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700" />
-                        </motion.div>
-
-                        <div className="grid gap-8">
-                            <div className="bg-white p-8 rounded-3xl border border-neutral-100 shadow-sm">
-                                <h3 className="text-xl font-bold text-neutral-900 mb-4">The Three Levels</h3>
-                                <ul className="space-y-4">
-                                    <li className="flex gap-4 items-start">
-                                        <div className="p-2 bg-red-50 text-red-600 rounded-lg shrink-0"><Search className="w-5 h-5" /></div>
-                                        <div>
-                                            <strong className="block text-neutral-900">Level 1: The Alert</strong>
-                                            <p className="text-neutral-600 text-sm">Visualized data anomaly.</p>
-                                        </div>
-                                    </li>
-                                    <li className="flex gap-4 items-start">
-                                        <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg shrink-0"><Brain className="w-5 h-5" /></div>
-                                        <div>
-                                            <strong className="block text-neutral-900">Level 2: The Context</strong>
-                                            <p className="text-neutral-600 text-sm">AI-generated summary of <em>why</em>.</p>
-                                        </div>
-                                    </li>
-                                    <li className="flex gap-4 items-start">
-                                        <div className="p-2 bg-green-50 text-green-600 rounded-lg shrink-0"><ShieldCheck className="w-5 h-5" /></div>
-                                        <div>
-                                            <strong className="block text-neutral-900">Level 3: The Resolution</strong>
-                                            <p className="text-neutral-600 text-sm">Pre-filled checklist for the leader.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Results & Reflection */}
-                    <div className="bg-neutral-900 text-white p-8 rounded-[2rem] relative overflow-hidden">
-                        <DesignerNoteChip avatarSrc="/assets/images/profile.png" label="Lead UX & System Architect" className="mb-6 bg-white/10 text-white border-white/20" />
-
-                        <div className="grid md:grid-cols-3 gap-6 mb-8 border-b border-white/10 pb-8">
-                            <div>
-                                <div className="text-3xl font-bold text-indigo-400 mb-1">40%</div>
-                                <div className="text-sm text-neutral-400">Increase in Proactive Interventions</div>
-                            </div>
-                            <div>
-                                <div className="text-3xl font-bold text-indigo-400 mb-1">70%</div>
-                                <div className="text-sm text-neutral-400">Reduction in Analysis Time</div>
-                            </div>
-                        </div>
-
-                        <p className="text-xl font-medium leading-relaxed mb-4 text-white/90">
-                            "In 2026, great design is a <strong>Cognitive Subsidy.</strong> My value was in recognizing that a leader’s most precious resource isn't their time—it's their <strong>energy</strong>. By building an 'Action Engine,' I protected that energy."
-                        </p>
+                        </Card>
                     </div>
-
                 </div>
-            </article>
-        </PasswordGate>
+            )
+        },
+        {
+            id: "impact",
+            title: "Impact",
+            content: (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
+                    <div className="p-8 rounded-3xl cl-bg-emerald-50 cl-text-emerald-900 border cl-border-emerald-100 text-center">
+                        <div className="text-3xl font-bold">~45%</div>
+                        <p className="text-[10px] uppercase font-bold tracking-[0.2em] mt-3">Dev Cycle Reduction</p>
+                    </div>
+                    <div className="p-8 rounded-3xl cl-bg-indigo-50 cl-text-indigo-900 border cl-border-indigo-100 text-center">
+                        <div className="text-3xl font-bold">High</div>
+                        <p className="text-[10px] uppercase font-bold tracking-[0.2em] mt-3">User Retention</p>
+                    </div>
+                    <div className="p-8 rounded-3xl cl-bg-amber-50 cl-text-amber-900 border cl-border-amber-100 text-center">
+                        <div className="text-3xl font-bold">Live</div>
+                        <p className="text-[10px] uppercase font-bold tracking-[0.2em] mt-3">GenUI Prototypes</p>
+                    </div>
+                </div>
+            )
+        }
+    ];
+
+    return (
+        <V2CaseStudyTemplate
+            title="Enculture—The Action Engine"
+            subtitle="Bridging engineering requirements with Growth-focused UI strategies."
+            impactValue="~45%"
+            impactLabel="Dev Velocity"
+            role="Senior UX Designer"
+            duration="Jan 2024 - Present"
+            badges={["B2B SaaS", "Growth Design", "Agentic UI"]}
+            sections={sections}
+        />
     );
+}
+
+function CheckIcon() {
+    return <Zap className="w-4 h-4 cl-text-brand-primary-base mt-1 shrink-0" />;
 }

@@ -56,18 +56,18 @@ export function LayerInsightTabs() {
     const activeInsight = INSIGHTS.find(i => i.category === activeTab)!;
 
     return (
-        <div className="w-full bg-white rounded-2xl shadow-sm border border-neutral-200/60 overflow-hidden">
+        <div className="w-full cl-surface-card cl-radius-lg cl-elevation-surface cl-border-thin cl-border-solid cl-border-subtle overflow-hidden">
             {/* Header / Tabs */}
-            <div className="border-b border-neutral-100 bg-neutral-50/50 p-2 flex items-center justify-center gap-2">
+            <div className="cl-border-solid cl-border-subtle cl-bg-neutral-surface-level-2 p-2 flex items-center justify-center gap-2" style={{ borderBottomWidth: '1px' }}>
                 {(['UX', 'AI', 'Security'] as LayerType[]).map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
                         className={cn(
-                            "px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2",
+                            "cl-p-inline-300 cl-p-stack-150 cl-radius-full cl-text-075 cl-weight-medium cl-motion-standard flex items-center cl-gap-inline-150",
                             activeTab === tab
-                                ? "bg-white text-neutral-900 shadow-sm ring-1 ring-neutral-200"
-                                : "text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100/50"
+                                ? "cl-bg-color-brand-primary-background cl-text-color-brand-primary-base cl-elevation-raised"
+                                : "cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-3"
                         )}
                     >
                         {tab === 'UX' && <MousePointerClick className="w-4 h-4" />}
@@ -95,7 +95,7 @@ export function LayerInsightTabs() {
                     {/* Speech Bubble / Content */}
                     <div className="flex-1 relative">
                         {/* Speech Bubble Triangle */}
-                        <div className="hidden md:block absolute top-6 -left-3 w-4 h-4 bg-indigo-50 border-l border-b border-indigo-100 transform rotate-45" />
+                        <div className="hidden md:block absolute top-6 -left-3 w-4 h-4 cl-bg-color-brand-primary-surface border-l border-b cl-border-color-brand-primary-background transform rotate-45" />
 
                         <AnimatePresence mode='wait'>
                             <motion.div
@@ -104,20 +104,20 @@ export function LayerInsightTabs() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -10 }}
                                 transition={{ duration: 0.2 }}
-                                className="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 md:p-8"
+                                className="cl-bg-color-brand-primary-surface cl-border-thin cl-border-solid cl-border-color-brand-primary-background cl-radius-lg cl-p-inset-400 md:cl-p-inset-600"
                             >
                                 <div className="mb-6">
-                                    <h3 className="text-xl font-bold text-indigo-900 mb-2">{activeInsight.title}</h3>
-                                    <p className="text-indigo-700/80 text-sm">Key architectural decisions driving this layer.</p>
+                                    <h3 className="cl-text-300 cl-weight-bold cl-text-color-brand-primary-base mb-2">{activeInsight.title}</h3>
+                                    <p className="cl-text-color-brand-primary-interaction cl-opacity-overlay text-sm">Key architectural decisions driving this layer.</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {activeInsight.points.map((point, idx) => (
                                         <div key={idx} className="flex gap-3 items-start group">
-                                            <CheckCircle2 className="w-5 h-5 text-indigo-500 flex-shrink-0 mt-0.5 group-hover:text-indigo-600 transition-colors" />
+                                            <CheckCircle2 className="w-5 h-5 cl-text-color-brand-primary-base flex-shrink-0 mt-0.5 group-hover:cl-text-color-brand-primary-interaction transition-colors" />
                                             <div>
-                                                <h4 className="font-bold text-neutral-900 text-sm mb-1">{point.heading}</h4>
-                                                <p className="text-sm text-neutral-600 leading-relaxed">
+                                                <h4 className="cl-weight-bold cl-text-primary text-sm mb-1">{point.heading}</h4>
+                                                <p className="text-sm cl-text-secondary leading-relaxed">
                                                     {point.body}
                                                 </p>
                                             </div>

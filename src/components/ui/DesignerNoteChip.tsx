@@ -12,15 +12,15 @@ export function DesignerNoteChip({
     className
 }: DesignerNoteChipProps) {
     return (
-        <div className={cn("inline-flex items-center bg-orange-500 rounded-full p-1.5 pr-6 gap-3 shadow-sm", className)}>
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 shrink-0">
+        <div className={cn("inline-flex items-center cl-bg-color-brand-primary-background cl-p-inset-200 cl-radius-full gap-3 cl-elevation-surface", className)}>
+            <div className="w-10 h-10 rounded-full overflow-hidden cl-border-thin cl-border-solid cl-border-color-brand-primary-base shrink-0">
                 <img
                     src={avatarSrc}
                     alt="Designer"
                     className="w-full h-full object-cover"
                 />
             </div>
-            <span className="text-white font-medium text-lg tracking-wide">{label}</span>
+            <span className="cl-text-color-brand-primary-base cl-weight-medium cl-text-200 tracking-wide pr-3">{label}</span>
         </div>
     );
 }

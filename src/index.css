@@ -1,11 +1,21 @@
+@import './styles/variables.css';
+@import './styles/utilities.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 
+  🔒 DESIGN SYSTEM AUTHORITY 
+  Craftlayers CSS must match LAST to override Tailwind.
+*/
+
 @layer base {
 
-  /* Set Poppins as default font */
+  /* Set Inter as default font */
   body {
-    @apply font-sans text-content-primary bg-surface overflow-x-hidden;
+    @apply font-sans overflow-x-hidden;
+    background-color: var(--cl-color-neutral-surface-level-0);
+    color: var(--cl-color-neutral-text-high-contrast);
   }
 }

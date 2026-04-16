@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle2, ArrowRight, Clock } from 'lucide-react';
 import { toast } from 'sonner';
+import { cn } from '../ui/Button';
 
 interface Task {
     id: string;
@@ -27,7 +28,7 @@ export function ActionPlanWidget({ tasks }: ActionPlanProps) {
 
     return (
         <div className="space-y-3 mt-2 w-full max-w-md">
-            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-xs font-semibold cl-text-color-brand-primary-base uppercase tracking-wider mb-1">
                 <SparklesIcon className="w-3 h-3" />
                 Suggested Intervention Plan
             </div>
@@ -35,34 +36,34 @@ export function ActionPlanWidget({ tasks }: ActionPlanProps) {
             {tasks.map((task) => (
                 <div
                     key={task.id}
-                    className="bg-white border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all group"
+                    className="cl-surface-card border cl-border-default rounded-xl p-4 shadow-sm hover:cl-elevation-raised transition-all group"
                 >
                     <div className="flex justify-between items-start mb-2">
                         <div>
-                            <h4 className="font-semibold text-neutral-900 text-sm">{task.title}</h4>
-                            <span className="inline-block mt-1 px-2 py-0.5 bg-neutral-100 text-neutral-500 text-[10px] rounded-full font-medium">
+                            <h4 className="font-semibold cl-text-primary text-sm">{task.title}</h4>
+                            <span className="inline-block mt-1 px-2 py-0.5 cl-bg-neutral-surface-level-2 cl-text-secondary text-[10px] rounded-full font-medium">
                                 {task.team}
                             </span>
                         </div>
                         {scheduledTasks.has(task.id) ? (
-                            <span className="text-green-600 bg-green-50 p-1 rounded-full">
+                            <span className="cl-text-semantic-success-text cl-bg-semantic-success-background p-1 rounded-full">
                                 <CheckCircle2 className="w-4 h-4" />
                             </span>
                         ) : (
-                            <div className="text-neutral-300">
+                            <div className="cl-text-neutral-text-low-contrast">
                                 <Clock className="w-4 h-4" />
                             </div>
                         )}
                     </div>
 
-                    <p className="text-xs text-neutral-600 mb-3 leading-relaxed">
+                    <p className="text-xs cl-text-secondary mb-3 leading-relaxed">
                         {task.description}
                     </p>
 
-                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-neutral-50">
-                        <span className="text-[10px] text-neutral-400 font-medium flex items-center gap-1">
+                    <div className="flex items-center justify-between mt-3 pt-3 border-t cl-border-subtle">
+                        <span className="text-[10px] cl-text-neutral-text-medium-contrast font-medium flex items-center gap-1">
                             Impact over low sentiment:
-                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gradient-to-r ${getImpactColor(task.estimatedImpact)} text-white shadow-sm`}>
+                            <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border cl-border-subtle shadow-sm", getImpactStyles(task.estimatedImpact))}>
                                 {task.estimatedImpact}
                             </span>
                         </span>
@@ -70,10 +71,11 @@ export function ActionPlanWidget({ tasks }: ActionPlanProps) {
                         <button
                             onClick={() => handleExecute(task.id, task.title)}
                             disabled={scheduledTasks.has(task.id)}
-                            className={`text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium transition-colors ${scheduledTasks.has(task.id)
-                                ? 'bg-green-100 text-green-700 cursor-default'
-                                : 'bg-indigo-600 text-white hover:bg-indigo-700'
-                                }`}
+                            className={cn("text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium transition-colors",
+                                scheduledTasks.has(task.id)
+                                    ? 'cl-bg-semantic-success-background cl-text-semantic-success-text cursor-default'
+                                    : 'cl-bg-color-brand-primary-base cl-text-color-brand-primary-on-base hover:opacity-90'
+                            )}
                         >
                             {scheduledTasks.has(task.id) ? (
                                 'Scheduled'
@@ -90,12 +92,12 @@ export function ActionPlanWidget({ tasks }: ActionPlanProps) {
     );
 }
 
-function getImpactColor(impact: string) {
+function getImpactStyles(impact: string) {
     const lower = impact.toLowerCase();
-    if (lower.includes('high')) return 'from-green-500 to-green-600';
-    if (lower.includes('medium')) return 'from-orange-400 to-orange-500';
-    if (lower.includes('low')) return 'from-red-500 to-red-600';
-    return 'from-indigo-500 to-indigo-600'; // default
+    if (lower.includes('high')) return 'cl-bg-semantic-success-background cl-text-semantic-success-text cl-border-semantic-success-border';
+    if (lower.includes('medium')) return 'cl-bg-semantic-warning-background cl-text-semantic-warning-text cl-border-semantic-warning-border';
+    if (lower.includes('low')) return 'cl-bg-semantic-error-background cl-text-semantic-error-text cl-border-semantic-error-border';
+    return 'cl-bg-color-brand-primary-background cl-text-color-brand-primary-base'; // default
 }
 
 function SparklesIcon({ className }: { className?: string }) {

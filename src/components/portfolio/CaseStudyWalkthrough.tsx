@@ -47,7 +47,7 @@ export function CaseStudyWalkthrough({ imageSrc, className }: CaseStudyWalkthrou
         <div className={cn("w-full max-w-5xl mx-auto", className)}>
 
             {/* Desktop/Tablet Interactive View */}
-            <div className="hidden md:block relative bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl">
+            <div className="hidden md:block relative cl-bg-neutral-surface-level-0 rounded-3xl overflow-hidden border cl-border-default shadow-2xl">
                 {/* Dashboard Image */}
                 <img
                     src={imageSrc}
@@ -56,7 +56,7 @@ export function CaseStudyWalkthrough({ imageSrc, className }: CaseStudyWalkthrou
                 />
 
                 {/* Dark Overlay for better dot visibility (optional, subtle) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 cl-bg-neutral-surface-level-2 opacity-50 pointer-events-none" />
 
                 {/* Hotspots */}
                 {hotspots.map((spot) => (
@@ -69,8 +69,8 @@ export function CaseStudyWalkthrough({ imageSrc, className }: CaseStudyWalkthrou
                     >
                         {/* Pulse Ring */}
                         <div className="relative flex items-center justify-center w-8 h-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer group">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-4 w-4 bg-orange-500 border-2 border-white group-hover:scale-125 transition-transform duration-300"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full cl-bg-color-brand-primary-interaction opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 cl-bg-color-brand-primary-base border-2 cl-border-color-brand-primary-on-base group-hover:scale-125 transition-transform duration-300"></span>
                         </div>
 
                         {/* Tooltip Card */}
@@ -84,19 +84,19 @@ export function CaseStudyWalkthrough({ imageSrc, className }: CaseStudyWalkthrou
                                     className="absolute left-1/2 -translate-x-1/2 mt-4 w-72 z-30 pointer-events-none"
                                 >
                                     {/* Glassmorphism Card */}
-                                    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-xl text-left">
+                                    <div className="cl-surface-card backdrop-blur-md border cl-border-default p-5 rounded-2xl shadow-xl text-left">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                                            <div className="w-2 h-2 rounded-full cl-bg-color-brand-primary-base" />
+                                            <h3 className="text-sm font-bold cl-text-primary uppercase tracking-wider">
                                                 {spot.title}
                                             </h3>
                                         </div>
-                                        <p className="text-sm text-gray-200 leading-relaxed">
+                                        <p className="text-sm cl-text-secondary leading-relaxed">
                                             {spot.body}
                                         </p>
                                     </div>
                                     {/* Arrow */}
-                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-white/10 absolute -top-2 left-1/2 -translate-x-1/2 backdrop-blur-md" />
+                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] cl-border-neutral-surface-level-2 absolute -top-2 left-1/2 -translate-x-1/2 backdrop-blur-md" />
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -106,22 +106,22 @@ export function CaseStudyWalkthrough({ imageSrc, className }: CaseStudyWalkthrou
 
             {/* Mobile Stacked View */}
             <div className="md:hidden space-y-6">
-                <div className="rounded-2xl overflow-hidden border border-neutral-200 shadow-md">
+                <div className="rounded-2xl overflow-hidden border cl-border-default shadow-md">
                     <img src={imageSrc} alt="Dashboard Preview" className="w-full h-auto" />
                 </div>
 
                 <div className="space-y-4">
                     {hotspots.map((spot, index) => (
-                        <div key={spot.id} className="bg-white p-6 rounded-2xl border border-neutral-100 shadow-sm">
+                        <div key={spot.id} className="cl-surface-card p-6 rounded-2xl border cl-border-default shadow-sm">
                             <div className="flex items-center gap-3 mb-3">
-                                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-orange-600 text-xs font-bold border border-orange-200">
+                                <span className="flex items-center justify-center w-6 h-6 rounded-full cl-bg-color-brand-primary-background cl-text-color-brand-primary-base text-xs font-bold border cl-border-color-brand-primary-surface">
                                     {index + 1}
                                 </span>
-                                <h3 className="text-base font-bold text-neutral-900">
+                                <h3 className="text-base font-bold cl-text-primary">
                                     {spot.title}
                                 </h3>
                             </div>
-                            <p className="text-sm text-neutral-600 leading-relaxed pl-9">
+                            <p className="text-sm cl-text-secondary leading-relaxed pl-9">
                                 {spot.body}
                             </p>
                         </div>
