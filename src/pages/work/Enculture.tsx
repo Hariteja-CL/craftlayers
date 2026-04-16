@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { V2CaseStudyTemplate } from '../../components/portfolio/V2CaseStudyTemplate';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-import { Zap, Search, Brain, ArrowRight, ShieldCheck, Activity, Monitor } from 'lucide-react';
+import { Zap, Brain, ArrowRight, Activity } from 'lucide-react';
 
 export function Enculture() {
     const navigate = useNavigate();

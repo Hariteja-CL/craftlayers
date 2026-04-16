@@ -1,11 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { V2CaseStudyTemplate } from '../../components/portfolio/V2CaseStudyTemplate';
-import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
-import { Zap, Search, LayoutTemplate, Activity, Users, ShieldCheck, ArrowRight, Monitor, Smartphone } from 'lucide-react';
+import { Zap, Activity, Users, ShieldCheck } from 'lucide-react';
 
 export function Inwards() {
-    const navigate = useNavigate();
 
     const sections = [
         {
