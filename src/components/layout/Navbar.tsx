@@ -1,96 +1,150 @@
-import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../ui/Button'; // Reuse utility
 
-const navItems = [
+
+const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { name: 'Work', path: '/work' },
     { name: 'Insights', path: '/blog' },
+    { name: 'About', path: '/about' },
 ];
 
 export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const navRef = useRef(null);
+    const location = useLocation();
+
+    const email = "haritejanandipati@gmail.com";
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText(email);
+        alert("Email copied to clipboard: " + email);
+        setIsMenuOpen(false);
+    };
+
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[90%] md:w-auto">
-            <div className={cn(
-                "bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[2rem] px-2 py-2 flex flex-col md:flex-row md:items-center justify-between md:gap-2 transition-all duration-300",
-                isMenuOpen ? "rounded-[2rem]" : "rounded-full"
-            )}>
+        <nav
+            ref={navRef}
+            className={cn(
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full cl-bg-neutral-surface-level-1 border-b cl-border-border-color-default",
+                isScrolled ? "cl-py-100 shadow-sm" : "cl-py-200"
+            )}
+        >
+            <div
+                className={cn(
+                    "flex flex-col md:flex-row md:items-center justify-between md:gap-2 transition-all duration-300 cl-px-400 w-full max-w-7xl mx-auto"
+                )}
+            >
+                {/* 
+                 * LEFT GROUP
+                 * Contains CTA (Extreme Left), Brand Logo, and Mobile Toggle 
+                 */}
+                <div className="flex items-center gap-6">
+                    {/* Re-aligned Left side: Logo & Mobile Menu Only */}
+                    {/* Logo & Mobile Toggle Container */}
+                    <div className="flex items-center justify-between pl-4 md:pl-0">
+                        <Link
+                            to="/"
+                            className="cl-text-400 cl-weight-bold cl-text-neutral-text-high-contrast hover:scale-[1.02] transition-transform cl-focus-ring"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Craftlayers DS
+                        </Link>
 
-                <div className="flex items-center justify-between w-full md:w-auto">
-                    {/* Logo Section */}
-                    <Link to="/" className="flex items-center gap-2 px-4 py-2 hover:bg-white/50 rounded-full transition-colors" onClick={() => setIsMenuOpen(false)}>
-                        <div className="w-2 h-2 rounded-full bg-orange-500" />
-                        <span className="font-bold text-gray-900 tracking-tight text-sm">CraftLayers</span>
-                    </Link>
-
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden p-2 rounded-full text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                        aria-label="Toggle menu"
-                    >
-                        {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </button>
-
-                    {/* Desktop Contact Action (Hidden on Mobile when menu closed, effectively moved inside menu for mobile) */}
-                    <div className="hidden md:block">
-                        {/* Placeholder to keep layout consistent if needed, but flex justify-between handles it. 
-                             Actually, the standard deskop layout has Contact on the right. 
-                             We can leave the 'Contact' link outside this div for Desktop, see below.
-                         */}
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="md:hidden ml-4 flex items-center p-2 rounded-full hover:cl-bg-neutral-surface-level-2 transition-colors cl-text-neutral-text-high-contrast cl-focus-ring"
+                            aria-label="Toggle menu"
+                        >
+                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
                     </div>
                 </div>
 
-
-                {/* Navigation Links Area */}
-                <div className={cn(
-                    "flex-col md:flex-row items-center gap-4 md:gap-2 w-full md:w-auto overflow-hidden transition-all duration-300 ease-in-out",
-                    isMenuOpen ? "flex max-h-screen opacity-100 mt-4 md:mt-0" : "hidden md:flex max-h-0 md:max-h-full opacity-0 md:opacity-100"
-                )}>
-                    {/* Desktop Nav Wrapper (Gray Pill) - Modified for Mobile to be just a list */}
-                    <div className="flex flex-col md:flex-row items-stretch md:items-center bg-transparent md:bg-gray-100/50 rounded-2xl md:rounded-full px-0 md:px-1 p-0 md:p-1 w-full md:w-auto gap-1">
-                        {navItems.map((item) => (
-                            <NavLink
-                                key={item.path}
-                                to={item.path}
-                                onClick={() => setIsMenuOpen(false)}
-                                className={({ isActive }) =>
-                                    cn(
-                                        "px-5 py-3 md:py-2 rounded-xl md:rounded-full text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 text-center",
-                                        isActive
-                                            ? "bg-white text-gray-900 shadow-sm"
-                                            : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
-                                    )
-                                }
+                {/* 
+                 * RIGHT GROUP
+                 * Contains Navigation Links and Theme Toggle
+                 */}
+                <div className="flex items-center gap-4">
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center bg-transparent px-2 space-x-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                className={cn(
+                                    "px-4 py-2 rounded-md cl-text-075 cl-weight-medium transition-all duration-200 cl-focus-ring",
+                                    location.pathname === link.path
+                                        ? "cl-bg-neutral-surface-level-2 cl-text-neutral-text-high-contrast"
+                                        : "cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2"
+                                )}
                             >
-                                {item.name}
-                            </NavLink>
+                                <span className="relative z-10">{link.name}</span>
+                            </Link>
                         ))}
                     </div>
 
-                    {/* Mobile Contact Action */}
-                    <div className="md:hidden w-full pt-2 border-t border-gray-100 pb-2">
-                        <Link
-                            to="/contact"
-                            onClick={() => setIsMenuOpen(false)}
-                            className="bg-[#1A1A1A] text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-black transition-colors shadow-lg shadow-black/5 flex justify-center w-full focus:outline-none focus:ring-2 focus:ring-orange-500/40"
-                        >
-                            Contact
-                        </Link>
-                    </div>
 
-                    {/* Desktop Contact Action (Visible only on Desktop) */}
-                    <Link
-                        to="/contact"
-                        className="hidden md:block bg-[#1A1A1A] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-lg shadow-black/5 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+
+                    <button
+                        onClick={handleCopyEmail}
+                        className="hidden md:block cl-bg-brand-primary-base cl-text-brand-primary-on-base px-5 py-2 rounded-md text-sm font-medium hover:cl-bg-brand-primary-interaction transition-colors whitespace-nowrap focus:outline-none cl-focus-ring ml-2"
                     >
-                        Contact
-                    </Link>
+                        Let's Connect
+                    </button>
                 </div>
 
+                {/* Mobile Navigation Menu */}
+                <div
+                    className={cn(
+                        "md:hidden overflow-hidden transition-all duration-500 ease-in-out",
+                        isMenuOpen ? "max-h-[400px] opacity-100 mt-4 pb-4" : "max-h-0 opacity-0"
+                    )}
+                >
+                    <div className="flex flex-col gap-2 px-2">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                onClick={() => setIsMenuOpen(false)}
+                                className={cn(
+                                    "px-4 py-3 rounded-xl text-lg font-medium transition-colors cl-focus-ring",
+                                    location.pathname === link.path
+                                        ? "cl-bg-neutral-surface-level-2 cl-text-neutral-text-high-contrast"
+                                        : "cl-text-neutral-text-medium-contrast hover:cl-bg-neutral-surface-level-2 hover:cl-text-neutral-text-high-contrast"
+                                )}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                        <button
+                            onClick={handleCopyEmail}
+                            className="mt-2 w-full cl-bg-brand-primary-base cl-text-brand-primary-on-base px-6 py-3 rounded-xl text-lg font-medium hover:cl-bg-brand-primary-interaction transition-colors text-center cl-focus-ring"
+                        >
+                            Let's Connect
+                        </button>
+                    </div>
+                </div>
             </div>
         </nav>
     );

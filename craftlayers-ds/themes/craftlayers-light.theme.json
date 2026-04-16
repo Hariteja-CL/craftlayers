@@ -2,11 +2,11 @@
     "color": {
         "brand": {
             "primary": {
-                "base": "#4f46e5",
+                "base": "#f97316",
                 "on-base": "#ffffff",
-                "interaction": "#4338ca",
-                "background": "#eef2ff",
-                "surface": "#e0e7ff"
+                "interaction": "#ea580c",
+                "background": "#ffedd5",
+                "surface": "#ffedd5"
             },
             "secondary": {
                 "base": "#0891b2",
@@ -18,17 +18,17 @@
         },
         "neutral": {
             "surface": {
-                "level-0": "#f8fafc",
+                "level-0": "#f8f9fa",
                 "level-1": "#ffffff",
-                "level-2": "#f1f5f9",
-                "level-3": "#e2e8f0",
-                "level-4": "#cbd5e1"
+                "level-2": "#f3f4f6",
+                "level-3": "#e5e7eb",
+                "level-4": "#d1d5db"
             },
             "text": {
-                "high-contrast": "#0f172a",
-                "medium-contrast": "#64748b",
-                "low-contrast": "#94a3b8",
-                "disabled": "#cbd5e1",
+                "high-contrast": "#202124",
+                "medium-contrast": "#5f6368",
+                "low-contrast": "#9aa0a6",
+                "disabled": "#dadce0",
                 "inverse": "#ffffff"
             }
         },
@@ -160,10 +160,10 @@
     },
     "elevation": {
         "none": "none",
-        "surface": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-        "raised": "0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)",
-        "overlay": "0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)",
-        "focus": "0 0 0 2px rgba(79, 70, 229, 0.5)"
+        "surface": "none",
+        "raised": "none",
+        "overlay": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "focus": "0 0 0 2px rgba(249, 115, 22, 0.5)"
     },
     "border": {
         "width": {
@@ -178,10 +178,10 @@
             "dotted": "dotted"
         },
         "color": {
-            "default": "#e2e8f0",
-            "subtle": "#f1f5f9",
-            "strong": "#cbd5e1",
-            "interaction": "#4f46e5"
+            "default": "#e5e7eb",
+            "subtle": "#f3f4f6",
+            "strong": "#d1d5db",
+            "interaction": "#f97316"
         }
     },
     "motion": {
@@ -217,7 +217,7 @@
         "ring": {
             "width": "2px",
             "offset": "2px",
-            "color": "#4f46e5"
+            "color": "#f97316"
         }
     }
 }

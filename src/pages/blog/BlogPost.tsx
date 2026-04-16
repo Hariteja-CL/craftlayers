@@ -15,19 +15,19 @@ export function BlogPost() {
             {/* Header */}
             <header className="mb-12">
                 <div className="flex gap-3 mb-6">
-                    <span className="bg-primary-main-100 text-primary-main-700 px-3 py-1 rounded-full text-xs font-semibold">Secure UX</span>
-                    <span className="text-content-tertiary text-sm py-1">Dec 30, 2025</span>
+                    <span className="cl-bg-neutral-surface-level-2 cl-text-primary px-3 py-1 rounded-full text-xs font-bold">Secure UX</span>
+                    <span className="cl-text-secondary text-sm py-1">Dec 30, 2025</span>
                 </div>
-                <h1 className="text-3xl md:text-5xl font-extrabold text-content-primary mb-6 leading-tight">
+                <h1 className="text-3xl md:text-5xl font-extrabold cl-text-primary mb-6 leading-tight">
                     Secure UX: How Small Interface Decisions Prevent Big Breaches
                 </h1>
-                <p className="text-xl text-content-secondary leading-relaxed border-l-4 border-primary-main-400 pl-6">
+                <p className="text-xl cl-text-secondary leading-relaxed border-l-4 cl-border-primary-main-400 pl-6">
                     Understanding how everyday UI patterns silently shape security outcomes.
                 </p>
             </header>
 
             {/* Featured Image */}
-            <div className="rounded-2xl overflow-hidden border border-border-muted mb-12 shadow-sm">
+            <div className="rounded-2xl overflow-hidden border cl-border-subtle mb-12 shadow-sm">
                 <img
                     src="/assets/images/blog/secure-ux-cover-bento-grid.png"
                     alt="Secure UX Interface"
@@ -36,7 +36,7 @@ export function BlogPost() {
             </div>
 
             {/* Content Body */}
-            <div className="prose prose-lg prose-gray max-w-none text-content-primary">
+            <div className="prose prose-lg prose-gray max-w-none cl-text-primary">
                 <p className="mb-6">
                     Security is strictly a backend responsibility, but every UI we create shapes user behavior. And behavior is one of the biggest risk factors in cybersecurity.
                 </p>
@@ -47,7 +47,7 @@ export function BlogPost() {
                     Security breaches rarely begin with complex code exploits. Most originate from something far simpler — user confusion.
                 </p>
 
-                <h3 className="text-2xl font-bold text-content-primary mt-12 mb-6">The Problem: When UI Creates Risk</h3>
+                <h3 className="text-2xl font-bold cl-text-primary mt-12 mb-6">The Problem: When UI Creates Risk</h3>
                 <p className="mb-6">
                     A hidden warning, a poorly explained permission, a vague Call to Action (CTA), or a predictable password pattern can unintentionally open doors for attackers. Designers often assume human error contributes to over 80% of security incidents. But what triggers that error? Often, it is the interface itself.
                 </p>

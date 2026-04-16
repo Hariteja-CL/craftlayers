@@ -26,9 +26,9 @@
             },
             "text": {
                 "high-contrast": "#0f172a",
-                "medium-contrast": "#64748b",
-                "low-contrast": "#94a3b8",
-                "disabled": "rgba(0, 0, 0, 0.3)",
+                "medium-contrast": "#475569",
+                "low-contrast": "#64748b",
+                "disabled": "rgba(0, 0, 0, 0.4)",
                 "inverse": "#ffffff"
             }
         },

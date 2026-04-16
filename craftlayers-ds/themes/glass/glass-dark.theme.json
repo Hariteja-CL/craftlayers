@@ -3,7 +3,7 @@
         "brand": {
             "primary": {
                 "base": "#818cf8",
-                "on-base": "#fafafa",
+                "on-base": "#09090b",
                 "interaction": "#a5b4fc",
                 "background": "rgba(129, 140, 248, 0.15)",
                 "surface": "rgba(129, 140, 248, 0.05)"
@@ -25,34 +25,34 @@
                 "level-4": "rgba(82, 82, 91, 0.7)"
             },
             "text": {
-                "high-contrast": "#fafafa",
-                "medium-contrast": "#d4d4d8",
-                "low-contrast": "#a1a1aa",
-                "disabled": "rgba(255, 255, 255, 0.3)",
+                "high-contrast": "#ffffff",
+                "medium-contrast": "#e4e4e7",
+                "low-contrast": "#d4d4d8",
+                "disabled": "rgba(255, 255, 255, 0.5)",
                 "inverse": "#09090b"
             }
         },
         "semantic": {
             "success": {
-                "text": "#34d399",
+                "text": "#6ee7b7",
                 "icon": "#34d399",
                 "background": "rgba(52, 211, 153, 0.15)",
                 "border": "#059669"
             },
             "warning": {
-                "text": "#fbbf24",
+                "text": "#fcd34d",
                 "icon": "#fbbf24",
                 "background": "rgba(251, 191, 36, 0.15)",
                 "border": "#d97706"
             },
             "error": {
-                "text": "#f87171",
-                "icon": "#f87171",
+                "text": "#fca5a5",
+                "icon": "#fca5a5",
                 "background": "rgba(248, 113, 113, 0.15)",
                 "border": "#b91c1c"
             },
             "info": {
-                "text": "#60a5fa",
+                "text": "#93c5fd",
                 "icon": "#60a5fa",
                 "background": "rgba(96, 165, 250, 0.15)",
                 "border": "#2563eb"

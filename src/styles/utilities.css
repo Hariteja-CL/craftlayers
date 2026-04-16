@@ -1,0 +1,1557 @@
+/* 
+  🛠️ CRAFTLAYERS UTILITIES
+  Auto-generated. DO NOT EDIT.
+  Prefix: .cl-
+*/
+
+/* Intent Bundles */
+.cl-surface-page { background-color: var(--cl-color-neutral-surface-level-0); color: var(--cl-color-neutral-text-high-contrast); }
+.cl-surface-card { background-color: var(--cl-color-neutral-surface-level-1); border: 1px solid var(--cl-color-border-color-default); }
+.cl-focus-ring:focus-visible { outline: 2px solid var(--cl-color-brand-primary-base); outline-offset: 2px; }
+.cl-motion-standard { transition-property: all; transition-duration: var(--cl-motion-duration-medium, 300ms); transition-timing-function: var(--cl-motion-easing-standard, ease); }
+
+/* Atomic Utilities */
+.cl-bg-brand-primary-50 { background-color: var(--cl-color-brand-primary-50); }
+.cl-hover-bg-brand-primary-50:hover { background-color: var(--cl-color-brand-primary-50); }
+.cl-focus-bg-brand-primary-50:focus { background-color: var(--cl-color-brand-primary-50); }
+.group:hover .cl-group-hover-bg-brand-primary-50 { background-color: var(--cl-color-brand-primary-50); }
+.cl-text-brand-primary-50 { color: var(--cl-color-brand-primary-50); }
+.cl-hover-text-brand-primary-50:hover { color: var(--cl-color-brand-primary-50); }
+.cl-focus-text-brand-primary-50:focus { color: var(--cl-color-brand-primary-50); }
+.group:hover .cl-group-hover-text-brand-primary-50 { color: var(--cl-color-brand-primary-50); }
+.cl-bg-color-brand-primary-50 { background-color: var(--cl-color-brand-primary-50); }
+.cl-hover-bg-color-brand-primary-50:hover { background-color: var(--cl-color-brand-primary-50); }
+.cl-focus-bg-color-brand-primary-50:focus { background-color: var(--cl-color-brand-primary-50); }
+.group:hover .cl-group-hover-bg-color-brand-primary-50 { background-color: var(--cl-color-brand-primary-50); }
+.cl-text-color-brand-primary-50 { color: var(--cl-color-brand-primary-50); }
+.cl-hover-text-color-brand-primary-50:hover { color: var(--cl-color-brand-primary-50); }
+.cl-focus-text-color-brand-primary-50:focus { color: var(--cl-color-brand-primary-50); }
+.group:hover .cl-group-hover-text-color-brand-primary-50 { color: var(--cl-color-brand-primary-50); }
+.cl-bg-brand-primary-100 { background-color: var(--cl-color-brand-primary-100); }
+.cl-hover-bg-brand-primary-100:hover { background-color: var(--cl-color-brand-primary-100); }
+.cl-focus-bg-brand-primary-100:focus { background-color: var(--cl-color-brand-primary-100); }
+.group:hover .cl-group-hover-bg-brand-primary-100 { background-color: var(--cl-color-brand-primary-100); }
+.cl-text-brand-primary-100 { color: var(--cl-color-brand-primary-100); }
+.cl-hover-text-brand-primary-100:hover { color: var(--cl-color-brand-primary-100); }
+.cl-focus-text-brand-primary-100:focus { color: var(--cl-color-brand-primary-100); }
+.group:hover .cl-group-hover-text-brand-primary-100 { color: var(--cl-color-brand-primary-100); }
+.cl-bg-color-brand-primary-100 { background-color: var(--cl-color-brand-primary-100); }
+.cl-hover-bg-color-brand-primary-100:hover { background-color: var(--cl-color-brand-primary-100); }
+.cl-focus-bg-color-brand-primary-100:focus { background-color: var(--cl-color-brand-primary-100); }
+.group:hover .cl-group-hover-bg-color-brand-primary-100 { background-color: var(--cl-color-brand-primary-100); }
+.cl-text-color-brand-primary-100 { color: var(--cl-color-brand-primary-100); }
+.cl-hover-text-color-brand-primary-100:hover { color: var(--cl-color-brand-primary-100); }
+.cl-focus-text-color-brand-primary-100:focus { color: var(--cl-color-brand-primary-100); }
+.group:hover .cl-group-hover-text-color-brand-primary-100 { color: var(--cl-color-brand-primary-100); }
+.cl-bg-brand-primary-200 { background-color: var(--cl-color-brand-primary-200); }
+.cl-hover-bg-brand-primary-200:hover { background-color: var(--cl-color-brand-primary-200); }
+.cl-focus-bg-brand-primary-200:focus { background-color: var(--cl-color-brand-primary-200); }
+.group:hover .cl-group-hover-bg-brand-primary-200 { background-color: var(--cl-color-brand-primary-200); }
+.cl-text-brand-primary-200 { color: var(--cl-color-brand-primary-200); }
+.cl-hover-text-brand-primary-200:hover { color: var(--cl-color-brand-primary-200); }
+.cl-focus-text-brand-primary-200:focus { color: var(--cl-color-brand-primary-200); }
+.group:hover .cl-group-hover-text-brand-primary-200 { color: var(--cl-color-brand-primary-200); }
+.cl-bg-color-brand-primary-200 { background-color: var(--cl-color-brand-primary-200); }
+.cl-hover-bg-color-brand-primary-200:hover { background-color: var(--cl-color-brand-primary-200); }
+.cl-focus-bg-color-brand-primary-200:focus { background-color: var(--cl-color-brand-primary-200); }
+.group:hover .cl-group-hover-bg-color-brand-primary-200 { background-color: var(--cl-color-brand-primary-200); }
+.cl-text-color-brand-primary-200 { color: var(--cl-color-brand-primary-200); }
+.cl-hover-text-color-brand-primary-200:hover { color: var(--cl-color-brand-primary-200); }
+.cl-focus-text-color-brand-primary-200:focus { color: var(--cl-color-brand-primary-200); }
+.group:hover .cl-group-hover-text-color-brand-primary-200 { color: var(--cl-color-brand-primary-200); }
+.cl-bg-brand-primary-300 { background-color: var(--cl-color-brand-primary-300); }
+.cl-hover-bg-brand-primary-300:hover { background-color: var(--cl-color-brand-primary-300); }
+.cl-focus-bg-brand-primary-300:focus { background-color: var(--cl-color-brand-primary-300); }
+.group:hover .cl-group-hover-bg-brand-primary-300 { background-color: var(--cl-color-brand-primary-300); }
+.cl-text-brand-primary-300 { color: var(--cl-color-brand-primary-300); }
+.cl-hover-text-brand-primary-300:hover { color: var(--cl-color-brand-primary-300); }
+.cl-focus-text-brand-primary-300:focus { color: var(--cl-color-brand-primary-300); }
+.group:hover .cl-group-hover-text-brand-primary-300 { color: var(--cl-color-brand-primary-300); }
+.cl-bg-color-brand-primary-300 { background-color: var(--cl-color-brand-primary-300); }
+.cl-hover-bg-color-brand-primary-300:hover { background-color: var(--cl-color-brand-primary-300); }
+.cl-focus-bg-color-brand-primary-300:focus { background-color: var(--cl-color-brand-primary-300); }
+.group:hover .cl-group-hover-bg-color-brand-primary-300 { background-color: var(--cl-color-brand-primary-300); }
+.cl-text-color-brand-primary-300 { color: var(--cl-color-brand-primary-300); }
+.cl-hover-text-color-brand-primary-300:hover { color: var(--cl-color-brand-primary-300); }
+.cl-focus-text-color-brand-primary-300:focus { color: var(--cl-color-brand-primary-300); }
+.group:hover .cl-group-hover-text-color-brand-primary-300 { color: var(--cl-color-brand-primary-300); }
+.cl-bg-brand-primary-400 { background-color: var(--cl-color-brand-primary-400); }
+.cl-hover-bg-brand-primary-400:hover { background-color: var(--cl-color-brand-primary-400); }
+.cl-focus-bg-brand-primary-400:focus { background-color: var(--cl-color-brand-primary-400); }
+.group:hover .cl-group-hover-bg-brand-primary-400 { background-color: var(--cl-color-brand-primary-400); }
+.cl-text-brand-primary-400 { color: var(--cl-color-brand-primary-400); }
+.cl-hover-text-brand-primary-400:hover { color: var(--cl-color-brand-primary-400); }
+.cl-focus-text-brand-primary-400:focus { color: var(--cl-color-brand-primary-400); }
+.group:hover .cl-group-hover-text-brand-primary-400 { color: var(--cl-color-brand-primary-400); }
+.cl-bg-color-brand-primary-400 { background-color: var(--cl-color-brand-primary-400); }
+.cl-hover-bg-color-brand-primary-400:hover { background-color: var(--cl-color-brand-primary-400); }
+.cl-focus-bg-color-brand-primary-400:focus { background-color: var(--cl-color-brand-primary-400); }
+.group:hover .cl-group-hover-bg-color-brand-primary-400 { background-color: var(--cl-color-brand-primary-400); }
+.cl-text-color-brand-primary-400 { color: var(--cl-color-brand-primary-400); }
+.cl-hover-text-color-brand-primary-400:hover { color: var(--cl-color-brand-primary-400); }
+.cl-focus-text-color-brand-primary-400:focus { color: var(--cl-color-brand-primary-400); }
+.group:hover .cl-group-hover-text-color-brand-primary-400 { color: var(--cl-color-brand-primary-400); }
+.cl-bg-brand-primary-500 { background-color: var(--cl-color-brand-primary-500); }
+.cl-hover-bg-brand-primary-500:hover { background-color: var(--cl-color-brand-primary-500); }
+.cl-focus-bg-brand-primary-500:focus { background-color: var(--cl-color-brand-primary-500); }
+.group:hover .cl-group-hover-bg-brand-primary-500 { background-color: var(--cl-color-brand-primary-500); }
+.cl-text-brand-primary-500 { color: var(--cl-color-brand-primary-500); }
+.cl-hover-text-brand-primary-500:hover { color: var(--cl-color-brand-primary-500); }
+.cl-focus-text-brand-primary-500:focus { color: var(--cl-color-brand-primary-500); }
+.group:hover .cl-group-hover-text-brand-primary-500 { color: var(--cl-color-brand-primary-500); }
+.cl-bg-color-brand-primary-500 { background-color: var(--cl-color-brand-primary-500); }
+.cl-hover-bg-color-brand-primary-500:hover { background-color: var(--cl-color-brand-primary-500); }
+.cl-focus-bg-color-brand-primary-500:focus { background-color: var(--cl-color-brand-primary-500); }
+.group:hover .cl-group-hover-bg-color-brand-primary-500 { background-color: var(--cl-color-brand-primary-500); }
+.cl-text-color-brand-primary-500 { color: var(--cl-color-brand-primary-500); }
+.cl-hover-text-color-brand-primary-500:hover { color: var(--cl-color-brand-primary-500); }
+.cl-focus-text-color-brand-primary-500:focus { color: var(--cl-color-brand-primary-500); }
+.group:hover .cl-group-hover-text-color-brand-primary-500 { color: var(--cl-color-brand-primary-500); }
+.cl-bg-brand-primary-600 { background-color: var(--cl-color-brand-primary-600); }
+.cl-hover-bg-brand-primary-600:hover { background-color: var(--cl-color-brand-primary-600); }
+.cl-focus-bg-brand-primary-600:focus { background-color: var(--cl-color-brand-primary-600); }
+.group:hover .cl-group-hover-bg-brand-primary-600 { background-color: var(--cl-color-brand-primary-600); }
+.cl-text-brand-primary-600 { color: var(--cl-color-brand-primary-600); }
+.cl-hover-text-brand-primary-600:hover { color: var(--cl-color-brand-primary-600); }
+.cl-focus-text-brand-primary-600:focus { color: var(--cl-color-brand-primary-600); }
+.group:hover .cl-group-hover-text-brand-primary-600 { color: var(--cl-color-brand-primary-600); }
+.cl-bg-color-brand-primary-600 { background-color: var(--cl-color-brand-primary-600); }
+.cl-hover-bg-color-brand-primary-600:hover { background-color: var(--cl-color-brand-primary-600); }
+.cl-focus-bg-color-brand-primary-600:focus { background-color: var(--cl-color-brand-primary-600); }
+.group:hover .cl-group-hover-bg-color-brand-primary-600 { background-color: var(--cl-color-brand-primary-600); }
+.cl-text-color-brand-primary-600 { color: var(--cl-color-brand-primary-600); }
+.cl-hover-text-color-brand-primary-600:hover { color: var(--cl-color-brand-primary-600); }
+.cl-focus-text-color-brand-primary-600:focus { color: var(--cl-color-brand-primary-600); }
+.group:hover .cl-group-hover-text-color-brand-primary-600 { color: var(--cl-color-brand-primary-600); }
+.cl-bg-brand-primary-700 { background-color: var(--cl-color-brand-primary-700); }
+.cl-hover-bg-brand-primary-700:hover { background-color: var(--cl-color-brand-primary-700); }
+.cl-focus-bg-brand-primary-700:focus { background-color: var(--cl-color-brand-primary-700); }
+.group:hover .cl-group-hover-bg-brand-primary-700 { background-color: var(--cl-color-brand-primary-700); }
+.cl-text-brand-primary-700 { color: var(--cl-color-brand-primary-700); }
+.cl-hover-text-brand-primary-700:hover { color: var(--cl-color-brand-primary-700); }
+.cl-focus-text-brand-primary-700:focus { color: var(--cl-color-brand-primary-700); }
+.group:hover .cl-group-hover-text-brand-primary-700 { color: var(--cl-color-brand-primary-700); }
+.cl-bg-color-brand-primary-700 { background-color: var(--cl-color-brand-primary-700); }
+.cl-hover-bg-color-brand-primary-700:hover { background-color: var(--cl-color-brand-primary-700); }
+.cl-focus-bg-color-brand-primary-700:focus { background-color: var(--cl-color-brand-primary-700); }
+.group:hover .cl-group-hover-bg-color-brand-primary-700 { background-color: var(--cl-color-brand-primary-700); }
+.cl-text-color-brand-primary-700 { color: var(--cl-color-brand-primary-700); }
+.cl-hover-text-color-brand-primary-700:hover { color: var(--cl-color-brand-primary-700); }
+.cl-focus-text-color-brand-primary-700:focus { color: var(--cl-color-brand-primary-700); }
+.group:hover .cl-group-hover-text-color-brand-primary-700 { color: var(--cl-color-brand-primary-700); }
+.cl-bg-brand-primary-800 { background-color: var(--cl-color-brand-primary-800); }
+.cl-hover-bg-brand-primary-800:hover { background-color: var(--cl-color-brand-primary-800); }
+.cl-focus-bg-brand-primary-800:focus { background-color: var(--cl-color-brand-primary-800); }
+.group:hover .cl-group-hover-bg-brand-primary-800 { background-color: var(--cl-color-brand-primary-800); }
+.cl-text-brand-primary-800 { color: var(--cl-color-brand-primary-800); }
+.cl-hover-text-brand-primary-800:hover { color: var(--cl-color-brand-primary-800); }
+.cl-focus-text-brand-primary-800:focus { color: var(--cl-color-brand-primary-800); }
+.group:hover .cl-group-hover-text-brand-primary-800 { color: var(--cl-color-brand-primary-800); }
+.cl-bg-color-brand-primary-800 { background-color: var(--cl-color-brand-primary-800); }
+.cl-hover-bg-color-brand-primary-800:hover { background-color: var(--cl-color-brand-primary-800); }
+.cl-focus-bg-color-brand-primary-800:focus { background-color: var(--cl-color-brand-primary-800); }
+.group:hover .cl-group-hover-bg-color-brand-primary-800 { background-color: var(--cl-color-brand-primary-800); }
+.cl-text-color-brand-primary-800 { color: var(--cl-color-brand-primary-800); }
+.cl-hover-text-color-brand-primary-800:hover { color: var(--cl-color-brand-primary-800); }
+.cl-focus-text-color-brand-primary-800:focus { color: var(--cl-color-brand-primary-800); }
+.group:hover .cl-group-hover-text-color-brand-primary-800 { color: var(--cl-color-brand-primary-800); }
+.cl-bg-brand-primary-900 { background-color: var(--cl-color-brand-primary-900); }
+.cl-hover-bg-brand-primary-900:hover { background-color: var(--cl-color-brand-primary-900); }
+.cl-focus-bg-brand-primary-900:focus { background-color: var(--cl-color-brand-primary-900); }
+.group:hover .cl-group-hover-bg-brand-primary-900 { background-color: var(--cl-color-brand-primary-900); }
+.cl-text-brand-primary-900 { color: var(--cl-color-brand-primary-900); }
+.cl-hover-text-brand-primary-900:hover { color: var(--cl-color-brand-primary-900); }
+.cl-focus-text-brand-primary-900:focus { color: var(--cl-color-brand-primary-900); }
+.group:hover .cl-group-hover-text-brand-primary-900 { color: var(--cl-color-brand-primary-900); }
+.cl-bg-color-brand-primary-900 { background-color: var(--cl-color-brand-primary-900); }
+.cl-hover-bg-color-brand-primary-900:hover { background-color: var(--cl-color-brand-primary-900); }
+.cl-focus-bg-color-brand-primary-900:focus { background-color: var(--cl-color-brand-primary-900); }
+.group:hover .cl-group-hover-bg-color-brand-primary-900 { background-color: var(--cl-color-brand-primary-900); }
+.cl-text-color-brand-primary-900 { color: var(--cl-color-brand-primary-900); }
+.cl-hover-text-color-brand-primary-900:hover { color: var(--cl-color-brand-primary-900); }
+.cl-focus-text-color-brand-primary-900:focus { color: var(--cl-color-brand-primary-900); }
+.group:hover .cl-group-hover-text-color-brand-primary-900 { color: var(--cl-color-brand-primary-900); }
+.cl-bg-brand-primary-950 { background-color: var(--cl-color-brand-primary-950); }
+.cl-hover-bg-brand-primary-950:hover { background-color: var(--cl-color-brand-primary-950); }
+.cl-focus-bg-brand-primary-950:focus { background-color: var(--cl-color-brand-primary-950); }
+.group:hover .cl-group-hover-bg-brand-primary-950 { background-color: var(--cl-color-brand-primary-950); }
+.cl-text-brand-primary-950 { color: var(--cl-color-brand-primary-950); }
+.cl-hover-text-brand-primary-950:hover { color: var(--cl-color-brand-primary-950); }
+.cl-focus-text-brand-primary-950:focus { color: var(--cl-color-brand-primary-950); }
+.group:hover .cl-group-hover-text-brand-primary-950 { color: var(--cl-color-brand-primary-950); }
+.cl-bg-color-brand-primary-950 { background-color: var(--cl-color-brand-primary-950); }
+.cl-hover-bg-color-brand-primary-950:hover { background-color: var(--cl-color-brand-primary-950); }
+.cl-focus-bg-color-brand-primary-950:focus { background-color: var(--cl-color-brand-primary-950); }
+.group:hover .cl-group-hover-bg-color-brand-primary-950 { background-color: var(--cl-color-brand-primary-950); }
+.cl-text-color-brand-primary-950 { color: var(--cl-color-brand-primary-950); }
+.cl-hover-text-color-brand-primary-950:hover { color: var(--cl-color-brand-primary-950); }
+.cl-focus-text-color-brand-primary-950:focus { color: var(--cl-color-brand-primary-950); }
+.group:hover .cl-group-hover-text-color-brand-primary-950 { color: var(--cl-color-brand-primary-950); }
+.cl-bg-brand-primary-base { background-color: var(--cl-color-brand-primary-base); }
+.cl-hover-bg-brand-primary-base:hover { background-color: var(--cl-color-brand-primary-base); }
+.cl-focus-bg-brand-primary-base:focus { background-color: var(--cl-color-brand-primary-base); }
+.group:hover .cl-group-hover-bg-brand-primary-base { background-color: var(--cl-color-brand-primary-base); }
+.cl-text-brand-primary-base { color: var(--cl-color-brand-primary-base); }
+.cl-hover-text-brand-primary-base:hover { color: var(--cl-color-brand-primary-base); }
+.cl-focus-text-brand-primary-base:focus { color: var(--cl-color-brand-primary-base); }
+.group:hover .cl-group-hover-text-brand-primary-base { color: var(--cl-color-brand-primary-base); }
+.cl-bg-color-brand-primary-base { background-color: var(--cl-color-brand-primary-base); }
+.cl-hover-bg-color-brand-primary-base:hover { background-color: var(--cl-color-brand-primary-base); }
+.cl-focus-bg-color-brand-primary-base:focus { background-color: var(--cl-color-brand-primary-base); }
+.group:hover .cl-group-hover-bg-color-brand-primary-base { background-color: var(--cl-color-brand-primary-base); }
+.cl-text-color-brand-primary-base { color: var(--cl-color-brand-primary-base); }
+.cl-hover-text-color-brand-primary-base:hover { color: var(--cl-color-brand-primary-base); }
+.cl-focus-text-color-brand-primary-base:focus { color: var(--cl-color-brand-primary-base); }
+.group:hover .cl-group-hover-text-color-brand-primary-base { color: var(--cl-color-brand-primary-base); }
+.cl-bg-brand-primary-on-base { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-hover-bg-brand-primary-on-base:hover { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-focus-bg-brand-primary-on-base:focus { background-color: var(--cl-color-brand-primary-on-base); }
+.group:hover .cl-group-hover-bg-brand-primary-on-base { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-text-brand-primary-on-base { color: var(--cl-color-brand-primary-on-base); }
+.cl-hover-text-brand-primary-on-base:hover { color: var(--cl-color-brand-primary-on-base); }
+.cl-focus-text-brand-primary-on-base:focus { color: var(--cl-color-brand-primary-on-base); }
+.group:hover .cl-group-hover-text-brand-primary-on-base { color: var(--cl-color-brand-primary-on-base); }
+.cl-bg-color-brand-primary-on-base { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-hover-bg-color-brand-primary-on-base:hover { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-focus-bg-color-brand-primary-on-base:focus { background-color: var(--cl-color-brand-primary-on-base); }
+.group:hover .cl-group-hover-bg-color-brand-primary-on-base { background-color: var(--cl-color-brand-primary-on-base); }
+.cl-text-color-brand-primary-on-base { color: var(--cl-color-brand-primary-on-base); }
+.cl-hover-text-color-brand-primary-on-base:hover { color: var(--cl-color-brand-primary-on-base); }
+.cl-focus-text-color-brand-primary-on-base:focus { color: var(--cl-color-brand-primary-on-base); }
+.group:hover .cl-group-hover-text-color-brand-primary-on-base { color: var(--cl-color-brand-primary-on-base); }
+.cl-bg-brand-primary-interaction { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-hover-bg-brand-primary-interaction:hover { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-focus-bg-brand-primary-interaction:focus { background-color: var(--cl-color-brand-primary-interaction); }
+.group:hover .cl-group-hover-bg-brand-primary-interaction { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-text-brand-primary-interaction { color: var(--cl-color-brand-primary-interaction); }
+.cl-hover-text-brand-primary-interaction:hover { color: var(--cl-color-brand-primary-interaction); }
+.cl-focus-text-brand-primary-interaction:focus { color: var(--cl-color-brand-primary-interaction); }
+.group:hover .cl-group-hover-text-brand-primary-interaction { color: var(--cl-color-brand-primary-interaction); }
+.cl-bg-color-brand-primary-interaction { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-hover-bg-color-brand-primary-interaction:hover { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-focus-bg-color-brand-primary-interaction:focus { background-color: var(--cl-color-brand-primary-interaction); }
+.group:hover .cl-group-hover-bg-color-brand-primary-interaction { background-color: var(--cl-color-brand-primary-interaction); }
+.cl-text-color-brand-primary-interaction { color: var(--cl-color-brand-primary-interaction); }
+.cl-hover-text-color-brand-primary-interaction:hover { color: var(--cl-color-brand-primary-interaction); }
+.cl-focus-text-color-brand-primary-interaction:focus { color: var(--cl-color-brand-primary-interaction); }
+.group:hover .cl-group-hover-text-color-brand-primary-interaction { color: var(--cl-color-brand-primary-interaction); }
+.cl-bg-brand-primary-background { background-color: var(--cl-color-brand-primary-background); }
+.cl-hover-bg-brand-primary-background:hover { background-color: var(--cl-color-brand-primary-background); }
+.cl-focus-bg-brand-primary-background:focus { background-color: var(--cl-color-brand-primary-background); }
+.group:hover .cl-group-hover-bg-brand-primary-background { background-color: var(--cl-color-brand-primary-background); }
+.cl-bg-color-brand-primary-background { background-color: var(--cl-color-brand-primary-background); }
+.cl-hover-bg-color-brand-primary-background:hover { background-color: var(--cl-color-brand-primary-background); }
+.cl-focus-bg-color-brand-primary-background:focus { background-color: var(--cl-color-brand-primary-background); }
+.group:hover .cl-group-hover-bg-color-brand-primary-background { background-color: var(--cl-color-brand-primary-background); }
+.cl-bg-brand-primary-surface { background-color: var(--cl-color-brand-primary-surface); }
+.cl-hover-bg-brand-primary-surface:hover { background-color: var(--cl-color-brand-primary-surface); }
+.cl-focus-bg-brand-primary-surface:focus { background-color: var(--cl-color-brand-primary-surface); }
+.group:hover .cl-group-hover-bg-brand-primary-surface { background-color: var(--cl-color-brand-primary-surface); }
+.cl-bg-color-brand-primary-surface { background-color: var(--cl-color-brand-primary-surface); }
+.cl-hover-bg-color-brand-primary-surface:hover { background-color: var(--cl-color-brand-primary-surface); }
+.cl-focus-bg-color-brand-primary-surface:focus { background-color: var(--cl-color-brand-primary-surface); }
+.group:hover .cl-group-hover-bg-color-brand-primary-surface { background-color: var(--cl-color-brand-primary-surface); }
+.cl-bg-neutral-surface-50 { background-color: var(--cl-color-neutral-surface-50); }
+.cl-hover-bg-neutral-surface-50:hover { background-color: var(--cl-color-neutral-surface-50); }
+.cl-focus-bg-neutral-surface-50:focus { background-color: var(--cl-color-neutral-surface-50); }
+.group:hover .cl-group-hover-bg-neutral-surface-50 { background-color: var(--cl-color-neutral-surface-50); }
+.cl-bg-color-neutral-surface-50 { background-color: var(--cl-color-neutral-surface-50); }
+.cl-hover-bg-color-neutral-surface-50:hover { background-color: var(--cl-color-neutral-surface-50); }
+.cl-focus-bg-color-neutral-surface-50:focus { background-color: var(--cl-color-neutral-surface-50); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-50 { background-color: var(--cl-color-neutral-surface-50); }
+.cl-bg-neutral-surface-100 { background-color: var(--cl-color-neutral-surface-100); }
+.cl-hover-bg-neutral-surface-100:hover { background-color: var(--cl-color-neutral-surface-100); }
+.cl-focus-bg-neutral-surface-100:focus { background-color: var(--cl-color-neutral-surface-100); }
+.group:hover .cl-group-hover-bg-neutral-surface-100 { background-color: var(--cl-color-neutral-surface-100); }
+.cl-bg-color-neutral-surface-100 { background-color: var(--cl-color-neutral-surface-100); }
+.cl-hover-bg-color-neutral-surface-100:hover { background-color: var(--cl-color-neutral-surface-100); }
+.cl-focus-bg-color-neutral-surface-100:focus { background-color: var(--cl-color-neutral-surface-100); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-100 { background-color: var(--cl-color-neutral-surface-100); }
+.cl-bg-neutral-surface-200 { background-color: var(--cl-color-neutral-surface-200); }
+.cl-hover-bg-neutral-surface-200:hover { background-color: var(--cl-color-neutral-surface-200); }
+.cl-focus-bg-neutral-surface-200:focus { background-color: var(--cl-color-neutral-surface-200); }
+.group:hover .cl-group-hover-bg-neutral-surface-200 { background-color: var(--cl-color-neutral-surface-200); }
+.cl-bg-color-neutral-surface-200 { background-color: var(--cl-color-neutral-surface-200); }
+.cl-hover-bg-color-neutral-surface-200:hover { background-color: var(--cl-color-neutral-surface-200); }
+.cl-focus-bg-color-neutral-surface-200:focus { background-color: var(--cl-color-neutral-surface-200); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-200 { background-color: var(--cl-color-neutral-surface-200); }
+.cl-bg-neutral-surface-300 { background-color: var(--cl-color-neutral-surface-300); }
+.cl-hover-bg-neutral-surface-300:hover { background-color: var(--cl-color-neutral-surface-300); }
+.cl-focus-bg-neutral-surface-300:focus { background-color: var(--cl-color-neutral-surface-300); }
+.group:hover .cl-group-hover-bg-neutral-surface-300 { background-color: var(--cl-color-neutral-surface-300); }
+.cl-bg-color-neutral-surface-300 { background-color: var(--cl-color-neutral-surface-300); }
+.cl-hover-bg-color-neutral-surface-300:hover { background-color: var(--cl-color-neutral-surface-300); }
+.cl-focus-bg-color-neutral-surface-300:focus { background-color: var(--cl-color-neutral-surface-300); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-300 { background-color: var(--cl-color-neutral-surface-300); }
+.cl-bg-neutral-surface-400 { background-color: var(--cl-color-neutral-surface-400); }
+.cl-hover-bg-neutral-surface-400:hover { background-color: var(--cl-color-neutral-surface-400); }
+.cl-focus-bg-neutral-surface-400:focus { background-color: var(--cl-color-neutral-surface-400); }
+.group:hover .cl-group-hover-bg-neutral-surface-400 { background-color: var(--cl-color-neutral-surface-400); }
+.cl-bg-color-neutral-surface-400 { background-color: var(--cl-color-neutral-surface-400); }
+.cl-hover-bg-color-neutral-surface-400:hover { background-color: var(--cl-color-neutral-surface-400); }
+.cl-focus-bg-color-neutral-surface-400:focus { background-color: var(--cl-color-neutral-surface-400); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-400 { background-color: var(--cl-color-neutral-surface-400); }
+.cl-bg-neutral-surface-500 { background-color: var(--cl-color-neutral-surface-500); }
+.cl-hover-bg-neutral-surface-500:hover { background-color: var(--cl-color-neutral-surface-500); }
+.cl-focus-bg-neutral-surface-500:focus { background-color: var(--cl-color-neutral-surface-500); }
+.group:hover .cl-group-hover-bg-neutral-surface-500 { background-color: var(--cl-color-neutral-surface-500); }
+.cl-bg-color-neutral-surface-500 { background-color: var(--cl-color-neutral-surface-500); }
+.cl-hover-bg-color-neutral-surface-500:hover { background-color: var(--cl-color-neutral-surface-500); }
+.cl-focus-bg-color-neutral-surface-500:focus { background-color: var(--cl-color-neutral-surface-500); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-500 { background-color: var(--cl-color-neutral-surface-500); }
+.cl-bg-neutral-surface-600 { background-color: var(--cl-color-neutral-surface-600); }
+.cl-hover-bg-neutral-surface-600:hover { background-color: var(--cl-color-neutral-surface-600); }
+.cl-focus-bg-neutral-surface-600:focus { background-color: var(--cl-color-neutral-surface-600); }
+.group:hover .cl-group-hover-bg-neutral-surface-600 { background-color: var(--cl-color-neutral-surface-600); }
+.cl-bg-color-neutral-surface-600 { background-color: var(--cl-color-neutral-surface-600); }
+.cl-hover-bg-color-neutral-surface-600:hover { background-color: var(--cl-color-neutral-surface-600); }
+.cl-focus-bg-color-neutral-surface-600:focus { background-color: var(--cl-color-neutral-surface-600); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-600 { background-color: var(--cl-color-neutral-surface-600); }
+.cl-bg-neutral-surface-700 { background-color: var(--cl-color-neutral-surface-700); }
+.cl-hover-bg-neutral-surface-700:hover { background-color: var(--cl-color-neutral-surface-700); }
+.cl-focus-bg-neutral-surface-700:focus { background-color: var(--cl-color-neutral-surface-700); }
+.group:hover .cl-group-hover-bg-neutral-surface-700 { background-color: var(--cl-color-neutral-surface-700); }
+.cl-bg-color-neutral-surface-700 { background-color: var(--cl-color-neutral-surface-700); }
+.cl-hover-bg-color-neutral-surface-700:hover { background-color: var(--cl-color-neutral-surface-700); }
+.cl-focus-bg-color-neutral-surface-700:focus { background-color: var(--cl-color-neutral-surface-700); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-700 { background-color: var(--cl-color-neutral-surface-700); }
+.cl-bg-neutral-surface-800 { background-color: var(--cl-color-neutral-surface-800); }
+.cl-hover-bg-neutral-surface-800:hover { background-color: var(--cl-color-neutral-surface-800); }
+.cl-focus-bg-neutral-surface-800:focus { background-color: var(--cl-color-neutral-surface-800); }
+.group:hover .cl-group-hover-bg-neutral-surface-800 { background-color: var(--cl-color-neutral-surface-800); }
+.cl-bg-color-neutral-surface-800 { background-color: var(--cl-color-neutral-surface-800); }
+.cl-hover-bg-color-neutral-surface-800:hover { background-color: var(--cl-color-neutral-surface-800); }
+.cl-focus-bg-color-neutral-surface-800:focus { background-color: var(--cl-color-neutral-surface-800); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-800 { background-color: var(--cl-color-neutral-surface-800); }
+.cl-bg-neutral-surface-900 { background-color: var(--cl-color-neutral-surface-900); }
+.cl-hover-bg-neutral-surface-900:hover { background-color: var(--cl-color-neutral-surface-900); }
+.cl-focus-bg-neutral-surface-900:focus { background-color: var(--cl-color-neutral-surface-900); }
+.group:hover .cl-group-hover-bg-neutral-surface-900 { background-color: var(--cl-color-neutral-surface-900); }
+.cl-bg-color-neutral-surface-900 { background-color: var(--cl-color-neutral-surface-900); }
+.cl-hover-bg-color-neutral-surface-900:hover { background-color: var(--cl-color-neutral-surface-900); }
+.cl-focus-bg-color-neutral-surface-900:focus { background-color: var(--cl-color-neutral-surface-900); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-900 { background-color: var(--cl-color-neutral-surface-900); }
+.cl-bg-neutral-surface-950 { background-color: var(--cl-color-neutral-surface-950); }
+.cl-hover-bg-neutral-surface-950:hover { background-color: var(--cl-color-neutral-surface-950); }
+.cl-focus-bg-neutral-surface-950:focus { background-color: var(--cl-color-neutral-surface-950); }
+.group:hover .cl-group-hover-bg-neutral-surface-950 { background-color: var(--cl-color-neutral-surface-950); }
+.cl-bg-color-neutral-surface-950 { background-color: var(--cl-color-neutral-surface-950); }
+.cl-hover-bg-color-neutral-surface-950:hover { background-color: var(--cl-color-neutral-surface-950); }
+.cl-focus-bg-color-neutral-surface-950:focus { background-color: var(--cl-color-neutral-surface-950); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-950 { background-color: var(--cl-color-neutral-surface-950); }
+.cl-bg-neutral-surface-level-0 { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-hover-bg-neutral-surface-level-0:hover { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-focus-bg-neutral-surface-level-0:focus { background-color: var(--cl-color-neutral-surface-level-0); }
+.group:hover .cl-group-hover-bg-neutral-surface-level-0 { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-bg-color-neutral-surface-level-0 { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-hover-bg-color-neutral-surface-level-0:hover { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-focus-bg-color-neutral-surface-level-0:focus { background-color: var(--cl-color-neutral-surface-level-0); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-level-0 { background-color: var(--cl-color-neutral-surface-level-0); }
+.cl-bg-neutral-surface-level-1 { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-hover-bg-neutral-surface-level-1:hover { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-focus-bg-neutral-surface-level-1:focus { background-color: var(--cl-color-neutral-surface-level-1); }
+.group:hover .cl-group-hover-bg-neutral-surface-level-1 { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-bg-color-neutral-surface-level-1 { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-hover-bg-color-neutral-surface-level-1:hover { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-focus-bg-color-neutral-surface-level-1:focus { background-color: var(--cl-color-neutral-surface-level-1); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-level-1 { background-color: var(--cl-color-neutral-surface-level-1); }
+.cl-bg-neutral-surface-level-2 { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-hover-bg-neutral-surface-level-2:hover { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-focus-bg-neutral-surface-level-2:focus { background-color: var(--cl-color-neutral-surface-level-2); }
+.group:hover .cl-group-hover-bg-neutral-surface-level-2 { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-bg-color-neutral-surface-level-2 { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-hover-bg-color-neutral-surface-level-2:hover { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-focus-bg-color-neutral-surface-level-2:focus { background-color: var(--cl-color-neutral-surface-level-2); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-level-2 { background-color: var(--cl-color-neutral-surface-level-2); }
+.cl-bg-neutral-surface-level-3 { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-hover-bg-neutral-surface-level-3:hover { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-focus-bg-neutral-surface-level-3:focus { background-color: var(--cl-color-neutral-surface-level-3); }
+.group:hover .cl-group-hover-bg-neutral-surface-level-3 { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-bg-color-neutral-surface-level-3 { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-hover-bg-color-neutral-surface-level-3:hover { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-focus-bg-color-neutral-surface-level-3:focus { background-color: var(--cl-color-neutral-surface-level-3); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-level-3 { background-color: var(--cl-color-neutral-surface-level-3); }
+.cl-bg-neutral-surface-level-4 { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-hover-bg-neutral-surface-level-4:hover { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-focus-bg-neutral-surface-level-4:focus { background-color: var(--cl-color-neutral-surface-level-4); }
+.group:hover .cl-group-hover-bg-neutral-surface-level-4 { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-bg-color-neutral-surface-level-4 { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-hover-bg-color-neutral-surface-level-4:hover { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-focus-bg-color-neutral-surface-level-4:focus { background-color: var(--cl-color-neutral-surface-level-4); }
+.group:hover .cl-group-hover-bg-color-neutral-surface-level-4 { background-color: var(--cl-color-neutral-surface-level-4); }
+.cl-text-neutral-text-high-contrast { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-hover-text-neutral-text-high-contrast:hover { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-focus-text-neutral-text-high-contrast:focus { color: var(--cl-color-neutral-text-high-contrast); }
+.group:hover .cl-group-hover-text-neutral-text-high-contrast { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-text-color-neutral-text-high-contrast { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-hover-text-color-neutral-text-high-contrast:hover { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-focus-text-color-neutral-text-high-contrast:focus { color: var(--cl-color-neutral-text-high-contrast); }
+.group:hover .cl-group-hover-text-color-neutral-text-high-contrast { color: var(--cl-color-neutral-text-high-contrast); }
+.cl-text-neutral-text-medium-contrast { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-hover-text-neutral-text-medium-contrast:hover { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-focus-text-neutral-text-medium-contrast:focus { color: var(--cl-color-neutral-text-medium-contrast); }
+.group:hover .cl-group-hover-text-neutral-text-medium-contrast { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-text-color-neutral-text-medium-contrast { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-hover-text-color-neutral-text-medium-contrast:hover { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-focus-text-color-neutral-text-medium-contrast:focus { color: var(--cl-color-neutral-text-medium-contrast); }
+.group:hover .cl-group-hover-text-color-neutral-text-medium-contrast { color: var(--cl-color-neutral-text-medium-contrast); }
+.cl-text-neutral-text-low-contrast { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-hover-text-neutral-text-low-contrast:hover { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-focus-text-neutral-text-low-contrast:focus { color: var(--cl-color-neutral-text-low-contrast); }
+.group:hover .cl-group-hover-text-neutral-text-low-contrast { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-text-color-neutral-text-low-contrast { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-hover-text-color-neutral-text-low-contrast:hover { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-focus-text-color-neutral-text-low-contrast:focus { color: var(--cl-color-neutral-text-low-contrast); }
+.group:hover .cl-group-hover-text-color-neutral-text-low-contrast { color: var(--cl-color-neutral-text-low-contrast); }
+.cl-text-neutral-text-disabled { color: var(--cl-color-neutral-text-disabled); }
+.cl-hover-text-neutral-text-disabled:hover { color: var(--cl-color-neutral-text-disabled); }
+.cl-focus-text-neutral-text-disabled:focus { color: var(--cl-color-neutral-text-disabled); }
+.group:hover .cl-group-hover-text-neutral-text-disabled { color: var(--cl-color-neutral-text-disabled); }
+.cl-text-color-neutral-text-disabled { color: var(--cl-color-neutral-text-disabled); }
+.cl-hover-text-color-neutral-text-disabled:hover { color: var(--cl-color-neutral-text-disabled); }
+.cl-focus-text-color-neutral-text-disabled:focus { color: var(--cl-color-neutral-text-disabled); }
+.group:hover .cl-group-hover-text-color-neutral-text-disabled { color: var(--cl-color-neutral-text-disabled); }
+.cl-text-neutral-text-inverse { color: var(--cl-color-neutral-text-inverse); }
+.cl-hover-text-neutral-text-inverse:hover { color: var(--cl-color-neutral-text-inverse); }
+.cl-focus-text-neutral-text-inverse:focus { color: var(--cl-color-neutral-text-inverse); }
+.group:hover .cl-group-hover-text-neutral-text-inverse { color: var(--cl-color-neutral-text-inverse); }
+.cl-text-color-neutral-text-inverse { color: var(--cl-color-neutral-text-inverse); }
+.cl-hover-text-color-neutral-text-inverse:hover { color: var(--cl-color-neutral-text-inverse); }
+.cl-focus-text-color-neutral-text-inverse:focus { color: var(--cl-color-neutral-text-inverse); }
+.group:hover .cl-group-hover-text-color-neutral-text-inverse { color: var(--cl-color-neutral-text-inverse); }
+.cl-bg-semantic-success-50 { background-color: var(--cl-color-semantic-success-50); }
+.cl-hover-bg-semantic-success-50:hover { background-color: var(--cl-color-semantic-success-50); }
+.cl-focus-bg-semantic-success-50:focus { background-color: var(--cl-color-semantic-success-50); }
+.group:hover .cl-group-hover-bg-semantic-success-50 { background-color: var(--cl-color-semantic-success-50); }
+.cl-text-semantic-success-50 { color: var(--cl-color-semantic-success-50); }
+.cl-hover-text-semantic-success-50:hover { color: var(--cl-color-semantic-success-50); }
+.cl-focus-text-semantic-success-50:focus { color: var(--cl-color-semantic-success-50); }
+.group:hover .cl-group-hover-text-semantic-success-50 { color: var(--cl-color-semantic-success-50); }
+.cl-bg-color-semantic-success-50 { background-color: var(--cl-color-semantic-success-50); }
+.cl-hover-bg-color-semantic-success-50:hover { background-color: var(--cl-color-semantic-success-50); }
+.cl-focus-bg-color-semantic-success-50:focus { background-color: var(--cl-color-semantic-success-50); }
+.group:hover .cl-group-hover-bg-color-semantic-success-50 { background-color: var(--cl-color-semantic-success-50); }
+.cl-text-color-semantic-success-50 { color: var(--cl-color-semantic-success-50); }
+.cl-hover-text-color-semantic-success-50:hover { color: var(--cl-color-semantic-success-50); }
+.cl-focus-text-color-semantic-success-50:focus { color: var(--cl-color-semantic-success-50); }
+.group:hover .cl-group-hover-text-color-semantic-success-50 { color: var(--cl-color-semantic-success-50); }
+.cl-bg-semantic-success-500 { background-color: var(--cl-color-semantic-success-500); }
+.cl-hover-bg-semantic-success-500:hover { background-color: var(--cl-color-semantic-success-500); }
+.cl-focus-bg-semantic-success-500:focus { background-color: var(--cl-color-semantic-success-500); }
+.group:hover .cl-group-hover-bg-semantic-success-500 { background-color: var(--cl-color-semantic-success-500); }
+.cl-text-semantic-success-500 { color: var(--cl-color-semantic-success-500); }
+.cl-hover-text-semantic-success-500:hover { color: var(--cl-color-semantic-success-500); }
+.cl-focus-text-semantic-success-500:focus { color: var(--cl-color-semantic-success-500); }
+.group:hover .cl-group-hover-text-semantic-success-500 { color: var(--cl-color-semantic-success-500); }
+.cl-bg-color-semantic-success-500 { background-color: var(--cl-color-semantic-success-500); }
+.cl-hover-bg-color-semantic-success-500:hover { background-color: var(--cl-color-semantic-success-500); }
+.cl-focus-bg-color-semantic-success-500:focus { background-color: var(--cl-color-semantic-success-500); }
+.group:hover .cl-group-hover-bg-color-semantic-success-500 { background-color: var(--cl-color-semantic-success-500); }
+.cl-text-color-semantic-success-500 { color: var(--cl-color-semantic-success-500); }
+.cl-hover-text-color-semantic-success-500:hover { color: var(--cl-color-semantic-success-500); }
+.cl-focus-text-color-semantic-success-500:focus { color: var(--cl-color-semantic-success-500); }
+.group:hover .cl-group-hover-text-color-semantic-success-500 { color: var(--cl-color-semantic-success-500); }
+.cl-bg-semantic-success-900 { background-color: var(--cl-color-semantic-success-900); }
+.cl-hover-bg-semantic-success-900:hover { background-color: var(--cl-color-semantic-success-900); }
+.cl-focus-bg-semantic-success-900:focus { background-color: var(--cl-color-semantic-success-900); }
+.group:hover .cl-group-hover-bg-semantic-success-900 { background-color: var(--cl-color-semantic-success-900); }
+.cl-text-semantic-success-900 { color: var(--cl-color-semantic-success-900); }
+.cl-hover-text-semantic-success-900:hover { color: var(--cl-color-semantic-success-900); }
+.cl-focus-text-semantic-success-900:focus { color: var(--cl-color-semantic-success-900); }
+.group:hover .cl-group-hover-text-semantic-success-900 { color: var(--cl-color-semantic-success-900); }
+.cl-bg-color-semantic-success-900 { background-color: var(--cl-color-semantic-success-900); }
+.cl-hover-bg-color-semantic-success-900:hover { background-color: var(--cl-color-semantic-success-900); }
+.cl-focus-bg-color-semantic-success-900:focus { background-color: var(--cl-color-semantic-success-900); }
+.group:hover .cl-group-hover-bg-color-semantic-success-900 { background-color: var(--cl-color-semantic-success-900); }
+.cl-text-color-semantic-success-900 { color: var(--cl-color-semantic-success-900); }
+.cl-hover-text-color-semantic-success-900:hover { color: var(--cl-color-semantic-success-900); }
+.cl-focus-text-color-semantic-success-900:focus { color: var(--cl-color-semantic-success-900); }
+.group:hover .cl-group-hover-text-color-semantic-success-900 { color: var(--cl-color-semantic-success-900); }
+.cl-text-semantic-success-text { color: var(--cl-color-semantic-success-text); }
+.cl-hover-text-semantic-success-text:hover { color: var(--cl-color-semantic-success-text); }
+.cl-focus-text-semantic-success-text:focus { color: var(--cl-color-semantic-success-text); }
+.group:hover .cl-group-hover-text-semantic-success-text { color: var(--cl-color-semantic-success-text); }
+.cl-text-color-semantic-success-text { color: var(--cl-color-semantic-success-text); }
+.cl-hover-text-color-semantic-success-text:hover { color: var(--cl-color-semantic-success-text); }
+.cl-focus-text-color-semantic-success-text:focus { color: var(--cl-color-semantic-success-text); }
+.group:hover .cl-group-hover-text-color-semantic-success-text { color: var(--cl-color-semantic-success-text); }
+.cl-fill-semantic-success-icon { fill: var(--cl-color-semantic-success-icon); }
+.cl-hover-fill-semantic-success-icon:hover { fill: var(--cl-color-semantic-success-icon); }
+.cl-focus-fill-semantic-success-icon:focus { fill: var(--cl-color-semantic-success-icon); }
+.group:hover .cl-group-hover-fill-semantic-success-icon { fill: var(--cl-color-semantic-success-icon); }
+.cl-bg-semantic-success-background { background-color: var(--cl-color-semantic-success-background); }
+.cl-hover-bg-semantic-success-background:hover { background-color: var(--cl-color-semantic-success-background); }
+.cl-focus-bg-semantic-success-background:focus { background-color: var(--cl-color-semantic-success-background); }
+.group:hover .cl-group-hover-bg-semantic-success-background { background-color: var(--cl-color-semantic-success-background); }
+.cl-bg-color-semantic-success-background { background-color: var(--cl-color-semantic-success-background); }
+.cl-hover-bg-color-semantic-success-background:hover { background-color: var(--cl-color-semantic-success-background); }
+.cl-focus-bg-color-semantic-success-background:focus { background-color: var(--cl-color-semantic-success-background); }
+.group:hover .cl-group-hover-bg-color-semantic-success-background { background-color: var(--cl-color-semantic-success-background); }
+.cl-border-semantic-success-border { border-color: var(--cl-color-semantic-success-border); }
+.cl-hover-border-semantic-success-border:hover { border-color: var(--cl-color-semantic-success-border); }
+.cl-focus-border-semantic-success-border:focus { border-color: var(--cl-color-semantic-success-border); }
+.group:hover .cl-group-hover-border-semantic-success-border { border-color: var(--cl-color-semantic-success-border); }
+.cl-border-color-semantic-success-border { border-color: var(--cl-color-semantic-success-border); }
+.cl-hover-border-color-semantic-success-border:hover { border-color: var(--cl-color-semantic-success-border); }
+.cl-focus-border-color-semantic-success-border:focus { border-color: var(--cl-color-semantic-success-border); }
+.group:hover .cl-group-hover-border-color-semantic-success-border { border-color: var(--cl-color-semantic-success-border); }
+.cl-bg-semantic-warning-50 { background-color: var(--cl-color-semantic-warning-50); }
+.cl-hover-bg-semantic-warning-50:hover { background-color: var(--cl-color-semantic-warning-50); }
+.cl-focus-bg-semantic-warning-50:focus { background-color: var(--cl-color-semantic-warning-50); }
+.group:hover .cl-group-hover-bg-semantic-warning-50 { background-color: var(--cl-color-semantic-warning-50); }
+.cl-text-semantic-warning-50 { color: var(--cl-color-semantic-warning-50); }
+.cl-hover-text-semantic-warning-50:hover { color: var(--cl-color-semantic-warning-50); }
+.cl-focus-text-semantic-warning-50:focus { color: var(--cl-color-semantic-warning-50); }
+.group:hover .cl-group-hover-text-semantic-warning-50 { color: var(--cl-color-semantic-warning-50); }
+.cl-bg-color-semantic-warning-50 { background-color: var(--cl-color-semantic-warning-50); }
+.cl-hover-bg-color-semantic-warning-50:hover { background-color: var(--cl-color-semantic-warning-50); }
+.cl-focus-bg-color-semantic-warning-50:focus { background-color: var(--cl-color-semantic-warning-50); }
+.group:hover .cl-group-hover-bg-color-semantic-warning-50 { background-color: var(--cl-color-semantic-warning-50); }
+.cl-text-color-semantic-warning-50 { color: var(--cl-color-semantic-warning-50); }
+.cl-hover-text-color-semantic-warning-50:hover { color: var(--cl-color-semantic-warning-50); }
+.cl-focus-text-color-semantic-warning-50:focus { color: var(--cl-color-semantic-warning-50); }
+.group:hover .cl-group-hover-text-color-semantic-warning-50 { color: var(--cl-color-semantic-warning-50); }
+.cl-bg-semantic-warning-500 { background-color: var(--cl-color-semantic-warning-500); }
+.cl-hover-bg-semantic-warning-500:hover { background-color: var(--cl-color-semantic-warning-500); }
+.cl-focus-bg-semantic-warning-500:focus { background-color: var(--cl-color-semantic-warning-500); }
+.group:hover .cl-group-hover-bg-semantic-warning-500 { background-color: var(--cl-color-semantic-warning-500); }
+.cl-text-semantic-warning-500 { color: var(--cl-color-semantic-warning-500); }
+.cl-hover-text-semantic-warning-500:hover { color: var(--cl-color-semantic-warning-500); }
+.cl-focus-text-semantic-warning-500:focus { color: var(--cl-color-semantic-warning-500); }
+.group:hover .cl-group-hover-text-semantic-warning-500 { color: var(--cl-color-semantic-warning-500); }
+.cl-bg-color-semantic-warning-500 { background-color: var(--cl-color-semantic-warning-500); }
+.cl-hover-bg-color-semantic-warning-500:hover { background-color: var(--cl-color-semantic-warning-500); }
+.cl-focus-bg-color-semantic-warning-500:focus { background-color: var(--cl-color-semantic-warning-500); }
+.group:hover .cl-group-hover-bg-color-semantic-warning-500 { background-color: var(--cl-color-semantic-warning-500); }
+.cl-text-color-semantic-warning-500 { color: var(--cl-color-semantic-warning-500); }
+.cl-hover-text-color-semantic-warning-500:hover { color: var(--cl-color-semantic-warning-500); }
+.cl-focus-text-color-semantic-warning-500:focus { color: var(--cl-color-semantic-warning-500); }
+.group:hover .cl-group-hover-text-color-semantic-warning-500 { color: var(--cl-color-semantic-warning-500); }
+.cl-bg-semantic-warning-900 { background-color: var(--cl-color-semantic-warning-900); }
+.cl-hover-bg-semantic-warning-900:hover { background-color: var(--cl-color-semantic-warning-900); }
+.cl-focus-bg-semantic-warning-900:focus { background-color: var(--cl-color-semantic-warning-900); }
+.group:hover .cl-group-hover-bg-semantic-warning-900 { background-color: var(--cl-color-semantic-warning-900); }
+.cl-text-semantic-warning-900 { color: var(--cl-color-semantic-warning-900); }
+.cl-hover-text-semantic-warning-900:hover { color: var(--cl-color-semantic-warning-900); }
+.cl-focus-text-semantic-warning-900:focus { color: var(--cl-color-semantic-warning-900); }
+.group:hover .cl-group-hover-text-semantic-warning-900 { color: var(--cl-color-semantic-warning-900); }
+.cl-bg-color-semantic-warning-900 { background-color: var(--cl-color-semantic-warning-900); }
+.cl-hover-bg-color-semantic-warning-900:hover { background-color: var(--cl-color-semantic-warning-900); }
+.cl-focus-bg-color-semantic-warning-900:focus { background-color: var(--cl-color-semantic-warning-900); }
+.group:hover .cl-group-hover-bg-color-semantic-warning-900 { background-color: var(--cl-color-semantic-warning-900); }
+.cl-text-color-semantic-warning-900 { color: var(--cl-color-semantic-warning-900); }
+.cl-hover-text-color-semantic-warning-900:hover { color: var(--cl-color-semantic-warning-900); }
+.cl-focus-text-color-semantic-warning-900:focus { color: var(--cl-color-semantic-warning-900); }
+.group:hover .cl-group-hover-text-color-semantic-warning-900 { color: var(--cl-color-semantic-warning-900); }
+.cl-text-semantic-warning-text { color: var(--cl-color-semantic-warning-text); }
+.cl-hover-text-semantic-warning-text:hover { color: var(--cl-color-semantic-warning-text); }
+.cl-focus-text-semantic-warning-text:focus { color: var(--cl-color-semantic-warning-text); }
+.group:hover .cl-group-hover-text-semantic-warning-text { color: var(--cl-color-semantic-warning-text); }
+.cl-text-color-semantic-warning-text { color: var(--cl-color-semantic-warning-text); }
+.cl-hover-text-color-semantic-warning-text:hover { color: var(--cl-color-semantic-warning-text); }
+.cl-focus-text-color-semantic-warning-text:focus { color: var(--cl-color-semantic-warning-text); }
+.group:hover .cl-group-hover-text-color-semantic-warning-text { color: var(--cl-color-semantic-warning-text); }
+.cl-fill-semantic-warning-icon { fill: var(--cl-color-semantic-warning-icon); }
+.cl-hover-fill-semantic-warning-icon:hover { fill: var(--cl-color-semantic-warning-icon); }
+.cl-focus-fill-semantic-warning-icon:focus { fill: var(--cl-color-semantic-warning-icon); }
+.group:hover .cl-group-hover-fill-semantic-warning-icon { fill: var(--cl-color-semantic-warning-icon); }
+.cl-bg-semantic-warning-background { background-color: var(--cl-color-semantic-warning-background); }
+.cl-hover-bg-semantic-warning-background:hover { background-color: var(--cl-color-semantic-warning-background); }
+.cl-focus-bg-semantic-warning-background:focus { background-color: var(--cl-color-semantic-warning-background); }
+.group:hover .cl-group-hover-bg-semantic-warning-background { background-color: var(--cl-color-semantic-warning-background); }
+.cl-bg-color-semantic-warning-background { background-color: var(--cl-color-semantic-warning-background); }
+.cl-hover-bg-color-semantic-warning-background:hover { background-color: var(--cl-color-semantic-warning-background); }
+.cl-focus-bg-color-semantic-warning-background:focus { background-color: var(--cl-color-semantic-warning-background); }
+.group:hover .cl-group-hover-bg-color-semantic-warning-background { background-color: var(--cl-color-semantic-warning-background); }
+.cl-border-semantic-warning-border { border-color: var(--cl-color-semantic-warning-border); }
+.cl-hover-border-semantic-warning-border:hover { border-color: var(--cl-color-semantic-warning-border); }
+.cl-focus-border-semantic-warning-border:focus { border-color: var(--cl-color-semantic-warning-border); }
+.group:hover .cl-group-hover-border-semantic-warning-border { border-color: var(--cl-color-semantic-warning-border); }
+.cl-border-color-semantic-warning-border { border-color: var(--cl-color-semantic-warning-border); }
+.cl-hover-border-color-semantic-warning-border:hover { border-color: var(--cl-color-semantic-warning-border); }
+.cl-focus-border-color-semantic-warning-border:focus { border-color: var(--cl-color-semantic-warning-border); }
+.group:hover .cl-group-hover-border-color-semantic-warning-border { border-color: var(--cl-color-semantic-warning-border); }
+.cl-bg-semantic-error-50 { background-color: var(--cl-color-semantic-error-50); }
+.cl-hover-bg-semantic-error-50:hover { background-color: var(--cl-color-semantic-error-50); }
+.cl-focus-bg-semantic-error-50:focus { background-color: var(--cl-color-semantic-error-50); }
+.group:hover .cl-group-hover-bg-semantic-error-50 { background-color: var(--cl-color-semantic-error-50); }
+.cl-text-semantic-error-50 { color: var(--cl-color-semantic-error-50); }
+.cl-hover-text-semantic-error-50:hover { color: var(--cl-color-semantic-error-50); }
+.cl-focus-text-semantic-error-50:focus { color: var(--cl-color-semantic-error-50); }
+.group:hover .cl-group-hover-text-semantic-error-50 { color: var(--cl-color-semantic-error-50); }
+.cl-bg-color-semantic-error-50 { background-color: var(--cl-color-semantic-error-50); }
+.cl-hover-bg-color-semantic-error-50:hover { background-color: var(--cl-color-semantic-error-50); }
+.cl-focus-bg-color-semantic-error-50:focus { background-color: var(--cl-color-semantic-error-50); }
+.group:hover .cl-group-hover-bg-color-semantic-error-50 { background-color: var(--cl-color-semantic-error-50); }
+.cl-text-color-semantic-error-50 { color: var(--cl-color-semantic-error-50); }
+.cl-hover-text-color-semantic-error-50:hover { color: var(--cl-color-semantic-error-50); }
+.cl-focus-text-color-semantic-error-50:focus { color: var(--cl-color-semantic-error-50); }
+.group:hover .cl-group-hover-text-color-semantic-error-50 { color: var(--cl-color-semantic-error-50); }
+.cl-bg-semantic-error-500 { background-color: var(--cl-color-semantic-error-500); }
+.cl-hover-bg-semantic-error-500:hover { background-color: var(--cl-color-semantic-error-500); }
+.cl-focus-bg-semantic-error-500:focus { background-color: var(--cl-color-semantic-error-500); }
+.group:hover .cl-group-hover-bg-semantic-error-500 { background-color: var(--cl-color-semantic-error-500); }
+.cl-text-semantic-error-500 { color: var(--cl-color-semantic-error-500); }
+.cl-hover-text-semantic-error-500:hover { color: var(--cl-color-semantic-error-500); }
+.cl-focus-text-semantic-error-500:focus { color: var(--cl-color-semantic-error-500); }
+.group:hover .cl-group-hover-text-semantic-error-500 { color: var(--cl-color-semantic-error-500); }
+.cl-bg-color-semantic-error-500 { background-color: var(--cl-color-semantic-error-500); }
+.cl-hover-bg-color-semantic-error-500:hover { background-color: var(--cl-color-semantic-error-500); }
+.cl-focus-bg-color-semantic-error-500:focus { background-color: var(--cl-color-semantic-error-500); }
+.group:hover .cl-group-hover-bg-color-semantic-error-500 { background-color: var(--cl-color-semantic-error-500); }
+.cl-text-color-semantic-error-500 { color: var(--cl-color-semantic-error-500); }
+.cl-hover-text-color-semantic-error-500:hover { color: var(--cl-color-semantic-error-500); }
+.cl-focus-text-color-semantic-error-500:focus { color: var(--cl-color-semantic-error-500); }
+.group:hover .cl-group-hover-text-color-semantic-error-500 { color: var(--cl-color-semantic-error-500); }
+.cl-bg-semantic-error-900 { background-color: var(--cl-color-semantic-error-900); }
+.cl-hover-bg-semantic-error-900:hover { background-color: var(--cl-color-semantic-error-900); }
+.cl-focus-bg-semantic-error-900:focus { background-color: var(--cl-color-semantic-error-900); }
+.group:hover .cl-group-hover-bg-semantic-error-900 { background-color: var(--cl-color-semantic-error-900); }
+.cl-text-semantic-error-900 { color: var(--cl-color-semantic-error-900); }
+.cl-hover-text-semantic-error-900:hover { color: var(--cl-color-semantic-error-900); }
+.cl-focus-text-semantic-error-900:focus { color: var(--cl-color-semantic-error-900); }
+.group:hover .cl-group-hover-text-semantic-error-900 { color: var(--cl-color-semantic-error-900); }
+.cl-bg-color-semantic-error-900 { background-color: var(--cl-color-semantic-error-900); }
+.cl-hover-bg-color-semantic-error-900:hover { background-color: var(--cl-color-semantic-error-900); }
+.cl-focus-bg-color-semantic-error-900:focus { background-color: var(--cl-color-semantic-error-900); }
+.group:hover .cl-group-hover-bg-color-semantic-error-900 { background-color: var(--cl-color-semantic-error-900); }
+.cl-text-color-semantic-error-900 { color: var(--cl-color-semantic-error-900); }
+.cl-hover-text-color-semantic-error-900:hover { color: var(--cl-color-semantic-error-900); }
+.cl-focus-text-color-semantic-error-900:focus { color: var(--cl-color-semantic-error-900); }
+.group:hover .cl-group-hover-text-color-semantic-error-900 { color: var(--cl-color-semantic-error-900); }
+.cl-text-semantic-error-text { color: var(--cl-color-semantic-error-text); }
+.cl-hover-text-semantic-error-text:hover { color: var(--cl-color-semantic-error-text); }
+.cl-focus-text-semantic-error-text:focus { color: var(--cl-color-semantic-error-text); }
+.group:hover .cl-group-hover-text-semantic-error-text { color: var(--cl-color-semantic-error-text); }
+.cl-text-color-semantic-error-text { color: var(--cl-color-semantic-error-text); }
+.cl-hover-text-color-semantic-error-text:hover { color: var(--cl-color-semantic-error-text); }
+.cl-focus-text-color-semantic-error-text:focus { color: var(--cl-color-semantic-error-text); }
+.group:hover .cl-group-hover-text-color-semantic-error-text { color: var(--cl-color-semantic-error-text); }
+.cl-fill-semantic-error-icon { fill: var(--cl-color-semantic-error-icon); }
+.cl-hover-fill-semantic-error-icon:hover { fill: var(--cl-color-semantic-error-icon); }
+.cl-focus-fill-semantic-error-icon:focus { fill: var(--cl-color-semantic-error-icon); }
+.group:hover .cl-group-hover-fill-semantic-error-icon { fill: var(--cl-color-semantic-error-icon); }
+.cl-bg-semantic-error-background { background-color: var(--cl-color-semantic-error-background); }
+.cl-hover-bg-semantic-error-background:hover { background-color: var(--cl-color-semantic-error-background); }
+.cl-focus-bg-semantic-error-background:focus { background-color: var(--cl-color-semantic-error-background); }
+.group:hover .cl-group-hover-bg-semantic-error-background { background-color: var(--cl-color-semantic-error-background); }
+.cl-bg-color-semantic-error-background { background-color: var(--cl-color-semantic-error-background); }
+.cl-hover-bg-color-semantic-error-background:hover { background-color: var(--cl-color-semantic-error-background); }
+.cl-focus-bg-color-semantic-error-background:focus { background-color: var(--cl-color-semantic-error-background); }
+.group:hover .cl-group-hover-bg-color-semantic-error-background { background-color: var(--cl-color-semantic-error-background); }
+.cl-border-semantic-error-border { border-color: var(--cl-color-semantic-error-border); }
+.cl-hover-border-semantic-error-border:hover { border-color: var(--cl-color-semantic-error-border); }
+.cl-focus-border-semantic-error-border:focus { border-color: var(--cl-color-semantic-error-border); }
+.group:hover .cl-group-hover-border-semantic-error-border { border-color: var(--cl-color-semantic-error-border); }
+.cl-border-color-semantic-error-border { border-color: var(--cl-color-semantic-error-border); }
+.cl-hover-border-color-semantic-error-border:hover { border-color: var(--cl-color-semantic-error-border); }
+.cl-focus-border-color-semantic-error-border:focus { border-color: var(--cl-color-semantic-error-border); }
+.group:hover .cl-group-hover-border-color-semantic-error-border { border-color: var(--cl-color-semantic-error-border); }
+.cl-bg-semantic-info-50 { background-color: var(--cl-color-semantic-info-50); }
+.cl-hover-bg-semantic-info-50:hover { background-color: var(--cl-color-semantic-info-50); }
+.cl-focus-bg-semantic-info-50:focus { background-color: var(--cl-color-semantic-info-50); }
+.group:hover .cl-group-hover-bg-semantic-info-50 { background-color: var(--cl-color-semantic-info-50); }
+.cl-text-semantic-info-50 { color: var(--cl-color-semantic-info-50); }
+.cl-hover-text-semantic-info-50:hover { color: var(--cl-color-semantic-info-50); }
+.cl-focus-text-semantic-info-50:focus { color: var(--cl-color-semantic-info-50); }
+.group:hover .cl-group-hover-text-semantic-info-50 { color: var(--cl-color-semantic-info-50); }
+.cl-bg-color-semantic-info-50 { background-color: var(--cl-color-semantic-info-50); }
+.cl-hover-bg-color-semantic-info-50:hover { background-color: var(--cl-color-semantic-info-50); }
+.cl-focus-bg-color-semantic-info-50:focus { background-color: var(--cl-color-semantic-info-50); }
+.group:hover .cl-group-hover-bg-color-semantic-info-50 { background-color: var(--cl-color-semantic-info-50); }
+.cl-text-color-semantic-info-50 { color: var(--cl-color-semantic-info-50); }
+.cl-hover-text-color-semantic-info-50:hover { color: var(--cl-color-semantic-info-50); }
+.cl-focus-text-color-semantic-info-50:focus { color: var(--cl-color-semantic-info-50); }
+.group:hover .cl-group-hover-text-color-semantic-info-50 { color: var(--cl-color-semantic-info-50); }
+.cl-bg-semantic-info-500 { background-color: var(--cl-color-semantic-info-500); }
+.cl-hover-bg-semantic-info-500:hover { background-color: var(--cl-color-semantic-info-500); }
+.cl-focus-bg-semantic-info-500:focus { background-color: var(--cl-color-semantic-info-500); }
+.group:hover .cl-group-hover-bg-semantic-info-500 { background-color: var(--cl-color-semantic-info-500); }
+.cl-text-semantic-info-500 { color: var(--cl-color-semantic-info-500); }
+.cl-hover-text-semantic-info-500:hover { color: var(--cl-color-semantic-info-500); }
+.cl-focus-text-semantic-info-500:focus { color: var(--cl-color-semantic-info-500); }
+.group:hover .cl-group-hover-text-semantic-info-500 { color: var(--cl-color-semantic-info-500); }
+.cl-bg-color-semantic-info-500 { background-color: var(--cl-color-semantic-info-500); }
+.cl-hover-bg-color-semantic-info-500:hover { background-color: var(--cl-color-semantic-info-500); }
+.cl-focus-bg-color-semantic-info-500:focus { background-color: var(--cl-color-semantic-info-500); }
+.group:hover .cl-group-hover-bg-color-semantic-info-500 { background-color: var(--cl-color-semantic-info-500); }
+.cl-text-color-semantic-info-500 { color: var(--cl-color-semantic-info-500); }
+.cl-hover-text-color-semantic-info-500:hover { color: var(--cl-color-semantic-info-500); }
+.cl-focus-text-color-semantic-info-500:focus { color: var(--cl-color-semantic-info-500); }
+.group:hover .cl-group-hover-text-color-semantic-info-500 { color: var(--cl-color-semantic-info-500); }
+.cl-bg-semantic-info-900 { background-color: var(--cl-color-semantic-info-900); }
+.cl-hover-bg-semantic-info-900:hover { background-color: var(--cl-color-semantic-info-900); }
+.cl-focus-bg-semantic-info-900:focus { background-color: var(--cl-color-semantic-info-900); }
+.group:hover .cl-group-hover-bg-semantic-info-900 { background-color: var(--cl-color-semantic-info-900); }
+.cl-text-semantic-info-900 { color: var(--cl-color-semantic-info-900); }
+.cl-hover-text-semantic-info-900:hover { color: var(--cl-color-semantic-info-900); }
+.cl-focus-text-semantic-info-900:focus { color: var(--cl-color-semantic-info-900); }
+.group:hover .cl-group-hover-text-semantic-info-900 { color: var(--cl-color-semantic-info-900); }
+.cl-bg-color-semantic-info-900 { background-color: var(--cl-color-semantic-info-900); }
+.cl-hover-bg-color-semantic-info-900:hover { background-color: var(--cl-color-semantic-info-900); }
+.cl-focus-bg-color-semantic-info-900:focus { background-color: var(--cl-color-semantic-info-900); }
+.group:hover .cl-group-hover-bg-color-semantic-info-900 { background-color: var(--cl-color-semantic-info-900); }
+.cl-text-color-semantic-info-900 { color: var(--cl-color-semantic-info-900); }
+.cl-hover-text-color-semantic-info-900:hover { color: var(--cl-color-semantic-info-900); }
+.cl-focus-text-color-semantic-info-900:focus { color: var(--cl-color-semantic-info-900); }
+.group:hover .cl-group-hover-text-color-semantic-info-900 { color: var(--cl-color-semantic-info-900); }
+.cl-text-semantic-info-text { color: var(--cl-color-semantic-info-text); }
+.cl-hover-text-semantic-info-text:hover { color: var(--cl-color-semantic-info-text); }
+.cl-focus-text-semantic-info-text:focus { color: var(--cl-color-semantic-info-text); }
+.group:hover .cl-group-hover-text-semantic-info-text { color: var(--cl-color-semantic-info-text); }
+.cl-text-color-semantic-info-text { color: var(--cl-color-semantic-info-text); }
+.cl-hover-text-color-semantic-info-text:hover { color: var(--cl-color-semantic-info-text); }
+.cl-focus-text-color-semantic-info-text:focus { color: var(--cl-color-semantic-info-text); }
+.group:hover .cl-group-hover-text-color-semantic-info-text { color: var(--cl-color-semantic-info-text); }
+.cl-fill-semantic-info-icon { fill: var(--cl-color-semantic-info-icon); }
+.cl-hover-fill-semantic-info-icon:hover { fill: var(--cl-color-semantic-info-icon); }
+.cl-focus-fill-semantic-info-icon:focus { fill: var(--cl-color-semantic-info-icon); }
+.group:hover .cl-group-hover-fill-semantic-info-icon { fill: var(--cl-color-semantic-info-icon); }
+.cl-bg-semantic-info-background { background-color: var(--cl-color-semantic-info-background); }
+.cl-hover-bg-semantic-info-background:hover { background-color: var(--cl-color-semantic-info-background); }
+.cl-focus-bg-semantic-info-background:focus { background-color: var(--cl-color-semantic-info-background); }
+.group:hover .cl-group-hover-bg-semantic-info-background { background-color: var(--cl-color-semantic-info-background); }
+.cl-bg-color-semantic-info-background { background-color: var(--cl-color-semantic-info-background); }
+.cl-hover-bg-color-semantic-info-background:hover { background-color: var(--cl-color-semantic-info-background); }
+.cl-focus-bg-color-semantic-info-background:focus { background-color: var(--cl-color-semantic-info-background); }
+.group:hover .cl-group-hover-bg-color-semantic-info-background { background-color: var(--cl-color-semantic-info-background); }
+.cl-border-semantic-info-border { border-color: var(--cl-color-semantic-info-border); }
+.cl-hover-border-semantic-info-border:hover { border-color: var(--cl-color-semantic-info-border); }
+.cl-focus-border-semantic-info-border:focus { border-color: var(--cl-color-semantic-info-border); }
+.group:hover .cl-group-hover-border-semantic-info-border { border-color: var(--cl-color-semantic-info-border); }
+.cl-border-color-semantic-info-border { border-color: var(--cl-color-semantic-info-border); }
+.cl-hover-border-color-semantic-info-border:hover { border-color: var(--cl-color-semantic-info-border); }
+.cl-focus-border-color-semantic-info-border:focus { border-color: var(--cl-color-semantic-info-border); }
+.group:hover .cl-group-hover-border-color-semantic-info-border { border-color: var(--cl-color-semantic-info-border); }
+.cl-bg-accents-emerald-50 { background-color: var(--cl-color-accents-emerald-50); }
+.cl-hover-bg-accents-emerald-50:hover { background-color: var(--cl-color-accents-emerald-50); }
+.cl-focus-bg-accents-emerald-50:focus { background-color: var(--cl-color-accents-emerald-50); }
+.group:hover .cl-group-hover-bg-accents-emerald-50 { background-color: var(--cl-color-accents-emerald-50); }
+.cl-text-accents-emerald-50 { color: var(--cl-color-accents-emerald-50); }
+.cl-hover-text-accents-emerald-50:hover { color: var(--cl-color-accents-emerald-50); }
+.cl-focus-text-accents-emerald-50:focus { color: var(--cl-color-accents-emerald-50); }
+.group:hover .cl-group-hover-text-accents-emerald-50 { color: var(--cl-color-accents-emerald-50); }
+.cl-bg-color-accents-emerald-50 { background-color: var(--cl-color-accents-emerald-50); }
+.cl-hover-bg-color-accents-emerald-50:hover { background-color: var(--cl-color-accents-emerald-50); }
+.cl-focus-bg-color-accents-emerald-50:focus { background-color: var(--cl-color-accents-emerald-50); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-50 { background-color: var(--cl-color-accents-emerald-50); }
+.cl-text-color-accents-emerald-50 { color: var(--cl-color-accents-emerald-50); }
+.cl-hover-text-color-accents-emerald-50:hover { color: var(--cl-color-accents-emerald-50); }
+.cl-focus-text-color-accents-emerald-50:focus { color: var(--cl-color-accents-emerald-50); }
+.group:hover .cl-group-hover-text-color-accents-emerald-50 { color: var(--cl-color-accents-emerald-50); }
+.cl-bg-accents-emerald-100 { background-color: var(--cl-color-accents-emerald-100); }
+.cl-hover-bg-accents-emerald-100:hover { background-color: var(--cl-color-accents-emerald-100); }
+.cl-focus-bg-accents-emerald-100:focus { background-color: var(--cl-color-accents-emerald-100); }
+.group:hover .cl-group-hover-bg-accents-emerald-100 { background-color: var(--cl-color-accents-emerald-100); }
+.cl-text-accents-emerald-100 { color: var(--cl-color-accents-emerald-100); }
+.cl-hover-text-accents-emerald-100:hover { color: var(--cl-color-accents-emerald-100); }
+.cl-focus-text-accents-emerald-100:focus { color: var(--cl-color-accents-emerald-100); }
+.group:hover .cl-group-hover-text-accents-emerald-100 { color: var(--cl-color-accents-emerald-100); }
+.cl-bg-color-accents-emerald-100 { background-color: var(--cl-color-accents-emerald-100); }
+.cl-hover-bg-color-accents-emerald-100:hover { background-color: var(--cl-color-accents-emerald-100); }
+.cl-focus-bg-color-accents-emerald-100:focus { background-color: var(--cl-color-accents-emerald-100); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-100 { background-color: var(--cl-color-accents-emerald-100); }
+.cl-text-color-accents-emerald-100 { color: var(--cl-color-accents-emerald-100); }
+.cl-hover-text-color-accents-emerald-100:hover { color: var(--cl-color-accents-emerald-100); }
+.cl-focus-text-color-accents-emerald-100:focus { color: var(--cl-color-accents-emerald-100); }
+.group:hover .cl-group-hover-text-color-accents-emerald-100 { color: var(--cl-color-accents-emerald-100); }
+.cl-bg-accents-emerald-200 { background-color: var(--cl-color-accents-emerald-200); }
+.cl-hover-bg-accents-emerald-200:hover { background-color: var(--cl-color-accents-emerald-200); }
+.cl-focus-bg-accents-emerald-200:focus { background-color: var(--cl-color-accents-emerald-200); }
+.group:hover .cl-group-hover-bg-accents-emerald-200 { background-color: var(--cl-color-accents-emerald-200); }
+.cl-text-accents-emerald-200 { color: var(--cl-color-accents-emerald-200); }
+.cl-hover-text-accents-emerald-200:hover { color: var(--cl-color-accents-emerald-200); }
+.cl-focus-text-accents-emerald-200:focus { color: var(--cl-color-accents-emerald-200); }
+.group:hover .cl-group-hover-text-accents-emerald-200 { color: var(--cl-color-accents-emerald-200); }
+.cl-bg-color-accents-emerald-200 { background-color: var(--cl-color-accents-emerald-200); }
+.cl-hover-bg-color-accents-emerald-200:hover { background-color: var(--cl-color-accents-emerald-200); }
+.cl-focus-bg-color-accents-emerald-200:focus { background-color: var(--cl-color-accents-emerald-200); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-200 { background-color: var(--cl-color-accents-emerald-200); }
+.cl-text-color-accents-emerald-200 { color: var(--cl-color-accents-emerald-200); }
+.cl-hover-text-color-accents-emerald-200:hover { color: var(--cl-color-accents-emerald-200); }
+.cl-focus-text-color-accents-emerald-200:focus { color: var(--cl-color-accents-emerald-200); }
+.group:hover .cl-group-hover-text-color-accents-emerald-200 { color: var(--cl-color-accents-emerald-200); }
+.cl-bg-accents-emerald-300 { background-color: var(--cl-color-accents-emerald-300); }
+.cl-hover-bg-accents-emerald-300:hover { background-color: var(--cl-color-accents-emerald-300); }
+.cl-focus-bg-accents-emerald-300:focus { background-color: var(--cl-color-accents-emerald-300); }
+.group:hover .cl-group-hover-bg-accents-emerald-300 { background-color: var(--cl-color-accents-emerald-300); }
+.cl-text-accents-emerald-300 { color: var(--cl-color-accents-emerald-300); }
+.cl-hover-text-accents-emerald-300:hover { color: var(--cl-color-accents-emerald-300); }
+.cl-focus-text-accents-emerald-300:focus { color: var(--cl-color-accents-emerald-300); }
+.group:hover .cl-group-hover-text-accents-emerald-300 { color: var(--cl-color-accents-emerald-300); }
+.cl-bg-color-accents-emerald-300 { background-color: var(--cl-color-accents-emerald-300); }
+.cl-hover-bg-color-accents-emerald-300:hover { background-color: var(--cl-color-accents-emerald-300); }
+.cl-focus-bg-color-accents-emerald-300:focus { background-color: var(--cl-color-accents-emerald-300); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-300 { background-color: var(--cl-color-accents-emerald-300); }
+.cl-text-color-accents-emerald-300 { color: var(--cl-color-accents-emerald-300); }
+.cl-hover-text-color-accents-emerald-300:hover { color: var(--cl-color-accents-emerald-300); }
+.cl-focus-text-color-accents-emerald-300:focus { color: var(--cl-color-accents-emerald-300); }
+.group:hover .cl-group-hover-text-color-accents-emerald-300 { color: var(--cl-color-accents-emerald-300); }
+.cl-bg-accents-emerald-400 { background-color: var(--cl-color-accents-emerald-400); }
+.cl-hover-bg-accents-emerald-400:hover { background-color: var(--cl-color-accents-emerald-400); }
+.cl-focus-bg-accents-emerald-400:focus { background-color: var(--cl-color-accents-emerald-400); }
+.group:hover .cl-group-hover-bg-accents-emerald-400 { background-color: var(--cl-color-accents-emerald-400); }
+.cl-text-accents-emerald-400 { color: var(--cl-color-accents-emerald-400); }
+.cl-hover-text-accents-emerald-400:hover { color: var(--cl-color-accents-emerald-400); }
+.cl-focus-text-accents-emerald-400:focus { color: var(--cl-color-accents-emerald-400); }
+.group:hover .cl-group-hover-text-accents-emerald-400 { color: var(--cl-color-accents-emerald-400); }
+.cl-bg-color-accents-emerald-400 { background-color: var(--cl-color-accents-emerald-400); }
+.cl-hover-bg-color-accents-emerald-400:hover { background-color: var(--cl-color-accents-emerald-400); }
+.cl-focus-bg-color-accents-emerald-400:focus { background-color: var(--cl-color-accents-emerald-400); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-400 { background-color: var(--cl-color-accents-emerald-400); }
+.cl-text-color-accents-emerald-400 { color: var(--cl-color-accents-emerald-400); }
+.cl-hover-text-color-accents-emerald-400:hover { color: var(--cl-color-accents-emerald-400); }
+.cl-focus-text-color-accents-emerald-400:focus { color: var(--cl-color-accents-emerald-400); }
+.group:hover .cl-group-hover-text-color-accents-emerald-400 { color: var(--cl-color-accents-emerald-400); }
+.cl-bg-accents-emerald-500 { background-color: var(--cl-color-accents-emerald-500); }
+.cl-hover-bg-accents-emerald-500:hover { background-color: var(--cl-color-accents-emerald-500); }
+.cl-focus-bg-accents-emerald-500:focus { background-color: var(--cl-color-accents-emerald-500); }
+.group:hover .cl-group-hover-bg-accents-emerald-500 { background-color: var(--cl-color-accents-emerald-500); }
+.cl-text-accents-emerald-500 { color: var(--cl-color-accents-emerald-500); }
+.cl-hover-text-accents-emerald-500:hover { color: var(--cl-color-accents-emerald-500); }
+.cl-focus-text-accents-emerald-500:focus { color: var(--cl-color-accents-emerald-500); }
+.group:hover .cl-group-hover-text-accents-emerald-500 { color: var(--cl-color-accents-emerald-500); }
+.cl-bg-color-accents-emerald-500 { background-color: var(--cl-color-accents-emerald-500); }
+.cl-hover-bg-color-accents-emerald-500:hover { background-color: var(--cl-color-accents-emerald-500); }
+.cl-focus-bg-color-accents-emerald-500:focus { background-color: var(--cl-color-accents-emerald-500); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-500 { background-color: var(--cl-color-accents-emerald-500); }
+.cl-text-color-accents-emerald-500 { color: var(--cl-color-accents-emerald-500); }
+.cl-hover-text-color-accents-emerald-500:hover { color: var(--cl-color-accents-emerald-500); }
+.cl-focus-text-color-accents-emerald-500:focus { color: var(--cl-color-accents-emerald-500); }
+.group:hover .cl-group-hover-text-color-accents-emerald-500 { color: var(--cl-color-accents-emerald-500); }
+.cl-bg-accents-emerald-600 { background-color: var(--cl-color-accents-emerald-600); }
+.cl-hover-bg-accents-emerald-600:hover { background-color: var(--cl-color-accents-emerald-600); }
+.cl-focus-bg-accents-emerald-600:focus { background-color: var(--cl-color-accents-emerald-600); }
+.group:hover .cl-group-hover-bg-accents-emerald-600 { background-color: var(--cl-color-accents-emerald-600); }
+.cl-text-accents-emerald-600 { color: var(--cl-color-accents-emerald-600); }
+.cl-hover-text-accents-emerald-600:hover { color: var(--cl-color-accents-emerald-600); }
+.cl-focus-text-accents-emerald-600:focus { color: var(--cl-color-accents-emerald-600); }
+.group:hover .cl-group-hover-text-accents-emerald-600 { color: var(--cl-color-accents-emerald-600); }
+.cl-bg-color-accents-emerald-600 { background-color: var(--cl-color-accents-emerald-600); }
+.cl-hover-bg-color-accents-emerald-600:hover { background-color: var(--cl-color-accents-emerald-600); }
+.cl-focus-bg-color-accents-emerald-600:focus { background-color: var(--cl-color-accents-emerald-600); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-600 { background-color: var(--cl-color-accents-emerald-600); }
+.cl-text-color-accents-emerald-600 { color: var(--cl-color-accents-emerald-600); }
+.cl-hover-text-color-accents-emerald-600:hover { color: var(--cl-color-accents-emerald-600); }
+.cl-focus-text-color-accents-emerald-600:focus { color: var(--cl-color-accents-emerald-600); }
+.group:hover .cl-group-hover-text-color-accents-emerald-600 { color: var(--cl-color-accents-emerald-600); }
+.cl-bg-accents-emerald-700 { background-color: var(--cl-color-accents-emerald-700); }
+.cl-hover-bg-accents-emerald-700:hover { background-color: var(--cl-color-accents-emerald-700); }
+.cl-focus-bg-accents-emerald-700:focus { background-color: var(--cl-color-accents-emerald-700); }
+.group:hover .cl-group-hover-bg-accents-emerald-700 { background-color: var(--cl-color-accents-emerald-700); }
+.cl-text-accents-emerald-700 { color: var(--cl-color-accents-emerald-700); }
+.cl-hover-text-accents-emerald-700:hover { color: var(--cl-color-accents-emerald-700); }
+.cl-focus-text-accents-emerald-700:focus { color: var(--cl-color-accents-emerald-700); }
+.group:hover .cl-group-hover-text-accents-emerald-700 { color: var(--cl-color-accents-emerald-700); }
+.cl-bg-color-accents-emerald-700 { background-color: var(--cl-color-accents-emerald-700); }
+.cl-hover-bg-color-accents-emerald-700:hover { background-color: var(--cl-color-accents-emerald-700); }
+.cl-focus-bg-color-accents-emerald-700:focus { background-color: var(--cl-color-accents-emerald-700); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-700 { background-color: var(--cl-color-accents-emerald-700); }
+.cl-text-color-accents-emerald-700 { color: var(--cl-color-accents-emerald-700); }
+.cl-hover-text-color-accents-emerald-700:hover { color: var(--cl-color-accents-emerald-700); }
+.cl-focus-text-color-accents-emerald-700:focus { color: var(--cl-color-accents-emerald-700); }
+.group:hover .cl-group-hover-text-color-accents-emerald-700 { color: var(--cl-color-accents-emerald-700); }
+.cl-bg-accents-emerald-800 { background-color: var(--cl-color-accents-emerald-800); }
+.cl-hover-bg-accents-emerald-800:hover { background-color: var(--cl-color-accents-emerald-800); }
+.cl-focus-bg-accents-emerald-800:focus { background-color: var(--cl-color-accents-emerald-800); }
+.group:hover .cl-group-hover-bg-accents-emerald-800 { background-color: var(--cl-color-accents-emerald-800); }
+.cl-text-accents-emerald-800 { color: var(--cl-color-accents-emerald-800); }
+.cl-hover-text-accents-emerald-800:hover { color: var(--cl-color-accents-emerald-800); }
+.cl-focus-text-accents-emerald-800:focus { color: var(--cl-color-accents-emerald-800); }
+.group:hover .cl-group-hover-text-accents-emerald-800 { color: var(--cl-color-accents-emerald-800); }
+.cl-bg-color-accents-emerald-800 { background-color: var(--cl-color-accents-emerald-800); }
+.cl-hover-bg-color-accents-emerald-800:hover { background-color: var(--cl-color-accents-emerald-800); }
+.cl-focus-bg-color-accents-emerald-800:focus { background-color: var(--cl-color-accents-emerald-800); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-800 { background-color: var(--cl-color-accents-emerald-800); }
+.cl-text-color-accents-emerald-800 { color: var(--cl-color-accents-emerald-800); }
+.cl-hover-text-color-accents-emerald-800:hover { color: var(--cl-color-accents-emerald-800); }
+.cl-focus-text-color-accents-emerald-800:focus { color: var(--cl-color-accents-emerald-800); }
+.group:hover .cl-group-hover-text-color-accents-emerald-800 { color: var(--cl-color-accents-emerald-800); }
+.cl-bg-accents-emerald-900 { background-color: var(--cl-color-accents-emerald-900); }
+.cl-hover-bg-accents-emerald-900:hover { background-color: var(--cl-color-accents-emerald-900); }
+.cl-focus-bg-accents-emerald-900:focus { background-color: var(--cl-color-accents-emerald-900); }
+.group:hover .cl-group-hover-bg-accents-emerald-900 { background-color: var(--cl-color-accents-emerald-900); }
+.cl-text-accents-emerald-900 { color: var(--cl-color-accents-emerald-900); }
+.cl-hover-text-accents-emerald-900:hover { color: var(--cl-color-accents-emerald-900); }
+.cl-focus-text-accents-emerald-900:focus { color: var(--cl-color-accents-emerald-900); }
+.group:hover .cl-group-hover-text-accents-emerald-900 { color: var(--cl-color-accents-emerald-900); }
+.cl-bg-color-accents-emerald-900 { background-color: var(--cl-color-accents-emerald-900); }
+.cl-hover-bg-color-accents-emerald-900:hover { background-color: var(--cl-color-accents-emerald-900); }
+.cl-focus-bg-color-accents-emerald-900:focus { background-color: var(--cl-color-accents-emerald-900); }
+.group:hover .cl-group-hover-bg-color-accents-emerald-900 { background-color: var(--cl-color-accents-emerald-900); }
+.cl-text-color-accents-emerald-900 { color: var(--cl-color-accents-emerald-900); }
+.cl-hover-text-color-accents-emerald-900:hover { color: var(--cl-color-accents-emerald-900); }
+.cl-focus-text-color-accents-emerald-900:focus { color: var(--cl-color-accents-emerald-900); }
+.group:hover .cl-group-hover-text-color-accents-emerald-900 { color: var(--cl-color-accents-emerald-900); }
+.cl-bg-accents-amber-50 { background-color: var(--cl-color-accents-amber-50); }
+.cl-hover-bg-accents-amber-50:hover { background-color: var(--cl-color-accents-amber-50); }
+.cl-focus-bg-accents-amber-50:focus { background-color: var(--cl-color-accents-amber-50); }
+.group:hover .cl-group-hover-bg-accents-amber-50 { background-color: var(--cl-color-accents-amber-50); }
+.cl-text-accents-amber-50 { color: var(--cl-color-accents-amber-50); }
+.cl-hover-text-accents-amber-50:hover { color: var(--cl-color-accents-amber-50); }
+.cl-focus-text-accents-amber-50:focus { color: var(--cl-color-accents-amber-50); }
+.group:hover .cl-group-hover-text-accents-amber-50 { color: var(--cl-color-accents-amber-50); }
+.cl-bg-color-accents-amber-50 { background-color: var(--cl-color-accents-amber-50); }
+.cl-hover-bg-color-accents-amber-50:hover { background-color: var(--cl-color-accents-amber-50); }
+.cl-focus-bg-color-accents-amber-50:focus { background-color: var(--cl-color-accents-amber-50); }
+.group:hover .cl-group-hover-bg-color-accents-amber-50 { background-color: var(--cl-color-accents-amber-50); }
+.cl-text-color-accents-amber-50 { color: var(--cl-color-accents-amber-50); }
+.cl-hover-text-color-accents-amber-50:hover { color: var(--cl-color-accents-amber-50); }
+.cl-focus-text-color-accents-amber-50:focus { color: var(--cl-color-accents-amber-50); }
+.group:hover .cl-group-hover-text-color-accents-amber-50 { color: var(--cl-color-accents-amber-50); }
+.cl-bg-accents-amber-100 { background-color: var(--cl-color-accents-amber-100); }
+.cl-hover-bg-accents-amber-100:hover { background-color: var(--cl-color-accents-amber-100); }
+.cl-focus-bg-accents-amber-100:focus { background-color: var(--cl-color-accents-amber-100); }
+.group:hover .cl-group-hover-bg-accents-amber-100 { background-color: var(--cl-color-accents-amber-100); }
+.cl-text-accents-amber-100 { color: var(--cl-color-accents-amber-100); }
+.cl-hover-text-accents-amber-100:hover { color: var(--cl-color-accents-amber-100); }
+.cl-focus-text-accents-amber-100:focus { color: var(--cl-color-accents-amber-100); }
+.group:hover .cl-group-hover-text-accents-amber-100 { color: var(--cl-color-accents-amber-100); }
+.cl-bg-color-accents-amber-100 { background-color: var(--cl-color-accents-amber-100); }
+.cl-hover-bg-color-accents-amber-100:hover { background-color: var(--cl-color-accents-amber-100); }
+.cl-focus-bg-color-accents-amber-100:focus { background-color: var(--cl-color-accents-amber-100); }
+.group:hover .cl-group-hover-bg-color-accents-amber-100 { background-color: var(--cl-color-accents-amber-100); }
+.cl-text-color-accents-amber-100 { color: var(--cl-color-accents-amber-100); }
+.cl-hover-text-color-accents-amber-100:hover { color: var(--cl-color-accents-amber-100); }
+.cl-focus-text-color-accents-amber-100:focus { color: var(--cl-color-accents-amber-100); }
+.group:hover .cl-group-hover-text-color-accents-amber-100 { color: var(--cl-color-accents-amber-100); }
+.cl-bg-accents-amber-200 { background-color: var(--cl-color-accents-amber-200); }
+.cl-hover-bg-accents-amber-200:hover { background-color: var(--cl-color-accents-amber-200); }
+.cl-focus-bg-accents-amber-200:focus { background-color: var(--cl-color-accents-amber-200); }
+.group:hover .cl-group-hover-bg-accents-amber-200 { background-color: var(--cl-color-accents-amber-200); }
+.cl-text-accents-amber-200 { color: var(--cl-color-accents-amber-200); }
+.cl-hover-text-accents-amber-200:hover { color: var(--cl-color-accents-amber-200); }
+.cl-focus-text-accents-amber-200:focus { color: var(--cl-color-accents-amber-200); }
+.group:hover .cl-group-hover-text-accents-amber-200 { color: var(--cl-color-accents-amber-200); }
+.cl-bg-color-accents-amber-200 { background-color: var(--cl-color-accents-amber-200); }
+.cl-hover-bg-color-accents-amber-200:hover { background-color: var(--cl-color-accents-amber-200); }
+.cl-focus-bg-color-accents-amber-200:focus { background-color: var(--cl-color-accents-amber-200); }
+.group:hover .cl-group-hover-bg-color-accents-amber-200 { background-color: var(--cl-color-accents-amber-200); }
+.cl-text-color-accents-amber-200 { color: var(--cl-color-accents-amber-200); }
+.cl-hover-text-color-accents-amber-200:hover { color: var(--cl-color-accents-amber-200); }
+.cl-focus-text-color-accents-amber-200:focus { color: var(--cl-color-accents-amber-200); }
+.group:hover .cl-group-hover-text-color-accents-amber-200 { color: var(--cl-color-accents-amber-200); }
+.cl-bg-accents-amber-300 { background-color: var(--cl-color-accents-amber-300); }
+.cl-hover-bg-accents-amber-300:hover { background-color: var(--cl-color-accents-amber-300); }
+.cl-focus-bg-accents-amber-300:focus { background-color: var(--cl-color-accents-amber-300); }
+.group:hover .cl-group-hover-bg-accents-amber-300 { background-color: var(--cl-color-accents-amber-300); }
+.cl-text-accents-amber-300 { color: var(--cl-color-accents-amber-300); }
+.cl-hover-text-accents-amber-300:hover { color: var(--cl-color-accents-amber-300); }
+.cl-focus-text-accents-amber-300:focus { color: var(--cl-color-accents-amber-300); }
+.group:hover .cl-group-hover-text-accents-amber-300 { color: var(--cl-color-accents-amber-300); }
+.cl-bg-color-accents-amber-300 { background-color: var(--cl-color-accents-amber-300); }
+.cl-hover-bg-color-accents-amber-300:hover { background-color: var(--cl-color-accents-amber-300); }
+.cl-focus-bg-color-accents-amber-300:focus { background-color: var(--cl-color-accents-amber-300); }
+.group:hover .cl-group-hover-bg-color-accents-amber-300 { background-color: var(--cl-color-accents-amber-300); }
+.cl-text-color-accents-amber-300 { color: var(--cl-color-accents-amber-300); }
+.cl-hover-text-color-accents-amber-300:hover { color: var(--cl-color-accents-amber-300); }
+.cl-focus-text-color-accents-amber-300:focus { color: var(--cl-color-accents-amber-300); }
+.group:hover .cl-group-hover-text-color-accents-amber-300 { color: var(--cl-color-accents-amber-300); }
+.cl-bg-accents-amber-400 { background-color: var(--cl-color-accents-amber-400); }
+.cl-hover-bg-accents-amber-400:hover { background-color: var(--cl-color-accents-amber-400); }
+.cl-focus-bg-accents-amber-400:focus { background-color: var(--cl-color-accents-amber-400); }
+.group:hover .cl-group-hover-bg-accents-amber-400 { background-color: var(--cl-color-accents-amber-400); }
+.cl-text-accents-amber-400 { color: var(--cl-color-accents-amber-400); }
+.cl-hover-text-accents-amber-400:hover { color: var(--cl-color-accents-amber-400); }
+.cl-focus-text-accents-amber-400:focus { color: var(--cl-color-accents-amber-400); }
+.group:hover .cl-group-hover-text-accents-amber-400 { color: var(--cl-color-accents-amber-400); }
+.cl-bg-color-accents-amber-400 { background-color: var(--cl-color-accents-amber-400); }
+.cl-hover-bg-color-accents-amber-400:hover { background-color: var(--cl-color-accents-amber-400); }
+.cl-focus-bg-color-accents-amber-400:focus { background-color: var(--cl-color-accents-amber-400); }
+.group:hover .cl-group-hover-bg-color-accents-amber-400 { background-color: var(--cl-color-accents-amber-400); }
+.cl-text-color-accents-amber-400 { color: var(--cl-color-accents-amber-400); }
+.cl-hover-text-color-accents-amber-400:hover { color: var(--cl-color-accents-amber-400); }
+.cl-focus-text-color-accents-amber-400:focus { color: var(--cl-color-accents-amber-400); }
+.group:hover .cl-group-hover-text-color-accents-amber-400 { color: var(--cl-color-accents-amber-400); }
+.cl-bg-accents-amber-500 { background-color: var(--cl-color-accents-amber-500); }
+.cl-hover-bg-accents-amber-500:hover { background-color: var(--cl-color-accents-amber-500); }
+.cl-focus-bg-accents-amber-500:focus { background-color: var(--cl-color-accents-amber-500); }
+.group:hover .cl-group-hover-bg-accents-amber-500 { background-color: var(--cl-color-accents-amber-500); }
+.cl-text-accents-amber-500 { color: var(--cl-color-accents-amber-500); }
+.cl-hover-text-accents-amber-500:hover { color: var(--cl-color-accents-amber-500); }
+.cl-focus-text-accents-amber-500:focus { color: var(--cl-color-accents-amber-500); }
+.group:hover .cl-group-hover-text-accents-amber-500 { color: var(--cl-color-accents-amber-500); }
+.cl-bg-color-accents-amber-500 { background-color: var(--cl-color-accents-amber-500); }
+.cl-hover-bg-color-accents-amber-500:hover { background-color: var(--cl-color-accents-amber-500); }
+.cl-focus-bg-color-accents-amber-500:focus { background-color: var(--cl-color-accents-amber-500); }
+.group:hover .cl-group-hover-bg-color-accents-amber-500 { background-color: var(--cl-color-accents-amber-500); }
+.cl-text-color-accents-amber-500 { color: var(--cl-color-accents-amber-500); }
+.cl-hover-text-color-accents-amber-500:hover { color: var(--cl-color-accents-amber-500); }
+.cl-focus-text-color-accents-amber-500:focus { color: var(--cl-color-accents-amber-500); }
+.group:hover .cl-group-hover-text-color-accents-amber-500 { color: var(--cl-color-accents-amber-500); }
+.cl-bg-accents-amber-600 { background-color: var(--cl-color-accents-amber-600); }
+.cl-hover-bg-accents-amber-600:hover { background-color: var(--cl-color-accents-amber-600); }
+.cl-focus-bg-accents-amber-600:focus { background-color: var(--cl-color-accents-amber-600); }
+.group:hover .cl-group-hover-bg-accents-amber-600 { background-color: var(--cl-color-accents-amber-600); }
+.cl-text-accents-amber-600 { color: var(--cl-color-accents-amber-600); }
+.cl-hover-text-accents-amber-600:hover { color: var(--cl-color-accents-amber-600); }
+.cl-focus-text-accents-amber-600:focus { color: var(--cl-color-accents-amber-600); }
+.group:hover .cl-group-hover-text-accents-amber-600 { color: var(--cl-color-accents-amber-600); }
+.cl-bg-color-accents-amber-600 { background-color: var(--cl-color-accents-amber-600); }
+.cl-hover-bg-color-accents-amber-600:hover { background-color: var(--cl-color-accents-amber-600); }
+.cl-focus-bg-color-accents-amber-600:focus { background-color: var(--cl-color-accents-amber-600); }
+.group:hover .cl-group-hover-bg-color-accents-amber-600 { background-color: var(--cl-color-accents-amber-600); }
+.cl-text-color-accents-amber-600 { color: var(--cl-color-accents-amber-600); }
+.cl-hover-text-color-accents-amber-600:hover { color: var(--cl-color-accents-amber-600); }
+.cl-focus-text-color-accents-amber-600:focus { color: var(--cl-color-accents-amber-600); }
+.group:hover .cl-group-hover-text-color-accents-amber-600 { color: var(--cl-color-accents-amber-600); }
+.cl-bg-accents-amber-700 { background-color: var(--cl-color-accents-amber-700); }
+.cl-hover-bg-accents-amber-700:hover { background-color: var(--cl-color-accents-amber-700); }
+.cl-focus-bg-accents-amber-700:focus { background-color: var(--cl-color-accents-amber-700); }
+.group:hover .cl-group-hover-bg-accents-amber-700 { background-color: var(--cl-color-accents-amber-700); }
+.cl-text-accents-amber-700 { color: var(--cl-color-accents-amber-700); }
+.cl-hover-text-accents-amber-700:hover { color: var(--cl-color-accents-amber-700); }
+.cl-focus-text-accents-amber-700:focus { color: var(--cl-color-accents-amber-700); }
+.group:hover .cl-group-hover-text-accents-amber-700 { color: var(--cl-color-accents-amber-700); }
+.cl-bg-color-accents-amber-700 { background-color: var(--cl-color-accents-amber-700); }
+.cl-hover-bg-color-accents-amber-700:hover { background-color: var(--cl-color-accents-amber-700); }
+.cl-focus-bg-color-accents-amber-700:focus { background-color: var(--cl-color-accents-amber-700); }
+.group:hover .cl-group-hover-bg-color-accents-amber-700 { background-color: var(--cl-color-accents-amber-700); }
+.cl-text-color-accents-amber-700 { color: var(--cl-color-accents-amber-700); }
+.cl-hover-text-color-accents-amber-700:hover { color: var(--cl-color-accents-amber-700); }
+.cl-focus-text-color-accents-amber-700:focus { color: var(--cl-color-accents-amber-700); }
+.group:hover .cl-group-hover-text-color-accents-amber-700 { color: var(--cl-color-accents-amber-700); }
+.cl-bg-accents-amber-800 { background-color: var(--cl-color-accents-amber-800); }
+.cl-hover-bg-accents-amber-800:hover { background-color: var(--cl-color-accents-amber-800); }
+.cl-focus-bg-accents-amber-800:focus { background-color: var(--cl-color-accents-amber-800); }
+.group:hover .cl-group-hover-bg-accents-amber-800 { background-color: var(--cl-color-accents-amber-800); }
+.cl-text-accents-amber-800 { color: var(--cl-color-accents-amber-800); }
+.cl-hover-text-accents-amber-800:hover { color: var(--cl-color-accents-amber-800); }
+.cl-focus-text-accents-amber-800:focus { color: var(--cl-color-accents-amber-800); }
+.group:hover .cl-group-hover-text-accents-amber-800 { color: var(--cl-color-accents-amber-800); }
+.cl-bg-color-accents-amber-800 { background-color: var(--cl-color-accents-amber-800); }
+.cl-hover-bg-color-accents-amber-800:hover { background-color: var(--cl-color-accents-amber-800); }
+.cl-focus-bg-color-accents-amber-800:focus { background-color: var(--cl-color-accents-amber-800); }
+.group:hover .cl-group-hover-bg-color-accents-amber-800 { background-color: var(--cl-color-accents-amber-800); }
+.cl-text-color-accents-amber-800 { color: var(--cl-color-accents-amber-800); }
+.cl-hover-text-color-accents-amber-800:hover { color: var(--cl-color-accents-amber-800); }
+.cl-focus-text-color-accents-amber-800:focus { color: var(--cl-color-accents-amber-800); }
+.group:hover .cl-group-hover-text-color-accents-amber-800 { color: var(--cl-color-accents-amber-800); }
+.cl-bg-accents-amber-900 { background-color: var(--cl-color-accents-amber-900); }
+.cl-hover-bg-accents-amber-900:hover { background-color: var(--cl-color-accents-amber-900); }
+.cl-focus-bg-accents-amber-900:focus { background-color: var(--cl-color-accents-amber-900); }
+.group:hover .cl-group-hover-bg-accents-amber-900 { background-color: var(--cl-color-accents-amber-900); }
+.cl-text-accents-amber-900 { color: var(--cl-color-accents-amber-900); }
+.cl-hover-text-accents-amber-900:hover { color: var(--cl-color-accents-amber-900); }
+.cl-focus-text-accents-amber-900:focus { color: var(--cl-color-accents-amber-900); }
+.group:hover .cl-group-hover-text-accents-amber-900 { color: var(--cl-color-accents-amber-900); }
+.cl-bg-color-accents-amber-900 { background-color: var(--cl-color-accents-amber-900); }
+.cl-hover-bg-color-accents-amber-900:hover { background-color: var(--cl-color-accents-amber-900); }
+.cl-focus-bg-color-accents-amber-900:focus { background-color: var(--cl-color-accents-amber-900); }
+.group:hover .cl-group-hover-bg-color-accents-amber-900 { background-color: var(--cl-color-accents-amber-900); }
+.cl-text-color-accents-amber-900 { color: var(--cl-color-accents-amber-900); }
+.cl-hover-text-color-accents-amber-900:hover { color: var(--cl-color-accents-amber-900); }
+.cl-focus-text-color-accents-amber-900:focus { color: var(--cl-color-accents-amber-900); }
+.group:hover .cl-group-hover-text-color-accents-amber-900 { color: var(--cl-color-accents-amber-900); }
+.cl-bg-accents-rose-50 { background-color: var(--cl-color-accents-rose-50); }
+.cl-hover-bg-accents-rose-50:hover { background-color: var(--cl-color-accents-rose-50); }
+.cl-focus-bg-accents-rose-50:focus { background-color: var(--cl-color-accents-rose-50); }
+.group:hover .cl-group-hover-bg-accents-rose-50 { background-color: var(--cl-color-accents-rose-50); }
+.cl-text-accents-rose-50 { color: var(--cl-color-accents-rose-50); }
+.cl-hover-text-accents-rose-50:hover { color: var(--cl-color-accents-rose-50); }
+.cl-focus-text-accents-rose-50:focus { color: var(--cl-color-accents-rose-50); }
+.group:hover .cl-group-hover-text-accents-rose-50 { color: var(--cl-color-accents-rose-50); }
+.cl-bg-color-accents-rose-50 { background-color: var(--cl-color-accents-rose-50); }
+.cl-hover-bg-color-accents-rose-50:hover { background-color: var(--cl-color-accents-rose-50); }
+.cl-focus-bg-color-accents-rose-50:focus { background-color: var(--cl-color-accents-rose-50); }
+.group:hover .cl-group-hover-bg-color-accents-rose-50 { background-color: var(--cl-color-accents-rose-50); }
+.cl-text-color-accents-rose-50 { color: var(--cl-color-accents-rose-50); }
+.cl-hover-text-color-accents-rose-50:hover { color: var(--cl-color-accents-rose-50); }
+.cl-focus-text-color-accents-rose-50:focus { color: var(--cl-color-accents-rose-50); }
+.group:hover .cl-group-hover-text-color-accents-rose-50 { color: var(--cl-color-accents-rose-50); }
+.cl-bg-accents-rose-100 { background-color: var(--cl-color-accents-rose-100); }
+.cl-hover-bg-accents-rose-100:hover { background-color: var(--cl-color-accents-rose-100); }
+.cl-focus-bg-accents-rose-100:focus { background-color: var(--cl-color-accents-rose-100); }
+.group:hover .cl-group-hover-bg-accents-rose-100 { background-color: var(--cl-color-accents-rose-100); }
+.cl-text-accents-rose-100 { color: var(--cl-color-accents-rose-100); }
+.cl-hover-text-accents-rose-100:hover { color: var(--cl-color-accents-rose-100); }
+.cl-focus-text-accents-rose-100:focus { color: var(--cl-color-accents-rose-100); }
+.group:hover .cl-group-hover-text-accents-rose-100 { color: var(--cl-color-accents-rose-100); }
+.cl-bg-color-accents-rose-100 { background-color: var(--cl-color-accents-rose-100); }
+.cl-hover-bg-color-accents-rose-100:hover { background-color: var(--cl-color-accents-rose-100); }
+.cl-focus-bg-color-accents-rose-100:focus { background-color: var(--cl-color-accents-rose-100); }
+.group:hover .cl-group-hover-bg-color-accents-rose-100 { background-color: var(--cl-color-accents-rose-100); }
+.cl-text-color-accents-rose-100 { color: var(--cl-color-accents-rose-100); }
+.cl-hover-text-color-accents-rose-100:hover { color: var(--cl-color-accents-rose-100); }
+.cl-focus-text-color-accents-rose-100:focus { color: var(--cl-color-accents-rose-100); }
+.group:hover .cl-group-hover-text-color-accents-rose-100 { color: var(--cl-color-accents-rose-100); }
+.cl-bg-accents-rose-200 { background-color: var(--cl-color-accents-rose-200); }
+.cl-hover-bg-accents-rose-200:hover { background-color: var(--cl-color-accents-rose-200); }
+.cl-focus-bg-accents-rose-200:focus { background-color: var(--cl-color-accents-rose-200); }
+.group:hover .cl-group-hover-bg-accents-rose-200 { background-color: var(--cl-color-accents-rose-200); }
+.cl-text-accents-rose-200 { color: var(--cl-color-accents-rose-200); }
+.cl-hover-text-accents-rose-200:hover { color: var(--cl-color-accents-rose-200); }
+.cl-focus-text-accents-rose-200:focus { color: var(--cl-color-accents-rose-200); }
+.group:hover .cl-group-hover-text-accents-rose-200 { color: var(--cl-color-accents-rose-200); }
+.cl-bg-color-accents-rose-200 { background-color: var(--cl-color-accents-rose-200); }
+.cl-hover-bg-color-accents-rose-200:hover { background-color: var(--cl-color-accents-rose-200); }
+.cl-focus-bg-color-accents-rose-200:focus { background-color: var(--cl-color-accents-rose-200); }
+.group:hover .cl-group-hover-bg-color-accents-rose-200 { background-color: var(--cl-color-accents-rose-200); }
+.cl-text-color-accents-rose-200 { color: var(--cl-color-accents-rose-200); }
+.cl-hover-text-color-accents-rose-200:hover { color: var(--cl-color-accents-rose-200); }
+.cl-focus-text-color-accents-rose-200:focus { color: var(--cl-color-accents-rose-200); }
+.group:hover .cl-group-hover-text-color-accents-rose-200 { color: var(--cl-color-accents-rose-200); }
+.cl-bg-accents-rose-300 { background-color: var(--cl-color-accents-rose-300); }
+.cl-hover-bg-accents-rose-300:hover { background-color: var(--cl-color-accents-rose-300); }
+.cl-focus-bg-accents-rose-300:focus { background-color: var(--cl-color-accents-rose-300); }
+.group:hover .cl-group-hover-bg-accents-rose-300 { background-color: var(--cl-color-accents-rose-300); }
+.cl-text-accents-rose-300 { color: var(--cl-color-accents-rose-300); }
+.cl-hover-text-accents-rose-300:hover { color: var(--cl-color-accents-rose-300); }
+.cl-focus-text-accents-rose-300:focus { color: var(--cl-color-accents-rose-300); }
+.group:hover .cl-group-hover-text-accents-rose-300 { color: var(--cl-color-accents-rose-300); }
+.cl-bg-color-accents-rose-300 { background-color: var(--cl-color-accents-rose-300); }
+.cl-hover-bg-color-accents-rose-300:hover { background-color: var(--cl-color-accents-rose-300); }
+.cl-focus-bg-color-accents-rose-300:focus { background-color: var(--cl-color-accents-rose-300); }
+.group:hover .cl-group-hover-bg-color-accents-rose-300 { background-color: var(--cl-color-accents-rose-300); }
+.cl-text-color-accents-rose-300 { color: var(--cl-color-accents-rose-300); }
+.cl-hover-text-color-accents-rose-300:hover { color: var(--cl-color-accents-rose-300); }
+.cl-focus-text-color-accents-rose-300:focus { color: var(--cl-color-accents-rose-300); }
+.group:hover .cl-group-hover-text-color-accents-rose-300 { color: var(--cl-color-accents-rose-300); }
+.cl-bg-accents-rose-400 { background-color: var(--cl-color-accents-rose-400); }
+.cl-hover-bg-accents-rose-400:hover { background-color: var(--cl-color-accents-rose-400); }
+.cl-focus-bg-accents-rose-400:focus { background-color: var(--cl-color-accents-rose-400); }
+.group:hover .cl-group-hover-bg-accents-rose-400 { background-color: var(--cl-color-accents-rose-400); }
+.cl-text-accents-rose-400 { color: var(--cl-color-accents-rose-400); }
+.cl-hover-text-accents-rose-400:hover { color: var(--cl-color-accents-rose-400); }
+.cl-focus-text-accents-rose-400:focus { color: var(--cl-color-accents-rose-400); }
+.group:hover .cl-group-hover-text-accents-rose-400 { color: var(--cl-color-accents-rose-400); }
+.cl-bg-color-accents-rose-400 { background-color: var(--cl-color-accents-rose-400); }
+.cl-hover-bg-color-accents-rose-400:hover { background-color: var(--cl-color-accents-rose-400); }
+.cl-focus-bg-color-accents-rose-400:focus { background-color: var(--cl-color-accents-rose-400); }
+.group:hover .cl-group-hover-bg-color-accents-rose-400 { background-color: var(--cl-color-accents-rose-400); }
+.cl-text-color-accents-rose-400 { color: var(--cl-color-accents-rose-400); }
+.cl-hover-text-color-accents-rose-400:hover { color: var(--cl-color-accents-rose-400); }
+.cl-focus-text-color-accents-rose-400:focus { color: var(--cl-color-accents-rose-400); }
+.group:hover .cl-group-hover-text-color-accents-rose-400 { color: var(--cl-color-accents-rose-400); }
+.cl-bg-accents-rose-500 { background-color: var(--cl-color-accents-rose-500); }
+.cl-hover-bg-accents-rose-500:hover { background-color: var(--cl-color-accents-rose-500); }
+.cl-focus-bg-accents-rose-500:focus { background-color: var(--cl-color-accents-rose-500); }
+.group:hover .cl-group-hover-bg-accents-rose-500 { background-color: var(--cl-color-accents-rose-500); }
+.cl-text-accents-rose-500 { color: var(--cl-color-accents-rose-500); }
+.cl-hover-text-accents-rose-500:hover { color: var(--cl-color-accents-rose-500); }
+.cl-focus-text-accents-rose-500:focus { color: var(--cl-color-accents-rose-500); }
+.group:hover .cl-group-hover-text-accents-rose-500 { color: var(--cl-color-accents-rose-500); }
+.cl-bg-color-accents-rose-500 { background-color: var(--cl-color-accents-rose-500); }
+.cl-hover-bg-color-accents-rose-500:hover { background-color: var(--cl-color-accents-rose-500); }
+.cl-focus-bg-color-accents-rose-500:focus { background-color: var(--cl-color-accents-rose-500); }
+.group:hover .cl-group-hover-bg-color-accents-rose-500 { background-color: var(--cl-color-accents-rose-500); }
+.cl-text-color-accents-rose-500 { color: var(--cl-color-accents-rose-500); }
+.cl-hover-text-color-accents-rose-500:hover { color: var(--cl-color-accents-rose-500); }
+.cl-focus-text-color-accents-rose-500:focus { color: var(--cl-color-accents-rose-500); }
+.group:hover .cl-group-hover-text-color-accents-rose-500 { color: var(--cl-color-accents-rose-500); }
+.cl-bg-accents-rose-600 { background-color: var(--cl-color-accents-rose-600); }
+.cl-hover-bg-accents-rose-600:hover { background-color: var(--cl-color-accents-rose-600); }
+.cl-focus-bg-accents-rose-600:focus { background-color: var(--cl-color-accents-rose-600); }
+.group:hover .cl-group-hover-bg-accents-rose-600 { background-color: var(--cl-color-accents-rose-600); }
+.cl-text-accents-rose-600 { color: var(--cl-color-accents-rose-600); }
+.cl-hover-text-accents-rose-600:hover { color: var(--cl-color-accents-rose-600); }
+.cl-focus-text-accents-rose-600:focus { color: var(--cl-color-accents-rose-600); }
+.group:hover .cl-group-hover-text-accents-rose-600 { color: var(--cl-color-accents-rose-600); }
+.cl-bg-color-accents-rose-600 { background-color: var(--cl-color-accents-rose-600); }
+.cl-hover-bg-color-accents-rose-600:hover { background-color: var(--cl-color-accents-rose-600); }
+.cl-focus-bg-color-accents-rose-600:focus { background-color: var(--cl-color-accents-rose-600); }
+.group:hover .cl-group-hover-bg-color-accents-rose-600 { background-color: var(--cl-color-accents-rose-600); }
+.cl-text-color-accents-rose-600 { color: var(--cl-color-accents-rose-600); }
+.cl-hover-text-color-accents-rose-600:hover { color: var(--cl-color-accents-rose-600); }
+.cl-focus-text-color-accents-rose-600:focus { color: var(--cl-color-accents-rose-600); }
+.group:hover .cl-group-hover-text-color-accents-rose-600 { color: var(--cl-color-accents-rose-600); }
+.cl-bg-accents-rose-700 { background-color: var(--cl-color-accents-rose-700); }
+.cl-hover-bg-accents-rose-700:hover { background-color: var(--cl-color-accents-rose-700); }
+.cl-focus-bg-accents-rose-700:focus { background-color: var(--cl-color-accents-rose-700); }
+.group:hover .cl-group-hover-bg-accents-rose-700 { background-color: var(--cl-color-accents-rose-700); }
+.cl-text-accents-rose-700 { color: var(--cl-color-accents-rose-700); }
+.cl-hover-text-accents-rose-700:hover { color: var(--cl-color-accents-rose-700); }
+.cl-focus-text-accents-rose-700:focus { color: var(--cl-color-accents-rose-700); }
+.group:hover .cl-group-hover-text-accents-rose-700 { color: var(--cl-color-accents-rose-700); }
+.cl-bg-color-accents-rose-700 { background-color: var(--cl-color-accents-rose-700); }
+.cl-hover-bg-color-accents-rose-700:hover { background-color: var(--cl-color-accents-rose-700); }
+.cl-focus-bg-color-accents-rose-700:focus { background-color: var(--cl-color-accents-rose-700); }
+.group:hover .cl-group-hover-bg-color-accents-rose-700 { background-color: var(--cl-color-accents-rose-700); }
+.cl-text-color-accents-rose-700 { color: var(--cl-color-accents-rose-700); }
+.cl-hover-text-color-accents-rose-700:hover { color: var(--cl-color-accents-rose-700); }
+.cl-focus-text-color-accents-rose-700:focus { color: var(--cl-color-accents-rose-700); }
+.group:hover .cl-group-hover-text-color-accents-rose-700 { color: var(--cl-color-accents-rose-700); }
+.cl-bg-accents-rose-800 { background-color: var(--cl-color-accents-rose-800); }
+.cl-hover-bg-accents-rose-800:hover { background-color: var(--cl-color-accents-rose-800); }
+.cl-focus-bg-accents-rose-800:focus { background-color: var(--cl-color-accents-rose-800); }
+.group:hover .cl-group-hover-bg-accents-rose-800 { background-color: var(--cl-color-accents-rose-800); }
+.cl-text-accents-rose-800 { color: var(--cl-color-accents-rose-800); }
+.cl-hover-text-accents-rose-800:hover { color: var(--cl-color-accents-rose-800); }
+.cl-focus-text-accents-rose-800:focus { color: var(--cl-color-accents-rose-800); }
+.group:hover .cl-group-hover-text-accents-rose-800 { color: var(--cl-color-accents-rose-800); }
+.cl-bg-color-accents-rose-800 { background-color: var(--cl-color-accents-rose-800); }
+.cl-hover-bg-color-accents-rose-800:hover { background-color: var(--cl-color-accents-rose-800); }
+.cl-focus-bg-color-accents-rose-800:focus { background-color: var(--cl-color-accents-rose-800); }
+.group:hover .cl-group-hover-bg-color-accents-rose-800 { background-color: var(--cl-color-accents-rose-800); }
+.cl-text-color-accents-rose-800 { color: var(--cl-color-accents-rose-800); }
+.cl-hover-text-color-accents-rose-800:hover { color: var(--cl-color-accents-rose-800); }
+.cl-focus-text-color-accents-rose-800:focus { color: var(--cl-color-accents-rose-800); }
+.group:hover .cl-group-hover-text-color-accents-rose-800 { color: var(--cl-color-accents-rose-800); }
+.cl-bg-accents-rose-900 { background-color: var(--cl-color-accents-rose-900); }
+.cl-hover-bg-accents-rose-900:hover { background-color: var(--cl-color-accents-rose-900); }
+.cl-focus-bg-accents-rose-900:focus { background-color: var(--cl-color-accents-rose-900); }
+.group:hover .cl-group-hover-bg-accents-rose-900 { background-color: var(--cl-color-accents-rose-900); }
+.cl-text-accents-rose-900 { color: var(--cl-color-accents-rose-900); }
+.cl-hover-text-accents-rose-900:hover { color: var(--cl-color-accents-rose-900); }
+.cl-focus-text-accents-rose-900:focus { color: var(--cl-color-accents-rose-900); }
+.group:hover .cl-group-hover-text-accents-rose-900 { color: var(--cl-color-accents-rose-900); }
+.cl-bg-color-accents-rose-900 { background-color: var(--cl-color-accents-rose-900); }
+.cl-hover-bg-color-accents-rose-900:hover { background-color: var(--cl-color-accents-rose-900); }
+.cl-focus-bg-color-accents-rose-900:focus { background-color: var(--cl-color-accents-rose-900); }
+.group:hover .cl-group-hover-bg-color-accents-rose-900 { background-color: var(--cl-color-accents-rose-900); }
+.cl-text-color-accents-rose-900 { color: var(--cl-color-accents-rose-900); }
+.cl-hover-text-color-accents-rose-900:hover { color: var(--cl-color-accents-rose-900); }
+.cl-focus-text-color-accents-rose-900:focus { color: var(--cl-color-accents-rose-900); }
+.group:hover .cl-group-hover-text-color-accents-rose-900 { color: var(--cl-color-accents-rose-900); }
+.cl-bg-accents-violet-50 { background-color: var(--cl-color-accents-violet-50); }
+.cl-hover-bg-accents-violet-50:hover { background-color: var(--cl-color-accents-violet-50); }
+.cl-focus-bg-accents-violet-50:focus { background-color: var(--cl-color-accents-violet-50); }
+.group:hover .cl-group-hover-bg-accents-violet-50 { background-color: var(--cl-color-accents-violet-50); }
+.cl-text-accents-violet-50 { color: var(--cl-color-accents-violet-50); }
+.cl-hover-text-accents-violet-50:hover { color: var(--cl-color-accents-violet-50); }
+.cl-focus-text-accents-violet-50:focus { color: var(--cl-color-accents-violet-50); }
+.group:hover .cl-group-hover-text-accents-violet-50 { color: var(--cl-color-accents-violet-50); }
+.cl-bg-color-accents-violet-50 { background-color: var(--cl-color-accents-violet-50); }
+.cl-hover-bg-color-accents-violet-50:hover { background-color: var(--cl-color-accents-violet-50); }
+.cl-focus-bg-color-accents-violet-50:focus { background-color: var(--cl-color-accents-violet-50); }
+.group:hover .cl-group-hover-bg-color-accents-violet-50 { background-color: var(--cl-color-accents-violet-50); }
+.cl-text-color-accents-violet-50 { color: var(--cl-color-accents-violet-50); }
+.cl-hover-text-color-accents-violet-50:hover { color: var(--cl-color-accents-violet-50); }
+.cl-focus-text-color-accents-violet-50:focus { color: var(--cl-color-accents-violet-50); }
+.group:hover .cl-group-hover-text-color-accents-violet-50 { color: var(--cl-color-accents-violet-50); }
+.cl-bg-accents-violet-100 { background-color: var(--cl-color-accents-violet-100); }
+.cl-hover-bg-accents-violet-100:hover { background-color: var(--cl-color-accents-violet-100); }
+.cl-focus-bg-accents-violet-100:focus { background-color: var(--cl-color-accents-violet-100); }
+.group:hover .cl-group-hover-bg-accents-violet-100 { background-color: var(--cl-color-accents-violet-100); }
+.cl-text-accents-violet-100 { color: var(--cl-color-accents-violet-100); }
+.cl-hover-text-accents-violet-100:hover { color: var(--cl-color-accents-violet-100); }
+.cl-focus-text-accents-violet-100:focus { color: var(--cl-color-accents-violet-100); }
+.group:hover .cl-group-hover-text-accents-violet-100 { color: var(--cl-color-accents-violet-100); }
+.cl-bg-color-accents-violet-100 { background-color: var(--cl-color-accents-violet-100); }
+.cl-hover-bg-color-accents-violet-100:hover { background-color: var(--cl-color-accents-violet-100); }
+.cl-focus-bg-color-accents-violet-100:focus { background-color: var(--cl-color-accents-violet-100); }
+.group:hover .cl-group-hover-bg-color-accents-violet-100 { background-color: var(--cl-color-accents-violet-100); }
+.cl-text-color-accents-violet-100 { color: var(--cl-color-accents-violet-100); }
+.cl-hover-text-color-accents-violet-100:hover { color: var(--cl-color-accents-violet-100); }
+.cl-focus-text-color-accents-violet-100:focus { color: var(--cl-color-accents-violet-100); }
+.group:hover .cl-group-hover-text-color-accents-violet-100 { color: var(--cl-color-accents-violet-100); }
+.cl-bg-accents-violet-200 { background-color: var(--cl-color-accents-violet-200); }
+.cl-hover-bg-accents-violet-200:hover { background-color: var(--cl-color-accents-violet-200); }
+.cl-focus-bg-accents-violet-200:focus { background-color: var(--cl-color-accents-violet-200); }
+.group:hover .cl-group-hover-bg-accents-violet-200 { background-color: var(--cl-color-accents-violet-200); }
+.cl-text-accents-violet-200 { color: var(--cl-color-accents-violet-200); }
+.cl-hover-text-accents-violet-200:hover { color: var(--cl-color-accents-violet-200); }
+.cl-focus-text-accents-violet-200:focus { color: var(--cl-color-accents-violet-200); }
+.group:hover .cl-group-hover-text-accents-violet-200 { color: var(--cl-color-accents-violet-200); }
+.cl-bg-color-accents-violet-200 { background-color: var(--cl-color-accents-violet-200); }
+.cl-hover-bg-color-accents-violet-200:hover { background-color: var(--cl-color-accents-violet-200); }
+.cl-focus-bg-color-accents-violet-200:focus { background-color: var(--cl-color-accents-violet-200); }
+.group:hover .cl-group-hover-bg-color-accents-violet-200 { background-color: var(--cl-color-accents-violet-200); }
+.cl-text-color-accents-violet-200 { color: var(--cl-color-accents-violet-200); }
+.cl-hover-text-color-accents-violet-200:hover { color: var(--cl-color-accents-violet-200); }
+.cl-focus-text-color-accents-violet-200:focus { color: var(--cl-color-accents-violet-200); }
+.group:hover .cl-group-hover-text-color-accents-violet-200 { color: var(--cl-color-accents-violet-200); }
+.cl-bg-accents-violet-300 { background-color: var(--cl-color-accents-violet-300); }
+.cl-hover-bg-accents-violet-300:hover { background-color: var(--cl-color-accents-violet-300); }
+.cl-focus-bg-accents-violet-300:focus { background-color: var(--cl-color-accents-violet-300); }
+.group:hover .cl-group-hover-bg-accents-violet-300 { background-color: var(--cl-color-accents-violet-300); }
+.cl-text-accents-violet-300 { color: var(--cl-color-accents-violet-300); }
+.cl-hover-text-accents-violet-300:hover { color: var(--cl-color-accents-violet-300); }
+.cl-focus-text-accents-violet-300:focus { color: var(--cl-color-accents-violet-300); }
+.group:hover .cl-group-hover-text-accents-violet-300 { color: var(--cl-color-accents-violet-300); }
+.cl-bg-color-accents-violet-300 { background-color: var(--cl-color-accents-violet-300); }
+.cl-hover-bg-color-accents-violet-300:hover { background-color: var(--cl-color-accents-violet-300); }
+.cl-focus-bg-color-accents-violet-300:focus { background-color: var(--cl-color-accents-violet-300); }
+.group:hover .cl-group-hover-bg-color-accents-violet-300 { background-color: var(--cl-color-accents-violet-300); }
+.cl-text-color-accents-violet-300 { color: var(--cl-color-accents-violet-300); }
+.cl-hover-text-color-accents-violet-300:hover { color: var(--cl-color-accents-violet-300); }
+.cl-focus-text-color-accents-violet-300:focus { color: var(--cl-color-accents-violet-300); }
+.group:hover .cl-group-hover-text-color-accents-violet-300 { color: var(--cl-color-accents-violet-300); }
+.cl-bg-accents-violet-400 { background-color: var(--cl-color-accents-violet-400); }
+.cl-hover-bg-accents-violet-400:hover { background-color: var(--cl-color-accents-violet-400); }
+.cl-focus-bg-accents-violet-400:focus { background-color: var(--cl-color-accents-violet-400); }
+.group:hover .cl-group-hover-bg-accents-violet-400 { background-color: var(--cl-color-accents-violet-400); }
+.cl-text-accents-violet-400 { color: var(--cl-color-accents-violet-400); }
+.cl-hover-text-accents-violet-400:hover { color: var(--cl-color-accents-violet-400); }
+.cl-focus-text-accents-violet-400:focus { color: var(--cl-color-accents-violet-400); }
+.group:hover .cl-group-hover-text-accents-violet-400 { color: var(--cl-color-accents-violet-400); }
+.cl-bg-color-accents-violet-400 { background-color: var(--cl-color-accents-violet-400); }
+.cl-hover-bg-color-accents-violet-400:hover { background-color: var(--cl-color-accents-violet-400); }
+.cl-focus-bg-color-accents-violet-400:focus { background-color: var(--cl-color-accents-violet-400); }
+.group:hover .cl-group-hover-bg-color-accents-violet-400 { background-color: var(--cl-color-accents-violet-400); }
+.cl-text-color-accents-violet-400 { color: var(--cl-color-accents-violet-400); }
+.cl-hover-text-color-accents-violet-400:hover { color: var(--cl-color-accents-violet-400); }
+.cl-focus-text-color-accents-violet-400:focus { color: var(--cl-color-accents-violet-400); }
+.group:hover .cl-group-hover-text-color-accents-violet-400 { color: var(--cl-color-accents-violet-400); }
+.cl-bg-accents-violet-500 { background-color: var(--cl-color-accents-violet-500); }
+.cl-hover-bg-accents-violet-500:hover { background-color: var(--cl-color-accents-violet-500); }
+.cl-focus-bg-accents-violet-500:focus { background-color: var(--cl-color-accents-violet-500); }
+.group:hover .cl-group-hover-bg-accents-violet-500 { background-color: var(--cl-color-accents-violet-500); }
+.cl-text-accents-violet-500 { color: var(--cl-color-accents-violet-500); }
+.cl-hover-text-accents-violet-500:hover { color: var(--cl-color-accents-violet-500); }
+.cl-focus-text-accents-violet-500:focus { color: var(--cl-color-accents-violet-500); }
+.group:hover .cl-group-hover-text-accents-violet-500 { color: var(--cl-color-accents-violet-500); }
+.cl-bg-color-accents-violet-500 { background-color: var(--cl-color-accents-violet-500); }
+.cl-hover-bg-color-accents-violet-500:hover { background-color: var(--cl-color-accents-violet-500); }
+.cl-focus-bg-color-accents-violet-500:focus { background-color: var(--cl-color-accents-violet-500); }
+.group:hover .cl-group-hover-bg-color-accents-violet-500 { background-color: var(--cl-color-accents-violet-500); }
+.cl-text-color-accents-violet-500 { color: var(--cl-color-accents-violet-500); }
+.cl-hover-text-color-accents-violet-500:hover { color: var(--cl-color-accents-violet-500); }
+.cl-focus-text-color-accents-violet-500:focus { color: var(--cl-color-accents-violet-500); }
+.group:hover .cl-group-hover-text-color-accents-violet-500 { color: var(--cl-color-accents-violet-500); }
+.cl-bg-accents-violet-600 { background-color: var(--cl-color-accents-violet-600); }
+.cl-hover-bg-accents-violet-600:hover { background-color: var(--cl-color-accents-violet-600); }
+.cl-focus-bg-accents-violet-600:focus { background-color: var(--cl-color-accents-violet-600); }
+.group:hover .cl-group-hover-bg-accents-violet-600 { background-color: var(--cl-color-accents-violet-600); }
+.cl-text-accents-violet-600 { color: var(--cl-color-accents-violet-600); }
+.cl-hover-text-accents-violet-600:hover { color: var(--cl-color-accents-violet-600); }
+.cl-focus-text-accents-violet-600:focus { color: var(--cl-color-accents-violet-600); }
+.group:hover .cl-group-hover-text-accents-violet-600 { color: var(--cl-color-accents-violet-600); }
+.cl-bg-color-accents-violet-600 { background-color: var(--cl-color-accents-violet-600); }
+.cl-hover-bg-color-accents-violet-600:hover { background-color: var(--cl-color-accents-violet-600); }
+.cl-focus-bg-color-accents-violet-600:focus { background-color: var(--cl-color-accents-violet-600); }
+.group:hover .cl-group-hover-bg-color-accents-violet-600 { background-color: var(--cl-color-accents-violet-600); }
+.cl-text-color-accents-violet-600 { color: var(--cl-color-accents-violet-600); }
+.cl-hover-text-color-accents-violet-600:hover { color: var(--cl-color-accents-violet-600); }
+.cl-focus-text-color-accents-violet-600:focus { color: var(--cl-color-accents-violet-600); }
+.group:hover .cl-group-hover-text-color-accents-violet-600 { color: var(--cl-color-accents-violet-600); }
+.cl-bg-accents-violet-700 { background-color: var(--cl-color-accents-violet-700); }
+.cl-hover-bg-accents-violet-700:hover { background-color: var(--cl-color-accents-violet-700); }
+.cl-focus-bg-accents-violet-700:focus { background-color: var(--cl-color-accents-violet-700); }
+.group:hover .cl-group-hover-bg-accents-violet-700 { background-color: var(--cl-color-accents-violet-700); }
+.cl-text-accents-violet-700 { color: var(--cl-color-accents-violet-700); }
+.cl-hover-text-accents-violet-700:hover { color: var(--cl-color-accents-violet-700); }
+.cl-focus-text-accents-violet-700:focus { color: var(--cl-color-accents-violet-700); }
+.group:hover .cl-group-hover-text-accents-violet-700 { color: var(--cl-color-accents-violet-700); }
+.cl-bg-color-accents-violet-700 { background-color: var(--cl-color-accents-violet-700); }
+.cl-hover-bg-color-accents-violet-700:hover { background-color: var(--cl-color-accents-violet-700); }
+.cl-focus-bg-color-accents-violet-700:focus { background-color: var(--cl-color-accents-violet-700); }
+.group:hover .cl-group-hover-bg-color-accents-violet-700 { background-color: var(--cl-color-accents-violet-700); }
+.cl-text-color-accents-violet-700 { color: var(--cl-color-accents-violet-700); }
+.cl-hover-text-color-accents-violet-700:hover { color: var(--cl-color-accents-violet-700); }
+.cl-focus-text-color-accents-violet-700:focus { color: var(--cl-color-accents-violet-700); }
+.group:hover .cl-group-hover-text-color-accents-violet-700 { color: var(--cl-color-accents-violet-700); }
+.cl-bg-accents-violet-800 { background-color: var(--cl-color-accents-violet-800); }
+.cl-hover-bg-accents-violet-800:hover { background-color: var(--cl-color-accents-violet-800); }
+.cl-focus-bg-accents-violet-800:focus { background-color: var(--cl-color-accents-violet-800); }
+.group:hover .cl-group-hover-bg-accents-violet-800 { background-color: var(--cl-color-accents-violet-800); }
+.cl-text-accents-violet-800 { color: var(--cl-color-accents-violet-800); }
+.cl-hover-text-accents-violet-800:hover { color: var(--cl-color-accents-violet-800); }
+.cl-focus-text-accents-violet-800:focus { color: var(--cl-color-accents-violet-800); }
+.group:hover .cl-group-hover-text-accents-violet-800 { color: var(--cl-color-accents-violet-800); }
+.cl-bg-color-accents-violet-800 { background-color: var(--cl-color-accents-violet-800); }
+.cl-hover-bg-color-accents-violet-800:hover { background-color: var(--cl-color-accents-violet-800); }
+.cl-focus-bg-color-accents-violet-800:focus { background-color: var(--cl-color-accents-violet-800); }
+.group:hover .cl-group-hover-bg-color-accents-violet-800 { background-color: var(--cl-color-accents-violet-800); }
+.cl-text-color-accents-violet-800 { color: var(--cl-color-accents-violet-800); }
+.cl-hover-text-color-accents-violet-800:hover { color: var(--cl-color-accents-violet-800); }
+.cl-focus-text-color-accents-violet-800:focus { color: var(--cl-color-accents-violet-800); }
+.group:hover .cl-group-hover-text-color-accents-violet-800 { color: var(--cl-color-accents-violet-800); }
+.cl-bg-accents-violet-900 { background-color: var(--cl-color-accents-violet-900); }
+.cl-hover-bg-accents-violet-900:hover { background-color: var(--cl-color-accents-violet-900); }
+.cl-focus-bg-accents-violet-900:focus { background-color: var(--cl-color-accents-violet-900); }
+.group:hover .cl-group-hover-bg-accents-violet-900 { background-color: var(--cl-color-accents-violet-900); }
+.cl-text-accents-violet-900 { color: var(--cl-color-accents-violet-900); }
+.cl-hover-text-accents-violet-900:hover { color: var(--cl-color-accents-violet-900); }
+.cl-focus-text-accents-violet-900:focus { color: var(--cl-color-accents-violet-900); }
+.group:hover .cl-group-hover-text-accents-violet-900 { color: var(--cl-color-accents-violet-900); }
+.cl-bg-color-accents-violet-900 { background-color: var(--cl-color-accents-violet-900); }
+.cl-hover-bg-color-accents-violet-900:hover { background-color: var(--cl-color-accents-violet-900); }
+.cl-focus-bg-color-accents-violet-900:focus { background-color: var(--cl-color-accents-violet-900); }
+.group:hover .cl-group-hover-bg-color-accents-violet-900 { background-color: var(--cl-color-accents-violet-900); }
+.cl-text-color-accents-violet-900 { color: var(--cl-color-accents-violet-900); }
+.cl-hover-text-color-accents-violet-900:hover { color: var(--cl-color-accents-violet-900); }
+.cl-focus-text-color-accents-violet-900:focus { color: var(--cl-color-accents-violet-900); }
+.group:hover .cl-group-hover-text-color-accents-violet-900 { color: var(--cl-color-accents-violet-900); }
+.cl-text-100 { font-size: var(--cl-typography-font-size-100); }
+.cl-text-size-100 { font-size: var(--cl-typography-font-size-100); }
+.cl-text-200 { font-size: var(--cl-typography-font-size-200); }
+.cl-text-size-200 { font-size: var(--cl-typography-font-size-200); }
+.cl-text-300 { font-size: var(--cl-typography-font-size-300); }
+.cl-text-size-300 { font-size: var(--cl-typography-font-size-300); }
+.cl-text-400 { font-size: var(--cl-typography-font-size-400); }
+.cl-text-size-400 { font-size: var(--cl-typography-font-size-400); }
+.cl-text-500 { font-size: var(--cl-typography-font-size-500); }
+.cl-text-size-500 { font-size: var(--cl-typography-font-size-500); }
+.cl-text-600 { font-size: var(--cl-typography-font-size-600); }
+.cl-text-size-600 { font-size: var(--cl-typography-font-size-600); }
+.cl-text-700 { font-size: var(--cl-typography-font-size-700); }
+.cl-text-size-700 { font-size: var(--cl-typography-font-size-700); }
+.cl-text-800 { font-size: var(--cl-typography-font-size-800); }
+.cl-text-size-800 { font-size: var(--cl-typography-font-size-800); }
+.cl-text-050 { font-size: var(--cl-typography-font-size-050); }
+.cl-text-size-050 { font-size: var(--cl-typography-font-size-050); }
+.cl-text-075 { font-size: var(--cl-typography-font-size-075); }
+.cl-text-size-075 { font-size: var(--cl-typography-font-size-075); }
+.cl-weight-light { font-weight: var(--cl-typography-font-weight-light); }
+.cl-weight-regular { font-weight: var(--cl-typography-font-weight-regular); }
+.cl-weight-medium { font-weight: var(--cl-typography-font-weight-medium); }
+.cl-weight-semibold { font-weight: var(--cl-typography-font-weight-semibold); }
+.cl-weight-bold { font-weight: var(--cl-typography-font-weight-bold); }
+.cl-leading-100 { line-height: var(--cl-typography-line-height-100); }
+.cl-leading-125 { line-height: var(--cl-typography-line-height-125); }
+.cl-leading-150 { line-height: var(--cl-typography-line-height-150); }
+.cl-leading-175 { line-height: var(--cl-typography-line-height-175); }
+.cl-leading-200 { line-height: var(--cl-typography-line-height-200); }
+.cl-p-inline-100 { padding: var(--cl-spacing-inline-100); }
+.cl-m-inline-100 { margin: var(--cl-spacing-inline-100); }
+.cl-gap-inline-100 { gap: var(--cl-spacing-inline-100); }
+.cl-px-inline-100 { padding-left: var(--cl-spacing-inline-100); padding-right: var(--cl-spacing-inline-100); }
+.cl-py-inline-100 { padding-top: var(--cl-spacing-inline-100); padding-bottom: var(--cl-spacing-inline-100); }
+.cl-p-inline-200 { padding: var(--cl-spacing-inline-200); }
+.cl-m-inline-200 { margin: var(--cl-spacing-inline-200); }
+.cl-gap-inline-200 { gap: var(--cl-spacing-inline-200); }
+.cl-px-inline-200 { padding-left: var(--cl-spacing-inline-200); padding-right: var(--cl-spacing-inline-200); }
+.cl-py-inline-200 { padding-top: var(--cl-spacing-inline-200); padding-bottom: var(--cl-spacing-inline-200); }
+.cl-p-inline-300 { padding: var(--cl-spacing-inline-300); }
+.cl-m-inline-300 { margin: var(--cl-spacing-inline-300); }
+.cl-gap-inline-300 { gap: var(--cl-spacing-inline-300); }
+.cl-px-inline-300 { padding-left: var(--cl-spacing-inline-300); padding-right: var(--cl-spacing-inline-300); }
+.cl-py-inline-300 { padding-top: var(--cl-spacing-inline-300); padding-bottom: var(--cl-spacing-inline-300); }
+.cl-p-inline-400 { padding: var(--cl-spacing-inline-400); }
+.cl-m-inline-400 { margin: var(--cl-spacing-inline-400); }
+.cl-gap-inline-400 { gap: var(--cl-spacing-inline-400); }
+.cl-px-inline-400 { padding-left: var(--cl-spacing-inline-400); padding-right: var(--cl-spacing-inline-400); }
+.cl-py-inline-400 { padding-top: var(--cl-spacing-inline-400); padding-bottom: var(--cl-spacing-inline-400); }
+.cl-p-inline-500 { padding: var(--cl-spacing-inline-500); }
+.cl-m-inline-500 { margin: var(--cl-spacing-inline-500); }
+.cl-gap-inline-500 { gap: var(--cl-spacing-inline-500); }
+.cl-px-inline-500 { padding-left: var(--cl-spacing-inline-500); padding-right: var(--cl-spacing-inline-500); }
+.cl-py-inline-500 { padding-top: var(--cl-spacing-inline-500); padding-bottom: var(--cl-spacing-inline-500); }
+.cl-p-inline-600 { padding: var(--cl-spacing-inline-600); }
+.cl-m-inline-600 { margin: var(--cl-spacing-inline-600); }
+.cl-gap-inline-600 { gap: var(--cl-spacing-inline-600); }
+.cl-px-inline-600 { padding-left: var(--cl-spacing-inline-600); padding-right: var(--cl-spacing-inline-600); }
+.cl-py-inline-600 { padding-top: var(--cl-spacing-inline-600); padding-bottom: var(--cl-spacing-inline-600); }
+.cl-p-inline-800 { padding: var(--cl-spacing-inline-800); }
+.cl-m-inline-800 { margin: var(--cl-spacing-inline-800); }
+.cl-gap-inline-800 { gap: var(--cl-spacing-inline-800); }
+.cl-px-inline-800 { padding-left: var(--cl-spacing-inline-800); padding-right: var(--cl-spacing-inline-800); }
+.cl-py-inline-800 { padding-top: var(--cl-spacing-inline-800); padding-bottom: var(--cl-spacing-inline-800); }
+.cl-p-inline-050 { padding: var(--cl-spacing-inline-050); }
+.cl-m-inline-050 { margin: var(--cl-spacing-inline-050); }
+.cl-gap-inline-050 { gap: var(--cl-spacing-inline-050); }
+.cl-px-inline-050 { padding-left: var(--cl-spacing-inline-050); padding-right: var(--cl-spacing-inline-050); }
+.cl-py-inline-050 { padding-top: var(--cl-spacing-inline-050); padding-bottom: var(--cl-spacing-inline-050); }
+.cl-p-stack-100 { padding: var(--cl-spacing-stack-100); }
+.cl-m-stack-100 { margin: var(--cl-spacing-stack-100); }
+.cl-gap-stack-100 { gap: var(--cl-spacing-stack-100); }
+.cl-px-stack-100 { padding-left: var(--cl-spacing-stack-100); padding-right: var(--cl-spacing-stack-100); }
+.cl-py-stack-100 { padding-top: var(--cl-spacing-stack-100); padding-bottom: var(--cl-spacing-stack-100); }
+.cl-p-stack-200 { padding: var(--cl-spacing-stack-200); }
+.cl-m-stack-200 { margin: var(--cl-spacing-stack-200); }
+.cl-gap-stack-200 { gap: var(--cl-spacing-stack-200); }
+.cl-px-stack-200 { padding-left: var(--cl-spacing-stack-200); padding-right: var(--cl-spacing-stack-200); }
+.cl-py-stack-200 { padding-top: var(--cl-spacing-stack-200); padding-bottom: var(--cl-spacing-stack-200); }
+.cl-p-stack-300 { padding: var(--cl-spacing-stack-300); }
+.cl-m-stack-300 { margin: var(--cl-spacing-stack-300); }
+.cl-gap-stack-300 { gap: var(--cl-spacing-stack-300); }
+.cl-px-stack-300 { padding-left: var(--cl-spacing-stack-300); padding-right: var(--cl-spacing-stack-300); }
+.cl-py-stack-300 { padding-top: var(--cl-spacing-stack-300); padding-bottom: var(--cl-spacing-stack-300); }
+.cl-p-stack-400 { padding: var(--cl-spacing-stack-400); }
+.cl-m-stack-400 { margin: var(--cl-spacing-stack-400); }
+.cl-gap-stack-400 { gap: var(--cl-spacing-stack-400); }
+.cl-px-stack-400 { padding-left: var(--cl-spacing-stack-400); padding-right: var(--cl-spacing-stack-400); }
+.cl-py-stack-400 { padding-top: var(--cl-spacing-stack-400); padding-bottom: var(--cl-spacing-stack-400); }
+.cl-p-stack-500 { padding: var(--cl-spacing-stack-500); }
+.cl-m-stack-500 { margin: var(--cl-spacing-stack-500); }
+.cl-gap-stack-500 { gap: var(--cl-spacing-stack-500); }
+.cl-px-stack-500 { padding-left: var(--cl-spacing-stack-500); padding-right: var(--cl-spacing-stack-500); }
+.cl-py-stack-500 { padding-top: var(--cl-spacing-stack-500); padding-bottom: var(--cl-spacing-stack-500); }
+.cl-p-stack-600 { padding: var(--cl-spacing-stack-600); }
+.cl-m-stack-600 { margin: var(--cl-spacing-stack-600); }
+.cl-gap-stack-600 { gap: var(--cl-spacing-stack-600); }
+.cl-px-stack-600 { padding-left: var(--cl-spacing-stack-600); padding-right: var(--cl-spacing-stack-600); }
+.cl-py-stack-600 { padding-top: var(--cl-spacing-stack-600); padding-bottom: var(--cl-spacing-stack-600); }
+.cl-p-stack-800 { padding: var(--cl-spacing-stack-800); }
+.cl-m-stack-800 { margin: var(--cl-spacing-stack-800); }
+.cl-gap-stack-800 { gap: var(--cl-spacing-stack-800); }
+.cl-px-stack-800 { padding-left: var(--cl-spacing-stack-800); padding-right: var(--cl-spacing-stack-800); }
+.cl-py-stack-800 { padding-top: var(--cl-spacing-stack-800); padding-bottom: var(--cl-spacing-stack-800); }
+.cl-p-stack-050 { padding: var(--cl-spacing-stack-050); }
+.cl-m-stack-050 { margin: var(--cl-spacing-stack-050); }
+.cl-gap-stack-050 { gap: var(--cl-spacing-stack-050); }
+.cl-px-stack-050 { padding-left: var(--cl-spacing-stack-050); padding-right: var(--cl-spacing-stack-050); }
+.cl-py-stack-050 { padding-top: var(--cl-spacing-stack-050); padding-bottom: var(--cl-spacing-stack-050); }
+.cl-p-inset-100 { padding: var(--cl-spacing-inset-100); }
+.cl-m-inset-100 { margin: var(--cl-spacing-inset-100); }
+.cl-gap-inset-100 { gap: var(--cl-spacing-inset-100); }
+.cl-px-inset-100 { padding-left: var(--cl-spacing-inset-100); padding-right: var(--cl-spacing-inset-100); }
+.cl-py-inset-100 { padding-top: var(--cl-spacing-inset-100); padding-bottom: var(--cl-spacing-inset-100); }
+.cl-p-inset-200 { padding: var(--cl-spacing-inset-200); }
+.cl-m-inset-200 { margin: var(--cl-spacing-inset-200); }
+.cl-gap-inset-200 { gap: var(--cl-spacing-inset-200); }
+.cl-px-inset-200 { padding-left: var(--cl-spacing-inset-200); padding-right: var(--cl-spacing-inset-200); }
+.cl-py-inset-200 { padding-top: var(--cl-spacing-inset-200); padding-bottom: var(--cl-spacing-inset-200); }
+.cl-p-inset-300 { padding: var(--cl-spacing-inset-300); }
+.cl-m-inset-300 { margin: var(--cl-spacing-inset-300); }
+.cl-gap-inset-300 { gap: var(--cl-spacing-inset-300); }
+.cl-px-inset-300 { padding-left: var(--cl-spacing-inset-300); padding-right: var(--cl-spacing-inset-300); }
+.cl-py-inset-300 { padding-top: var(--cl-spacing-inset-300); padding-bottom: var(--cl-spacing-inset-300); }
+.cl-p-inset-400 { padding: var(--cl-spacing-inset-400); }
+.cl-m-inset-400 { margin: var(--cl-spacing-inset-400); }
+.cl-gap-inset-400 { gap: var(--cl-spacing-inset-400); }
+.cl-px-inset-400 { padding-left: var(--cl-spacing-inset-400); padding-right: var(--cl-spacing-inset-400); }
+.cl-py-inset-400 { padding-top: var(--cl-spacing-inset-400); padding-bottom: var(--cl-spacing-inset-400); }
+.cl-p-inset-500 { padding: var(--cl-spacing-inset-500); }
+.cl-m-inset-500 { margin: var(--cl-spacing-inset-500); }
+.cl-gap-inset-500 { gap: var(--cl-spacing-inset-500); }
+.cl-px-inset-500 { padding-left: var(--cl-spacing-inset-500); padding-right: var(--cl-spacing-inset-500); }
+.cl-py-inset-500 { padding-top: var(--cl-spacing-inset-500); padding-bottom: var(--cl-spacing-inset-500); }
+.cl-p-inset-600 { padding: var(--cl-spacing-inset-600); }
+.cl-m-inset-600 { margin: var(--cl-spacing-inset-600); }
+.cl-gap-inset-600 { gap: var(--cl-spacing-inset-600); }
+.cl-px-inset-600 { padding-left: var(--cl-spacing-inset-600); padding-right: var(--cl-spacing-inset-600); }
+.cl-py-inset-600 { padding-top: var(--cl-spacing-inset-600); padding-bottom: var(--cl-spacing-inset-600); }
+.cl-p-inset-800 { padding: var(--cl-spacing-inset-800); }
+.cl-m-inset-800 { margin: var(--cl-spacing-inset-800); }
+.cl-gap-inset-800 { gap: var(--cl-spacing-inset-800); }
+.cl-px-inset-800 { padding-left: var(--cl-spacing-inset-800); padding-right: var(--cl-spacing-inset-800); }
+.cl-py-inset-800 { padding-top: var(--cl-spacing-inset-800); padding-bottom: var(--cl-spacing-inset-800); }
+.cl-p-inset-050 { padding: var(--cl-spacing-inset-050); }
+.cl-m-inset-050 { margin: var(--cl-spacing-inset-050); }
+.cl-gap-inset-050 { gap: var(--cl-spacing-inset-050); }
+.cl-px-inset-050 { padding-left: var(--cl-spacing-inset-050); padding-right: var(--cl-spacing-inset-050); }
+.cl-py-inset-050 { padding-top: var(--cl-spacing-inset-050); padding-bottom: var(--cl-spacing-inset-050); }
+.cl-radius-sm { border-radius: var(--cl-radius-sm); }
+.cl-radius-md { border-radius: var(--cl-radius-md); }
+.cl-radius-lg { border-radius: var(--cl-radius-lg); }
+.cl-radius-xl { border-radius: var(--cl-radius-xl); }
+.cl-radius-full { border-radius: var(--cl-radius-full); }
+.cl-elevation-none { box-shadow: var(--cl-elevation-none); }
+.cl-hover-elevation-none:hover { box-shadow: var(--cl-elevation-none); }
+.cl-elevation-subtle { box-shadow: var(--cl-elevation-subtle); }
+.cl-hover-elevation-subtle:hover { box-shadow: var(--cl-elevation-subtle); }
+.cl-elevation-card { box-shadow: var(--cl-elevation-card); }
+.cl-hover-elevation-card:hover { box-shadow: var(--cl-elevation-card); }
+.cl-elevation-overlay { box-shadow: var(--cl-elevation-overlay); }
+.cl-hover-elevation-overlay:hover { box-shadow: var(--cl-elevation-overlay); }
+.cl-elevation-focus { box-shadow: var(--cl-elevation-focus); }
+.cl-hover-elevation-focus:hover { box-shadow: var(--cl-elevation-focus); }
+.cl-border-none { border-width: var(--cl-border-width-none); }
+.cl-border-thin { border-width: var(--cl-border-width-thin); }
+.cl-border-medium { border-width: var(--cl-border-width-medium); }
+.cl-border-border-default { border-color: var(--cl-border-color-default); }
+.cl-hover-border-border-default:hover { border-color: var(--cl-border-color-default); }
+.cl-focus-border-border-default:focus { border-color: var(--cl-border-color-default); }
+.group:hover .cl-group-hover-border-border-default { border-color: var(--cl-border-color-default); }
+.cl-border-border-color-default { border-color: var(--cl-border-color-default); }
+.cl-hover-border-border-color-default:hover { border-color: var(--cl-border-color-default); }
+.cl-focus-border-border-color-default:focus { border-color: var(--cl-border-color-default); }
+.group:hover .cl-group-hover-border-border-color-default { border-color: var(--cl-border-color-default); }
+.cl-border-border-subtle { border-color: var(--cl-border-color-subtle); }
+.cl-hover-border-border-subtle:hover { border-color: var(--cl-border-color-subtle); }
+.cl-focus-border-border-subtle:focus { border-color: var(--cl-border-color-subtle); }
+.group:hover .cl-group-hover-border-border-subtle { border-color: var(--cl-border-color-subtle); }
+.cl-border-border-color-subtle { border-color: var(--cl-border-color-subtle); }
+.cl-hover-border-border-color-subtle:hover { border-color: var(--cl-border-color-subtle); }
+.cl-focus-border-border-color-subtle:focus { border-color: var(--cl-border-color-subtle); }
+.group:hover .cl-group-hover-border-border-color-subtle { border-color: var(--cl-border-color-subtle); }
+.cl-border-border-strong { border-color: var(--cl-border-color-strong); }
+.cl-hover-border-border-strong:hover { border-color: var(--cl-border-color-strong); }
+.cl-focus-border-border-strong:focus { border-color: var(--cl-border-color-strong); }
+.group:hover .cl-group-hover-border-border-strong { border-color: var(--cl-border-color-strong); }
+.cl-border-border-color-strong { border-color: var(--cl-border-color-strong); }
+.cl-hover-border-border-color-strong:hover { border-color: var(--cl-border-color-strong); }
+.cl-focus-border-border-color-strong:focus { border-color: var(--cl-border-color-strong); }
+.group:hover .cl-group-hover-border-border-color-strong { border-color: var(--cl-border-color-strong); }

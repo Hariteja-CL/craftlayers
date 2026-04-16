@@ -11,55 +11,52 @@ interface ServiceCardProps {
     onClick?: () => void;
     className?: string;
     badge?: string;
+    variant?: 'light' | 'dark';
 }
 
 export function ServiceCard({
     title,
     description,
     icon,
-    variant = "light",
     onClick,
     className,
     badge,
-}: ServiceCardProps & { variant?: "light" | "dark" }) {
-    const isDark = variant === "dark";
+}: ServiceCardProps) {
 
     return (
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between transition-all duration-300 p-8 rounded-[2rem] border-0 relative overflow-hidden",
-                // Light Mode
-                !isDark && "bg-white text-gray-900 shadow-sm hover:shadow-md",
-                // Dark Mode
-                isDark && "bg-[#0B1121] text-white shadow-xl hover:shadow-2xl hover:bg-[#11192e]", // Deep Navy
+                "cursor-pointer group h-full flex flex-col justify-between p-6 lg:p-10 cl-radius-lg cl-border-thin cl-border-solid relative overflow-hidden",
+                "cl-bg-neutral-surface-level-1 cl-border-border-color-default hover:cl-border-border-color-strong",
                 className
             )}
         >
             {badge && (
-                <div className="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-[10px] font-bold tracking-wider uppercase">
+                <div className={cn(
+                    "absolute top-4 right-4 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border",
+                    "cl-border-border-color-strong cl-text-neutral-text-medium-contrast"
+                )}>
                     {badge}
                 </div>
             )}
             <div className="space-y-6">
                 {/* Icon Container */}
                 <div className={cn(
-                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300",
-                    isDark ? "bg-white/10" : "bg-orange-50"
+                    "w-12 h-12 rounded-full flex items-center justify-center border cl-border-border-color-default cl-bg-neutral-surface-level-0",
+                    "cl-text-brand-primary-base"
                 )}>
                     {icon}
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                     <CardTitle className={cn(
-                        "text-2xl font-bold",
-                        isDark ? "text-white" : "text-gray-900"
+                        "cl-text-300 cl-weight-semibold cl-text-neutral-text-high-contrast"
                     )}>
                         {title}
                     </CardTitle>
                     <p className={cn(
-                        "text-base leading-relaxed font-medium",
-                        isDark ? "text-gray-200" : "text-gray-500"
+                        "cl-text-075 cl-leading-150 cl-weight-regular line-clamp-3 cl-text-neutral-text-medium-contrast"
                     )}>
                         {description}
                     </p>
@@ -67,13 +64,11 @@ export function ServiceCard({
             </div>
 
             <div className={cn(
-                "mt-8 flex items-center justify-between text-sm font-semibold tracking-wide uppercase",
-                isDark ? "text-orange-50" : "text-gray-900"
+                "mt-8 flex items-center justify-between cl-text-075 cl-weight-medium cl-text-brand-primary-base"
             )}>
-                {isDark ? "EXP_02" : "Explore Case Studies"}
+                Explore Case Studies
                 <ArrowRight className={cn(
-                    "h-5 w-5 transition-transform duration-300",
-                    "group-hover:translate-x-1"
+                    "h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
                 )} />
             </div>
         </Card>

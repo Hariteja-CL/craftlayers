@@ -1,6 +1,6 @@
 
-import { ArrowLeft, ShieldCheck, Lock } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Lock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { ServiceCard } from '../../components/portfolio/ServiceCard';
 
 export function SecurityLayers() {
@@ -8,30 +8,26 @@ export function SecurityLayers() {
 
     return (
         <div className="space-y-12 pb-20">
-            {/* Hero */}
-            <section className="bg-surface border-b border-border-muted py-20">
-                <div className="container mx-auto px-6 max-w-container">
-                    <Link to="/" className="inline-flex items-center text-sm font-medium text-content-secondary hover:text-primary-main-400 mb-8 transition-colors">
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to Home
-                    </Link>
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="p-3 rounded-2xl bg-layer-security-bg text-layer-security-text">
-                            <ShieldCheck className="w-8 h-8" />
-                        </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-content-primary">
+            {/* Header / Hero */}
+            <div className="max-w-container mx-auto px-6 pt-12">
+                <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
+                    <div className="flex-1">
+                        <div className="inline-block px-3 py-1 rounded-full cl-bg-semantic-error-background cl-text-semantic-error-text border cl-border-semantic-error-border text-xs font-bold uppercase tracking-wider mb-4">
                             Security Layer
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold cl-text-primary">
+                            Security & Compliance
                         </h1>
+                        <p className="mt-6 text-lg cl-text-secondary leading-relaxed max-w-2xl">
+                            Building trust through transparent protection. My work in the security layer focuses on making complex compliance protocols (SOC2, GDPR) accessible and ensuring users feel safe without adding friction.
+                        </p>
                     </div>
-                    <p className="text-xl text-content-secondary max-w-2xl leading-relaxed">
-                        Building trust through transparent, compliant, and secure user interfaces.
-                    </p>
                 </div>
-            </section>
+            </div>
 
-            {/* Content Grid */}
-            <section className="container mx-auto px-6 max-w-container">
-                <h2 className="text-2xl font-bold mb-8">Case Studies</h2>
+            {/* Case Studies */}
+            <div className="max-w-container mx-auto px-6 py-16">
+                <h2 className="text-2xl font-bold mb-8 cl-text-primary">Case Studies</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                     {/* Secure UX Blog Post Link */}
@@ -44,7 +40,7 @@ export function SecurityLayers() {
                         />
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     );
 }

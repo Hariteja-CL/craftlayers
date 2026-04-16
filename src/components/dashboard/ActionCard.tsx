@@ -26,22 +26,22 @@ export function ActionCard({ averageSentiment, data }: AlertSystemProps) {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="fixed bottom-8 right-8 z-50 bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-center gap-6 w-auto min-w-[320px]"
+                className="fixed bottom-8 right-8 z-50 bg-surface-page border border-semantic-error-border shadow-xl rounded-2xl p-4 flex items-center gap-6 w-auto min-w-[320px]"
             >
-                <div className="p-3 bg-red-50 rounded-full text-red-600 shrink-0">
+                <div className="p-3 bg-semantic-error-background rounded-full text-semantic-error-icon shrink-0">
                     <AlertTriangle className="w-5 h-5" />
                 </div>
                 <div className="flex-1 whitespace-nowrap">
-                    <h3 className="text-sm font-bold text-neutral-900">Culture metrics are critical</h3>
-                    <p className="text-xs text-neutral-500 mt-0.5">
-                        Sentiment dropped to <span className="font-bold text-red-600">{averageSentiment.toFixed(0)}%</span>
+                    <h3 className="text-sm font-bold text-neutral-text-high-contrast">Culture metrics are critical</h3>
+                    <p className="text-xs text-neutral-text-medium-contrast mt-0.5">
+                        Sentiment dropped to <span className="font-bold text-semantic-error-text">{averageSentiment.toFixed(0)}%</span>
                     </p>
                 </div>
 
                 <div className="relative group">
                     <button
                         onClick={() => setIsSheetOpen(true)}
-                        className="flex items-center gap-2 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors shadow-md font-medium text-xs whitespace-nowrap"
+                        className="flex items-center gap-2 px-3 py-2 bg-semantic-error-icon hover:bg-semantic-error-border text-white rounded-lg transition-colors shadow-md font-medium text-xs whitespace-nowrap"
                     >
                         <Sparkles className="w-4 h-4" />
                         <span>Take Action</span>

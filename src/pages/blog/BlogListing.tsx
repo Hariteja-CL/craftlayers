@@ -25,11 +25,11 @@ export function BlogListing() {
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 mb-6">
                         <span className="text-xs font-bold text-blue-600 tracking-wider uppercase">Thought Leadership</span>
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#1A1A1A]">
+                    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-neutral-text-high-contrast">
                         Latest Insights.
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-500 leading-relaxed font-medium">
-                        Exploring the intersection of <span className="text-gray-900">design systems</span>, <span className="text-gray-900">security</span>, and the <span className="text-gray-900">future of AI</span>.
+                    <p className="text-xl md:text-2xl text-neutral-text-medium-contrast leading-relaxed font-medium">
+                        Exploring the intersection of <span className="text-neutral-text-high-contrast">design systems</span>, <span className="text-neutral-text-high-contrast">security</span>, and the <span className="text-neutral-text-high-contrast">future of AI</span>.
                     </p>
                 </div>
             </section>

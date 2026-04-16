@@ -23,9 +23,9 @@ export function AILayers() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <Link to="/work/enculture" className="group md:col-span-2">
-                        <div className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 p-6 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-900/20 group-hover:-translate-y-1">
+                        <div className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 p-6 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-900/20 group-hover:-translate-y-1">
                             {/* Background Glow */}
-                            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px] mix-blend-screen opacity-40 group-hover:opacity-60 transition-opacity" />
+                            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[120px] mix-blend-screen opacity-40 group-hover:opacity-60 transition-opacity" />
 
                             <div className="relative z-10 flex flex-col md:flex-row gap-8 justify-between items-start">
                                 <div className="max-w-xl">

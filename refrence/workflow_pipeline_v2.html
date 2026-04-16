@@ -1,0 +1,191 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap');
+
+.wp { font-family: 'Outfit', sans-serif; padding: 2rem 0.5rem 3rem; box-sizing: border-box; }
+
+.wp-head { margin-bottom: 0.5rem; }
+.wp-title { font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400; color: var(--color-text-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.wp-sub { font-size: 14px; color: var(--color-text-secondary); margin: 0 0 6px; line-height: 1.5; }
+.wp-flow { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 1.75rem; letter-spacing: 0.03em; }
+.wp-flow span { color: var(--color-text-secondary); }
+
+.legend { display: flex; gap: 14px; margin-bottom: 2rem; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--color-text-tertiary); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+.ld { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ld-u { background: #1D9E75; }
+.ld-s { background: #BA7517; }
+.ld-d { background: #378ADD; }
+
+.pipeline { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; position: relative; }
+.pipeline::before { content: ''; position: absolute; top: 27px; left: calc(100% / 14); right: calc(100% / 14); height: 1px; background: var(--color-border-tertiary); z-index: 0; }
+
+.step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 0 5px; }
+
+.icon-wrap { width: 54px; height: 54px; border-radius: 50%; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; flex-shrink: 0; transition: border-color 0.2s; }
+.step:hover .icon-wrap { border-color: var(--color-border-primary); }
+.step.ai-step .icon-wrap { border-color: #378ADD; background: #E6F1FB; border-width: 1px; }
+.step.ai-step:hover .icon-wrap { border-color: #185FA5; }
+
+.icon-wrap svg { width: 18px; height: 18px; }
+.icon-wrap svg path, .icon-wrap svg circle, .icon-wrap svg rect, .icon-wrap svg polyline, .icon-wrap svg line, .icon-wrap svg ellipse { stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ai-step .icon-wrap svg path, .ai-step .icon-wrap svg circle { stroke: #185FA5; }
+
+.snum { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--color-text-tertiary); margin-bottom: 3px; letter-spacing: 0.08em; text-align: center; }
+.sname { font-size: 11px; font-weight: 500; color: var(--color-text-primary); text-align: center; line-height: 1.3; margin-bottom: 6px; }
+.ai-step .sname { color: #185FA5; }
+
+.output-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.1em; color: var(--color-text-tertiary); text-align: center; margin-bottom: 2px; text-transform: uppercase; }
+.output-val { font-size: 10px; font-weight: 500; color: var(--color-text-primary); text-align: center; line-height: 1.35; margin-bottom: 5px; }
+.ai-step .output-val { color: #185FA5; }
+
+.sdesc { font-size: 9.5px; color: var(--color-text-tertiary); text-align: center; line-height: 1.4; margin-bottom: 8px; min-height: 14px; }
+
+.ai-badge { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.06em; color: #185FA5; background: #E6F1FB; border: 0.5px solid #B5D4F4; border-radius: 4px; padding: 2px 6px; margin-bottom: 6px; text-align: center; }
+@media (prefers-color-scheme: dark) {
+  .ai-badge { background: #0C447C; color: #B5D4F4; border-color: #185FA5; }
+  .step.ai-step .icon-wrap { background: #0C447C; border-color: #378ADD; }
+}
+
+.div-line { width: 0.5px; height: 14px; background: var(--color-border-tertiary); margin: 0 auto 5px; }
+
+.tags { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+.tag { font-size: 8.5px; font-family: 'DM Mono', monospace; letter-spacing: 0.03em; text-align: center; padding: 2px 5px; border-radius: 3px; color: var(--color-text-tertiary); border: 0.5px solid var(--color-border-tertiary); background: transparent; }
+
+.footer { margin-top: 2.5rem; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 1.25rem; display: flex; flex-direction: column; gap: 4px; }
+.footer-main { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.footer-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--color-text-tertiary); letter-spacing: 0.03em; }
+</style>
+
+<div class="wp">
+  <div class="wp-head">
+    <h1 class="wp-title">My workflow pipeline</h1>
+    <p class="wp-sub">A system-first approach that transforms complexity into production-ready UI.</p>
+    <p class="wp-flow"><span>Research</span> → <span>System design</span> → <span>AI-assisted execution</span> → <span>Shipped frontend</span></p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="ld ld-u"></div>user input</div>
+    <div class="legend-item"><div class="ld ld-s"></div>stakeholder input</div>
+    <div class="legend-item"><div class="ld ld-d"></div>developer collab</div>
+  </div>
+
+  <div class="pipeline">
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </div>
+      <div class="snum">01</div>
+      <div class="sname">Discovery &amp; Research</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Clear problem definition</div>
+      <div class="sdesc">Stakeholder + user alignment</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">user input</div>
+        <div class="tag">stakeholder</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="snum">02</div>
+      <div class="sname">Insight to System Design</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Structured flows &amp; data models</div>
+      <div class="sdesc">&nbsp;</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">stakeholder</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </div>
+      <div class="snum">03</div>
+      <div class="sname">System Design</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Scalable UI architecture</div>
+      <div class="sdesc">&nbsp;</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">developer collab</div>
+        <div class="tag">stakeholder</div>
+      </div>
+    </div>
+
+    <div class="step ai-step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M15 3l6 6-12 12H3v-6L15 3z"/></svg>
+      </div>
+      <div class="snum">04</div>
+      <div class="sname">Vibe Coding (AI Layer)</div>
+      <div class="ai-badge">AI-assisted</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Functional UI structure</div>
+      <div class="sdesc">Cursor + AI generation</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">developer collab</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="snum">05</div>
+      <div class="sname">Refinement &amp; Polish</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Usable, production-ready interface</div>
+      <div class="sdesc">&nbsp;</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">user input</div>
+        <div class="tag">stakeholder</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="snum">06</div>
+      <div class="sname">Production UI</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Clean frontend-ready implementation</div>
+      <div class="sdesc">&nbsp;</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">developer collab</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      </div>
+      <div class="snum">07</div>
+      <div class="sname">Handover &amp; Ship</div>
+      <div class="output-label">output</div>
+      <div class="output-val">Git-ready delivery</div>
+      <div class="sdesc">&nbsp;</div>
+      <div class="div-line"></div>
+      <div class="tags">
+        <div class="tag">developer collab</div>
+        <div class="tag">stakeholder</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-main">AI generates speed. Refinement ensures quality.</div>
+    <div class="footer-sub">AI-generated structure → refined → production-ready UI</div>
+  </div>
+</div>
