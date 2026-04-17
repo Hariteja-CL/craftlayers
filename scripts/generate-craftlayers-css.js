@@ -173,17 +173,50 @@ async function generate() {
             }
         }
         
-        if (key.startsWith('spacing-')) {
-            const shortKey = key.replace('spacing-', '');
-            utilitiesCss += `.cl-p-${shortKey} { padding: ${varName}; }\n`;
-            utilitiesCss += `.cl-m-${shortKey} { margin: ${varName}; }\n`;
-            utilitiesCss += `.cl-gap-${shortKey} { gap: ${varName}; }\n`;
-            // Add px, py variants for safety
-            utilitiesCss += `.cl-px-${shortKey} { padding-left: ${varName}; padding-right: ${varName}; }\n`;
-            utilitiesCss += `.cl-py-${shortKey} { padding-top: ${varName}; padding-bottom: ${varName}; }\n`;
+        if (key.startsWith('spacing-') || key.startsWith('scale-')) {
+            const shortKey = key.replace('spacing-', '').replace('scale-', '');
+            const prefix = key.startsWith('scale-') ? 'scale-' : '';
+            
+            // Standard Utility Set
+            utilitiesCss += `.cl-p-${prefix}${shortKey} { padding: ${varName}; }\n`;
+            utilitiesCss += `.cl-m-${prefix}${shortKey} { margin: ${varName}; }\n`;
+            utilitiesCss += `.cl-gap-${prefix}${shortKey} { gap: ${varName}; }\n`;
+            
+            // Logical Properties
+            utilitiesCss += `.cl-px-${prefix}${shortKey} { padding-left: ${varName}; padding-right: ${varName}; }\n`;
+            utilitiesCss += `.cl-py-${prefix}${shortKey} { padding-top: ${varName}; padding-bottom: ${varName}; }\n`;
+            utilitiesCss += `.cl-pt-${prefix}${shortKey} { padding-top: ${varName}; }\n`;
+            utilitiesCss += `.cl-pb-${prefix}${shortKey} { padding-bottom: ${varName}; }\n`;
+            utilitiesCss += `.cl-mx-${prefix}${shortKey} { margin-left: ${varName}; margin-right: ${varName}; }\n`;
+            utilitiesCss += `.cl-my-${prefix}${shortKey} { margin-top: ${varName}; margin-bottom: ${varName}; }\n`;
+            utilitiesCss += `.cl-mt-${prefix}${shortKey} { margin-top: ${varName}; }\n`;
+            utilitiesCss += `.cl-mb-${prefix}${shortKey} { margin-bottom: ${varName}; }\n`;
+
+            // Dimensional (only for scale)
+            if (key.startsWith('scale-')) {
+                utilitiesCss += `.cl-w-${prefix}${shortKey} { width: ${varName}; }\n`;
+                utilitiesCss += `.cl-h-${prefix}${shortKey} { height: ${varName}; }\n`;
+            }
+        }
+
+        if (key.startsWith('layout-')) {
+            const shortKey = key.replace('layout-', '');
+            if (shortKey.includes('container-')) {
+                utilitiesCss += `.cl-max-w-${shortKey.replace('container-', 'container-')} { max-width: ${varName}; }\n`;
+                utilitiesCss += `.cl-w-${shortKey.replace('container-', 'container-')} { width: ${varName}; }\n`;
+            } else {
+                utilitiesCss += `.cl-${shortKey} { ${shortKey.includes('width') ? 'max-width' : 'margin-top'}: ${varName}; }\n`;
+            }
         }
         
-        if (key.startsWith('border-width-')) utilitiesCss += `.cl-border-${key.replace('border-width-', '')} { border-width: ${varName}; }\n`;
+        if (key.startsWith('border-width-')) {
+            const shortKey = key.replace('border-width-', '');
+            utilitiesCss += `.cl-border-${shortKey} { border-width: ${varName}; }\n`;
+            utilitiesCss += `.cl-border-t-${shortKey} { border-top-width: ${varName}; }\n`;
+            utilitiesCss += `.cl-border-r-${shortKey} { border-right-width: ${varName}; }\n`;
+            utilitiesCss += `.cl-border-b-${shortKey} { border-bottom-width: ${varName}; }\n`;
+            utilitiesCss += `.cl-border-l-${shortKey} { border-left-width: ${varName}; }\n`;
+        }
         if (key.startsWith('typography-font-size-')) {
             utilitiesCss += `.cl-text-${key.replace('typography-font-size-', '')} { font-size: ${varName}; }\n`;
             utilitiesCss += `.cl-text-${key.replace('typography-font-', '')} { font-size: ${varName}; }\n`; // Fallback for shortened text sizing

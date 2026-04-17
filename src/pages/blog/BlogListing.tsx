@@ -10,10 +10,18 @@ const BLOG_POSTS = [
         excerpt: "How to design security features that enhance rather than hinder the user experience. A deep dive into authentication patterns.",
         category: "Security",
         date: "Oct 24, 2024",
-        slug: "/work/secure-ux",
+        slug: "/blog/secure-ux",
         imageUrl: "/assets/images/blog/secure-ux-cover.png"
     },
-    // Add placeholder if needed
+    {
+        id: 2,
+        title: "Architecting Governance",
+        excerpt: "Transforming acquisition chaos into a unified, token-based system architecture for enterprise SaaS.",
+        category: "Design Systems",
+        date: "Dec 30, 2024",
+        slug: "/blog/governance",
+        imageUrl: "/assets/images/blog/governance-cover.png"
+    },
 ];
 
 export function BlogListing() {

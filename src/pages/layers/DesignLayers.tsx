@@ -1,7 +1,5 @@
-
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Layers } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { ServiceCard } from '../../components/portfolio/ServiceCard';
 
 export function DesignLayers() {
@@ -12,9 +10,9 @@ export function DesignLayers() {
             {/* Hero */}
             <section className="bg-surface border-b border-border-muted py-20">
                 <div className="container mx-auto px-6 max-w-container">
-                    <Link to="/" className="inline-flex items-center text-sm font-medium cl-text-secondary hover:cl-text-primary transition-colors mb-8">
+                    <Link to="/work" className="inline-flex items-center text-sm font-bold cl-text-neutral-text-medium-contrast hover:cl-text-brand-primary-base transition-colors mb-8">
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to Home
+                        Back to Workspace
                     </Link>
                     <div className="flex items-center gap-4 mb-4">
                         <div className="p-3 rounded-2xl cl-bg-neutral-surface-level-2 cl-text-primary">

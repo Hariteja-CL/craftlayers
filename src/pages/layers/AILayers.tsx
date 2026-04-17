@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import { Badge } from '../../components/ui/Badge';
 import { Card } from '../../components/ui/Card';
-import { ArrowRight, Sparkles, Bot } from 'lucide-react';
+import { ArrowRight, Sparkles, Bot, ArrowLeft } from 'lucide-react';
 
 export function AILayers() {
     return (
         <div className="pt-24 pb-20">
             <div className="container mx-auto px-6 max-w-container">
+                <Link to="/work" className="inline-flex items-center text-sm font-bold cl-text-neutral-text-medium-contrast hover:cl-text-brand-primary-base transition-colors mb-8">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Workspace
+                </Link>
 
                 {/* Header */}
                 <div className="mb-16 max-w-2xl">

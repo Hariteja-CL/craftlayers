@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DataView } from './DataView';
 import { VisualView } from './VisualView';
 import { ActionCard } from './ActionCard';
@@ -26,6 +27,7 @@ const INITIAL_DATA: DepartmentMetric[] = [
 ];
 
 export function CultureDashboard() {
+    const navigate = useNavigate();
     const [data, setData] = useState<DepartmentMetric[]>(INITIAL_DATA);
 
     const averageSentiment = data.reduce((acc, curr) => acc + curr.sentiment, 0) / data.length;
@@ -48,7 +50,7 @@ export function CultureDashboard() {
                     </div>
                     <Button
                         variant="outline"
-                        onClick={() => window.location.href = '/work/enculture'}
+                        onClick={() => navigate('/work/enculture')}
                         className="bg-white"
                     >
                         Back to Case Study

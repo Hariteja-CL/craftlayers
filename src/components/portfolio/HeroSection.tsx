@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Zap, Target, Shield, Rocket } from 'lucide-react';
 import { cn } from '../ui/Button';
 
 export function HeroSection() {
+    const navigate = useNavigate();
+
     return (
         <section className="relative py-20 lg:py-32 overflow-hidden cl-bg-neutral-surface-level-0">
             {/* Ambient Background Elements */}
@@ -44,13 +47,13 @@ export function HeroSection() {
                         <ArrowRight className="w-4 h-4" />
                     </button>
                     <button 
-                        onClick={() => window.location.href = '/work/enculture'}
+                        onClick={() => navigate('/work')}
                         className={cn(
                             "w-full sm:w-auto px-8 py-4 rounded-xl text-md font-semibold transition-all duration-300 cl-focus-ring border",
                             "cl-bg-neutral-surface-level-1 cl-border-border-color-default cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2"
                         )}
                     >
-                        View Work (Enculture)
+                        Explore Work
                     </button>
                 </div>
 
