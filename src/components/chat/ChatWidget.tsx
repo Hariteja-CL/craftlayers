@@ -68,11 +68,19 @@ export function ChatWidget() {
         setIsThinking(true);
 
         try {
-            const response = await fetch(import.meta.env.VITE_CHAT_API_URL, {
+            const apiUrl = import.meta.env.VITE_CHAT_API_URL;
+            const apiKey = import.meta.env.VITE_CHAT_API_KEY;
+
+            if (!apiUrl || apiUrl === 'undefined') {
+                console.error('CHAT_API_URL is missing. Please check your .env or Vercel settings.');
+                throw new Error('Configuration error');
+            }
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    'x-api-key': import.meta.env.VITE_CHAT_API_KEY
+                    'x-api-key': apiKey || ''
                 },
                 body: JSON.stringify({
                     message: content,
