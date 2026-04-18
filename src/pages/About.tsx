@@ -1,5 +1,6 @@
 import { Briefcase, Fingerprint } from 'lucide-react';
 import { Badge } from '../components/ui/Badge';
+import profileHero from '../assets/images/profile.png';
 
 export function About() {
     return (
@@ -9,6 +10,9 @@ export function About() {
                 {/* Left Column: Text Content */}
                 <div className="lg:col-span-6 space-y-8 self-center">
                     <div className="space-y-4">
+                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 cl-border-neutral-surface-level-2 shadow-xl overflow-hidden mb-6">
+                            <img src={profileHero} alt="Hariteja Nandipati - Product Designer" className="w-full h-full object-cover" />
+                        </div>
                         <div className="cl-text-semantic-warning-text font-bold tracking-widest text-xs uppercase">
                             About Me
                         </div>

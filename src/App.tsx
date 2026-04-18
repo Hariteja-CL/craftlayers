@@ -8,17 +8,14 @@ import { Inwards } from './pages/work/Inwards';
 import { Enculture } from './pages/work/Enculture';
 import { UserDashboard } from './pages/work/UserDashboard';
 import { TherapistDashboard } from './pages/work/TherapistDashboard';
+import { CultureDashboard } from './components/dashboard/CultureDashboard';
+import { Works } from './pages/work/Works';
+import { Governance } from './pages/work/Governance';
 import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
-import { CultureDashboard } from './components/dashboard/CultureDashboard';
-import { Works } from './pages/work/Works';
-import { AIAgentCaseStudy as AIAgent } from './pages/work/AIAgentCaseStudy';
-import { SecurityAgentCaseStudy as SecurityAgent } from './pages/work/SecurityAgentCaseStudy';
-import { Governance } from './pages/work/Governance';
 
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
-
 
 function App() {
   return (
@@ -29,23 +26,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<BlogListing />} />
-          <Route path="/work/secure-ux" element={<BlogPost />} />
+          <Route path="/blog/secure-ux" element={<BlogPost />} />
+          <Route path="/blog/governance" element={<Governance />} />
           <Route path="/work" element={<Works />} />
-          <Route path="/work/agent-ai" element={<AIAgent />} />
-          <Route path="/work/agent-security" element={<SecurityAgent />} />
+          <Route path="/work/design" element={<DesignLayers />} />
+          <Route path="/work/ai" element={<AILayers />} />
+          <Route path="/work/security" element={<SecurityLayers />} />
           <Route path="/work/inwards" element={<Inwards />} />
           <Route path="/work/inwards/user" element={<UserDashboard />} />
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />
           <Route path="/work/enculture" element={<Enculture />} />
-          <Route path="/work/governance" element={<Governance />} />
-
-          {/* Layer Pages */}
-          <Route path="/work/design" element={<DesignLayers />} />
-          <Route path="/work/ai" element={<AILayers />} />
-          <Route path="/work/security" element={<SecurityLayers />} />
           <Route path="/dashboard/culture" element={<CultureDashboard />} />
-
-          {/* Dashboards (Done) */}
           <Route path="/contact" element={<div className="p-20 text-center">Contact Page (Coming Soon)</div>} />
         </Route>
       </Routes>

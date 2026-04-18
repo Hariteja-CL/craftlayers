@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { Badge } from '../ui/Badge';
 
@@ -38,7 +39,7 @@ export function V2CaseStudyTemplate({
                     <div className="mb-10">
                         <Breadcrumbs items={[
                             { label: 'Home', path: '/' },
-                            { label: 'Work', path: '/' },
+                            { label: 'Work', path: '/work' },
                             { label: title }
                         ]} />
                     </div>
@@ -103,11 +104,11 @@ export function V2CaseStudyTemplate({
             <footer className="mt-40 pt-20 border-t cl-border-border-color-default">
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <h3 className="text-sm font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-8">Next Case Study</h3>
-                    <a href="/" className="group inline-block">
+                    <Link to="/work" className="group inline-block">
                         <div className="text-3xl md:text-5xl font-bold cl-text-neutral-text-high-contrast group-hover:cl-text-brand-primary-base transition-colors">
                             Return to Workspace →
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </footer>
         </article>

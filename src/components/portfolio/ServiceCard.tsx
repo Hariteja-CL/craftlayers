@@ -27,7 +27,7 @@ export function ServiceCard({
         <Card
             onClick={onClick}
             className={cn(
-                "cursor-pointer group h-full flex flex-col justify-between p-6 lg:p-10 cl-radius-lg cl-border-thin cl-border-solid relative overflow-hidden",
+                "cursor-pointer group h-full flex flex-col justify-between cl-p-scale-600 cl-radius-lg cl-border-thin cl-border-solid relative overflow-hidden",
                 "cl-bg-neutral-surface-level-1 cl-border-border-color-default hover:cl-border-border-color-strong",
                 className
             )}
@@ -40,7 +40,7 @@ export function ServiceCard({
                     {badge}
                 </div>
             )}
-            <div className="space-y-6">
+            <div className="flex flex-col cl-gap-scale-600">
                 {/* Icon Container */}
                 <div className={cn(
                     "w-12 h-12 rounded-full flex items-center justify-center border cl-border-border-color-default cl-bg-neutral-surface-level-0",
@@ -49,7 +49,7 @@ export function ServiceCard({
                     {icon}
                 </div>
 
-                <div className="space-y-3">
+                <div className="flex flex-col cl-gap-scale-300">
                     <CardTitle className={cn(
                         "cl-text-300 cl-weight-semibold cl-text-neutral-text-high-contrast"
                     )}>
