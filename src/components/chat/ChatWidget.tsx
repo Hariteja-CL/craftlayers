@@ -68,11 +68,11 @@ export function ChatWidget() {
         setIsThinking(true);
 
         try {
-            const response = await fetch('https://api.craftlayers.com/api/chat', {
+            const response = await fetch(import.meta.env.VITE_CHAT_API_URL, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    'x-api-key': 't7xwPNqIWYJbE3TtYkheSgMGXWRaBb3Ol-vnNe2kqVY'
+                    'x-api-key': import.meta.env.VITE_CHAT_API_KEY
                 },
                 body: JSON.stringify({
                     message: content,
