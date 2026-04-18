@@ -46,14 +46,23 @@ server {
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;
 
-        # CORS Headers
-        add_header 'Access-Control-Allow-Origin' '*' always;
+        # 🛡️ Prevent "Multiple Values" CORS Error
+        proxy_hide_header 'Access-Control-Allow-Origin';
+
+        # 🚀 Advanced CORS Configuration
+        # Allows requests from your live portfolio AND your local development environment
+        set \$cors_origin "";
+        if (\$http_origin ~* (https?://(localhost:5173|.*\.craftlayers\.com|craftlayers\.com))) {
+            set \$cors_origin \$http_origin;
+        }
+
+        add_header 'Access-Control-Allow-Origin' '\$cors_origin' always;
         add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE' always;
         add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,x-api-key' always;
         add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
 
         if (\$request_method = 'OPTIONS') {
-            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Origin' '\$cors_origin';
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE';
             add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,x-api-key';
             add_header 'Access-Control-Max-Age' 1728000;
