@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Zap, Target, Shield, Rocket } from 'lucide-react';
+import { ChevronDown, Zap, Target, Shield, Rocket } from 'lucide-react';
 import { cn } from '../ui/Button';
 
 export function HeroSection() {
@@ -28,11 +28,11 @@ export function HeroSection() {
                     <span className="cl-text-brand-primary-base">One pipeline.</span>
                 </h1>
 
-                <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl mx-auto">
-                    From messy requirements to production-ready UI — I design, refine, and ship using AI-assisted workflows.
+                <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl mx-auto font-medium">
+                    Senior Product Designer | UX Architect | AI Workflow Builder | Cybersecurity Practitioner
                 </p>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-10">
-                    No handoffs. No delays. Just execution.
+                    System-first. Code-aware. AI-accelerated.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
@@ -43,8 +43,8 @@ export function HeroSection() {
                             "cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction hover:-translate-y-0.5"
                         )}
                     >
-                        View Craftlayers DS
-                        <ArrowRight className="w-4 h-4" />
+                        Explore My Work Process
+                        <ChevronDown className="w-4 h-4" />
                     </button>
                     <button 
                         onClick={() => navigate('/work')}

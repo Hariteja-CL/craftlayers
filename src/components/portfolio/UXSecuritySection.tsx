@@ -20,7 +20,7 @@ export function UXSecuritySection() {
                         </div>
                         <h4 className="text-lg font-bold cl-text-neutral-text-high-contrast mb-3">Security-First Thinking</h4>
                         <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
-                            Every interface element is audited for potential data exposure, ensuring that usability never comes at the cost of vulnerability.
+                            Every interface element is audited for potential data exposure. I use secure architectures like **Cloudflare Tunneling** to protect backend-frontend communication.
                         </p>
                     </div>
 
@@ -55,13 +55,13 @@ export function UXSecuritySection() {
                             </div>
                             <h4 className="text-2xl font-bold cl-text-neutral-text-high-contrast mb-4">The PII Cookie Leak</h4>
                             <p className="text-sm cl-text-neutral-text-low-contrast leading-relaxed">
-                                A common UX shortcut: Storing user information in unencrypted cookies for "faster loading."
+                                A responsible disclosure for **Edureka**: Storing user information in unencrypted cookies for "faster loading."
                             </p>
                         </div>
                         
                         <div className="lg:w-2/3 grid sm:grid-cols-2 gap-6">
                             <div className="p-6 rounded-2xl cl-bg-neutral-surface-level-1 border cl-border-border-color-default">
-                                <h5 className="font-bold text-semantic-error-text text-xs mb-3 uppercase tracking-widest">Case Study: PII Leak</h5>
+                                <h5 className="font-bold text-semantic-error-text text-xs mb-3 uppercase tracking-widest">Case Study: Edureka Disclosure</h5>
                                 <div className="space-y-4">
                                     <div>
                                         <div className="text-[10px] font-bold cl-text-neutral-text-low-contrast uppercase mb-1">Issue</div>

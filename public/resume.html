@@ -8,17 +8,16 @@
     <!-- Import standard fonts locally or from Google to ensure print consistency -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #1A1A1A;
-            --secondary: #64748B;
-            --accent: #F97316;
-            /* Orange-500 */
-            --bg-page: #FDFDFD;
+            --primary: #111827;
+            --secondary: #4B5563;
+            --accent: #F97316; /* Orange-500 */
+            --bg-page: #F3F4F6;
             --surface: #FFFFFF;
-            --border: #F3F4F6;
+            --border: #E5E7EB;
         }
 
         * {
@@ -30,12 +29,19 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #EBF2FA;
-            /* Light Blue BG for screen */
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-page);
             color: var(--primary);
             line-height: 1.6;
             font-size: 10pt;
+        }
+
+        .serif {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .mono {
+            font-family: 'DM Mono', monospace;
         }
 
         .page {
@@ -44,45 +50,39 @@
             min-height: 29.7cm;
             margin: 2cm auto;
             padding: 1.5cm 2cm;
-            border-radius: 2rem;
-            /* Gemini Rounding */
+            border-radius: 1.5rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        /* Decorative Background Blob for Screen only (can be hidden in print if distracting, but adds flair) */
         .blob {
             position: absolute;
             top: -100px;
             right: -100px;
             width: 300px;
             height: 300px;
-            background: rgba(255, 167, 38, 0.15);
-            /* Orange-400 equivalent */
+            background: rgba(249, 115, 22, 0.1);
             filter: blur(80px);
             border-radius: 50%;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Header */
         header {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
             z-index: 10;
-            border-bottom: 1px dashed #E5E7EB;
-            /* Dashed line like About page */
+            border-bottom: 1px dashed var(--border);
             padding-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: 28pt;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: #111827;
+            font-size: 32pt;
+            font-weight: 400;
+            color: var(--primary);
             margin-bottom: 0.25rem;
-            line-height: 1;
+            line-height: 1.1;
         }
 
         .subtitle {
@@ -91,17 +91,16 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .contact-pill {
             display: inline-flex;
             gap: 1rem;
             background: #F9FAFB;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 9999px;
-            /* Pill Shape */
-            border: 1px solid #F3F4F6;
+            border: 1px solid var(--border);
             font-size: 9pt;
             font-weight: 500;
             color: var(--secondary);
@@ -119,14 +118,14 @@
         }
 
         .summary {
-            font-size: 10pt;
+            font-size: 10-pt;
             color: var(--secondary);
             margin-top: 1rem;
-            max-width: 90%;
-            font-weight: 500;
+            max-width: 95%;
+            font-weight: 400;
+            line-height: 1.6;
         }
 
-        /* Sections */
         section {
             margin-bottom: 1.5rem;
             position: relative;
@@ -137,8 +136,8 @@
             font-size: 11pt;
             text-transform: uppercase;
             font-weight: 800;
-            letter-spacing: 0.05em;
-            color: #111827;
+            letter-spacing: 0.08em;
+            color: var(--primary);
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -154,24 +153,21 @@
             border-radius: 50%;
         }
 
-        /* Grid Layout for Experience */
         .timeline {
-            border-left: 2px solid #F3F4F6;
+            border-left: 2px solid var(--border);
             margin-left: 3px;
             padding-left: 1.5rem;
         }
 
         .job-item {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             position: relative;
         }
 
-        /* Custom Bullet matching About Page */
         .job-item::before {
             content: '';
             position: absolute;
             left: calc(-1.5rem - 5px);
-            /* Adjust to center on line */
             top: 6px;
             width: 8px;
             height: 8px;
@@ -189,13 +185,13 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.15rem;
         }
 
         .role {
             font-weight: 700;
             font-size: 11pt;
-            color: #111827;
+            color: var(--primary);
         }
 
         .company {
@@ -204,22 +200,22 @@
         }
 
         .period {
-            font-family: 'Inter', monospace;
             font-size: 8.5pt;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #9CA3AF;
-            background: #F9FAFB;
-            padding: 2px 6px;
+            color: #6B7280;
+            background: #F3F4F6;
+            padding: 2px 8px;
             border-radius: 4px;
+            font-weight: 600;
         }
 
         .domain {
             font-size: 8.5pt;
             color: var(--accent);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
             display: block;
         }
@@ -230,10 +226,11 @@
 
         li {
             position: relative;
-            padding-left: 1rem;
+            padding-left: 1.2rem;
             margin-bottom: 0.35rem;
-            color: #4B5563;
+            color: #374151;
             font-size: 9.5pt;
+            line-height: 1.5;
         }
 
         li::before {
@@ -242,34 +239,35 @@
             left: 0;
             color: var(--accent);
             font-weight: bold;
-            font-size: 12pt;
+            font-size: 13pt;
             line-height: 1;
-            top: -1px;
+            top: 0px;
         }
 
-        /* Skills Bento-ish Grid */
         .skills-container {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             background: #F8FAFC;
-            padding: 1.5rem;
-            border-radius: 1.5rem;
+            padding: 1.25rem;
+            border-radius: 1rem;
             border: 1px solid #F1F5F9;
         }
 
         .skill-group {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1rem;
         }
 
         .skill-group strong {
-            min-width: 100px;
-            font-size: 9pt;
+            min-width: 110px;
+            font-size: 8.5pt;
             text-transform: uppercase;
             color: #64748B;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            padding-top: 4px;
         }
 
         .skill-list {
@@ -282,8 +280,7 @@
             background: white;
             border: 1px solid #E2E8F0;
             padding: 4px 10px;
-            border-radius: 8px;
-            /* Slightly rounded */
+            border-radius: 6px;
             font-size: 8.5pt;
             font-weight: 600;
             color: #334155;
@@ -294,11 +291,12 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: #1A1A1A;
+            background: var(--primary);
             color: white;
             padding: 1rem 2rem;
             border-radius: 9999px;
             font-weight: 700;
+            font-family: inherit;
             cursor: pointer;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             border: none;
@@ -315,13 +313,11 @@
             @page {
                 size: A4;
                 margin: 0.8cm 1.5cm;
-                /* Reduced margins */
             }
 
             body {
                 background: white;
-                font-size: 10pt;
-                /* Slightly smaller for density */
+                font-size: 9.5pt;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -344,35 +340,27 @@
 
             header {
                 margin-bottom: 1rem;
-                /* Reduced from 2rem */
                 padding-bottom: 1rem;
-                /* Reduced from 1.5rem */
                 border-bottom: 1px solid #ddd;
             }
 
             section {
                 break-inside: auto;
-                /* Allow breaking within long sections like Experience */
                 margin-bottom: 1.25rem;
-                /* Reduced from 2rem */
             }
 
             .job-item {
                 break-inside: avoid;
-                /* Don't break individual job blocks */
                 page-break-inside: avoid;
                 margin-bottom: 1rem;
-                /* Added explicitly to control job spacing */
             }
 
-            /* Force page break before Education if it's getting squeezed */
             section h2:contains('Education') {
                 page-break-before: auto;
             }
 
             h1 {
-                font-size: 24pt;
-                /* Slightly smaller header */
+                font-size: 26pt;
                 color: black;
                 margin-bottom: 0.25rem;
             }
@@ -384,10 +372,8 @@
                 margin-bottom: 0.75rem;
             }
 
-            /* Comfort spacing for reading */
             li {
-                margin-bottom: 0.2rem;
-                /* Reduced from 0.5rem */
+                margin-bottom: 0.25rem;
             }
 
             a {
@@ -402,6 +388,12 @@
                 background: transparent !important;
                 color: black !important;
             }
+
+            .skills-container {
+                background: white;
+                border: none;
+                padding: 0;
+            }
         }
     </style>
 </head>
@@ -411,22 +403,19 @@
     <button class="btn-print" onclick="window.print()">Save as PDF</button>
 
     <div class="page">
-        <!-- Atmospheric Blob -->
         <div class="blob"></div>
 
         <header>
-            <h1>Hariteja Nandipati.</h1>
-            <div class="subtitle">Senior UX Designer & Architect</div>
+            <h1 class="serif">Hari Teja Nandipati.</h1>
+            <div class="subtitle">Senior Product Designer | UX Architect | AI Workflow Builder</div>
 
             <p class="summary">
-                Seasoned Product Design leader with over 8 years of specialized experience (12 years total) in crafting
-                innovative, scalable, and user-centric solutions for B2B SaaS platforms. Expert in Design Systems,
-                Secure UX, and Data Visualization.
+                Product Design leader operating at the intersection of UX strategy, scalable systems, and AI-assisted workflows. 
+                With <strong>15+ years of total professional experience</strong> (including 8+ years specializing in complex B2B SaaS UX), 
+                I utilize a code-integrated design approach. I convert interface concepts into structured systems using tokens and commit production-ready frontend code, eliminating traditional handoff delays. Certified in Cybersecurity, I advocate for data privacy through secure UX flows.
             </p>
 
-            <div class="contact-pill">
-                <span>+91 7780214005</span>
-                <span>•</span>
+            <div class="contact-pill mono">
                 <a href="mailto:haritejanandipati@gmail.com">haritejanandipati@gmail.com</a>
                 <span>•</span>
                 <a href="https://craftlayers.com">craftlayers.com</a>
@@ -436,36 +425,31 @@
         </header>
 
         <section>
-            <h2>Key Leadership Achievements</h2>
+            <h2>Architectural Impact & Leadership</h2>
             <div class="skills-container" style="background: white; border: none; padding: 0;">
                 <div class="timeline">
                     <div class="job-item">
                         <div class="job-header">
-                            <span class="role">Design System Impact</span>
+                            <span class="role">Design Systems & Theming (Luminis)</span>
                         </div>
                         <ul>
-                            <li>Built and governed scalable design systems that reduced design-development rework by
-                                <strong>~40%</strong>.
-                            </li>
+                            <li>Developed <strong>'Luminis'</strong>, a CSS theme-layer system standardizing elevation hierarchies, typography, and interaction states. This enables continuous, non-disruptive UI upgrades without altering backend logic.</li>
                         </ul>
                     </div>
                     <div class="job-item">
                         <div class="job-header">
-                            <span class="role">AI-Assisted Workflows</span>
+                            <span class="role">AI-Accelerated Execution Pipelines</span>
                         </div>
                         <ul>
-                            <li>Introduced AI workflows for discovery and validation, improving design velocity by
-                                <strong>~45%</strong>.
-                            </li>
+                            <li>Built the <strong>Craft Layers AI Factory</strong>, orchestrating AI agents to rapidly generate and assemble UI components, directly bridging the gap from UX requirements to code implementation.</li>
                         </ul>
                     </div>
                     <div class="job-item">
                         <div class="job-header">
-                            <span class="role">Shipped 11 Core Products</span>
+                            <span class="role">Security-Aware Product Integrity</span>
                         </div>
                         <ul>
-                            <li>Successfully led design from concept to launch for major platforms in B2B SaaS,
-                                Healthcare, and Real Estate.</li>
+                            <li>Enforced the principle of data least-privilege across all interface designs. Executed responsible disclosures (e.g., client-side PII vulnerabilities) to ensure secure frontend-backend communication.</li>
                         </ul>
                     </div>
                 </div>
@@ -473,26 +457,20 @@
         </section>
 
         <section>
-            <h2>Experience</h2>
+            <h2>Career Experience</h2>
             <div class="timeline">
 
                 <!-- Enculture -->
                 <div class="job-item current">
                     <div class="job-header">
                         <span class="role">Senior UX Designer <span class="company"> // Enculture</span></span>
-                        <span class="period">Jan 2024 - Present</span>
+                        <span class="period mono">Jan 2024 - Present</span>
                     </div>
                     <span class="domain">B2B SaaS | Culture Analytics</span>
                     <ul>
-                        <li><strong>Architected 'Enculture Action Engine':</strong> Designed and engineered a functional
-                            Generative UI prototype using React and OpenAI, transforming static dashboards into an
-                            interactive, agent-based decision support system.</li>
-                        <li><strong>Strategic Innovation:</strong> Led the transition from passive analytics to
-                            prescriptive AI agents, reducing user cognitive load by automating complex data
-                            interpretation into actionable UI cards.</li>
-                        <li><strong>Technical Prototyping:</strong> Bridged the design-engineering gap by deploying live
-                            code (Vercel/Typescript) to validate complex "Human-in-the-Loop" AI interactions before
-                            engineering handoff.</li>
+                        <li><strong>Scalable Dashboards:</strong> Led UX design for end-to-end survey systems and high-density leadership and decision-support dashboards, standardizing the UI via token-based architecture.</li>
+                        <li><strong>Agentic GenUI (Hackathon Winner 2025):</strong> Built the 'Action Engine', a generative UI prototype that interprets organizational data streams to dynamically construct actionable intervention plans.</li>
+                        <li><strong>Reduced Cognitive Load:</strong> Improved workflow clarity and insight visibility across complex enterprise systems, directly enhancing data interpretation efficiency.</li>
                     </ul>
                 </div>
 
@@ -500,11 +478,11 @@
                 <div class="job-item">
                     <div class="job-header">
                         <span class="role">Product Designer <span class="company"> // Clinic Mantra</span></span>
-                        <span class="period">Jan 2023 - Aug 2023</span>
+                        <span class="period mono">Jan 2023 - Aug 2023</span>
                     </div>
                     <span class="domain">Healthcare Tech</span>
                     <ul>
-                        <li>Designed patient-centric interfaces and streamlined appointment scheduling flows.</li>
+                        <li>Designed patient-centric interfaces and optimized complex appointment scheduling workflows, prioritizing HIPAA-compliant secure UX practices.</li>
                     </ul>
                 </div>
 
@@ -512,28 +490,26 @@
                 <div class="job-item">
                     <div class="job-header">
                         <span class="role">UX Design Consultant <span class="company"> // Estate96</span></span>
-                        <span class="period">Aug 2022 - Nov 2022</span>
+                        <span class="period mono">Aug 2022 - Nov 2022</span>
                     </div>
                     <span class="domain">Smart Access Solutions</span>
                     <ul>
-                        <li>Consulted on UX strategy for smart building access control and mobile prototypes.</li>
+                        <li>Consulted on UX architectural strategy for smart building access control, delivering scalable mobile prototypes for hardware integration.</li>
                     </ul>
                 </div>
 
-                <!-- Force Break to Page 2 -->
                 <div style="page-break-after: always; height: 1px; display: block;"></div>
 
                 <!-- Opia Labs -->
                 <div class="job-item">
                     <div class="job-header">
                         <span class="role">UX Designer <span class="company"> // Opia Labs</span></span>
-                        <span class="period">Nov 2019 - Jul 2022</span>
+                        <span class="period mono">Nov 2019 - Jul 2022</span>
                     </div>
                     <span class="domain">SaaS Platforms</span>
                     <ul>
-                        <li>Led design for 'Inwards' (Mental Health/Emotional Intelligence platform), focusing on user
-                            connection and emotional tracking. Delivered data-driven dashboards and analytics UX for
-                            multiple SaaS products.</li>
+                        <li>Led product design for 'Inwards' (Mental Health/Emotional Intelligence platform), translating emotional tracking flows into data-driven analytical dashboards.</li>
+                        <li>Accelerated iteration cycles and enhanced UI structures for multiple active B2B SaaS deployments across the company portfolio.</li>
                     </ul>
                 </div>
 
@@ -541,12 +517,22 @@
                 <div class="job-item">
                     <div class="job-header">
                         <span class="role">UI/UX Designer <span class="company"> // Foyr</span></span>
-                        <span class="period">Apr 2017 - Nov 2019</span>
+                        <span class="period mono">Apr 2017 - Nov 2019</span>
                     </div>
                     <span class="domain">Immersive Architecture Tech</span>
                     <ul>
-                        <li>Instrumental in the UX design of "Foyr Enterprise", contributing to scalable design systems
-                            and brand consistency.</li>
+                        <li>Instrumental in standardizing the UX architecture of "Foyr Enterprise". Contributed heavily to foundational scalable design systems and overarching brand visual consistency.</li>
+                    </ul>
+                </div>
+
+                <!-- Foundational Career -->
+                <div class="job-item">
+                    <div class="job-header">
+                        <span class="role">Graphic Designer & Trainer <span class="company"> // Multiple Ventures</span></span>
+                        <span class="period mono">2010 - 2017</span>
+                    </div>
+                    <ul>
+                        <li>Established foundational design principles, visual hierarchy, and execution speed over 7 years before fully transitioning to digital product architecture.</li>
                     </ul>
                 </div>
 
@@ -558,69 +544,49 @@
             <div class="timeline">
                 <div class="job-item">
                     <div class="job-header">
-                        <span class="role">Advanced Certificate in Cyber Security <span class="company"> // IIT Guwahati
-                                & Edureka (2023-24)</span></span>
+                        <span class="role">Advanced Certificate Program in Cyber Security <span class="company"> // IIT Guwahati & Edureka (2023-24)</span></span>
                     </div>
                 </div>
                 <div class="job-item">
                     <div class="job-header">
-                        <span class="role">Design for AR/VR <span class="company"> // Interaction Design Foundation
-                                (2019)</span></span>
+                        <span class="role">Design for AR/VR <span class="company"> // Interaction Design Foundation (2019)</span></span>
                     </div>
                 </div>
                 <div class="job-item">
                     <div class="job-header">
-                        <span class="role">Diploma in Game Art & Design <span class="company"> // AAG (2009 -
-                                2011)</span></span>
+                        <span class="role">Diploma in Game Art & Design <span class="company"> // AAG (2009 - 2011)</span></span>
                     </div>
                 </div>
                 <div class="job-item">
                     <div class="job-header">
-                        <span class="role">B.Com <span class="company"> // Osmania University (2006 -
-                                2009)</span></span>
+                        <span class="role">B.Com <span class="company"> // Osmania University (2006 - 2009)</span></span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>Honors & Awards</h2>
-            <div class="skills-container" style="background: white; border: none; padding: 0;">
-                <div class="timeline">
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">Enculture Hackathon 2025 Winner</span>
-                        </div>
-                        <ul>
-                            <li>Built the 'Action Engine', a live GenUI agent that interprets cultural data to prescribe
-                                retention strategies.</li>
-                        </ul>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">MAXIMUS (Foyr)</span>
-                        </div>
-                        <ul>
-                            <li>In recognition of exceptional results and actions beyond the call of duty.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Expertise</h2>
+            <h2>Technical Fluency</h2>
             <div class="skills-container">
                 <div class="skill-group">
-                    <strong>Competencies</strong>
+                    <strong>Disciplines</strong>
                     <div class="skill-list">
-                        <span class="pill">UX Strategy & Leadership</span>
-                        <span class="pill">Design Systems</span>
-                        <span class="pill">Secure UX</span>
-                        <span class="pill">Data Visualization</span>
-                        <span class="pill">User Research</span>
-                        <span class="pill">AI Prototyping (Vercel/OpenAI)</span>
-                        <span class="pill">Generative UI Systems</span>
+                        <span class="pill">SaaS Dashboard UX</span>
+                        <span class="pill">Design System Architecture</span>
+                        <span class="pill">Secure Data Privacy</span>
+                        <span class="pill">Generative UI Modeling</span>
+                        <span class="pill">Front-End Translation</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <strong>Tech Stack</strong>
+                    <div class="skill-list">
+                        <span class="pill">Figma / Tokens Studio</span>
+                        <span class="pill">Cursor (IDE)</span>
+                        <span class="pill">HTML / Modern CSS</span>
+                        <span class="pill">Vercel / GitHub Integration</span>
+                        <span class="pill">Cloudflare Tunneling</span>
+                        <span class="pill">OpenAI System Prompting</span>
                     </div>
                 </div>
             </div>
