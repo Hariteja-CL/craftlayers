@@ -23,9 +23,9 @@ const steps: Step[] = [
     },
     {
         id: "02",
-        title: "Insight to System Design",
+        title: "Insight to System",
         output: "Structured flows & data models",
-        desc: "\u00A0",
+        desc: "Stitch + Google Studio orchestration",
         icon: (
             <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         ),
@@ -45,7 +45,7 @@ const steps: Step[] = [
         id: "04",
         title: "Vibe Coding (AI Layer)",
         output: "Functional UI structure",
-        desc: "Cursor + AI generation",
+        desc: "Cursor + Antigravity execution",
         isAI: true,
         icon: (
             <svg viewBox="0 0 24 24"><path d="M15 3l6 6-12 12H3v-6L15 3z"/></svg>
@@ -76,7 +76,7 @@ const steps: Step[] = [
         id: "07",
         title: "Handover & Ship",
         output: "Git-ready delivery",
-        desc: "\u00A0",
+        desc: "GitHub + Vercel deployment",
         icon: (
             <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
         ),
