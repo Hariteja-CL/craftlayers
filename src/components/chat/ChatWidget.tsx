@@ -68,11 +68,11 @@ export function ChatWidget() {
         setIsThinking(true);
 
         try {
-            const apiUrl = import.meta.env.VITE_CHAT_API_URL;
-            const apiKey = import.meta.env.VITE_CHAT_API_KEY;
+            const apiUrl = import.meta.env.VITE_B_GATEWAY_URL;
+            const apiKey = import.meta.env.VITE_B_GATEWAY_AUTH;
 
             if (!apiUrl || apiUrl === 'undefined') {
-                console.error('CHAT_API_URL is missing. Please check your .env or Vercel settings.');
+                console.error('B_GATEWAY_URL is missing. Please check your .env or Vercel settings.');
                 throw new Error('Configuration error');
             }
 
