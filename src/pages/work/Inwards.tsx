@@ -10,7 +10,7 @@ export function Inwards() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        Inwards is a specialized mental health platform where I led the design strategy for emotional connection features. The goal was to transform clinical requirements into a high-engagement ecosystem that drives repeat usage and patient trust through intuitive data-driven UX.
+                        Inwards is a specialized mental health platform where I led the design strategy for emotional connection features. The goal was to transform clinical requirements into a high-engagement ecosystem that drives repeat usage and patient trust through intuitive, outcome-driven UX and cognitive load reduction.
                     </p>
                     <p className="text-sm border-l-2 cl-border-border-color-default pl-4 italic">
                         "Enabling users to visualize ROI and health performance metrics effectively within a SaaS environment."
@@ -88,7 +88,7 @@ export function Inwards() {
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>ROI visualization:</strong> Delivered high-resolution dashboards for clinicians to see patient trends at a glance, enabling faster ROI demonstration for healthcare providers.</p>
+                        <p><strong>ROI visualization:</strong> Delivered frontend-ready UX dashboards for clinicians to see patient trends at a glance, enabling faster ROI demonstration for healthcare providers.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
@@ -131,8 +131,8 @@ export function Inwards() {
 
     return (
         <V2CaseStudyTemplate
-            title="Inwards—Emotional Connection Engine"
-            subtitle="Optimizing retention and ROI through human-centered health systems."
+            title="Inwards—Emotional Connection Engine (System-Driven UX)"
+            subtitle="Optimizing retention and ROI through human-in-the-loop health systems."
             impactValue="High"
             impactLabel="User Engagement"
             role="UX Design Consultant"

@@ -9,7 +9,7 @@ export function UXSecuritySection() {
                         UX + Security
                     </h2>
                     <p className="cl-text-neutral-text-medium-contrast max-w-2xl text-lg">
-                        UX decisions are security decisions. I build products that protect data by design, not by accident.
+                        UX decisions are security decisions. I build products that prioritize Secure UX Design, data-aware interface design, and privacy-first UX to protect data by design, not by accident.
                     </p>
                 </div>
 

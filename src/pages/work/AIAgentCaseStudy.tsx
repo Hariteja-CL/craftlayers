@@ -108,8 +108,8 @@ export function AIAgentCaseStudy() {
 
     return (
         <V2CaseStudyTemplate
-            title="The AI Orchestrator"
-            subtitle="Autonomous GenUI agents for enterprise retention strategies."
+            title="The AI Orchestrator (System-Driven UX)"
+            subtitle="Autonomous GenUI agents for enterprise dashboard & data visualization UX."
             impactValue="Growth"
             impactLabel="Strategic Focus"
             role="Research & Systems Lead"

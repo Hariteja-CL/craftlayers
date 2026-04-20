@@ -26,7 +26,7 @@ export function SecurityAgentCaseStudy() {
             content: (
                 <div className="space-y-6">
                     <p>
-                        Implemented a <strong>Pixel-Level Anonymization Logic</strong>. The "Sentinel Agent" acts as a proxy that enforces <strong>Zero-Trust UI</strong> principles, ensuring that sensitive metadata and PII are obfuscated or isolated based on role-based access before rendering in the DOM.
+                        Implemented a <strong>Pixel-Level Anonymization Logic</strong>. The "Sentinel Agent" acts as a proxy that enforces <strong>Zero-Trust UI</strong> principles, ensuring that sensitive metadata and PII are obfuscated or isolated based on role-based access before rendering in the DOM, managing deep system complexity context.
                     </p>
                     <div className="p-8 border cl-border-border-color-default rounded-3xl cl-bg-neutral-surface-level-1">
                         <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -115,8 +115,8 @@ export function SecurityAgentCaseStudy() {
 
     return (
         <V2CaseStudyTemplate
-            title="The Security Sentinel"
-            subtitle="Defensive UI architecture for identity-safe data orchestration."
+            title="The Security Sentinel (System-Driven UX)"
+            subtitle="Defensive UI architecture for frontend-ready UX orchestration."
             impactValue="Secure"
             impactLabel="Design Posture"
             role="Research & Security Lead"

@@ -6,28 +6,28 @@ const metrics = [
         icon: <Clock className="w-6 h-6" />,
         stat: "Efficiency",
         label: "Reduced Iteration Cycles",
-        desc: "Achieved through structured outputs and system-first architectural thinking.",
+        desc: "Achieved through structured AI-assisted workflows and reduced iteration cycles.",
         color: "cl-text-brand-primary-base"
     },
     {
         icon: <DollarSign className="w-6 h-6" />,
         stat: "Velocity",
         label: "Idea to Frontend Speed",
-        desc: "Faster transition from conceptual requirements to production-ready UI components.",
+        desc: "Accelerated design execution and high-velocity UX delivery for faster transition to production.",
         color: "cl-text-semantic-success-text"
     },
     {
         icon: <Repeat className="w-6 h-6" />,
         stat: "Alignment",
         label: "Reduced Handoff Friction",
-        desc: "Less dependency on traditional design-to-dev handoffs by delivering buildable code.",
+        desc: "Less dependency on traditional handoffs by delivering frontend-ready UX.",
         color: "cl-text-semantic-warning-text"
     },
     {
         icon: <BarChart3 className="w-6 h-6" />,
         stat: "Precision",
         label: "Stakeholder Directness",
-        desc: "Better alignment with core requirements early in the product development lifecycle.",
+        desc: "Improved decision clarity and alignment with core requirements early in development.",
         color: "cl-text-info-text"
     }
 ];
