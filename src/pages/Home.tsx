@@ -42,7 +42,7 @@ export function Home() {
                         {/* Design Layer */}
                         <ServiceCard
                             title="Design Layer"
-                            description="Human-centered UX for complex enterprise platforms. Focus on cognitive ergonomics."
+                            description="Human-centered UX for complex enterprise platforms. Focus on cognitive load reduction and human-in-the-loop workflows."
                             icon={<img src={designIcon} alt="Design" className="w-5 h-5" />}
                             variant="light"
                             onClick={() => navigate('/work#design')}

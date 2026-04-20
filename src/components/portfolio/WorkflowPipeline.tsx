@@ -43,9 +43,9 @@ const steps: Step[] = [
     },
     {
         id: "04",
-        title: "Vibe Coding (AI Layer)",
+        title: "LLM-Driven UI Generation",
         output: "Functional UI structure",
-        desc: "Cursor + Antigravity execution",
+        desc: "AI-Assisted Design Workflows",
         isAI: true,
         icon: (
             <svg viewBox="0 0 24 24"><path d="M15 3l6 6-12 12H3v-6L15 3z"/></svg>
@@ -136,7 +136,7 @@ export function WorkflowPipeline() {
                         My workflow
                     </h2>
                     <p className="text-[14px] cl-text-neutral-text-medium-contrast mb-1.5 leading-relaxed">
-                        A system-first approach that transforms complexity into production-ready UI.
+                        An AI-accelerated design-to-code workflow that transforms complexity into production-ready UI.
                     </p>
                     <p className="mono text-[11px] cl-text-neutral-text-low-contrast tracking-wider">
                         <span className="cl-text-neutral-text-medium-contrast">Research</span> → 

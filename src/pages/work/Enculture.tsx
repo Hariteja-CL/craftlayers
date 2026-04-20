@@ -14,7 +14,7 @@ export function Enculture() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        Enculture is an enterprise B2B SaaS platform where I served as Senior UX Designer with a heavy focus on Growth. I architected the <strong>"Enculture Action Engine"</strong>, a system that transforms passive metrics into prescriptive AI-driven insights for leadership teams.
+                        Enculture is an enterprise B2B SaaS platform where I served as Senior UX Designer with a heavy focus on Growth. I architected the <strong>"Enculture Action Engine"</strong>, a system that transforms passive metrics into prescriptive AI-driven insights, navigating deep system complexity context for leadership teams.
                     </p>
                     <p className="text-sm border-l-2 cl-border-border-color-default pl-4 italic">
                         "Winner of the Enculture Hackathon 2025 for building a live GenUI agent focused on retention strategies."
@@ -112,7 +112,7 @@ export function Enculture() {
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>Agentic Retention:</strong> Built GenUI agents that mutate based on user intent to proactively address churn signals.</p>
+                        <p><strong>Agentic Retention:</strong> Built GenUI agents within an AI-assisted workflow that mutate based on user intent to proactively address churn signals.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
@@ -139,7 +139,7 @@ export function Enculture() {
                     <div className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default p-10 rounded-[3rem] max-w-lg mx-auto">
                         <Zap className="w-12 h-12 mx-auto mb-6 cl-text-brand-primary-base" />
                         <p className="text-2xl font-bold mb-2">The Action Engine</p>
-                        <p className="text-sm cl-text-neutral-text-medium-contrast">A prescriptive SaaS growth system designed to transform behavioral signals into revenue-protecting actions.</p>
+                        <p className="text-sm cl-text-neutral-text-medium-contrast">A prescriptive SaaS growth system designed for outcome-driven UX, transforming behavioral signals into revenue-protecting actions.</p>
                     </div>
                 </div>
             )
@@ -200,8 +200,8 @@ export function Enculture() {
 
     return (
         <V2CaseStudyTemplate
-            title="Enculture—The Action Engine"
-            subtitle="Bridging engineering requirements with Growth-focused UI strategies."
+            title="Enculture—The Action Engine (System-Driven UX)"
+            subtitle="Bridging engineering requirements with Human-in-the-Loop workflows."
             impactValue="~45%"
             impactLabel="Dev Velocity"
             role="Senior UX Designer"

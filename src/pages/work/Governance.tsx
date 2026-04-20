@@ -10,7 +10,7 @@ export function Governance() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        Redesigning a fragmented governance platform formed by the acquisition of three independent SaaS modules. The focus was to transition from a collection of individual tools into a unified, scalable governance ecosystem.
+                        Redesigning a fragmented governance platform formed by the acquisition of three independent SaaS modules. The focus was to transition from a collection of individual tools into a unified, scalable governance ecosystem, managing deep system complexity context.
                     </p>
                 </div>
             )
@@ -97,11 +97,11 @@ export function Governance() {
                 <ul className="space-y-4">
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>AI-Assisted Workflow:</strong> Performed a heuristic design audit of 150+ legacy screens in 72 hours using AI agents.</p>
+                        <p><strong>AI-Assisted Workflow:</strong> Performed a heuristic design audit of 150+ legacy screens in 72 hours using AI agents, leveraging taste-driven decisions to align UI.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>Design System:</strong> Engineered a token-based system to replace 14 disparate style files.</p>
+                        <p><strong>Design Systems Architecture:</strong> Engineered a token-based system to replace 14 disparate style files, creating scalable UI systems with AI-compatible components.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
@@ -144,8 +144,8 @@ export function Governance() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        A unified Health Score Dashboard and persistent Compliance Linter. 
-                        <strong> What this enables:</strong> Real-time risk mitigation and data-driven decision making across a multi-acquisition enterprise stack.
+                        A unified Health Score Dashboard and persistent Compliance Linter for frontend-ready UX delivery. 
+                        <strong> What this enables:</strong> Real-time risk mitigation and outcome-driven UX across a multi-acquisition enterprise stack.
                     </p>
                 </div>
             )
@@ -182,7 +182,7 @@ export function Governance() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="p-6 rounded-2xl cl-bg-emerald-50 cl-text-emerald-900 border cl-border-emerald-100">
                         <div className="text-2xl font-bold mb-1">Reduced Load</div>
-                        <p className="text-xs opacity-80">One mental model for all modules.</p>
+                        <p className="text-xs opacity-80">Cognitive load reduction across workflows.</p>
                     </div>
                     <div className="p-6 rounded-2xl cl-bg-indigo-50 cl-text-indigo-900 border cl-border-indigo-100">
                         <div className="text-2xl font-bold mb-1">65% Save</div>
@@ -232,7 +232,7 @@ export function Governance() {
 
     return (
         <V2CaseStudyTemplate
-            title="Architecting Governance"
+            title="System-Driven UX: Architecting Governance"
             subtitle="Transforming acquisition chaos into a unified, token-based system architecture."
             impactValue="65% Cost Save"
             impactLabel="Refactor Reduction"

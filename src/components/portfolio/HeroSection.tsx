@@ -29,10 +29,10 @@ export function HeroSection() {
                 </h1>
 
                 <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl mx-auto font-medium">
-                    Senior Product Designer | UX Architect | AI Workflow Builder | Cybersecurity Practitioner
+                    AI-Native UX Engineer / System-Driven Product Designer | Cybersecurity Practitioner
                 </p>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-10">
-                    System-first. Code-aware. AI-accelerated.
+                    Designing systems, not just screens. AI-assisted workflows with production-ready execution.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
