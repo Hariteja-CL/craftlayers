@@ -30,18 +30,18 @@ export function ProfileSection() {
                         <span>Hyderabad, India</span>
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold cl-text-primary">
-                        Senior Product Designer | UX Architect | AI Workflow Builder
+                        AI-Native UX Lead | System Architect | Design-to-Code Execution
                     </h3>
                 </div>
 
                 <div className="space-y-4">
                     <p className="cl-text-secondary text-sm leading-relaxed font-medium">
-                        15+ Years Professional Experience (8+ Years specialized in UX & Product Design).
+                        12+ Years Professional Experience (8+ Years specialized in AI-Native UX & Product Systems).
                         <br /><br />
-                        I build data-driven systems, theme layers, and secure AI agents. Certified in Cyber Security from IIT Guwahati.
+                        I architect prescriptive AI engines, 3-layer token systems, and production-ready frontend code. Bridging the gap between "vibe-coded" intent and executable architecture.
                     </p>
                     <p className="text-[10px] uppercase tracking-[0.2em] font-bold cl-text-brand-primary-base">
-                        Systems-first. Code-aware. AI-accelerated.
+                        Systems-driven. Code-integrated. AI-governed.
                     </p>
                 </div>
 
