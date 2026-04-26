@@ -44,14 +44,16 @@ export function DesignLayers() {
                     </div>
 
                     {/* Governance Case Study */}
-                    <div onClick={() => navigate('/work/governance')} className="cursor-pointer">
+                    <div onClick={() => navigate('/work/architecturing-governance')} className="cursor-pointer">
                         <ServiceCard
-                            title="Architecting Governance"
+                            title="Architecturing Governance"
                             description="Managing 'Vibe Coding' debt with a 3-tier token architecture."
                             icon={<Layers className="w-8 h-8 text-indigo-500" />}
                             className="h-full hover:border-indigo-400"
                         />
                     </div>
+
+
                 </div>
             </section>
         </div>

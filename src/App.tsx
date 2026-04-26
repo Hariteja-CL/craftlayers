@@ -15,6 +15,8 @@ import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
 
+import { ArchitecturingGovernance } from './pages/work/ArchitecturingGovernance';
+
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/blog/governance" element={<Governance />} />
           <Route path="/work" element={<Works />} />
           <Route path="/work/design" element={<DesignLayers />} />
+
+          <Route path="/work/architecturing-governance" element={<ArchitecturingGovernance />} />
           <Route path="/work/ai" element={<AILayers />} />
           <Route path="/work/security" element={<SecurityLayers />} />
           <Route path="/work/inwards" element={<Inwards />} />
