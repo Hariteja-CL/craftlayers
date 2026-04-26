@@ -1,4 +1,4 @@
-**UI/UX DESIGNER**
+**AI-NATIVE UX LEAD**
 
 **CONTACT**
 
@@ -10,45 +10,60 @@ PORTFOLIO WEBSITE: www.craftlayers.com
 
 LINKEDIN: in/hariteja-nandipati
 
-(TOTAL EXPERIENCE: 12 YEARS, RELEVANCE TO UI/UX DESIGN: 8+ YEARS)
+(Total Experience: 12 Years | Relevance to **AI-Native UX Lead: 8+ Years**)
 
 **Summary**
 
-As a seasoned Product Designer with over 8+ years of experience, I excel in crafting innovative, user-centric solutions across industries such as Medical, Well-being, and Real Estate. My expertise lies in leveraging UX research, design thinking, and human-centered design principles to solve complex problems and elevate user experiences.
+AI-Native UX Lead architecting the intersection of prescriptive AI, structured design systems, and production-ready frontend code. Specializing in transforming "vibe-coded" chaos into governed enterprise systems, I bridge the gap between design intent and executable architecture. Expert in building human-in-the-loop agentic workflows that turn passive data into actionable decision systems.
 
 **Key Achievements**
 
-* **Product Innovation:** Led the development and enhancement of flagship products including "Elix9", "Foyer-Enterprise Suite", and "Foyer Neo", driving user engagement and increasing satisfaction metrics by up to 25%.  
-* **3D Immersive UX:** Revolutionized the UX for a real estate firm's 3D immersive solutions, resulting in a 30% boost in user engagement and a 15% increase in satisfaction scores.  
-* **Design Leadership:** Successfully guided design projects from concept through to completion, ensuring seamless integration with development teams and alignment with strategic business goals.
+* **Design System Governance:** Led design system governance across enterprise platforms, establishing token-driven architectures that standardized UI consistency and accelerated product-wide modernization.
+* **Immersive System UX:** Engineered a high-impact 3D immersive UX for real estate systems, leveraging spatial design principles to drive a 30% increase in user retention.
+* **Strategic Design Leadership:** Orchestrated end-to-end design lifecycles for complex B2B products, ensuring 100% alignment between system architecture, development velocity, and business growth targets.
 
-**Core Competencies**
+**AI & System Innovation**
 
-* **User Research & Design Thinking:** Expert in conducting in-depth UX research and implementing design thinking methodologies to address user challenges effectively.  
-* **UI/UX Design:** Proficient in creating intuitive and aesthetically pleasing interfaces using Adobe Creative Suite, Figma, and rapid prototyping tools.  
-* **Cross-Functional Collaboration:** Strong ability to collaborate with engineering, product management, and marketing teams to align design solutions with technical and business requirements.  
-* **Metrics-Driven Design:** Skilled in developing KPIs to analyze user behavior and inform iterative design improvements.
+*   **CraftLayers AI Factory:** Orchestrated a secure API gateway and reverse proxy system for LLM-driven agent deployments, enabling seamless AI-to-UX integration.
+*   **Agentic Workflow Design:** Architected human-in-the-loop interfaces for generative UI agents, ensuring transparency and control in automated decision environments.
+*   **Vibe-Code Governance:** Pioneered methodologies for taming non-deterministic AI outputs using strict structural governance layers and design token enforcement.
 
-**Technical Proficiency**
+**Technical Fluency**
 
-* Knowledgeable in HTML, CSS, and JavaScript, facilitating seamless collaboration with front-end developers.  
-* Spearheaded comprehensive user research and usability testing initiatives, directly informing and validating critical design decisions.  
-* Designed and maintained scalable design systems that streamlined product development and ensured visual consistency.  
-* Collaborated with cross-functional teams to integrate user insights into product roadmaps, enhancing both usability and business outcomes.  
-* Led usability testing for MVPs, iterating designs based on user feedback to deliver fully functional products that met both user needs and business goals.
+*   **UX & Product Systems:** Design Systems, Token Governance, Behavioral UX, Information Architecture, SaaS Growth Design.
+*   **AI & Workflow Tools:** Cursor, Antigravity, GenUI, Prompt Engineering, Agentic Workflows, LLM Implementation.
+*   **Frontend & Integration:** React/TypeScript (Production Prototyping), CSS-in-JS, Vanilla CSS (cl-tokens), Git/Version Control, Nginx/Cloudflare.
 
 **Professional Experience**
 
-| Company | Role | Duration | Products I Designed | Work Status |
-| ----- | ----- | ----- | ----- | ----- |
-| NHR Technologies (Naman HR), Hyderabad | SR UX DESIGNER | Jan 2024 \- Present | Complete Product | Under progress |
-| Clinic Mantra, Kolkata | PRODUCT DESIGNER | Jan 2023 \- Aug 2023 | ESTATE 96 Designed MVP | MVP Pivoted |
-| Estate96 Hyderabad, Telangana, India | UI/UX CONSULTANT | Aug 2022 \- Nov 2022 |  | MVP Pivoted |
-| OPIA LABS Bangalore | UI/UX DESIGNER | Nov 2019 – July 2022 | inwards | Part of project |
-| Foyr | UI/UX DESIGNER | April 2017 – Nov 2019 | Foyr | Complete Product |
-| (JBR Technologies Pvt. Ltd.) Hyderabad | GRAPHIC DESIGNER | Apr 2015 – Mar 2017 | NEO | Complete Product |
-| NICE Animation Hyderabad | GRAPHIC DESIGN TRAINER | July 2013 – Mar 2015 | Foyr Enterprise solution | Complete Product |
-| ARENA Secunderabad | GRAPHIC DESIGN TRAINER | March 2010 – June 2013 | Foyr Brand design | Trained Students |
+**NHR Technologies (Naman HR) | SR UX Lead (Growth & Systems)**
+*Jan 2024 – Present*
+
+*   **Architected the "Enculture Action Engine":** Transformed passive B2B enterprise dashboards into a prescriptive AI-driven system that synthesizes behavioral signals into actionable interventions for leadership teams.
+*   **Token-Based Governance Layer:** Designed and enforced a 3-layer token system (Primitive, Semantic, Component) to normalize AI-generated (vibe-coded) UI, ensuring production-grade consistency across rapid development cycles.
+*   **AI Workflow Integration:** Optimized design-to-production pipelines using Cursor and generative UI workflows, reducing frontend development cycles by ~45% while maintaining strict system adherence.
+*   **Behavioral UX & Retention:** Built human-in-the-loop workflows for survey creation and behavioral monitoring, directly impacting enterprise user retention metrics.
+*   **Winner, Enculture Hackathon 2025:** Conceptualized and built a live GenUI agent focused on proactive customer retention strategies.
+
+**OPIA LABS | UI/UX Designer (Product Lead)**
+*Nov 2019 – July 2022*
+
+*   **Inwards SaaS Platform:** Led the UX architecture for an enterprise mental health platform, designing complex workflows for both patient monitoring and therapist intervention management.
+*   **Behavioral Flow Optimization:** Designed scalable UX flows for clinical data entry, reducing therapist cognitive load and improving data accuracy across high-stakes environments.
+*   **System Consistency:** Developed and maintained a unified design language that synchronized marketing acquisition funnels with core product functionality.
+
+**Foyr | UI/UX Designer**
+*April 2017 – Nov 2019*
+
+*   **Foyer Enterprise Suite:** Revolutionized the UX for 3D immersive real estate solutions, architecting interactive layers that simplified complex spatial configuration for non-technical users.
+*   **Immersive Impact:** Delivered a 30% increase in user engagement by transforming static product views into a dynamic, immersive configuration system.
+*   **Cross-Functional Execution:** Collaborated with engineering to integrate 3D rendering requirements into a cohesive, user-friendly frontend interface.
+
+**Previous Experience Summary**
+*   **Clinic Mantra:** Product Designer (Estate96 MVP Design) | *Jan 2023 – Aug 2023*
+*   **Estate96:** UI/UX Consultant | *Aug 2022 – Nov 2022*
+*   **JBR Technologies:** Graphic Designer | *Apr 2015 – Mar 2017*
+*   **NICE Animation / ARENA:** Design Trainer & System Consultant | *Mar 2010 – Mar 2015*
 
 **ACHIEVEMENTS**
 

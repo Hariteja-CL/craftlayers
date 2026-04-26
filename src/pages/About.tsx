@@ -53,7 +53,7 @@ export function About() {
                         </ul>
 
                         <p className="pt-2">
-                            Currently serving as a <span className="cl-text-primary font-bold">Senior UX Designer</span>, I help enterprise teams untangle legacy complexity and weave it into compliant, accessible interfaces.
+                            Currently serving as an <span className="cl-text-primary font-bold">AI-Native UX Lead</span>, I help enterprise teams transform "vibe-coded" chaos into governed, production-ready systems.
                         </p>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ export function About() {
                     {/* Stat Card 1: Experience */}
                     <div className="cl-surface-card border cl-border-subtle p-8 rounded-[2rem] shadow-sm flex flex-col justify-center min-h-[160px] hover:cl-elevation-raised transition-all duration-300">
                         <div className="text-4xl lg:text-5xl font-extrabold cl-text-primary mb-2">
-                            08<span className="cl-text-semantic-warning-text">+</span>
+                            12<span className="cl-text-semantic-warning-text">+</span>
                         </div>
                         <div className="text-xs font-bold cl-text-secondary tracking-widest uppercase">
                             Years Experience
@@ -100,9 +100,9 @@ export function About() {
                                 {/* Enculture (NHR Technologies) */}
                                 <div className="pl-6 relative">
                                     <div className="absolute top-1.5 left-[-25px] w-4 h-4 rounded-full border-4 cl-border-neutral-surface-level-0 cl-bg-semantic-warning-icon shadow-sm" />
-                                    <div className="font-bold cl-text-primary text-lg">Senior UX Designer</div>
+                                    <div className="font-bold cl-text-primary text-lg">AI-Native UX Lead</div>
                                     <div className="text-sm cl-text-secondary font-medium">Enculture (NHR Technologies) • Jan 2024 - Present</div>
-                                    <div className="text-xs cl-text-neutral-text-low-contrast mt-1">B2B SaaS | Culture Analytics & Insights</div>
+                                    <div className="text-xs cl-text-neutral-text-low-contrast mt-1">Prescriptive AI | Action Engine | Token Governance</div>
                                 </div>
 
                                 {/* Clinic Mantra */}
@@ -140,7 +140,7 @@ export function About() {
 
                             {/* Tech Stack Pills */}
                             <div className="mt-12 flex flex-wrap gap-2">
-                                {["Figma", "React", "Tailwind", "WCAG 2.2", "Storybook", "Jira"].map((tech) => (
+                                {["Figma", "Cursor", "Antigravity", "React", "TypeScript", "Tailwind"].map((tech) => (
                                     <Badge key={tech} variant="secondary" className="px-4 py-1.5 cl-bg-neutral-surface-level-2 cl-text-secondary cl-border-default border text-xs font-bold uppercase tracking-wider hover:cl-bg-neutral-surface-level-3 hover:cl-text-primary transition-colors">
                                         {tech}
                                     </Badge>
