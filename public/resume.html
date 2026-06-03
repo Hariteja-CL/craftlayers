@@ -14,31 +14,24 @@
             --primary:   #0f172a;
             --secondary: #475569;
             --muted:     #94a3b8;
-            --accent:    #6366f1; /* indigo-500 */
-            --accent-bg: #eef2ff;
+            --accent:    #a05c00;
+            --accent-bar:#cc8400;
+            --accent-bg: #fff3e0;
+            --accent-border: #ffe0b2;
             --bg-page:   #f1f5f9;
             --surface:   #ffffff;
             --border:    #e2e8f0;
-            --border-dashed: #cbd5e1;
 
-            /* 12px minimum: all font sizes in pt where 1pt ≈ 1.333px */
-            /* 12px = 9pt  |  13px ≈ 9.75pt  |  14px ≈ 10.5pt */
-            --fs-body:    9.5pt;  /* ~12.7px */
-            --fs-small:   9pt;    /* exactly 12px */
-            --fs-label:   9pt;
-            --fs-role:    10.5pt; /* ~14px */
+            --fs-body:    9.5pt;
+            --fs-small:   9pt;
+            --fs-role:    10.5pt;
             --fs-h2:      9pt;
             --fs-h1:      30pt;
             --fs-tagline: 10pt;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -48,11 +41,10 @@
             font-size: var(--fs-body);
         }
 
-        /* ── Utilities ─────────────────────────────────── */
         .serif { font-family: 'DM Serif Display', serif; }
         .mono  { font-family: 'DM Mono', monospace; }
 
-        /* ── Page shell ─────────────────────────────────── */
+        /* ── Page ─────────────────────────────────────── */
         .page {
             background: var(--surface);
             width: 21cm;
@@ -65,16 +57,15 @@
             overflow: hidden;
         }
 
-        /* Subtle top accent bar */
         .page::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), #818cf8, #a78bfa);
+            background: var(--accent-bar);
         }
 
-        /* ── Header ─────────────────────────────────────── */
+        /* ── Header ───────────────────────────────────── */
         header {
             display: grid;
             grid-template-columns: 1fr auto;
@@ -98,7 +89,7 @@
             font-size: var(--fs-tagline);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.07em;
+            letter-spacing: 0.04em;
             color: var(--accent);
             margin-bottom: 0.6rem;
         }
@@ -110,7 +101,6 @@
             max-width: 56ch;
         }
 
-        /* Contact block — right column */
         .contact-block {
             display: flex;
             flex-direction: column;
@@ -143,19 +133,19 @@
             border: 1px solid var(--border);
         }
 
-        /* ── Two-column layout ──────────────────────────── */
+        /* ── Two-column body ──────────────────────────── */
         .body-grid {
             display: grid;
             grid-template-columns: 1fr 2.2fr;
             gap: 0 2rem;
         }
 
-        /* ── Section headings ───────────────────────────── */
+        /* ── Section headings ─────────────────────────── */
         h2 {
             font-size: var(--fs-h2);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.04em;
             color: var(--primary);
             margin-bottom: 0.85rem;
             padding-bottom: 0.4rem;
@@ -171,13 +161,13 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--accent-bar);
             flex-shrink: 0;
         }
 
         section { margin-bottom: 1.3rem; }
 
-        /* ── Timeline ───────────────────────────────────── */
+        /* ── Timeline ─────────────────────────────────── */
         .timeline {
             border-left: 1.5px solid var(--border);
             margin-left: 4px;
@@ -191,13 +181,8 @@
             border-bottom: 1px dashed var(--border);
         }
 
-        .job-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
+        .job-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-        /* Timeline dot */
         .job-item::before {
             content: '';
             position: absolute;
@@ -211,8 +196,8 @@
         }
 
         .job-item.current::before {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--accent-bar);
+            border-color: var(--accent-bar);
         }
 
         .job-header {
@@ -231,11 +216,7 @@
             line-height: 1.3;
         }
 
-        .company {
-            font-weight: 500;
-            color: var(--secondary);
-            font-size: var(--fs-body);
-        }
+        .company { font-weight: 500; color: var(--secondary); font-size: var(--fs-body); }
 
         .period {
             font-size: var(--fs-small);
@@ -256,21 +237,17 @@
             font-size: var(--fs-small);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.07em;
+            letter-spacing: 0.04em;
             color: var(--accent);
             margin-bottom: 0.45rem;
         }
 
-        /* Winner badge */
         .badge-winner {
             display: inline-flex;
             align-items: center;
-            gap: 0.2rem;
             font-size: var(--fs-small);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #b45309;
+            color: #92400e;
             background: #fef3c7;
             border: 1px solid #fcd34d;
             padding: 2px 8px;
@@ -279,14 +256,13 @@
             vertical-align: middle;
         }
 
-        /* Bullet list */
         ul { list-style: none; }
 
         li {
             position: relative;
-            padding-left: 1rem;
-            margin-bottom: 0.3rem;
-            color: #334155;
+            padding-left: 1.2rem;
+            margin-bottom: 0.35rem;
+            color: #374151;
             font-size: var(--fs-body);
             line-height: 1.5;
         }
@@ -295,21 +271,17 @@
             content: "›";
             position: absolute;
             left: 0;
-            top: -1px;
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 11pt;
+            color: var(--accent-bar);
+            font-weight: bold;
+            font-size: 13pt;
+            line-height: 1;
+            top: 0px;
         }
 
-        /* ── Left sidebar sections ──────────────────────── */
+        /* ── Sidebar ──────────────────────────────────── */
         .sidebar section { margin-bottom: 1.2rem; }
 
-        /* Sidebar pill list */
-        .pill-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
+        .pill-list { display: flex; flex-direction: column; gap: 0.35rem; }
 
         .pill {
             font-size: var(--fs-small);
@@ -322,117 +294,99 @@
             display: block;
         }
 
-        /* Flat education items */
-        .edu-item {
-            margin-bottom: 0.6rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 1px dashed var(--border);
-        }
-
+        .edu-item { margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px dashed var(--border); }
         .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-        .edu-title {
-            font-size: var(--fs-body);
-            font-weight: 600;
-            color: var(--primary);
-            line-height: 1.35;
-        }
+        .edu-title { font-size: var(--fs-body); font-weight: 600; color: var(--primary); line-height: 1.35; }
+        .edu-meta { font-size: var(--fs-small); color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 1px; }
 
-        .edu-meta {
-            font-size: var(--fs-small);
-            color: var(--muted);
-            font-family: 'DM Mono', monospace;
-            margin-top: 1px;
-        }
-
-        /* Skills groups */
-        .skill-group {
-            margin-bottom: 0.75rem;
-        }
-
+        .skill-group { margin-bottom: 0.75rem; }
         .skill-group:last-child { margin-bottom: 0; }
 
         .skill-group-label {
             font-size: var(--fs-small);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.04em;
             color: var(--muted);
             margin-bottom: 0.35rem;
         }
 
-        .skill-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-        }
+        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
-        /* Impact highlight box */
+        /* ── Impact cards ─────────────────────────────── */
         .impact-box {
             background: var(--accent-bg);
-            border: 1px solid #c7d2fe;
+            border: 1px solid var(--accent-border);
             border-radius: 0.5rem;
             padding: 0.6rem 0.85rem;
             margin-bottom: 0.85rem;
         }
 
+        .impact-box:last-child { margin-bottom: 0; }
+
         .impact-box-label {
             font-size: var(--fs-small);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.04em;
             color: var(--accent);
             margin-bottom: 0.2rem;
         }
 
-        .impact-box p {
-            font-size: var(--fs-body);
-            color: #3730a3;
-            line-height: 1.5;
+        .impact-box p { font-size: var(--fs-small); color: #78350f; line-height: 1.5; }
+
+        /* ── Honors ───────────────────────────────────── */
+        .honors-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+
+        .honor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 180px;
+            background: var(--accent-bg);
+            border: 1px solid var(--accent-border);
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
         }
 
-        /* Print CTA */
+        .honor-icon { font-size: 12pt; line-height: 1.3; flex-shrink: 0; }
+
+        .honor-title { font-size: var(--fs-small); font-weight: 700; color: var(--accent); line-height: 1.3; }
+        .honor-meta { font-size: var(--fs-small); color: var(--secondary); line-height: 1.4; margin-top: 1px; }
+
+        /* ── Print button ─────────────────────────────── */
         .btn-print {
             position: fixed;
             bottom: 1.75rem;
             right: 1.75rem;
-            background: var(--accent);
+            background: var(--accent-bar);
             color: white;
             padding: 0.75rem 1.75rem;
-            border-radius: 999px;
+            border-radius: 9999px;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
             font-size: 9pt;
             cursor: pointer;
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(204,132,0,0.35);
             border: none;
             transition: all 0.2s;
             z-index: 100;
         }
 
-        .btn-print:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.6);
-        }
+        .btn-print:hover { transform: translateY(-2px); }
 
-        /* ── Print ───────────────────────────────────────── */
+        /* ── Print ────────────────────────────────────── */
         @media print {
-            @page { size: A4; margin: 0.8cm 1.2cm; }
+            @page { size: A4; margin: 0.8cm 1.5cm; }
 
-            body {
-                background: white;
-                font-size: 9pt;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            body { background: white; font-size: 9.5pt;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
             .page {
-                box-shadow: none;
-                margin: 0;
-                padding: 0.4cm 0;
-                width: 100%;
-                min-height: auto;
-                border-radius: 0;
+                box-shadow: none; margin: 0; padding: 0 1.5cm;
+                width: 100%; min-height: auto; border-radius: 0;
                 overflow: visible;
             }
 
@@ -440,34 +394,24 @@
             .btn-print { display: none !important; }
 
             header { margin-bottom: 1rem; padding-bottom: 0.85rem; }
-
             .body-grid { gap: 0 1.5rem; }
-
             section { margin-bottom: 1rem; }
 
-            .job-item {
-                break-inside: avoid;
-                page-break-inside: avoid;
-                margin-bottom: 0.85rem;
-                padding-bottom: 0.85rem;
-            }
+            .job-item { break-inside: avoid; page-break-inside: avoid;
+                margin-bottom: 0.85rem; padding-bottom: 0.85rem; }
 
-            h1 { font-size: 24pt; }
+            h2 { margin-top: 0.5rem; border-bottom: 1px solid #eee;
+                padding-bottom: 0.25rem; margin-bottom: 0.75rem; }
 
             a { text-decoration: none; color: #333; }
 
-            .period, .pill, .location-badge {
-                background: transparent !important;
-                border: 1px solid #ccc;
-                color: #444 !important;
+            .pill, .location-badge, .period {
+                border: 1px solid #ccc; background: transparent !important; color: black !important;
             }
 
-            .impact-box {
-                background: transparent !important;
-                border: 1px solid #c7d2fe;
-            }
-
-            .impact-box p { color: #3730a3 !important; }
+            .impact-box { background: transparent !important; border: 1px solid var(--accent-border); }
+            .impact-box p { color: #78350f !important; }
+            .honors-row { break-inside: avoid; }
         }
     </style>
 </head>
@@ -476,22 +420,19 @@
 
 <button class="btn-print" onclick="window.print()">↓ Save as PDF</button>
 
-    <div class="page">
-        <div class="blob"></div>
+<div class="page">
 
-        <header>
-            <h1 class="serif">Hari Teja Nandipati.</h1>
-            <div class="subtitle">AI-Native UX Lead | System Architect | Design-to-Code Execution</div>
-
-    <!-- ── HEADER ─────────────────────────────────────── -->
+    <!-- HEADER -->
     <header>
         <div class="header-left">
             <h1 class="serif">Hariteja Nandipati.</h1>
             <div class="tagline">Senior Product Designer · UX Architect · AI Workflow Builder</div>
             <p class="summary">
-                AI-Native UX Lead architecting the intersection of prescriptive AI, structured design systems, and production-ready frontend code. 
-                With <strong>12+ years of total professional experience</strong> (including 8+ years specializing in AI-Native UX & Product Systems), 
-                I bridge the gap between "vibe-coded" intent and executable architecture. Expert in building human-in-the-loop agentic workflows that turn passive data into actionable decision systems.
+                Senior Product Designer and UX Architect with <strong>15+ years of professional experience</strong>, including 8+ years
+                designing complex B2B SaaS products across culture analytics, healthcare, access control, and immersive tech.
+                Operates at the intersection of UX strategy, scalable systems, and AI workflow generation — using a code-integrated
+                design approach to bridge interface concepts and production-ready frontend. Architect of theme-layered design systems
+                and AI execution pipelines, with a strong focus on <strong>security-aware UX</strong> and data privacy.
             </p>
         </div>
 
@@ -503,13 +444,12 @@
         </div>
     </header>
 
-    <!-- ── BODY GRID ──────────────────────────────────── -->
+    <!-- BODY GRID -->
     <div class="body-grid">
 
-        <!-- ── LEFT SIDEBAR ───────────────────────────── -->
+        <!-- SIDEBAR -->
         <aside class="sidebar">
 
-            <!-- Skills -->
             <section>
                 <h2>Skills</h2>
                 <div class="skill-group">
@@ -525,13 +465,13 @@
                         <span class="pill">Cognitive Load Reduction</span>
                     </div>
                 </div>
-                <div class="skill-group" style="margin-top: 0.75rem;">
+                <div class="skill-group" style="margin-top:0.75rem">
                     <div class="skill-group-label">Tech Stack</div>
                     <div class="skill-pills">
                         <span class="pill">Figma + Tokens Studio</span>
                         <span class="pill">React / TypeScript</span>
                         <span class="pill">Tailwind CSS</span>
-                        <span class="pill">Cursor (IDE)</span>
+                        <span class="pill">Cursor IDE</span>
                         <span class="pill">Vercel + GitHub</span>
                         <span class="pill">Cloudflare Tunneling</span>
                         <span class="pill">OpenAI System Prompting</span>
@@ -540,30 +480,24 @@
                 </div>
             </section>
 
-            <!-- Architectural Impact -->
             <section>
                 <h2>Architecture</h2>
-
                 <div class="impact-box">
                     <div class="impact-box-label">Luminis — Design System</div>
-                    <p>CSS theme-layer system standardising elevation hierarchies, typography, and interaction states — modernising UI at scale without disrupting backend logic.</p>
+                    <p>CSS theme-layer system standardising elevation hierarchies, typography, and interaction states. 3-layer token architecture: Primitive, Semantic, Component.</p>
                 </div>
-
                 <div class="impact-box">
                     <div class="impact-box-label">CraftLayers AI Factory</div>
-                    <p>Orchestrated AI agents via Cloudflare Tunneling to translate product and UX requirements into structural code, reducing design-to-development friction.</p>
+                    <p>Orchestrated AI agents via Cloudflare Tunneling to translate UX requirements into structural frontend code — reducing design-to-development friction end-to-end.</p>
                 </div>
-
                 <div class="impact-box">
-                    <div class="impact-box-label">Security-Aware Integrity</div>
-                    <p>Data least-privilege across all interfaces. Performed responsible vulnerability disclosures including client-side PII exposure at Edureka.</p>
+                    <div class="impact-box-label">Security-Aware UX</div>
+                    <p>Least-privilege data access enforced across all interface layers. Responsible vulnerability disclosures including client-side PII exposure at Edureka.</p>
                 </div>
             </section>
 
-            <!-- Education -->
             <section>
                 <h2>Education</h2>
-
                 <div class="edu-item">
                     <div class="edu-title">Advanced Cert. in Cyber Security</div>
                     <div class="edu-meta">IIT Guwahati × Edureka · 2023–24</div>
@@ -577,143 +511,91 @@
                     <div class="edu-meta">AAG · 2009–2011</div>
                 </div>
                 <div class="edu-item">
-                    <div class="edu-title">B.Com</div>
+                    <div class="edu-title">Bachelor of Commerce (B.Com)</div>
                     <div class="edu-meta">Osmania University · 2006–2009</div>
                 </div>
             </section>
 
         </aside>
 
-            <div class="contact-pill mono">
-                <a href="mailto:haritejanandipati@gmail.com">haritejanandipati@gmail.com</a>
-                <span>•</span>
-                <a href="https://craftlayers.com">craftlayers.com</a>
-                <span>•</span>
-                <a href="https://linkedin.com/in/hariteja-nandipati">in/hariteja-nandipati</a>
-            </div>
-        </header>
+        <!-- MAIN COLUMN -->
+        <main>
 
-        <section>
-            <h2>Design System Governance & UI Modernization</h2>
-            <div class="skills-container" style="background: white; border: none; padding: 0;">
+            <section>
+                <h2>Career Experience</h2>
                 <div class="timeline">
 
                     <!-- Enculture -->
                     <div class="job-item current">
                         <div class="job-header">
-                            <span class="role">Governance & Architectural Strategy</span>
+                            <span class="role">Senior UX Designer <span class="company">· Enculture (NHR Technologies)</span></span>
+                            <span class="period mono">Jan 2024 – Present</span>
                         </div>
                         <div class="domain-badge">B2B SaaS · Culture Analytics</div>
                         <ul>
-                            <li>Led design system governance across the platform, establishing a token-driven theming architecture that standardized UI consistency and enabled scalable frontend implementation.</li>
-                            <li>Architected a structured token hierarchy (Luminis) aligning design and engineering workflows, reducing UI fragmentation and accelerating product-wide modernization.</li>
+                            <li>Led UX across <strong>4+ enterprise product modules</strong> including survey systems and CXO dashboards; token-based design system reduced UI inconsistencies by ~60% and cut cross-team component duplication by half.</li>
+                            <li>Designed <strong>Action Engine</strong> — a generative UI agent that interprets organisational retention data streams and dynamically constructs prescriptive intervention plans. <span class="badge-winner">🏆 Hackathon Winner 2025</span></li>
+                            <li>Reduced cognitive load across <strong>8+ enterprise workflows</strong>, compressing stakeholder review cycles from 5 rounds to 2 and improving data interpretation speed by an estimated 35%.</li>
+                            <li>Enforced a 3-layer token system (Primitive, Semantic, Component) governing <strong>150+ design decisions</strong>, reducing UI QA defects in AI-generated code by ~40%.</li>
                         </ul>
                     </div>
 
                     <!-- Clinic Mantra -->
                     <div class="job-item">
                         <div class="job-header">
-                            <div>
-                                <span class="role">Product Designer</span>
-                                <span class="company"> · Clinic Mantra</span>
-                            </div>
+                            <span class="role">Product Designer <span class="company">· Clinic Mantra</span></span>
                             <span class="period mono">Jan 2023 – Aug 2023</span>
                         </div>
                         <div class="domain-badge">Healthcare Tech</div>
                         <ul>
-                            <li>Designed patient-centric interfaces and optimised complex appointment scheduling workflows, handling multi-constraint scheduling while preserving clarity and ease of use.</li>
-                            <li>Embedded HIPAA-aligned, secure UX patterns into the product to safeguard patient data and clinical operations.</li>
+                            <li>Redesigned appointment scheduling flow, <strong>reducing booking steps from 8 to 4</strong> and achieving an estimated 30% improvement in task completion rate across patient and admin roles.</li>
+                            <li>Embedded HIPAA-aligned secure UX patterns across <strong>3 core clinical workflows</strong>, reducing data exposure risk.</li>
                         </ul>
                     </div>
 
                     <!-- Estate96 -->
                     <div class="job-item">
                         <div class="job-header">
-                            <div>
-                                <span class="role">UX Design Consultant</span>
-                                <span class="company"> · Estate96</span>
-                            </div>
+                            <span class="role">UX Design Consultant <span class="company">· Estate96</span></span>
                             <span class="period mono">Aug 2022 – Nov 2022</span>
                         </div>
                         <div class="domain-badge">Smart Access Solutions</div>
                         <ul>
-                            <li>Advised on UX architecture for smart building access control systems — scalability, safety, and multi-device usage.</li>
-                            <li>Delivered mobile-first prototypes integrating clean UX flows with hardware and access-control logic.</li>
+                            <li>Delivered UX architecture across <strong>3 device types</strong> (mobile, tablet, wall panel) completing end-to-end design and prototype within an <strong>8-week engagement</strong>.</li>
+                            <li>Designed flows for <strong>2 distinct user roles</strong> (resident, admin) integrating hardware access logic — adopted directly into the development sprint with zero revision cycles.</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Career Experience</h2>
-            <div class="timeline">
-
-                <!-- Enculture -->
-                <div class="job-item current">
-                    <div class="job-header">
-                        <span class="role">AI-Native UX Lead <span class="company"> // Enculture</span></span>
-                        <span class="period mono">Jan 2024 - Present</span>
-                    </div>
-                    <span class="domain">Prescriptive AI | B2B SaaS Growth</span>
-                    <ul>
-                        <li><strong>Enculture Action Engine:</strong> Architected a prescriptive AI-driven system that synthesizes behavioral signals into actionable interventions for enterprise leadership teams.</li>
-                        <li><strong>Token-Based Governance:</strong> Designed and enforced a 3-layer token system (Primitive, Semantic, Component) to normalize AI-generated (vibe-coded) UI, ensuring production-grade consistency.</li>
-                        <li><strong>AI Workflow Integration:</strong> Optimized design-to-production pipelines using Cursor and generative UI workflows, reducing frontend development cycles by ~45%.</li>
-                    </ul>
-                </div>
-
-                <!-- Clinic Mantra -->
-                <div class="job-item">
-                    <div class="job-header">
-                        <span class="role">Product Designer <span class="company"> // Clinic Mantra</span></span>
-                        <span class="period mono">Jan 2023 - Aug 2023</span>
-                    </div>
-                    <span class="domain">Healthcare Tech</span>
-                    <ul>
-                        <li>Designed patient-centric interfaces and optimized complex appointment scheduling workflows, prioritizing HIPAA-compliant secure UX practices.</li>
-                    </ul>
-                </div>
 
                     <!-- Opia Labs -->
                     <div class="job-item">
                         <div class="job-header">
-                            <div>
-                                <span class="role">UX Designer</span>
-                                <span class="company"> · Opia Labs</span>
-                            </div>
+                            <span class="role">UX Designer <span class="company">· Opia Labs</span></span>
                             <span class="period mono">Nov 2019 – Jul 2022</span>
                         </div>
                         <div class="domain-badge">SaaS Platforms</div>
                         <ul>
-                            <li>Led product design for <strong>Inwards</strong> — a mental health and emotional intelligence platform — mapping emotional tracking flows into structured, data-driven analytical dashboards.</li>
-                            <li>Accelerated iteration cycles and improved UI structures across multiple active B2B SaaS deployments in the portfolio.</li>
+                            <li>Led end-to-end product design for <strong>Inwards</strong> across <strong>2 user roles</strong>, structuring <strong>6 emotional data types</strong> into role-specific analytical dashboards improving session depth in early usability testing.</li>
+                            <li>Accelerated design iteration across <strong>3 active B2B SaaS products</strong>, reducing design-to-handoff turnaround by ~40% through standardised component frameworks.</li>
                         </ul>
                     </div>
 
                     <!-- Foyr -->
                     <div class="job-item">
                         <div class="job-header">
-                            <div>
-                                <span class="role">UI / UX Designer</span>
-                                <span class="company"> · Foyr</span>
-                            </div>
+                            <span class="role">UI / UX Designer <span class="company">· Foyr</span></span>
                             <span class="period mono">Apr 2017 – Nov 2019</span>
                         </div>
                         <div class="domain-badge">Immersive Architecture Tech</div>
                         <ul>
-                            <li>Played a key role in standardising UX architecture for Foyr Enterprise, ensuring coherent flows across complex 3D visualisation tools.</li>
-                            <li>Contributed to foundational design systems and brand visual consistency for the enterprise product suite.</li>
+                            <li>Standardised UX architecture across <strong>3 interconnected 3D visualisation products</strong>, cutting new-designer onboarding time by an estimated 50%. <span class="badge-winner">🏅 MAXIMUS Award 2018</span></li>
+                            <li>Built a foundational design system of <strong>60+ reusable components</strong> used across 4 product lines, eliminating ~45% of redundant UI elements over 2.5 years.</li>
                         </ul>
                     </div>
 
                     <!-- Foundational -->
                     <div class="job-item">
                         <div class="job-header">
-                            <div>
-                                <span class="role">Graphic Designer & Design Trainer</span>
-                                <span class="company"> · Multiple Ventures</span>
-                            </div>
+                            <span class="role">Graphic Designer & Design Trainer <span class="company">· Multiple Ventures</span></span>
                             <span class="period mono">2010 – 2017</span>
                         </div>
                         <ul>
@@ -724,36 +606,29 @@
                 </div>
             </section>
 
+            <!-- Honors -->
+            <div class="honors-row">
+                <div class="honor-item">
+                    <span class="honor-icon">🏆</span>
+                    <div>
+                        <div class="honor-title">Hackathon Winner 2025</div>
+                        <div class="honor-meta">Action Engine · Enculture, NHR Technologies</div>
+                    </div>
+                </div>
+                <div class="honor-item">
+                    <span class="honor-icon">🏅</span>
+                    <div>
+                        <div class="honor-title">MAXIMUS Award 2018</div>
+                        <div class="honor-meta">Exceptional results beyond the call of duty · Foyr</div>
+                    </div>
+                </div>
+            </div>
+
         </main>
 
     </div><!-- /body-grid -->
 
-        <section>
-            <h2>Technical Fluency</h2>
-            <div class="skills-container">
-                <div class="skill-group">
-                    <strong>Disciplines</strong>
-                    <div class="skill-list">
-                        <span class="pill">AI-Native UX Lead</span>
-                        <span class="pill">Prescriptive AI Systems</span>
-                        <span class="pill">Token-Based Governance</span>
-                        <span class="pill">Agentic Workflow Design</span>
-                        <span class="pill">Design-to-Code Execution</span>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <strong>Tech Stack</strong>
-                    <div class="skill-list">
-                        <span class="pill">Figma / Tokens Studio</span>
-                        <span class="pill">Cursor (IDE)</span>
-                        <span class="pill">Antigravity</span>
-                        <span class="pill">React / TypeScript</span>
-                        <span class="pill">Vanilla CSS (Tokens)</span>
-                        <span class="pill">LLM Prompting</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+</div><!-- /page -->
 
 </body>
 </html>
