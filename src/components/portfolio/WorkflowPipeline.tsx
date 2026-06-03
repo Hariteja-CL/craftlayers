@@ -1,4 +1,4 @@
-import { BookOpen, Compass, Grid, CheckSquare, Settings, BarChart2 } from 'lucide-react';
+import { BookOpen, Compass, Grid, Settings, BarChart2 } from 'lucide-react';
 import { cn } from '../ui/Button';
 
 interface Step {
@@ -7,6 +7,8 @@ interface Step {
     desc: string;
     icon: React.ReactNode;
     output?: string;
+    isAI?: boolean;
+    tags?: string[];
 }
 
 const steps: Step[] = [
