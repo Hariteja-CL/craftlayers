@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Layers } from 'lucide-react';
+import { ArrowLeft, Layers, Zap } from 'lucide-react';
 import { ServiceCard } from '../../components/portfolio/ServiceCard';
 
 export function DesignLayers() {
@@ -48,11 +48,20 @@ export function DesignLayers() {
                         <ServiceCard
                             title="Architecturing Governance"
                             description="Managing 'Vibe Coding' debt with a 3-tier token architecture."
-                            icon={<Layers className="w-8 h-8 text-indigo-500" />}
-                            className="h-full hover:border-indigo-400"
+                            icon={<Layers className="w-8 h-8 cl-text-brand-primary-base" />}
+                            className="h-full hover:cl-border-brand-primary-base"
                         />
                     </div>
 
+                    {/* Enculture Case Study */}
+                    <div onClick={() => navigate('/work/enculture')} className="cursor-pointer">
+                        <ServiceCard
+                            title="Enculture"
+                            description="Prescriptive AI engine and culture analytics dashboards for enterprise retention intelligence."
+                            icon={<Zap className="w-8 h-8 cl-text-brand-primary-base" />}
+                            className="h-full hover:cl-border-brand-primary-base"
+                        />
+                    </div>
 
                 </div>
             </section>
