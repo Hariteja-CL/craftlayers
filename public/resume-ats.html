@@ -103,7 +103,7 @@
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.04em;   /* safe for PDF text extraction */
             margin-bottom: 0.75rem;
         }
 
@@ -146,7 +146,7 @@
             font-size: var(--f-h2);
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.04em;   /* kept minimal — wide spacing reads as spaces in PDF text extraction */
             color: var(--muted);
             display: flex;
             align-items: center;
@@ -519,6 +519,7 @@
 
             h2 {
                 font-size: 7.5pt !important;
+                letter-spacing: 0.04em !important;  /* prevent PDF text extraction spacing */
                 margin: 0.9rem 0 0.6rem !important;
                 padding-bottom: 0.2rem !important;
             }
@@ -629,8 +630,8 @@
     <!-- ══ BODY ══════════════════════════════════════════ -->
     <div class="resume-body">
 
-        <!-- ── Core Competencies ─────────────────────── -->
-        <h2>Core Competencies</h2>
+        <!-- ── Skills ────────────────────────────────── -->
+        <h2>Skills</h2>
 
         <div class="skills-section">
             <div class="skill-row">
