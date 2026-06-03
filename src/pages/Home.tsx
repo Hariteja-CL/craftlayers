@@ -119,83 +119,36 @@ function ApproachSection() {
                         </ol>
                     </div>
 
-                    {/* Flow B */}
-                    <div className="border cl-border-brand-primary-base/20 rounded-2xl p-8 cl-bg-brand-primary-background hover:shadow-md transition-shadow">
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-brand-primary-base">Flow 02</span>
-                            <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast">Dev-Led → UX Audit</span>
-                        </div>
-                        <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast mb-2">
-                            I inherit what's built and make it right.
-                        </h3>
-                        <p className="text-sm cl-text-neutral-text-medium-contrast mb-8 leading-relaxed">
-                            When a developer has already shipped the frontend from business requirements,
-                            I come in, find the usability gaps, and fix them directly in the code — no handoff cycle.
-                        </p>
-                        <ol className="space-y-3">
-                            {flowB.map((step, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                    <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast w-5 shrink-0 mt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                                    <span className="text-sm cl-text-neutral-text-high-contrast font-medium leading-snug">{step}</span>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-                </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Design Layer */}
+                        <ServiceCard
+                            title="Design Layer"
+                            description="Human-centered UX for complex enterprise platforms. Focus on cognitive load reduction and human-in-the-loop workflows."
+                            icon={<img src={designIcon} alt="Design" className="w-5 h-5" />}
+                            variant="light"
+                            onClick={() => navigate('/work#design')}
+                            className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default shadow-sm hover:shadow-md h-full rounded-3xl"
+                        />
 
-                {/* Differentiator callout */}
-                <div className="mt-6 flex items-center gap-4 px-6 py-4 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1">
-                    <span className="text-xs font-mono cl-text-neutral-text-low-contrast shrink-0 uppercase tracking-widest">Why this matters</span>
-                    <div className="w-px h-4 cl-bg-border-color-default opacity-40 shrink-0" />
-                    <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
-                        Most UX designers stop at the Figma file. I stay until the product ships — reducing
-                        handoff loss, design drift, and interpretation gaps between intent and implementation.
-                    </p>
-                </div>
-            </div>
-        </section>
-    );
-}
+                        {/* AI Layer */}
+                        <ServiceCard
+                            title="AI Layer"
+                            description="Generative UI & Adaptive flows. Orchestrating agents for autonomous frontends."
+                            icon={<img src={aiIcon} alt="AI" className="w-5 h-5 opacity-90 grayscale" />}
+                            variant="light"
+                            onClick={() => navigate('/work#ai')}
+                            className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default shadow-sm hover:shadow-md h-full rounded-3xl"
+                        />
 
-// ─── Focus Areas ─────────────────────────────────────────────────────────────
-function FocusSection() {
-    const areas = [
-        {
-            label: "Design System Architecture",
-            desc: "Token systems, component libraries, pattern governance, and health audits that scale across teams.",
-        },
-        {
-            label: "Frontend Development",
-            desc: "Production React / TypeScript built from design intent — components, states, responsiveness, accessibility.",
-        },
-        {
-            label: "Vibe Coding & AI-Assisted Execution",
-            desc: "Structured prompting formats and AI-assisted flows that accelerate idea-to-implementation speed.",
-        },
-        {
-            label: "Usability & UX Audits",
-            desc: "Finding friction, hierarchy failures, empty states, error handling gaps, and accessibility issues — then fixing them.",
-        },
-        {
-            label: "SaaS Dashboards & Enterprise UX",
-            desc: "Complex data surfaces: tables, filters, charts, permissions, decision-support — cognitive load by design.",
-        },
-        {
-            label: "Security-Aware UX",
-            desc: "Data least-privilege, obscured inputs, session-aware state, and zero-trust design patterns.",
-        },
-    ];
-
-    return (
-        <section className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-1">
-            <div className="max-w-7xl mx-auto px-6">
-
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                    <div>
-                        <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">Capabilities</span>
-                        <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">
-                            What I focus on.
-                        </h2>
+                        {/* Security Layer */}
+                        <ServiceCard
+                            title="Security Layer"
+                            description="Implementing zero-trust design patterns and defensive UI architectures."
+                            icon={<img src={securityIcon} alt="Security" className="w-5 h-5" />}
+                            variant="light"
+                            onClick={() => navigate('/work#security')}
+                            className="cl-bg-neutral-surface-level-1 border cl-border-border-color-default shadow-sm hover:shadow-md h-full rounded-3xl"
+                        />
                     </div>
                 </div>
 

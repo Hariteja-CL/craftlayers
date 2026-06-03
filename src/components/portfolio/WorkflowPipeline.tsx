@@ -33,10 +33,14 @@ const steps: Step[] = [
     },
     {
         id: "04",
-        title: "Validate",
-        desc: "I use wireframes, prototypes, usability review, and stakeholder feedback to check clarity before execution.",
-        icon: <CheckSquare className="w-5 h-5" />,
-        output: "Validated Interactive Flows"
+        title: "LLM-Driven UI Generation",
+        output: "Functional UI structure",
+        desc: "AI-Assisted Design Workflows",
+        isAI: true,
+        icon: (
+            <svg viewBox="0 0 24 24"><path d="M15 3l6 6-12 12H3v-6L15 3z"/></svg>
+        ),
+        tags: ["developer collab"]
     },
     {
         id: "05",
@@ -64,8 +68,14 @@ export function WorkflowPipeline() {
                     <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast mb-4 tracking-tight">
                         Design Thinking, Extended for Product Execution
                     </h2>
-                    <p className="cl-text-neutral-text-medium-contrast text-lg leading-relaxed">
-                        Design Thinking remains the foundation of my work. But modern product teams need more than static prototypes. I extend the process by connecting product understanding, UX strategy, design systems, validation, implementation support, and evidence-based improvement.
+                    <p className="text-[14px] cl-text-neutral-text-medium-contrast mb-1.5 leading-relaxed">
+                        An AI-accelerated design-to-code workflow that transforms complexity into production-ready UI.
+                    </p>
+                    <p className="mono text-[11px] cl-text-neutral-text-low-contrast tracking-wider">
+                        <span className="cl-text-neutral-text-medium-contrast">Research</span> → 
+                        <span className="cl-text-neutral-text-medium-contrast"> System design</span> → 
+                        <span className="cl-text-neutral-text-medium-contrast"> AI-assisted execution</span> → 
+                        <span className="cl-text-neutral-text-medium-contrast"> Shipped frontend</span>
                     </p>
                 </div>
 

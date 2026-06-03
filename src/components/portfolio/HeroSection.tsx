@@ -33,11 +33,12 @@ export function HeroSection() {
                         <span className="cl-text-brand-primary-base">ships the frontend.</span>
                     </h1>
 
-                    {/* Sub */}
-                    <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast leading-relaxed max-w-2xl mb-10">
-                        I design enterprise-grade systems, run usability, own the design system — and write
-                        production-ready React myself. No handoff loss. No interpretation gap.
-                    </p>
+                <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl mx-auto font-medium">
+                    AI-Native UX Engineer / System-Driven Product Designer | Cybersecurity Practitioner
+                </p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-10">
+                    Designing systems, not just screens. AI-assisted workflows with production-ready execution.
+                </p>
 
                     {/* CTAs */}
                     <div className="flex flex-col sm:flex-row items-start gap-3">
