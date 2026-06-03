@@ -26,7 +26,7 @@ export function ActionCard({ averageSentiment, data }: AlertSystemProps) {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="fixed bottom-8 right-8 z-50 bg-surface-page border border-semantic-error-border shadow-xl rounded-2xl p-4 flex items-center gap-6 w-auto min-w-[320px]"
+                className="fixed bottom-24 right-8 z-50 bg-white border border-semantic-error-border shadow-xl rounded-2xl p-4 flex items-center gap-6 w-auto min-w-[320px]"
             >
                 <div className="p-3 bg-semantic-error-background rounded-full text-semantic-error-icon shrink-0">
                     <AlertTriangle className="w-5 h-5" />
