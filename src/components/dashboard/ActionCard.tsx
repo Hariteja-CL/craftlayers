@@ -41,7 +41,7 @@ export function ActionCard({ averageSentiment, data }: AlertSystemProps) {
                 <div className="relative group">
                     <button
                         onClick={() => setIsSheetOpen(true)}
-                        className="flex items-center gap-2 px-3 py-2 cl-bg-semantic-error-text hover:opacity-90 text-white rounded-lg transition-colors shadow-md font-medium text-xs whitespace-nowrap"
+                        className="flex items-center gap-2 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors shadow-md font-medium text-xs whitespace-nowrap"
                     >
                         <Sparkles className="w-4 h-4" />
                         <span>Take Action</span>
