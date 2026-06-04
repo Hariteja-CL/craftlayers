@@ -67,13 +67,17 @@
 
         /* ── Header ───────────────────────────────────── */
         header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.1rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .header-top {
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 0 2rem;
             align-items: start;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1.2rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 0.6rem;
         }
 
         .header-left h1 {
@@ -82,7 +86,7 @@
             letter-spacing: -0.01em;
             line-height: 1.05;
             color: var(--primary);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .tagline {
@@ -91,22 +95,23 @@
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: var(--accent);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.35rem;
         }
 
-        .summary {
-            font-size: var(--fs-body);
-            color: var(--secondary);
-            line-height: 1.6;
-            max-width: 56ch;
+        .impact-line {
+            font-size: var(--fs-small);
+            font-weight: 600;
+            color: var(--primary);
+            font-style: italic;
+            line-height: 1.45;
         }
 
         .contact-block {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 0.35rem;
             align-items: flex-end;
-            padding-top: 0.25rem;
+            padding-top: 0.2rem;
         }
 
         .contact-block a,
@@ -120,15 +125,12 @@
         .contact-block a:hover { color: var(--accent); }
 
         .location-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
             font-size: var(--fs-small);
             font-weight: 600;
             color: var(--muted);
             font-family: 'DM Mono', monospace;
             background: #f8fafc;
-            padding: 3px 10px;
+            padding: 2px 8px;
             border-radius: 999px;
             border: 1px solid var(--border);
         }
@@ -158,8 +160,7 @@
         h2::before {
             content: '';
             display: inline-block;
-            width: 5px;
-            height: 5px;
+            width: 5px; height: 5px;
             border-radius: 50%;
             background: var(--accent-bar);
             flex-shrink: 0;
@@ -176,8 +177,8 @@
 
         .job-item {
             position: relative;
-            margin-bottom: 1.1rem;
-            padding-bottom: 1.1rem;
+            margin-bottom: 1.05rem;
+            padding-bottom: 1.05rem;
             border-bottom: 1px dashed var(--border);
         }
 
@@ -186,10 +187,8 @@
         .job-item::before {
             content: '';
             position: absolute;
-            left: calc(-1.1rem - 4.75px);
-            top: 5px;
-            width: 7px;
-            height: 7px;
+            left: calc(-1.1rem - 4.75px); top: 5px;
+            width: 7px; height: 7px;
             border-radius: 50%;
             background: var(--surface);
             border: 1.5px solid var(--secondary);
@@ -205,7 +204,7 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 0.5rem;
-            margin-bottom: 0.15rem;
+            margin-bottom: 0.12rem;
             flex-wrap: wrap;
         }
 
@@ -231,15 +230,13 @@
         }
 
         .domain-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
             font-size: var(--fs-small);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: var(--accent);
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.4rem;
+            display: block;
         }
 
         .badge-winner {
@@ -289,20 +286,22 @@
             color: #334155;
             background: #f8fafc;
             border: 1px solid var(--border);
-            padding: 4px 10px;
+            padding: 3px 9px;
             border-radius: 6px;
             display: block;
+            margin-bottom: 0.3rem;
         }
 
         .edu-item { margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px dashed var(--border); }
         .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .edu-title { font-size: var(--fs-body); font-weight: 600; color: var(--primary); line-height: 1.3; }
+        .edu-meta { font-size: var(--fs-small); color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 1px; }
 
         .edu-title { font-size: var(--fs-body); font-weight: 600; color: var(--primary); line-height: 1.35; }
         .edu-meta { font-size: var(--fs-small); color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 1px; }
 
         .skill-group { margin-bottom: 0.75rem; }
         .skill-group:last-child { margin-bottom: 0; }
-
         .skill-group-label {
             font-size: var(--fs-small);
             font-weight: 800;
@@ -319,8 +318,8 @@
             background: var(--accent-bg);
             border: 1px solid var(--accent-border);
             border-radius: 0.5rem;
-            padding: 0.6rem 0.85rem;
-            margin-bottom: 0.85rem;
+            padding: 0.55rem 0.8rem;
+            margin-bottom: 0.7rem;
         }
 
         .impact-box:last-child { margin-bottom: 0; }
@@ -331,7 +330,7 @@
             text-transform: uppercase;
             letter-spacing: 0.04em;
             color: var(--accent);
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .impact-box p { font-size: var(--fs-small); color: #78350f; line-height: 1.5; }
@@ -436,12 +435,26 @@
             </p>
         </div>
 
-        <div class="contact-block">
-            <a href="mailto:haritejanandipati@gmail.com">haritejanandipati@gmail.com</a>
-            <a href="https://craftlayers.com" target="_blank">craftlayers.com</a>
-            <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank">in/hariteja-nandipati</a>
-            <span class="location-badge">Hyderabad, India</span>
+            <div class="contact-block">
+                <a href="mailto:haritejanandipati@gmail.com">haritejanandipati@gmail.com</a>
+                <a href="https://craftlayers.com" target="_blank">craftlayers.com</a>
+                <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank">in/hariteja-nandipati</a>
+                <span class="location-badge">Hyderabad, India</span>
+            </div>
         </div>
+
+        <p class="summary-block">
+            Senior Product Designer and UX Architect with <strong>15+ years of experience (8+ in B2B SaaS)</strong>
+            across culture analytics, healthcare, access control, and immersive tech.
+            Operates at the intersection of UX strategy, scalable systems, design systems, and AI workflow generation,
+            using a code-integrated design approach to bridge interface concepts and production-ready frontend.
+            Architect of theme-layered design systems and AI execution pipelines, with a strong focus on
+            <strong>security-aware UX</strong> and data privacy.
+        </p>
+
+        <p class="target-roles">
+            <strong>Target roles:</strong> Senior Product Designer · Senior UX Architect · Lead AI Product Designer · Lead UX Designer
+        </p>
     </header>
 
     <!-- BODY GRID -->
@@ -454,16 +467,16 @@
                 <h2>Skills</h2>
                 <div class="skill-group">
                     <div class="skill-group-label">Disciplines</div>
-                    <div class="skill-pills">
-                        <span class="pill">SaaS Dashboard UX</span>
-                        <span class="pill">Design System Architecture</span>
-                        <span class="pill">Vibe Coding & AI Execution</span>
-                        <span class="pill">Usability Audits</span>
-                        <span class="pill">Security-Aware UX</span>
-                        <span class="pill">Generative UI Modeling</span>
-                        <span class="pill">Design-to-Code Handoff</span>
-                        <span class="pill">Cognitive Load Reduction</span>
-                    </div>
+                    <span class="pill">SaaS Dashboard UX</span>
+                    <span class="pill">Design Systems & Tokens</span>
+                    <span class="pill">Vibe Coding & AI Execution (AI product design, agent orchestration)</span>
+                    <span class="pill">Usability Audits</span>
+                    <span class="pill">Security-Aware UX</span>
+                    <span class="pill">Generative UI Modeling</span>
+                    <span class="pill">Design-to-Code Handoff</span>
+                    <span class="pill">Cognitive Load Reduction</span>
+                    <span class="pill">Product Discovery & UX Strategy</span>
+                    <span class="pill">Enterprise UX & Stakeholder Alignment</span>
                 </div>
                 <div class="skill-group" style="margin-top:0.75rem">
                     <div class="skill-group-label">Tech Stack</div>
@@ -500,6 +513,7 @@
                 <h2>Education</h2>
                 <div class="edu-item">
                     <div class="edu-title">Advanced Cert. in Cyber Security</div>
+                    <div class="edu-meta" style="font-style:italic;color:#64748b;font-size:7.5pt">focus: defensive security & secure product practices</div>
                     <div class="edu-meta">IIT Guwahati × Edureka · 2023–24</div>
                 </div>
                 <div class="edu-item">
@@ -531,7 +545,7 @@
                             <span class="role">Senior UX Designer <span class="company">· Enculture (NHR Technologies)</span></span>
                             <span class="period mono">Jan 2024 – Present</span>
                         </div>
-                        <div class="domain-badge">B2B SaaS · Culture Analytics</div>
+                        <span class="domain-badge">B2B SaaS · Culture Analytics</span>
                         <ul>
                             <li>Led UX across <strong>4+ enterprise product modules</strong> including survey systems and CXO dashboards; token-based design system reduced UI inconsistencies by ~60% and cut cross-team component duplication by half.</li>
                             <li>Designed <strong>Action Engine</strong> — a generative UI agent that interprets organisational retention data streams and dynamically constructs prescriptive intervention plans. <span class="badge-winner">🏆 Hackathon Winner 2025</span></li>
@@ -546,7 +560,7 @@
                             <span class="role">Product Designer <span class="company">· Clinic Mantra</span></span>
                             <span class="period mono">Jan 2023 – Aug 2023</span>
                         </div>
-                        <div class="domain-badge">Healthcare Tech</div>
+                        <span class="domain-badge">Healthcare Tech</span>
                         <ul>
                             <li>Redesigned appointment scheduling flow, <strong>reducing booking steps from 8 to 4</strong> and achieving an estimated 30% improvement in task completion rate across patient and admin roles.</li>
                             <li>Embedded HIPAA-aligned secure UX patterns across <strong>3 core clinical workflows</strong>, reducing data exposure risk.</li>
@@ -559,7 +573,7 @@
                             <span class="role">UX Design Consultant <span class="company">· Estate96</span></span>
                             <span class="period mono">Aug 2022 – Nov 2022</span>
                         </div>
-                        <div class="domain-badge">Smart Access Solutions</div>
+                        <span class="domain-badge">Smart Access Solutions</span>
                         <ul>
                             <li>Delivered UX architecture across <strong>3 device types</strong> (mobile, tablet, wall panel) completing end-to-end design and prototype within an <strong>8-week engagement</strong>.</li>
                             <li>Designed flows for <strong>2 distinct user roles</strong> (resident, admin) integrating hardware access logic — adopted directly into the development sprint with zero revision cycles.</li>
@@ -572,7 +586,7 @@
                             <span class="role">UX Designer <span class="company">· Opia Labs</span></span>
                             <span class="period mono">Nov 2019 – Jul 2022</span>
                         </div>
-                        <div class="domain-badge">SaaS Platforms</div>
+                        <span class="domain-badge">SaaS Platforms</span>
                         <ul>
                             <li>Led end-to-end product design for <strong>Inwards</strong> across <strong>2 user roles</strong>, structuring <strong>6 emotional data types</strong> into role-specific analytical dashboards improving session depth in early usability testing.</li>
                             <li>Accelerated design iteration across <strong>3 active B2B SaaS products</strong>, reducing design-to-handoff turnaround by ~40% through standardised component frameworks.</li>
@@ -585,7 +599,7 @@
                             <span class="role">UI / UX Designer <span class="company">· Foyr</span></span>
                             <span class="period mono">Apr 2017 – Nov 2019</span>
                         </div>
-                        <div class="domain-badge">Immersive Architecture Tech</div>
+                        <span class="domain-badge">Immersive Architecture Tech</span>
                         <ul>
                             <li>Standardised UX architecture across <strong>3 interconnected 3D visualisation products</strong>, cutting new-designer onboarding time by an estimated 50%. <span class="badge-winner">🏅 MAXIMUS Award 2018</span></li>
                             <li>Built a foundational design system of <strong>60+ reusable components</strong> used across 4 product lines, eliminating ~45% of redundant UI elements over 2.5 years.</li>
@@ -600,6 +614,7 @@
                         </div>
                         <ul>
                             <li>Built strong foundations in visual hierarchy, typography, and layout over 7 years before transitioning fully into digital product architecture.</li>
+                            <li>Mentored aspiring designers, strengthening communication and leadership skills later applied in enterprise product teams.</li>
                         </ul>
                     </div>
 
