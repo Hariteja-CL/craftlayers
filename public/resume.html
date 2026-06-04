@@ -383,6 +383,54 @@
 
         .btn-print:hover { transform: translateY(-2px); }
 
+        /* ── Mobile (screen only — does not affect print/PDF) ── */
+        @media screen and (max-width: 768px) {
+            body { font-size: 11pt; }
+
+            .page {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                padding: 1.5rem 1.25rem 2.5rem;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            /* Header stacks; contact left-aligns */
+            .header-top { grid-template-columns: 1fr; gap: 0.75rem; }
+            .header-left h1 { font-size: 26pt; }
+            .contact-block { align-items: flex-start; padding-top: 0; }
+
+            /* Two-column body → single column */
+            .body-grid { grid-template-columns: 1fr; gap: 0; }
+            .sidebar { margin-bottom: 1.5rem; }
+            .sidebar section { margin-bottom: 1.4rem; }
+
+            /* Career timeline a touch more padding */
+            .timeline { padding-left: 1rem; }
+
+            /* Education 4-across → 2-across */
+            .edu-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+            /* Awards stack full width */
+            .honors-row { flex-direction: column; gap: 0.6rem; }
+            .honor-item { min-width: 0; width: 100%; }
+
+            /* Slightly larger body text for phone readability */
+            li, .job-company, .summary-block, .impact-box p, .edu-title {
+                font-size: 10.5pt;
+            }
+
+            /* Keep the PDF button clear of content */
+            .btn-print { bottom: 1rem; right: 1rem; padding: 0.65rem 1.25rem; }
+        }
+
+        /* Extra-small phones */
+        @media screen and (max-width: 420px) {
+            .edu-grid { grid-template-columns: 1fr; }
+            .header-left h1 { font-size: 22pt; }
+        }
+
         /* ── Print ────────────────────────────────────── */
         @media print {
             @page { size: A4; margin: 0.8cm 1.5cm; }

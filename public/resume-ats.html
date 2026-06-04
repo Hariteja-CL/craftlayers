@@ -437,6 +437,53 @@
 
         .btn-print:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(204,132,0,0.45); }
 
+        /* ── Mobile (screen only — does not affect print/PDF) ── */
+        @media screen and (max-width: 768px) {
+            body { font-size: 11pt; }
+
+            .page {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .resume-header { padding: 1.5rem 1.25rem 1.25rem; }
+            .resume-body { padding: 0 1.25rem 2.5rem; }
+
+            .name { font-size: 26pt; }
+
+            /* Contact wraps cleanly */
+            .contact { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+            .contact-sep { display: none; }
+
+            /* 3-col systems grid → single column */
+            .impact-row { grid-template-columns: 1fr; gap: 0.6rem; }
+
+            /* Education 2-col → single column */
+            .edu-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+
+            /* Awards stack */
+            .honors-row { flex-direction: column; gap: 0.6rem; }
+            .honor-item { min-width: 0; width: 100%; }
+
+            /* Skills: label above pills */
+            .skill-row { flex-direction: column; gap: 0.4rem; }
+            .skill-label { min-width: 0; }
+
+            /* Larger body text for phone readability */
+            li, .job-company, .summary, .impact-card-body, .edu-title {
+                font-size: 10.5pt;
+            }
+
+            .btn-print { bottom: 1rem; right: 1rem; padding: 0.65rem 1.25rem; }
+        }
+
+        @media screen and (max-width: 420px) {
+            .name { font-size: 22pt; }
+        }
+
         /* ── Screen: approx page break hint (hidden in print) ── */
         .page-break-hint {
             display: block;
