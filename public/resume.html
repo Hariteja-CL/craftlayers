@@ -462,12 +462,9 @@
             .summary-block { line-height: 1.32; margin-bottom: 0.35rem; }
             .target-roles { line-height: 1.3; }
 
-            /* Single-column flow in print — CSS grids paginate poorly and
-               leave large gaps. Screen keeps the two-column layout. */
-            .body-grid { display: block; }
-            .sidebar { margin-bottom: 0; }
-            .sidebar .skill-pills { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-            .sidebar section { margin-bottom: 0.55rem; }
+            /* Two-column layout preserved in print to match the website */
+            .body-grid { gap: 0 1.3rem; }
+            .sidebar section { margin-bottom: 0.6rem; }
             section { margin-bottom: 0.55rem; }
 
             /* Headings stay with following content */
