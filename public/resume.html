@@ -291,9 +291,6 @@
             display: inline-block;
         }
 
-        .edu-item { padding-left: 0.75rem; border-left: 2px solid var(--accent-border); }
-        .edu-title { font-size: var(--fs-body); font-weight: 600; color: var(--primary); line-height: 1.3; }
-        .edu-meta { font-size: var(--fs-small); color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; line-height: 1.35; }
 
         .skill-group { margin-bottom: 0.75rem; }
         .skill-group:last-child { margin-bottom: 0; }
@@ -331,36 +328,28 @@
         .impact-box p { font-size: var(--fs-small); color: #78350f; line-height: 1.5; }
         .impact-line-arch { color: var(--secondary) !important; font-style: italic; margin-top: 0.2rem; }
 
-        /* ── Education band (full width, horizontal) ────── */
+        /* ── Education + Awards bands (full width) ───────── */
         .edu-band { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--border); }
-        .edu-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem 1.5rem;
-        }
-
-        /* ── Awards band (full width, under both columns) ── */
         .awards-band { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--border); }
 
-        /* ── Honors ───────────────────────────────────── */
-        .honors-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.2rem; }
+        /* ── Compact pointer lines (Education + Awards) ──── */
+        .edu-list, .awards-list {
+            list-style: none; display: flex; flex-direction: column;
+            gap: 0.35rem; margin-top: 0.2rem;
+        }
 
-        .honor-item {
+        .edu-list li, .awards-list li {
             display: flex;
             align-items: flex-start;
             gap: 0.5rem;
-            flex: 1;
-            min-width: 180px;
-            background: var(--accent-bg);
-            border: 1px solid var(--accent-border);
-            border-radius: 6px;
-            padding: 0.5rem 0.75rem;
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            line-height: 1.4;
         }
 
-        .honor-icon { font-size: 12pt; line-height: 1.3; flex-shrink: 0; }
-
-        .honor-title { font-size: var(--fs-small); font-weight: 700; color: var(--accent); line-height: 1.3; }
-        .honor-meta { font-size: var(--fs-small); color: var(--secondary); line-height: 1.4; margin-top: 1px; }
+        .award-icon { flex-shrink: 0; line-height: 1.3; }
+        .edu-list strong, .awards-list strong { color: var(--accent); font-weight: 700; }
+        .edu-list em { color: var(--muted); font-style: italic; }
 
         /* ── Print button ─────────────────────────────── */
         .btn-print {
@@ -415,15 +404,8 @@
             /* Career timeline a touch more padding */
             .timeline { padding-left: 1rem; }
 
-            /* Education 4-across → 2-across */
-            .edu-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-            /* Awards stack full width */
-            .honors-row { flex-direction: column; gap: 0.6rem; }
-            .honor-item { min-width: 0; width: 100%; }
-
             /* Slightly larger body text for phone readability */
-            li, .job-company, .summary-block, .impact-box p, .edu-title {
+            li, .job-company, .summary-block, .impact-box p {
                 font-size: 10.5pt;
             }
 
@@ -433,7 +415,6 @@
 
         /* Extra-small phones */
         @media screen and (max-width: 420px) {
-            .edu-grid { grid-template-columns: 1fr; }
             .header-left h1 { font-size: 22pt; }
         }
 
@@ -441,8 +422,8 @@
         @media print {
             @page { size: A4; margin: 0.8cm 1.5cm; }
 
-            /* Tuned for a clean 2-page A4 print (verified via headless render) */
-            body { background: white; font-size: 7.9pt; line-height: 1.26;
+            /* Tuned for a clean 2-page A4 print (verified with fonts loaded) */
+            body { background: white; font-size: 7.5pt; line-height: 1.22;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
             .page {
@@ -491,14 +472,11 @@
                 border: 1px solid #ccc; background: transparent !important; color: black !important;
             }
 
-            /* Education + Awards: full-width sequential blocks that flow onto
-               the current page (a grid here would jump whole to the next). */
+            /* Education + Awards: compact pointer lines */
             .edu-band { margin-top: 0.55rem; padding-top: 0.5rem; }
-            .edu-grid { grid-template-columns: repeat(4, 1fr); gap: 0.4rem 1rem; }
-            .edu-item { break-inside: avoid; page-break-inside: avoid; }
             .awards-band { margin-top: 0.55rem; padding-top: 0.5rem; }
-            .honors-row { display: flex; flex-direction: row; gap: 0.6rem; }
-            .honor-item { flex: 1; break-inside: avoid; page-break-inside: avoid; }
+            .edu-list, .awards-list { gap: 0.22rem; }
+            .edu-list li, .awards-list li { break-inside: avoid; page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -695,49 +673,30 @@
 
     </div><!-- /body-grid -->
 
-    <!-- Education — full-width horizontal band -->
+    <!-- Education — compact pointer lines (one after another) -->
     <section class="edu-band">
         <h2>Education</h2>
-        <div class="edu-grid">
-            <div class="edu-item">
-                <div class="edu-title">Advanced Cert. in Cyber Security</div>
-                <div class="edu-meta" style="font-style:italic;color:#64748b">focus: defensive security & secure product practices</div>
-                <div class="edu-meta">IIT Guwahati × Edureka · 2023–24</div>
-            </div>
-            <div class="edu-item">
-                <div class="edu-title">Design for AR / VR</div>
-                <div class="edu-meta">Interaction Design Foundation · 2019</div>
-            </div>
-            <div class="edu-item">
-                <div class="edu-title">Diploma in Game Art & Design</div>
-                <div class="edu-meta">AAG · 2009–2011</div>
-            </div>
-            <div class="edu-item">
-                <div class="edu-title">Bachelor of Commerce (B.Com)</div>
-                <div class="edu-meta">Osmania University · 2006–2009</div>
-            </div>
-        </div>
+        <ul class="edu-list">
+            <li><span><strong>Advanced Cert. in Cyber Security</strong> — <em>focus: defensive security &amp; secure product practices</em> · IIT Guwahati × Edureka · 2023–24</span></li>
+            <li><span><strong>Design for AR / VR</strong> — Interaction Design Foundation · 2019</span></li>
+            <li><span><strong>Diploma in Game Art &amp; Design</strong> — AAG · 2009–2011</span></li>
+            <li><span><strong>Bachelor of Commerce (B.Com)</strong> — Osmania University · 2006–2009</span></li>
+        </ul>
     </section>
 
-    <!-- Awards — full-width band -->
+    <!-- Awards — compact pointer lines (not boxes) -->
     <section class="awards-band">
         <h2>Awards & Recognition</h2>
-        <div class="honors-row">
-            <div class="honor-item">
-                <span class="honor-icon">🏆</span>
-                <div>
-                    <div class="honor-title">Hackathon Winner 2025</div>
-                    <div class="honor-meta">For Action Engine — a generative UI agent for prescriptive retention interventions · Enculture, NHR Technologies</div>
-                </div>
-            </div>
-            <div class="honor-item">
-                <span class="honor-icon">🏅</span>
-                <div>
-                    <div class="honor-title">MAXIMUS Award 2018</div>
-                    <div class="honor-meta">For cross-product UX standardisation and delivery impact · Foyr</div>
-                </div>
-            </div>
-        </div>
+        <ul class="awards-list">
+            <li>
+                <span class="award-icon">🏆</span>
+                <span><strong>Hackathon Winner 2025</strong> — Action Engine, a generative UI agent for prescriptive retention interventions · Enculture, NHR Technologies</span>
+            </li>
+            <li>
+                <span class="award-icon">🏅</span>
+                <span><strong>MAXIMUS Award 2018</strong> — Cross-product UX standardisation and delivery impact · Foyr</span>
+            </li>
+        </ul>
     </section>
 
 </div><!-- /page -->
