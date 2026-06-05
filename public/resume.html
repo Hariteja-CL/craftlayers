@@ -239,6 +239,15 @@
             display: block;
         }
 
+        .domain-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.4rem;
+        }
+        .domain-row .domain-badge { margin-bottom: 0; }
+
         .badge-winner {
             display: inline-flex;
             align-items: center;
@@ -423,7 +432,7 @@
             @page { size: A4; margin: 0.8cm 1.5cm; }
 
             /* Tuned for a clean 2-page A4 print (verified with fonts loaded) */
-            body { background: white; font-size: 7.5pt; line-height: 1.22;
+            body { background: white; font-size: 7.5pt; line-height: 1.18;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
             .page {
@@ -593,10 +602,13 @@
                             <span class="role">Senior UX Designer <span class="company">· Enculture (NHR Technologies)</span></span>
                             <span class="period mono">Jan 2024 – Present</span>
                         </div>
-                        <span class="domain-badge">B2B SaaS · Culture Analytics</span>
+                        <div class="domain-row">
+                            <span class="domain-badge">B2B SaaS · Culture Analytics</span>
+                            <span class="badge-winner">🏆 Hackathon Winner 2025</span>
+                        </div>
                         <ul>
                             <li>Led UX across <strong>4+ enterprise product modules</strong> (survey builder, analytics dashboards, action engine, role-based reporting); token-based design system reduced UI inconsistencies by ~60% and cut cross-team component duplication by half.</li>
-                            <li>Designed <strong>Action Engine</strong> — a generative UI agent that interprets organisational retention data streams and dynamically constructs prescriptive intervention plans, reducing time to identify at-risk cohorts by ~35%. <span class="badge-winner">🏆 Hackathon Winner 2025</span></li>
+                            <li>Designed <strong>Action Engine</strong> — a generative UI agent that interprets organisational retention data streams and dynamically constructs prescriptive intervention plans, reducing time to identify at-risk cohorts by ~35%.</li>
                             <li>Reduced cognitive load across <strong>8+ enterprise workflows</strong>, compressing stakeholder review cycles from 5 rounds to 2 and improving data interpretation speed by an estimated 35%.</li>
                             <li>Enforced a 3-layer token system (Primitive, Semantic, Component) governing <strong>150+ design decisions</strong>, used directly in frontend theming and AI-generated code review — reducing UI QA defects by ~40%.</li>
                         </ul>
@@ -647,9 +659,12 @@
                             <span class="role">UI / UX Designer <span class="company">· Foyr</span></span>
                             <span class="period mono">Apr 2017 – Nov 2019</span>
                         </div>
-                        <span class="domain-badge">Immersive Architecture Tech</span>
+                        <div class="domain-row">
+                            <span class="domain-badge">Immersive Architecture Tech</span>
+                            <span class="badge-winner">🏅 MAXIMUS Award 2018</span>
+                        </div>
                         <ul>
-                            <li>Standardised UX architecture across <strong>3 interconnected 3D visualisation products</strong>, cutting new-designer onboarding time by an estimated 50%. <span class="badge-winner">🏅 MAXIMUS Award 2018</span></li>
+                            <li>Standardised UX architecture across <strong>3 interconnected 3D visualisation products</strong>, cutting new-designer onboarding time by an estimated 50%.</li>
                             <li>Built a foundational <strong>multi-product design system</strong> of 60+ reusable components used across 4 product lines, eliminating ~45% of redundant UI elements over 2.5 years.</li>
                         </ul>
                     </div>
