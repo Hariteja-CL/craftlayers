@@ -441,7 +441,8 @@
         @media print {
             @page { size: A4; margin: 0.8cm 1.5cm; }
 
-            body { background: white; font-size: 9.5pt;
+            /* Tuned for a clean 2-page A4 print (verified via headless render) */
+            body { background: white; font-size: 7.9pt; line-height: 1.26;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
             .page {
@@ -453,39 +454,54 @@
             .page::before { display: none; }
             .btn-print { display: none !important; }
 
-            header { margin-bottom: 0.85rem; padding-bottom: 0.7rem; }
-            .body-grid { gap: 0 1.4rem; }
-            section { margin-bottom: 0.85rem; }
+            /* Header — compact */
+            header { margin-bottom: 0.6rem; padding-bottom: 0.5rem; }
+            .header-left h1 { font-size: 22pt; }
+            .tagline { margin-bottom: 0.25rem; }
+            .impact-line { line-height: 1.32; }
+            .summary-block { line-height: 1.32; margin-bottom: 0.35rem; }
+            .target-roles { line-height: 1.3; }
 
-            /* Keep sidebar sections (esp. Education) intact across pages */
-            .sidebar section { break-inside: avoid; page-break-inside: avoid; }
+            /* Single-column flow in print — CSS grids paginate poorly and
+               leave large gaps. Screen keeps the two-column layout. */
+            .body-grid { display: block; }
+            .sidebar { margin-bottom: 0; }
+            .sidebar .skill-pills { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+            .sidebar section { margin-bottom: 0.55rem; }
+            section { margin-bottom: 0.55rem; }
 
-            /* Headings never sit alone at the bottom of a page */
+            /* Headings stay with following content */
             h2 { break-after: avoid; page-break-after: avoid;
-                margin-top: 0.4rem; border-bottom: 1px solid #eee;
-                padding-bottom: 0.2rem; margin-bottom: 0.55rem; }
+                margin-top: 0.3rem; border-bottom: 1px solid #eee;
+                padding-bottom: 0.15rem; margin-bottom: 0.4rem; }
 
-            .job-item { break-inside: avoid; page-break-inside: avoid;
-                margin-bottom: 0.7rem; padding-bottom: 0.7rem; }
+            /* Jobs flow across page boundaries so pages fill fully */
+            .job-item { margin-bottom: 0.5rem; padding-bottom: 0.5rem; }
+            .job-header { break-after: avoid; page-break-after: avoid; }
+            .job-item ul li { margin-bottom: 0.12rem; break-inside: avoid; }
 
             .impact-box { break-inside: avoid; page-break-inside: avoid;
                 background: transparent !important; border: 1px solid var(--accent-border);
-                padding: 0.45rem 0.7rem; margin-bottom: 0.5rem; }
-            .impact-box p { color: #78350f !important; }
-            .edu-item { break-inside: avoid; page-break-inside: avoid; }
+                padding: 0.3rem 0.5rem; margin-bottom: 0.3rem; }
+            .impact-box p { color: #78350f !important; line-height: 1.28; }
+            .impact-box-label { margin-bottom: 0.05rem; }
+            .impact-line-arch { margin-top: 0.1rem; }
 
             a { text-decoration: none; color: #333; }
 
+            .pill { padding: 2px 7px; }
             .pill, .location-badge, .period {
                 border: 1px solid #ccc; background: transparent !important; color: black !important;
             }
 
-            .edu-band { break-inside: avoid; page-break-inside: avoid;
-                margin-top: 1rem; padding-top: 0.8rem; }
-            .edu-grid { gap: 0.6rem 1.2rem; }
-            .awards-band { break-inside: avoid; page-break-inside: avoid;
-                margin-top: 1rem; padding-top: 0.8rem; }
-            .honors-row { break-inside: avoid; }
+            /* Education + Awards: full-width sequential blocks that flow onto
+               the current page (a grid here would jump whole to the next). */
+            .edu-band { margin-top: 0.55rem; padding-top: 0.5rem; }
+            .edu-grid { grid-template-columns: repeat(4, 1fr); gap: 0.4rem 1rem; }
+            .edu-item { break-inside: avoid; page-break-inside: avoid; }
+            .awards-band { margin-top: 0.55rem; padding-top: 0.5rem; }
+            .honors-row { display: flex; flex-direction: row; gap: 0.6rem; }
+            .honor-item { flex: 1; break-inside: avoid; page-break-inside: avoid; }
         }
     </style>
 </head>
