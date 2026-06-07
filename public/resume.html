@@ -418,7 +418,39 @@
             z-index: 100;
         }
 
+        .btn-print { text-decoration: none; }
         .btn-print:hover { transform: translateY(-2px); }
+
+        /* ── Download confirmation toast ── */
+        .dl-toast {
+            position: fixed;
+            bottom: 6.25rem;
+            right: 1.75rem;
+            max-width: 320px;
+            background: #ffffff;
+            border: 1px solid var(--accent-border);
+            border-left: 4px solid var(--accent-bar);
+            border-radius: 12px;
+            padding: 0.95rem 2.1rem 0.95rem 1.1rem;
+            box-shadow: 0 14px 32px -6px rgba(0,0,0,0.22);
+            font-family: 'Inter', sans-serif;
+            opacity: 0;
+            transform: translateY(14px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 110;
+        }
+        .dl-toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .dl-toast-title { font-weight: 700; font-size: 12.5pt; color: var(--primary); margin-bottom: 0.25rem; }
+        .dl-toast-body { font-size: 10.5pt; color: var(--secondary); line-height: 1.45; }
+        .dl-toast-body a { color: var(--accent); font-weight: 700; text-decoration: none; }
+        .dl-toast-body a:hover { text-decoration: underline; }
+        .dl-toast-close {
+            position: absolute; top: 0.45rem; right: 0.6rem;
+            background: none; border: none; cursor: pointer;
+            font-size: 16pt; line-height: 1; color: var(--muted);
+        }
+        .dl-toast-close:hover { color: var(--primary); }
 
         /* ── Mobile (screen only — does not affect print/PDF) ── */
         @media screen and (max-width: 768px) {
@@ -473,20 +505,21 @@
 
         /* ── Print ────────────────────────────────────── */
         @media print {
-            @page { size: A4; margin: 0.6cm 1.3cm; }
+            /* Balanced document margins (header/footer + left/right) */
+            @page { size: A4; margin: 1.1cm 1.3cm; }
 
             /* Tuned for a clean 2-page A4 print (verified with fonts loaded) */
             body { background: white; font-size: 7.3pt; line-height: 1.16;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
             .page {
-                box-shadow: none; margin: 0; padding: 0 1.5cm;
+                box-shadow: none; margin: 0; padding: 0;
                 width: 100%; min-height: auto; border-radius: 0;
                 overflow: visible;
             }
 
             .page::before { display: none; }
-            .btn-print { display: none !important; }
+            .btn-print, .dl-toast { display: none !important; }
 
             /* Header — compact */
             header { margin-bottom: 0.6rem; padding-bottom: 0.5rem; }
@@ -542,7 +575,15 @@
 
 <body>
 
-<button class="btn-print" onclick="window.print()">↓ Save as PDF</button>
+<a class="btn-print" href="resume.pdf" download="Hariteja-Nandipati-Resume.pdf">↓ Download PDF</a>
+
+<!-- Download confirmation toast -->
+<div id="dl-toast" class="dl-toast" role="status" aria-live="polite">
+    <button class="dl-toast-close" aria-label="Dismiss" onclick="document.getElementById('dl-toast').classList.remove('show')">×</button>
+    <div class="dl-toast-title">Thanks for downloading my résumé!</div>
+    <div class="dl-toast-body">I'd love to connect and hear more about the role. Let's talk soon — reach me on
+        <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank" rel="noreferrer">LinkedIn</a>.</div>
+</div>
 
 <div class="page">
 
@@ -741,6 +782,20 @@
     </section>
 
 </div><!-- /page -->
+
+<script>
+    (function () {
+        var btn = document.querySelector('.btn-print');
+        var toast = document.getElementById('dl-toast');
+        if (!btn || !toast) return;
+        var timer;
+        btn.addEventListener('click', function () {
+            toast.classList.add('show');
+            clearTimeout(timer);
+            timer = setTimeout(function () { toast.classList.remove('show'); }, 8000);
+        });
+    })();
+</script>
 
 </body>
 </html>
