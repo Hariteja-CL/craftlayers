@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hariteja Nandipati — Master Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink:    #111827;
+            --body:   #374151;
+            --muted:  #6b7280;
+            --accent: #a05c00;   /* CraftLayers deep amber — AA on white */
+            --rule:   #e5e7eb;
+            --bg:     #f6f7f9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--body);
+            line-height: 1.5;
+            font-size: 10.5pt;
+        }
+
+        .page {
+            background: #fff;
+            max-width: 21cm;
+            margin: 1.5cm auto 3cm;
+            padding: 2.2cm 2.4cm;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border-radius: 8px;
+        }
+
+        /* ── Header ─────────────────────────────────── */
+        header { border-bottom: 2px solid var(--ink); padding-bottom: 1rem; margin-bottom: 1.4rem; }
+        h1 { font-size: 26pt; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+        .role-line { font-size: 11pt; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; }
+        .contact { font-size: 9.5pt; color: var(--muted); }
+        .contact a { color: var(--muted); text-decoration: none; }
+        .contact a:hover { color: var(--accent); }
+
+        /* ── Section headings ──────────────────────── */
+        h2 {
+            font-size: 12pt;
+            font-weight: 800;
+            color: var(--ink);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 0.3rem;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        h3 { font-size: 11pt; font-weight: 700; color: var(--ink); margin-bottom: 0.1rem; }
+        h4 {
+            font-size: 9.5pt; font-weight: 700; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.04em;
+            margin: 0.7rem 0 0.3rem;
+        }
+
+        p { margin-bottom: 0.6rem; }
+        .lead { color: var(--body); }
+
+        /* ── Meta line under a role ─────────────────── */
+        .meta { font-size: 9.5pt; color: var(--muted); margin-bottom: 0.5rem; }
+        .meta .org { font-weight: 700; color: var(--body); }
+
+        /* ── Lists ──────────────────────────────────── */
+        ul { list-style: none; margin: 0.3rem 0 0.6rem; }
+        li { position: relative; padding-left: 1rem; margin-bottom: 0.25rem; color: var(--body); }
+        li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+        /* Compact 2-column list for keyword-style bullets */
+        ul.cols { columns: 2; column-gap: 1.5rem; }
+        ul.cols li { break-inside: avoid; }
+
+        .pipe { color: var(--body); font-size: 10pt; line-height: 1.7; }
+
+        .role-block { margin-bottom: 1.2rem; }
+        .sub { margin-left: 0.2rem; }
+
+        hr.soft { border: none; border-top: 1px solid var(--rule); margin: 1.1rem 0; }
+
+        /* ── Print button ───────────────────────────── */
+        .btn-print {
+            position: fixed; bottom: 1.5rem; right: 1.5rem;
+            background: var(--accent); color: #fff;
+            padding: 0.7rem 1.5rem; border: none; border-radius: 999px;
+            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 9.5pt;
+            cursor: pointer; box-shadow: 0 8px 20px rgba(160,92,0,0.35);
+            transition: transform 0.15s;
+            z-index: 100;
+        }
+        .btn-print:hover { transform: translateY(-2px); }
+
+        /* ── Print ──────────────────────────────────── */
+        @media print {
+            @page { size: A4; margin: 1.2cm 1.4cm; }
+            body { background: #fff; font-size: 9.5pt; }
+            .page { box-shadow: none; margin: 0; padding: 0; max-width: 100%; border-radius: 0; }
+            .btn-print { display: none !important; }
+            h2 { margin-top: 1.1rem; }
+            /* Headings stay with following content; only small items are
+               unbreakable. Large role blocks flow across pages (a big
+               break-inside:avoid block would leave a near-empty page). */
+            h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+            li { break-inside: avoid; page-break-inside: avoid; }
+            ul.cols { break-inside: avoid; }
+            a { color: var(--body); }
+        }
+    </style>
+</head>
+
+<body>
+
+<button class="btn-print" onclick="window.print()">↓ Save as PDF</button>
+
+<div class="page">
+
+    <!-- ══ HEADER ════════════════════════════════════ -->
+    <header>
+        <h1>Hariteja Nandipati</h1>
+        <div class="role-line">Senior Product Designer | UX Architect | Design System Specialist | Secure UX Practitioner</div>
+        <div class="contact">
+            Hyderabad, India &nbsp;·&nbsp;
+            <a href="https://craftlayers.com" target="_blank">craftlayers.com</a> &nbsp;·&nbsp;
+            <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank">linkedin.com/in/hariteja-nandipati</a> &nbsp;·&nbsp;
+            Contact available on request
+        </div>
+    </header>
+
+    <!-- ══ PROFESSIONAL SUMMARY ══════════════════════ -->
+    <section>
+        <h2>Professional Summary</h2>
+        <p>Senior Product Designer and UX Architect with 15+ years of design experience, including 8+ years in B2B SaaS.
+            Experienced in UX strategy, design systems, enterprise dashboards, research-led product improvement,
+            product analytics, secure UX, and frontend-aware design handoff.</p>
+        <p>I work at the intersection of product design, system thinking, dashboard usability, design-system governance,
+            analytics-driven UX, and privacy-aware product decisions. My current work focuses on building scalable product
+            experiences for culture analytics, where complex survey and people data must be converted into clear, trusted,
+            and actionable insights.</p>
+        <p>I bring a hybrid background across UX, visual systems, SaaS dashboards, frontend-aware workflows, and
+            cybersecurity. This helps me design products that are not only usable and scalable, but also privacy-conscious,
+            consistent, and implementation-ready.</p>
+    </section>
+
+    <!-- ══ CAREER POSITIONING ════════════════════════ -->
+    <section>
+        <h2>Career Positioning</h2>
+        <p>I position myself as a Senior Product Designer / UX Architect who can own design beyond screens. My strength is
+            converting ambiguous business and user needs into structured product systems, design frameworks, dashboards,
+            reusable components, and evidence-backed design decisions.</p>
+        <p style="margin-bottom:0.3rem"><strong>My strongest areas are:</strong></p>
+        <ul class="cols">
+            <li>Enterprise SaaS UX</li>
+            <li>Design systems and token governance</li>
+            <li>Dashboard UX and data visualization</li>
+            <li>Research-led product improvement</li>
+            <li>UX philosophy and product principles</li>
+            <li>Analytics-informed design decisions</li>
+            <li>Secure UX and privacy-aware workflows</li>
+            <li>Stakeholder and engineering alignment</li>
+            <li>AI-assisted design workflows as a supporting capability</li>
+        </ul>
+    </section>
+
+    <!-- ══ TARGET ROLES ══════════════════════════════ -->
+    <section>
+        <h2>Target Roles</h2>
+        <p class="pipe">Senior Product Designer | Senior UX Designer | UX Architect | Lead Product Designer | Design System Lead | Product Design Lead</p>
+    </section>
+
+    <!-- ══ CORE SKILLS ═══════════════════════════════ -->
+    <section>
+        <h2>Core Skills</h2>
+        <p class="pipe">Product Design | UX Strategy | UX Research | Enterprise UX | SaaS Dashboard UX | Design Systems |
+            Design Tokens | Data Visualization | Information Architecture | Usability Audits | Accessibility | Secure UX |
+            Product Analytics | Stakeholder Alignment | Design-to-Development Handoff | AI-Assisted UX Workflows</p>
+    </section>
+
+    <!-- ══ TOOLS & TECH ══════════════════════════════ -->
+    <section>
+        <h2>Tools &amp; Tech</h2>
+        <p class="pipe">Figma | FigJam | Tokens Studio | Google Analytics | Microsoft Clarity | React | TypeScript |
+            Tailwind CSS | Cursor | GitHub | Vercel | Cloudflare | OpenAI / LLM Workflows | Basic Frontend Prototyping</p>
+    </section>
+
+    <!-- ══ CAREER EXPERIENCE ═════════════════════════ -->
+    <section>
+        <h2>Career Experience</h2>
+
+        <!-- Enculture -->
+        <div class="role-block">
+            <h3>Senior UX Designer / Senior Product Designer</h3>
+            <div class="meta"><span class="org">Enculture, NHR Technologies</span> · Jan 2024 – Present · B2B SaaS | Culture Analytics</div>
+            <p class="lead">Lead UX strategy and product design for Enculture, a culture intelligence platform used to create
+                organizational programs, collect employee feedback, analyze survey data, and convert culture signals into
+                actionable insights.</p>
+
+            <h4>Core Responsibilities</h4>
+            <ul>
+                <li>Lead UX across culture analytics modules including program creation, respondent flows, dashboards, action planning, and role-based reporting.</li>
+                <li>Own design direction from early requirement understanding to structured UX flows, design-system patterns, and implementation-ready handoff.</li>
+                <li>Work closely with product, engineering, data, leadership, and client-facing teams to align UX decisions with platform capabilities and business goals.</li>
+                <li>Translate complex survey, feedback, and dashboard requirements into clear user journeys and reusable interface patterns.</li>
+                <li>Support design decisions through research inputs, stakeholder discussions, analytics signals, and usability observations.</li>
+            </ul>
+
+            <h4>Product Areas</h4>
+            <ul class="cols">
+                <li>Program and survey creation workflows</li>
+                <li>Respondent experience</li>
+                <li>Analytics dashboards</li>
+                <li>Role-based reporting</li>
+                <li>Action planning and recommendation flows</li>
+                <li>Repository and configuration screens</li>
+                <li>Dashboard cards and chart patterns</li>
+                <li>Design-system governance</li>
+                <li>Accessibility and responsive behavior</li>
+                <li>Privacy-aware and secure UX patterns</li>
+            </ul>
+
+            <h4>UX Philosophy &amp; Product Direction</h4>
+            <p class="sub">Created a product-specific UX philosophy for Enculture to guide how users understand, respond,
+                interpret, trust, and act within the platform. It helps evaluate product screens through clear experience principles:</p>
+            <ul>
+                <li>Clarity in how information is presented</li>
+                <li>Guided interaction for complex workflows</li>
+                <li>Trusted evidence in dashboards and reports</li>
+                <li>Actionable outcomes from survey and culture data</li>
+                <li>Reduced cognitive load across respondent and admin experiences</li>
+            </ul>
+            <p class="sub">Used this philosophy to guide design decisions across respondent flows, dashboards, data interpretation, and product improvement discussions.</p>
+
+            <h4>Design System &amp; Governance</h4>
+            <p class="sub">Built and maintained a scalable design system for Enculture covering design tokens, typography,
+                spacing, colors, components, interaction states, dashboard patterns, form patterns, accessibility rules,
+                responsive behavior, and frontend-ready design guidance. Improved product consistency by aligning reusable
+                patterns, token-based decisions, dashboard components, and implementation-ready documentation across enterprise modules.</p>
+
+            <h4>Dashboard UX &amp; Data Visualization</h4>
+            <p class="sub">Designed dashboard systems that help HR leaders and client teams understand participation, survey
+                outcomes, team comparisons, trends over time, culture signals, action areas, metric interpretation, and
+                decision-ready summaries. Focused on improving dashboard clarity by making metrics easier to understand,
+                reducing ambiguity in charts, and connecting dashboard views to user decisions.</p>
+
+            <h4>Research, Analytics &amp; Product Signals</h4>
+            <p class="sub">Used multiple sources of product evidence to guide UX improvements — Google Analytics, Microsoft
+                Clarity, client interviews, stakeholder feedback, internal usability reviews, dashboard usage observations,
+                and product discussions with leadership and data teams. Converted these signals into design recommendations,
+                friction analysis, dashboard improvements, and product experience updates.</p>
+
+            <h4>Secure UX &amp; Privacy-Aware Design</h4>
+            <p class="sub">Applied secure UX principles across sensitive enterprise workflows — privacy-aware data presentation,
+                role-based access awareness, least-privilege thinking, avoiding unnecessary data exposure, clear trust signals
+                in respondent experiences, sensitive dashboard handling, and secure interaction patterns. Completed responsible
+                vulnerability disclosure involving client-side PII exposure and applied the learning to privacy-first product thinking.</p>
+
+            <h4>AI-Assisted UX Workflows</h4>
+            <p class="sub">Used AI-assisted workflows as a supporting capability for faster exploration, structured documentation,
+                frontend-aware prototyping, and design-to-engineering alignment — applied carefully to support UX requirement
+                structuring, design documentation, UI variation exploration, frontend-ready design communication, prototype
+                validation, and faster iteration with engineering. AI is used as an acceleration layer, not the core identity of the role.</p>
+
+            <h4>Selected Impact</h4>
+            <ul>
+                <li>Improved consistency across core enterprise modules through structured design-system rules.</li>
+                <li>Strengthened dashboard usability using analytics signals, client feedback, and UX evaluation.</li>
+                <li>Reduced ambiguity in product decisions through a clear UX philosophy and reusable product patterns.</li>
+                <li>Improved collaboration between design, product, engineering, and leadership through implementation-ready UX documentation.</li>
+                <li>Helped shift product design from screen-level execution to evidence-backed product experience improvement.</li>
+            </ul>
+        </div>
+
+        <hr class="soft">
+
+        <!-- Clinic Mantra -->
+        <div class="role-block">
+            <h3>Product Designer</h3>
+            <div class="meta"><span class="org">Clinic Mantra</span> · Jan 2023 – Aug 2023 · Healthcare Tech</div>
+            <p class="lead">Designed product experiences for healthcare workflows across patient and admin-facing systems.</p>
+            <ul>
+                <li>Redesigned multi-clinic appointment scheduling across web dashboards and mobile flows.</li>
+                <li>Reduced booking flow complexity from 8 steps to 4.</li>
+                <li>Improved task completion across patient and admin roles.</li>
+                <li>Applied secure UX patterns for sensitive healthcare workflows.</li>
+                <li>Designed with attention to privacy, task clarity, role-based workflows, and healthcare data sensitivity.</li>
+            </ul>
+        </div>
+
+        <hr class="soft">
+
+        <!-- Estate96 -->
+        <div class="role-block">
+            <h3>UX Design Consultant</h3>
+            <div class="meta"><span class="org">Estate96</span> · Aug 2022 – Nov 2022 · Smart Access Solutions</div>
+            <p class="lead">Designed UX architecture for smart access and hardware-connected user experiences.</p>
+            <ul>
+                <li>Delivered multi-device UX across mobile, tablet, and wall-panel interfaces.</li>
+                <li>Created workflows for resident and admin roles.</li>
+                <li>Aligned interface behavior with hardware access logic and development requirements.</li>
+                <li>Completed end-to-end design and prototype within an 8-week engagement.</li>
+                <li>Supported development handoff with structured flows and interaction guidance.</li>
+            </ul>
+        </div>
+
+        <hr class="soft">
+
+        <!-- Opia Labs -->
+        <div class="role-block">
+            <h3>UX Designer</h3>
+            <div class="meta"><span class="org">Opia Labs</span> · Nov 2019 – Jul 2022 · SaaS Platforms</div>
+            <p class="lead">Worked across SaaS products with a focus on dashboards, emotional data, customer insights, and reusable design patterns.</p>
+            <ul>
+                <li>Led product design for Inwards, an emotion analytics SaaS platform for B2B customer insights.</li>
+                <li>Structured emotional data into role-specific dashboards and insight views.</li>
+                <li>Improved dashboard readability by organizing complex emotional signals into usable interface patterns.</li>
+                <li>Supported faster design iteration across multiple SaaS products.</li>
+                <li>Improved design handoff through reusable component frameworks and standardized UX patterns.</li>
+            </ul>
+        </div>
+
+        <hr class="soft">
+
+        <!-- Foyr -->
+        <div class="role-block">
+            <h3>UI / UX Designer</h3>
+            <div class="meta"><span class="org">Foyr</span> · Apr 2017 – Nov 2019 · Immersive Architecture Tech</div>
+            <p class="lead">Worked on immersive architecture and 3D visualization products across multiple connected product lines.</p>
+            <ul>
+                <li>Standardized UX architecture across interconnected 3D visualization products.</li>
+                <li>Built reusable UI components for multi-product design consistency.</li>
+                <li>Improved onboarding for new designers through clearer design patterns and component reuse.</li>
+                <li>Supported product consistency across web-based and immersive visualization experiences.</li>
+                <li>Received the MAXIMUS Award in 2018 for cross-product UX contribution.</li>
+            </ul>
+        </div>
+
+        <hr class="soft">
+
+        <!-- Graphic Designer -->
+        <div class="role-block">
+            <h3>Graphic Designer &amp; Design Trainer</h3>
+            <div class="meta"><span class="org">Multiple Ventures</span> · 2010 – 2017</div>
+            <p class="lead">Built a strong foundation in visual design before transitioning fully into digital product and UX design.</p>
+            <ul>
+                <li>Developed strong skills in visual hierarchy, typography, layout, branding, and communication design.</li>
+                <li>Designed marketing, digital, and visual communication assets across multiple contexts.</li>
+                <li>Trained aspiring designers and built mentoring, communication, and leadership skills.</li>
+                <li>Transitioned into UX and product design with a strong visual and systems foundation.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ══ KEY SYSTEMS & FRAMEWORKS ══════════════════ -->
+    <section>
+        <h2>Key Systems &amp; Frameworks</h2>
+
+        <div class="role-block">
+            <h3>Enculture Design System</h3>
+            <p class="sub">Created and maintained an end-to-end design system for Enculture, covering tokens, typography,
+                spacing, color, components, dashboard patterns, interaction states, accessibility rules, and frontend-ready
+                design guidance. The system supports consistent UI patterns, faster design iteration, cleaner handoff to
+                engineering, reduced visual inconsistency, improved component reuse, better accessibility direction, and clearer dashboard and form behavior.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Enculture UX Philosophy</h3>
+            <p class="sub">Created a product-specific UX philosophy to guide experience decisions across respondent journeys,
+                dashboards, and admin workflows. It focuses on clarity, guided interaction, trusted evidence, actionable
+                outcomes, reduced cognitive load, and better interpretation of complex data — helping evaluate screens,
+                improve product flows, and align product decisions with user needs and business goals.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Evidence-Driven UX Framework</h3>
+            <p class="sub">Built an evidence-driven approach for product improvement by combining Google Analytics, Microsoft
+                Clarity, client interviews, stakeholder feedback, internal usability observations, dashboard usage signals,
+                and product discussions. It helps identify friction, validate assumptions, understand behavior, and recommend
+                design improvements based on product signals instead of assumptions.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Dashboard UX Framework</h3>
+            <p class="sub">Designed dashboard experiences around clarity, interpretation, and decision-making — focusing on
+                clear metric naming, definitions and calculation clarity, better chart readability, trend and comparison
+                visibility, reduced dashboard ambiguity, actionable summaries, leadership-friendly insights, and filter and grouping clarity.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Security-Aware UX Framework</h3>
+            <p class="sub">Applied security-aware UX thinking to product workflows involving sensitive data, access control,
+                and privacy — privacy-first interface design, role-based access awareness, least-privilege thinking, reducing
+                unnecessary data exposure, trust signals for respondents, safe handling of sensitive dashboard data, and
+                responsible vulnerability disclosure learning.</p>
+        </div>
+    </section>
+
+    <!-- ══ SELECTED PROJECTS / CASE STUDY AREAS ══════ -->
+    <section>
+        <h2>Selected Projects / Case Study Areas</h2>
+
+        <div class="role-block">
+            <h3>Enculture Design System Modernization</h3>
+            <p class="sub">Modernized the design system for a B2B culture analytics platform by building reusable tokens,
+                components, spacing rules, typography structure, interaction states, and accessibility guidance.</p>
+            <p class="sub"><strong>Outcome:</strong> stronger design consistency, better frontend alignment, reduced repeated UI decisions, and improved product scalability.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Enculture UX Philosophy</h3>
+            <p class="sub">Created a product-specific UX philosophy to guide design across respondent flows, dashboards, reporting, and product decision-making.</p>
+            <p class="sub"><strong>Outcome:</strong> clearer design evaluation model, better alignment with leadership and product teams, and a stronger connection between user needs and product direction.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Dashboard Experience Improvement</h3>
+            <p class="sub">Worked on dashboard systems that translate complex survey and culture signals into usable insights for HR leaders and client teams.</p>
+            <p class="sub"><strong>Outcome:</strong> improved metric clarity, better interpretation of charts and cards, stronger focus on user decision-making, and more structured dashboard patterns.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Evidence-Led Product Improvement</h3>
+            <p class="sub">Used analytics and qualitative signals — Google Analytics, Microsoft Clarity, client feedback, user interviews, and stakeholder discussions — to guide product design decisions.</p>
+            <p class="sub"><strong>Outcome:</strong> better understanding of product friction, clearer design recommendations, and stronger evidence for UI improvements.</p>
+        </div>
+
+        <div class="role-block">
+            <h3>Security-Aware UX Thinking</h3>
+            <p class="sub">Applied cybersecurity knowledge to UX work by identifying privacy and exposure risks in product flows, public resumes, portfolio pages, and client-side data handling.</p>
+            <p class="sub"><strong>Outcome:</strong> stronger privacy-aware product thinking, a better public/private resume strategy, and improved secure UX framing in product and portfolio work.</p>
+        </div>
+    </section>
+
+    <!-- ══ EDUCATION & CERTIFICATIONS ════════════════ -->
+    <section>
+        <h2>Education &amp; Certifications</h2>
+        <ul>
+            <li><strong>Advanced Certificate Program in Cyber Security</strong> — IIT Guwahati × Edureka · 2023–2024</li>
+            <li><strong>Cybersecurity Professional Certification</strong> — Edureka · 2024</li>
+            <li><strong>Design for Augmented &amp; Virtual Reality</strong> — Interaction Design Foundation · 2019</li>
+            <li><strong>Foundation Course for UX Designers</strong> — Interaction Design Foundation · 2018</li>
+            <li><strong>Diploma in Game Art &amp; Design</strong> — AAG · 2009–2011</li>
+            <li><strong>Bachelor of Commerce</strong> — Osmania University · 2006–2009</li>
+        </ul>
+    </section>
+
+    <!-- ══ AWARDS & RECOGNITION ══════════════════════ -->
+    <section>
+        <h2>Awards &amp; Recognition</h2>
+        <ul>
+            <li><strong>Hackathon Winner 2025</strong> — Enculture, NHR Technologies. Recognized for Action Engine, a product concept supporting prescriptive retention interventions and action planning.</li>
+            <li><strong>MAXIMUS Award 2018</strong> — Foyr. Recognized for cross-product UX standardization and delivery impact.</li>
+        </ul>
+    </section>
+
+    <!-- ══ PORTFOLIO / LINKEDIN ALIGNMENT NOTES ══════ -->
+    <section>
+        <h2>Portfolio / LinkedIn Alignment Notes</h2>
+        <p>The resume, LinkedIn profile, and portfolio should use the same core positioning:
+            <strong>Senior Product Designer | UX Architect | Design System Specialist</strong>.</p>
+        <p style="margin-bottom:0.3rem"><strong>The public profile should consistently highlight:</strong></p>
+        <ul class="cols">
+            <li>Senior product design</li>
+            <li>UX architecture</li>
+            <li>Design systems</li>
+            <li>Dashboard UX</li>
+            <li>Research-led product improvement</li>
+            <li>Secure UX</li>
+            <li>AI-assisted workflows as a supporting capability</li>
+        </ul>
+        <p style="margin:0.6rem 0 0.3rem"><strong>Avoid positioning the profile mainly as:</strong></p>
+        <ul class="cols">
+            <li>AI developer</li>
+            <li>Agent builder</li>
+            <li>Vibe coder</li>
+            <li>Resume automation expert</li>
+            <li>Cybersecurity-only professional</li>
+        </ul>
+        <p>Those areas can remain supporting strengths, but the main career story should stay focused on senior UX / product design leadership.</p>
+    </section>
+
+</div>
+
+</body>
+</html>
