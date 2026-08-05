@@ -165,10 +165,18 @@ export function ParticipationCard() {
  * distinguish rather than rank, so nothing here should read as good or bad.
  */
 export function DistributionCard() {
+    /**
+     * Categorical palette: distinguishes without ranking.
+     *
+     * Note that semantic-info-500 and accents-violet-500 are the same hex in
+     * this design system, so they cannot both appear in one chart. These three
+     * are separated by hue *and* lightness, and the bar carries gaps so
+     * adjacent categories stay legible even if colour perception differs.
+     */
     const groups = [
         { name: 'Product', pct: 41, colour: 'var(--cl-color-accents-violet-500)' },
-        { name: 'Operations', pct: 34, colour: 'var(--cl-color-semantic-info-500)' },
-        { name: 'Enablement', pct: 25, colour: 'var(--cl-color-neutral-surface-500)' },
+        { name: 'Operations', pct: 34, colour: 'var(--cl-color-neutral-surface-700)' },
+        { name: 'Enablement', pct: 25, colour: 'var(--cl-color-accents-violet-300)' },
     ];
     return (
         <div className={shell}>
@@ -176,10 +184,11 @@ export function DistributionCard() {
             <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
                 Share of responses by team group. Categories, not grades — no group is better than another.
             </p>
-            <div className="mt-4 flex h-2.5 rounded-full overflow-hidden" role="img"
+            {/* Gaps between categories — separation never depends on hue alone */}
+            <div className="mt-4 flex h-2.5 gap-1" role="img"
                 aria-label={`Distribution by group: ${groups.map(g => `${g.name} ${g.pct} percent`).join(', ')}`}>
                 {groups.map((g) => (
-                    <span key={g.name} style={{ backgroundColor: g.colour, width: `${g.pct}%` }} />
+                    <span key={g.name} style={{ backgroundColor: g.colour, width: `${g.pct}%` }} className="rounded-full" />
                 ))}
             </div>
             <ul className="mt-3 space-y-1.5">
