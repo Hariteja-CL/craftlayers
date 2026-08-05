@@ -159,6 +159,71 @@ export function ParticipationCard() {
 }
 
 /**
+ * "Everything visible at once" — the comparison case for progressive
+ * disclosure.
+ *
+ * Deliberately credible rather than a straw man: nothing here is wrong or
+ * ugly, and every element is one a reader might legitimately want. The problem
+ * is that all of it competes at the same level, so the signal that should be
+ * read first has no more weight than the calculation detail behind it.
+ */
+export function OverloadedCard() {
+    return (
+        <div className={shell}>
+            <h4 className={cardTitle}>Organisational Health Index</h4>
+
+            <div className="mt-3 flex items-baseline gap-2 flex-wrap">
+                <span className="text-3xl font-bold cl-text-neutral-text-high-contrast leading-none">72</span>
+                <span
+                    style={{ backgroundColor: tokenBg('warning'), color: tokenText('warning') }}
+                    className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                >
+                    Moderate
+                </span>
+            </div>
+
+            <p className="mt-3 text-xs cl-text-neutral-text-medium-contrast leading-relaxed">
+                A composite index summarising four organisational dimensions. Index score, 0–100 scale,
+                based on responses collected for the selected period.
+            </p>
+            <p className="mt-2 text-xs cl-text-neutral-text-medium-contrast leading-relaxed">
+                Calculated from four weighted dimensions using the selected organisational model. Changing
+                the model changes both the value and its band.
+            </p>
+
+            <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs cl-text-neutral-text-medium-contrast">
+                <li>Clarity 78</li><li>Workload 61</li>
+                <li>Recognition 69</li><li>Direction 80</li>
+            </ul>
+
+            <ul className="mt-2 space-y-0.5 text-xs cl-text-neutral-text-medium-contrast">
+                {SEGMENTS.map((s) => (
+                    <li key={s.key}>
+                        <span aria-hidden="true" style={{ backgroundColor: tokenColor(s.token) }} className="inline-block w-2 h-2 rounded-full mr-1.5" />
+                        {s.name} {s.band} · {s.pct}% — {s.meaning}
+                    </li>
+                ))}
+            </ul>
+
+            <div className="mt-2 flex h-2 rounded-full overflow-hidden">
+                {SEGMENTS.map((s) => (
+                    <span key={s.key} style={{ backgroundColor: tokenColor(s.token), width: `${s.pct}%` }} />
+                ))}
+            </div>
+
+            <p className="mt-2 text-xs cl-text-neutral-text-medium-contrast leading-relaxed">
+                <span className="font-semibold cl-text-neutral-text-high-contrast">Recommendation.</span>{' '}
+                Review priority alignment with team leads, starting with the lowest-scoring dimension and
+                its supporting comment themes.
+            </p>
+            <ul className="mt-1 space-y-0.5 text-xs cl-text-neutral-text-medium-contrast">
+                {SEGMENTS.map((s) => <li key={s.key}>→ {s.action}</li>)}
+            </ul>
+        </div>
+    );
+}
+
+/**
  * Categorical distribution.
  *
  * No score, no status chip, no valence: these are groups, not grades. Colours

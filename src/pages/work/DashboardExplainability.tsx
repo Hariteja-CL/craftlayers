@@ -19,6 +19,7 @@ import {
     SyntheticMetricCard,
     ParticipationCard,
     DistributionCard,
+    OverloadedCard,
     PrototypeLabel,
     SEGMENTS,
     type CardPanel,
@@ -428,7 +429,8 @@ export function DashboardExplainability() {
                         <p>
                             That gave <strong>direct evidence</strong> from her own product use and{' '}
                             <strong>indirect evidence</strong> from client interactions. It was not a formally
-                            moderated client-user study.
+                            moderated client-user study. Her feedback showed that the dashboard needed to support
+                            both concise decision-making and deeper explanation during client conversations.
                         </p>
                     </div>
 
@@ -586,7 +588,7 @@ export function DashboardExplainability() {
                 {/* ── 6. Four design principles ──────────────────── */}
                 <section {...narratable('principles')}>
                     <NowReading id="principles" />
-                    <SectionHeading eyebrow="05 · Principles" id="principles" title="Four design principles" />
+                    <SectionHeading eyebrow="05 · Principles" id="principles" title="Five design principles" />
                     <ol className="space-y-6">
                         {PRINCIPLES.map((p, i) => (
                             <li key={p.name} className="flex gap-5">
@@ -600,6 +602,102 @@ export function DashboardExplainability() {
                             </li>
                         ))}
                     </ol>
+
+                    {/* Fifth principle — cross-cutting, not a fifth card */}
+                    <div className="mt-10 pt-8 border-t cl-border-border-color-default">
+                        <div className="flex items-baseline gap-3 mb-3">
+                            <span className="text-sm font-mono font-bold cl-text-brand-primary-base">05</span>
+                            <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">
+                                Disclose detail on demand
+                            </h3>
+                        </div>
+                        <p className="text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                            The first four principles decide <em>what</em> a dashboard has to explain. This one
+                            decides <em>when</em> — and it is what keeps the other four from burying the signal.
+                            Feedback from a client-facing operational user showed that the dashboard needed to
+                            support both concise decision-making and deeper explanation during client
+                            conversations.
+                        </p>
+                        <p
+                            style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                            className="mt-5 border-l-2 pl-5 text-base font-medium cl-text-neutral-text-high-contrast"
+                        >
+                            Clarity does not mean showing everything. It means showing the right level of
+                            information at the right moment. The summary stays simple; the reasoning remains
+                            available.
+                        </p>
+
+                        {/* Two information needs, one screen */}
+                        <div className="mt-8 grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">
+                                    Senior decision-maker — by default
+                                </h4>
+                                <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
+                                    <li>· The key metric</li>
+                                    <li>· Current status</li>
+                                    <li>· A short interpretation</li>
+                                    <li>· The primary implication</li>
+                                    <li>· The next action</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">
+                                    Client-facing operational user — on demand
+                                </h4>
+                                <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
+                                    <li>· Metric definition</li>
+                                    <li>· Calculation context and contributing inputs</li>
+                                    <li>· Category meaning</li>
+                                    <li>· Supporting evidence</li>
+                                    <li>· Explanation usable in a client conversation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p className="mt-5 text-sm cl-text-neutral-text-low-contrast leading-relaxed">
+                            Senior decision-makers needed a concise view of the most important signal, while
+                            client-facing operational users needed access to the explanation behind it. One screen,
+                            two depths — rather than two products.
+                        </p>
+
+                        {/* Visual 5 — before / after disclosure */}
+                        <figure className="mt-8 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
+                            <div className="grid md:grid-cols-2 gap-8 items-start">
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">
+                                        Everything visible at once
+                                    </p>
+                                    <OverloadedCard />
+                                    <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast">
+                                        High information availability, low information hierarchy.
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">
+                                        Layered explanation
+                                    </p>
+                                    <SyntheticMetricCard forcedPanel="none" />
+                                    <p className="mt-3 text-xs font-semibold uppercase tracking-widest cl-text-neutral-text-low-contrast">
+                                        Available on demand
+                                    </p>
+                                    <ul className="mt-1.5 space-y-1 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· Metric information</li>
+                                        <li>· How this score was calculated</li>
+                                        <li>· Segment explanation</li>
+                                        <li>· Supporting evidence</li>
+                                    </ul>
+                                    <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast">
+                                        Essential meaning first; deeper reasoning on demand.
+                                    </p>
+                                </div>
+                            </div>
+                            <figcaption className="mt-6 text-sm cl-text-neutral-text-medium-contrast">
+                                Nothing was removed between the two. The same detail is present on the right —
+                                it simply waits until someone asks for it.
+                            </figcaption>
+                            <PrototypeLabel />
+                        </figure>
+                    </div>
 
                     {/* Visual 4 — semantic colour shown on the same component */}
                     <figure className="mt-10 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
