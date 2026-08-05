@@ -421,10 +421,10 @@ export function DashboardExplainability() {
                     <SectionHeading eyebrow="02 · Evidence" id="evidence-environment" title="What this is based on" />
                     <div className="space-y-5 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         <p>
-                            The work combined dashboard and artifact analysis with feedback from a client-facing
-                            relationship manager who also used the dashboard operationally. She supported clients
-                            through survey participation, reviewed results with them and surfaced the questions
-                            and interpretation gaps that arose during those conversations.
+                            The work combined dashboard and artifact analysis with feedback from a{' '}
+                            <strong>client-facing relationship manager and operational dashboard user</strong>.
+                            She supported clients through survey participation, reviewed results with them and
+                            surfaced the questions and interpretation gaps that arose during those conversations.
                         </p>
                         <p>
                             That gave <strong>direct evidence</strong> from her own product use and{' '}

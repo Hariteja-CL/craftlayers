@@ -25,7 +25,7 @@ export const NARRATION_SECTIONS: NarrationSection[] = [
     {
         title: 'Evidence environment',
         body:
-            'The work combined dashboard and artifact analysis with feedback from a client-facing relationship manager who also used the dashboard operationally. She supported clients through survey participation, reviewed results with them, and surfaced the questions and interpretation gaps that arose during those conversations. This provided direct evidence from her own product use and indirect evidence from client interactions. It was not a formally moderated client-user study.',
+            'The work combined dashboard and artifact analysis with feedback from a client-facing relationship manager and operational dashboard user. She supported clients through survey participation, reviewed results with them, and surfaced the questions and interpretation gaps that arose during those conversations. This provided direct evidence from her own product use and indirect evidence from client interactions. It was not a formally moderated client-user study.',
     },
     {
         title: 'Read, interpret, trust, act',
