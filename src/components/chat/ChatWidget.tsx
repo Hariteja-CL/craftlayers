@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ChatPanel } from './ChatPanel';
 import { ChatButton } from './ChatButton';
-import { resolvePageContext } from './pageContext';
+import { isAssistantSuppressed, resolvePageContext } from './pageContext';
 
 export interface Message {
     id: string;
@@ -161,6 +161,11 @@ export function ChatWidget() {
     };
 
     const toggleChat = () => setIsOpen(!isOpen);
+
+    // Temporary: hide the launcher where the gateway would answer from the
+    // wrong case study. Checked after all hooks so hook order stays stable.
+    // See isAssistantSuppressed() for the removal condition.
+    if (isAssistantSuppressed(location.pathname)) return null;
 
     return (
         <div data-chat-launcher className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end pointer-events-none">

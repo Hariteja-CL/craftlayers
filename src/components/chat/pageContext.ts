@@ -29,9 +29,36 @@ const PAGE_CONTEXTS: Record<string, PageContext> = {
     },
 };
 
+function normalise(pathname: string): string {
+    // Tolerate a trailing slash so /work/respondent-experience/ still matches.
+    return pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+}
+
 /** Resolve the context for a pathname, or null when the route has none. */
 export function resolvePageContext(pathname: string): PageContext | null {
-    // Tolerate a trailing slash so /work/respondent-experience/ still matches.
-    const normalised = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
-    return PAGE_CONTEXTS[normalised] ?? null;
+    return PAGE_CONTEXTS[normalise(pathname)] ?? null;
+}
+
+/* ------------------------------------------------------------------ *
+ * TEMPORARY — remove once the gateway ships context routing.
+ *
+ * The site correctly sends page_context, but factory-service currently
+ * discards it: asked about this case study it answers from an unrelated
+ * portfolio project (the security disclosure) and names organisations the
+ * published page deliberately anonymises.
+ *
+ * Rather than present a knowingly wrong assistant beside the case study, the
+ * launcher is suppressed on this route only. The assistant stays available
+ * everywhere else.
+ *
+ * REMOVAL: once GATEWAY-INTEGRATION-SPEC.md acceptance tests pass against
+ * production, empty this set. No other change is required.
+ * ------------------------------------------------------------------ */
+const ASSISTANT_SUPPRESSED_ROUTES = new Set<string>([
+    '/work/respondent-experience',
+]);
+
+/** True when the chat launcher must not be shown on this route. */
+export function isAssistantSuppressed(pathname: string): boolean {
+    return ASSISTANT_SUPPRESSED_ROUTES.has(normalise(pathname));
 }

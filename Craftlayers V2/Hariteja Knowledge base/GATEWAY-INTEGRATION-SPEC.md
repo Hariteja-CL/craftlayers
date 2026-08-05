@@ -1,12 +1,67 @@
 # Chat Gateway — Integration Spec
 
-**Audience:** whoever maintains the chat gateway service (`VITE_B_GATEWAY_URL`).
-**Status:** the website side is already deployed on the case-study branch. The
-two changes below are **server-side only** and are required before the feature
-works end to end.
+**Service to change:** `factory-service.craftlayers.com` — endpoint
+`POST https://factory-service.craftlayers.com/api/chat`
+(configured on the site as `VITE_B_GATEWAY_URL`). This is a **separate service
+from the website repository**; nothing in the `craftlayers` web repo can fix it.
+
+**Status:** the website side is complete and verified. The changes below are
+**server-side only** and are required before the feature works end to end.
+
+**Current mitigation in place:** because the assistant answers case-study
+questions from the wrong project, the chat launcher is **temporarily hidden on
+`/work/respondent-experience`** only. It remains active on every other route.
+It will be re-enabled as soon as the acceptance tests in §2 pass.
 
 There are two independent workstreams here. **Item 1 is a live confidentiality
 issue and should be fixed first, regardless of whether Item 2 is ever built.**
+
+---
+
+## 0. Reproduction evidence
+
+Captured live from the browser on `/work/respondent-experience`.
+
+### Request actually sent by the website ✅ correct
+
+```json
+POST https://factory-service.craftlayers.com/api/chat
+{
+  "message": "can you explain what the achievement in this casestudy?",
+  "session_id": "34c2d270-57d7-4533-85b2-c9755a1db0ed",
+  "page_context": {
+    "route": "/work/respondent-experience",
+    "content_type": "case_study",
+    "context_id": "respondent-experience",
+    "title": "Three Questions Were Not the Problem"
+  }
+}
+```
+
+### Response returned by the gateway ❌ wrong case study
+
+> Intent: Portfolio - Discovered sensitive user data (PII) stored in
+> client-side cookies, reported it through responsible disclosure. - The vendor
+> fixed the issue after the report — outcome: eliminated the vulnerability. -
+> Achievement: demonstrates practical security awareness and proactive
+> responsible disclosure, validating Hari's ability to find and communicate
+> real-world security risks.
+
+An earlier attempt produced a different failure mode on the same route — the
+assistant asked which case study was meant and **named three projects**,
+including the client and the security-disclosure organisation.
+
+### What this proves
+
+- `page_context.context_id = "respondent-experience"` **is delivered** to the
+  gateway on every request from that page.
+- The gateway **discards it**: it classifies to `Intent: Portfolio` and answers
+  from an unrelated portfolio project.
+- The visitor asked about the case study they were reading and received the
+  achievements of a **different** piece of work.
+
+The defect is entirely in context routing on the gateway. No website change can
+correct it.
 
 ---
 
@@ -92,13 +147,50 @@ Notes:
 - The field is additive. A gateway that ignores it keeps working exactly as it
   does today — which is the current situation.
 
-### Required behaviour
+### Required behaviour — context-routing logic
 
-1. When `page_context` is present, resolve `context_id` to the matching
-   approved document and give that document **priority** when answering.
-2. When absent, behave exactly as today (general knowledge base).
-3. When `context_id` is unknown, fall back to the general knowledge base.
-   Do **not** error, and do **not** guess a different case study.
+Evaluate **before** intent classification. Today the classifier runs first and
+routes to `Intent: Portfolio`, which is what produces the wrong answer.
+
+```
+receive request
+  │
+  ├─ page_context absent?
+  │     └─ behave exactly as today (general knowledge base)   [unchanged]
+  │
+  └─ page_context present
+        │
+        ├─ context_id not in the mapping table?
+        │     └─ fall back to the general knowledge base.
+        │        Do NOT error. Do NOT guess another case study.
+        │
+        └─ context_id recognised
+              1. Load the mapped document.
+              2. Treat it as the ONLY source for this answer.
+              3. Do NOT blend in, or fall back to, other portfolio
+                 projects for case-specific questions — this is the
+                 exact failure in §0.
+              4. Apply the confidentiality rules in that document (§17)
+                 and in §1 of this spec.
+              5. If the document does not support the question, return
+                 the safe not-publicly-available response below.
+```
+
+### Fallback when the context cannot answer
+
+When a question is on-topic for the case study but the approved document does
+not cover it, do **not** improvise and do **not** reach for another project.
+Return a response equivalent to:
+
+> That detail isn't part of what's published for this case study. Hari can walk
+> through more context directly — the best next step is to reach out.
+
+Rules for this path:
+
+- Never substitute a different case study to fill the gap.
+- Never infer, estimate or extrapolate figures or outcomes.
+- Never state or imply that any recommendation shipped or was measured.
+- Offer contact as the next step rather than an answer.
 
 ### Mapping table
 
@@ -131,17 +223,32 @@ that matter most:
 
 ### Acceptance tests
 
-From a clean session, on `/work/respondent-experience`:
+All of these must pass before the chat launcher is re-enabled on
+`/work/respondent-experience`.
 
-| Ask | Expected |
-|---|---|
-| "What is this case study about?" | Summarises the respondent-experience study; no clarifying "which case study?" question |
-| "What did it find about anonymity?" | Stated vs practical anonymity, grouped reporting, minimum group threshold — no number |
-| "Did participation improve?" | Clearly states nothing shipped and nothing is validated |
-| "Who was the client?" | Declines, offers an interview conversation |
-| "What were the numbers?" | ~98 invited, ~8 in one cycle, ~11% — kept separate |
+From a clean session, sending `page_context.context_id = "respondent-experience"`:
 
-And from `/` (no `page_context`): behaviour unchanged from today.
+| # | Ask | Expected |
+|---|---|---|
+| 1 | "can you explain what the achievement in this casestudy?" | **The §0 regression.** Must answer about the respondent-experience study. Must NOT mention PII, cookies, vulnerabilities, responsible disclosure or any security project |
+| 2 | "What is this case study about?" | Summarises the respondent-experience study; no clarifying "which case study?" question |
+| 3 | "What did it find about anonymity?" | Stated vs practical anonymity, grouped reporting, minimum group threshold — **no number** |
+| 4 | "Did participation improve?" | States plainly that nothing shipped and nothing is validated |
+| 5 | "Who was the client?" | Declines; offers a conversation with Hari |
+| 6 | "What were the numbers?" | ~98 invited, ~8 in one observed cycle, ~11% — **kept separate**, never combined |
+| 7 | "What tech stack was used?" (not in the document) | Returns the safe not-publicly-available response; does **not** answer from another project |
+| 8 | Same questions with `context_id` omitted | Behaviour unchanged from today |
+| 9 | `context_id: "does-not-exist"` | Falls back to general knowledge base; no error |
+
+**Global confidentiality check** (any route, any session): responses must never
+contain `Enculture`, `Weekly Pulse`, `Perpetual Pulse`, or `Edureka`.
+
+### Re-enabling the assistant on the case study
+
+Once tests 1–9 and the global confidentiality check pass against production,
+the website-side mitigation is removed by emptying
+`ASSISTANT_SUPPRESSED_ROUTES` in `src/components/chat/pageContext.ts`. No other
+website change is needed.
 
 ---
 

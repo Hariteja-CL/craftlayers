@@ -85,9 +85,13 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration, onSectionCh
     }, []);
 
     // Track the chat launcher so the chip always sits just left of it.
+    // When no launcher is present the chip takes the corner itself.
     useEffect(() => {
         const launcher = document.querySelector('[data-chat-launcher]');
-        if (!launcher) return;
+        if (!launcher) {
+            setRightOffset(24); // plain page gutter
+            return;
+        }
         const update = () => {
             const width = launcher.getBoundingClientRect().width;
             // 1.5rem page gutter + launcher width + 0.75rem gap
