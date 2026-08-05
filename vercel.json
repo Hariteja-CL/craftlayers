@@ -5,9 +5,10 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "headers": [
     {
-      "comment": "Client-named route kept alive so existing links do not break, but excluded from search. Server-side header, so it applies even to crawlers that do not run JS.",
       "source": "/work/enculture",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
     },
     {
       "source": "/resume.html",
