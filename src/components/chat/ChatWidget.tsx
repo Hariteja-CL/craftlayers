@@ -154,7 +154,7 @@ export function ChatWidget() {
     const toggleChat = () => setIsOpen(!isOpen);
 
     return (
-        <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end pointer-events-none">
+        <div data-chat-launcher className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end pointer-events-none">
             <AnimatePresence>
                 {isOpen && (
                     <ChatPanel 

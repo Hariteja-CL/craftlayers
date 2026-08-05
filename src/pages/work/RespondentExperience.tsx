@@ -1,16 +1,19 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Badge } from '../../components/ui/Badge';
+import { CaseStudyListenPlayer } from '../../components/case-study/CaseStudyListenPlayer';
+import { CaseStudyJumpNav } from '../../components/case-study/CaseStudyJumpNav';
+import { CaseStudyDisclosure } from '../../components/case-study/CaseStudyDisclosure';
 import {
-    ArrowRight,
-    ArrowDown,
-    Mail,
-    Bell,
-    ListChecks,
-    Send,
-    EarOff,
-    RefreshCw,
-} from 'lucide-react';
+    countWords,
+    formatMinutes,
+    minutesFor,
+    NARRATION_WPM,
+    READING_WPM,
+} from '../../components/case-study/readingTime';
+import { NARRATION_SECTIONS } from './respondentExperience.narration';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 
 /* ------------------------------------------------------------------ *
  * Local, page-specific building blocks.
@@ -35,7 +38,11 @@ function SectionHeading({ eyebrow, title, id }: { eyebrow: string; title: string
             <div className="text-[11px] font-bold uppercase tracking-[0.25em] cl-text-neutral-text-low-contrast mb-3">
                 {eyebrow}
             </div>
-            <h2 id={id} className="text-2xl md:text-4xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-tight">
+            {/* scroll-mt clears the fixed site header when jumped to via anchor */}
+            <h2
+                id={id}
+                className="text-2xl md:text-4xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-tight scroll-mt-28"
+            >
                 {title}
             </h2>
         </div>
@@ -51,12 +58,12 @@ const FIVE_CONDITIONS = [
 ];
 
 const JOURNEY = [
-    { icon: Mail, label: 'Invitation', thought: 'Another workplace email.' },
-    { icon: Bell, label: 'Reminder', thought: 'What is this about again?' },
-    { icon: ListChecks, label: 'Survey', thought: 'Is my answer really anonymous?' },
-    { icon: Send, label: 'Submit', thought: 'Who will see this?' },
-    { icon: EarOff, label: 'Silence', thought: 'Did anything happen?' },
-    { icon: RefreshCw, label: 'Next cycle', thought: 'Why should I answer again?' },
+    { label: 'Invitation', thought: 'Another workplace email.' },
+    { label: 'Reminder', thought: 'What is this about again?' },
+    { label: 'Survey', thought: 'Is my answer really anonymous?' },
+    { label: 'Submit', thought: 'Who will see this?' },
+    { label: 'Silence', thought: 'Did anything happen?' },
+    { label: 'Next cycle', thought: 'Why should I answer again?' },
 ];
 
 const EVIDENCE_CARDS = [
@@ -112,12 +119,49 @@ const RECOMMENDATIONS = [
     'Manager / HR ownership separation',
 ];
 
+const JUMP_TARGETS = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'journey', label: 'Respondent journey' },
+    { id: 'five-conditions', label: 'Five conditions' },
+    { id: 'evidence-insight-decision', label: 'Key decisions' },
+    { id: 'ownership', label: 'Ownership' },
+    { id: 'limitations', label: 'Limitations' },
+];
+
+/**
+ * Listen time is derived from the curated narration transcript only — a
+ * different, shorter source than the visible page. Computed once at module
+ * load rather than hardcoded.
+ */
+const NARRATION_WORDS = NARRATION_SECTIONS.reduce(
+    (total, s) => total + countWords(`${s.title} ${s.body}`),
+    0
+);
+const LISTEN_MINUTES = minutesFor(NARRATION_WORDS, NARRATION_WPM);
+
 export function RespondentExperience() {
+    /** Measured from the rendered article prose so the read estimate reflects
+     *  what is actually visible (collapsed <details> content is excluded by
+     *  innerText, which is exactly the reading burden we want to report). */
+    const proseRef = useRef<HTMLDivElement>(null);
+    const [readMinutes, setReadMinutes] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (!proseRef.current) return;
+        const words = countWords(proseRef.current.innerText || '');
+        setReadMinutes(minutesFor(words, READING_WPM));
+    }, []);
+
+    const timingLine = useMemo(() => {
+        const listen = `${formatMinutes(LISTEN_MINUTES)} listen`;
+        return readMinutes ? `${formatMinutes(readMinutes)} read · ${listen}` : listen;
+    }, [readMinutes]);
+
     return (
         <article className="cl-bg-neutral-surface-level-0 min-h-screen font-sans pb-28">
 
             {/* ── Header ─────────────────────────────────────────── */}
-            <header className="pt-10 pb-14 border-b cl-border-border-color-default">
+            <header className="pt-10 pb-10 border-b cl-border-border-color-default">
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="mb-8">
                         <Breadcrumbs items={[
@@ -144,29 +188,44 @@ export function RespondentExperience() {
                         practical safety, visible impact and confidence that someone will act.
                     </p>
 
-                    {/* Meta strip — role / category / confidentiality (no invented metric) */}
-                    <dl className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
-                        <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-1">Focus</dt>
-                            <dd className="text-sm font-bold cl-text-neutral-text-high-contrast">UX Research &amp; Product Design</dd>
-                        </div>
-                        <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-1">Method</dt>
-                            <dd className="text-sm font-bold cl-text-neutral-text-high-contrast">Early qualitative study</dd>
-                        </div>
-                        <div>
-                            <dt className="text-[10px] font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-1">Confidentiality</dt>
-                            <dd className="text-sm font-bold cl-text-neutral-text-high-contrast">Public · Anonymised</dd>
-                        </div>
-                    </dl>
+                    {/* Meta strip — role / method / confidentiality / timing */}
+                    <div className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-sm">
+                        <span className="cl-text-neutral-text-medium-contrast">
+                            <span className="cl-text-neutral-text-low-contrast">Focus </span>
+                            <span className="font-semibold cl-text-neutral-text-high-contrast">UX Research &amp; Product Design</span>
+                        </span>
+                        <span className="cl-text-neutral-text-medium-contrast">
+                            <span className="cl-text-neutral-text-low-contrast">Method </span>
+                            <span className="font-semibold cl-text-neutral-text-high-contrast">Early qualitative study</span>
+                        </span>
+                        <span className="cl-text-neutral-text-medium-contrast">
+                            <span className="cl-text-neutral-text-low-contrast">Confidentiality </span>
+                            <span className="font-semibold cl-text-neutral-text-high-contrast">Public · Anonymised</span>
+                        </span>
+                        <span className="font-semibold cl-text-neutral-text-high-contrast">{timingLine}</span>
+                    </div>
+
+                    <div className="mt-6">
+                        <CaseStudyJumpNav items={JUMP_TARGETS} />
+                    </div>
                 </div>
             </header>
 
-            <div className="max-w-4xl mx-auto px-6">
+            {/* Compact floating narration chip, docked beside the chat launcher */}
+            <CaseStudyListenPlayer
+                sections={NARRATION_SECTIONS}
+                estimatedDuration={formatMinutes(LISTEN_MINUTES)}
+            />
+
+            <div ref={proseRef} className="max-w-4xl mx-auto px-6">
 
                 {/* ── Central question + hero visual ─────────────── */}
-                <section aria-labelledby="central-question" className="pt-16">
-                    <p id="central-question" style={{ borderColor: 'var(--cl-color-brand-primary-base)' }} className="text-xl md:text-2xl font-medium cl-text-neutral-text-high-contrast leading-relaxed border-l-2 pl-6">
+                <section aria-labelledby="overview" className="pt-16">
+                    <h2 id="overview" className="sr-only scroll-mt-28">Overview</h2>
+                    <p
+                        style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                        className="text-xl md:text-2xl font-medium cl-text-neutral-text-high-contrast leading-relaxed border-l-2 pl-6"
+                    >
                         What prevents people from repeatedly providing honest feedback, even when a survey is
                         short and easy to complete?
                     </p>
@@ -204,10 +263,9 @@ export function RespondentExperience() {
                     <SectionHeading eyebrow="01 · The problem" id="universal" title="The universal respondent problem" />
                     <div className="space-y-5 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         <p>
-                            Recurring feedback surveys are everywhere: pulse checks, weekly temperature reads,
-                            quick “how's it going?” prompts. The common design belief is that friction is the
-                            enemy, so shorter is better. Yet plenty of short surveys still go unanswered — and,
-                            more quietly, some that <em>are</em> answered aren't answered honestly.
+                            Recurring feedback surveys are everywhere. The common design belief is that friction
+                            is the enemy, so shorter is better. Yet plenty of short surveys still go unanswered —
+                            and, more quietly, some that <em>are</em> answered aren't answered honestly.
                         </p>
                         <p>
                             “Repeatedly” and “honest” are the demanding words. A one-time form can succeed on
@@ -225,37 +283,40 @@ export function RespondentExperience() {
                             To investigate this respondent problem, I studied an internal recurring
                             workplace-survey pilot. Approximately 98 employees were invited, the survey
                             contained three short questions, and participation remained around 11% during the
-                            research period.
-                        </p>
-                        <p className="text-base cl-text-neutral-text-low-contrast">
-                            For transparency: in one observed cycle roughly 8 people responded, and participation
-                            declined across repeated iterations. These figures are approximate and kept separate —
-                            this was early qualitative research to surface hypotheses, not a statistically
-                            representative study, and it does not explain all survey non-response.
+                            research period. In one observed cycle roughly 8 people responded, and participation
+                            declined across repeated iterations. These figures are approximate and kept separate.
                         </p>
                     </div>
 
-                    <div className="mt-8 grid sm:grid-cols-2 gap-4">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-3">What the pilot was</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· Internal recurring workplace-survey pilot</li>
-                                <li>· ~98 employees invited</li>
-                                <li>· Three short questions, under ~2 minutes</li>
-                                <li>· ~11% participation during the research period</li>
-                                <li>· Participation declined across iterations</li>
-                            </ul>
-                        </div>
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-3">Evidence base</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· One employee / respondent interview</li>
-                                <li>· One HR / governance stakeholder interview</li>
-                                <li>· Management / lead feedback</li>
-                                <li>· Welcome &amp; reminder communication review</li>
-                                <li>· Respondent journey &amp; role-flow review</li>
-                            </ul>
-                        </div>
+                    <div className="mt-8">
+                        <CaseStudyDisclosure summary="Research methods and evidence boundaries">
+                            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-3">Evidence base</h3>
+                                    <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· One employee / respondent interview</li>
+                                        <li>· One HR / governance stakeholder interview</li>
+                                        <li>· Management / lead feedback</li>
+                                        <li>· Welcome &amp; reminder communication review</li>
+                                        <li>· Respondent journey &amp; role-flow review</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-3">Methods</h3>
+                                    <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· Qualitative interviews</li>
+                                        <li>· Stakeholder feedback synthesis</li>
+                                        <li>· Communication / artifact review</li>
+                                        <li>· Respondent journey mapping</li>
+                                        <li>· Evidence → insight → decision mapping</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p className="mt-6 text-sm cl-text-neutral-text-low-contrast">
+                                This was early qualitative research to surface hypotheses — not a statistically
+                                representative study, and it does not explain all survey non-response.
+                            </p>
+                        </CaseStudyDisclosure>
                     </div>
                 </section>
 
@@ -286,22 +347,10 @@ export function RespondentExperience() {
                                 </li>
                             ))}
                         </ol>
-                        <div className="mt-8 pt-6 border-t cl-border-border-color-default">
-                            <div className="text-[11px] font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">
-                                The respondent contract expands into
-                            </div>
-                            <ul className="flex flex-wrap gap-2">
-                                {FIVE_CONDITIONS.map((c) => (
-                                    <li key={c.name} className="rounded-full cl-bg-neutral-surface-level-0 border cl-border-border-color-default px-3.5 py-1.5 text-sm font-semibold cl-text-neutral-text-high-contrast">
-                                        {c.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                         <figcaption className="sr-only">
                             Diagnostic chain: low participation led to an initial assumption of survey friction;
                             evidence of a three-question, two-minute survey ruled that out; the underlying issue
-                            was the respondent contract, made of Relevance, Effort, Safety, Impact and Ownership.
+                            was the respondent contract.
                         </figcaption>
                     </figure>
                 </section>
@@ -315,29 +364,37 @@ export function RespondentExperience() {
                         <strong> submission and any visible impact</strong>.
                     </p>
 
-                    <ol className="space-y-3">
-                        {JOURNEY.map((step, i) => {
-                            const Icon = step.icon;
+                    {/* Plain editorial timeline (a rule, not six bordered cards) */}
+                    <ol className="border-l cl-border-border-color-default pl-6 space-y-6">
+                        {JOURNEY.map((step) => {
                             const isBreakAfter = step.label === 'Invitation' || step.label === 'Submit';
+                            const isSilence = step.label === 'Silence';
                             return (
-                                <li key={step.label}>
-                                    <div className="flex items-start gap-4 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-5">
-                                        <div className="w-10 h-10 rounded-xl cl-bg-neutral-surface-level-0 border cl-border-border-color-default flex items-center justify-center shrink-0 cl-text-brand-primary-base">
-                                            <Icon aria-hidden="true" className="w-5 h-5" />
-                                        </div>
-                                        <div>
-                                            <div className="text-sm font-bold uppercase tracking-wider cl-text-neutral-text-high-contrast">{step.label}</div>
-                                            <div className="text-base cl-text-neutral-text-medium-contrast italic mt-0.5">“{step.thought}”</div>
-                                        </div>
+                                <li key={step.label} className="relative">
+                                    <span
+                                        aria-hidden="true"
+                                        className={
+                                            'absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 rounded-full border-2 cl-bg-neutral-surface-level-0 ' +
+                                            (isSilence ? 'cl-border-border-color-strong' : 'cl-border-border-color-default')
+                                        }
+                                    />
+                                    <div className={isSilence ? 'font-bold' : 'font-semibold'}>
+                                        <span className="text-sm uppercase tracking-wider cl-text-neutral-text-high-contrast">
+                                            {step.label}
+                                        </span>
                                     </div>
+                                    <p className={
+                                        'italic mt-0.5 ' +
+                                        (isSilence
+                                            ? 'text-lg cl-text-neutral-text-high-contrast'
+                                            : 'text-base cl-text-neutral-text-medium-contrast')
+                                    }>
+                                        “{step.thought}”
+                                    </p>
                                     {isBreakAfter && (
-                                        <div className="flex items-center gap-2 pl-5 py-2 text-xs font-bold uppercase tracking-widest cl-text-semantic-warning-text">
-                                            <ArrowDown aria-hidden="true" className="w-4 h-4" />
-                                            Experience break
-                                        </div>
-                                    )}
-                                    {!isBreakAfter && i < JOURNEY.length - 1 && (
-                                        <ArrowDown aria-hidden="true" className="w-4 h-4 my-1 ml-7 cl-text-neutral-text-low-contrast" />
+                                        <p className="mt-3 text-xs font-bold uppercase tracking-widest cl-text-semantic-warning-text">
+                                            ↓ Experience break
+                                        </p>
                                     )}
                                 </li>
                             );
@@ -368,98 +425,97 @@ export function RespondentExperience() {
                     </ol>
                 </section>
 
-                {/* ── Communication comparison ───────────────────── */}
+                {/* ── Supporting evidence (disclosures) ──────────── */}
                 <section className="pt-20">
-                    <SectionHeading eyebrow="Evidence · Communication" id="communication" title="The reminder became the real entry point" />
+                    <SectionHeading eyebrow="Supporting evidence" id="supporting-evidence" title="How the conditions showed up" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
-                        …but it carried less of the context respondents needed. This is analysis of the existing
-                        communications, not a redesign that shipped.
+                        Two areas carried most of the detail. They are summarised here and expandable in full.
                     </p>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-4">Welcome contained</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· Three quick questions</li>
-                                <li>· Under two minutes</li>
-                                <li>· An anonymity statement</li>
-                                <li>· Broad purpose</li>
-                                <li>· A request for candid responses</li>
-                            </ul>
-                        </div>
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-4">Reminder contained</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· The survey still open</li>
-                                <li>· Under two minutes</li>
-                                <li>· Three simple questions</li>
-                                <li>· A participation call to action</li>
-                                <li>· A broad “better decisions” statement</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="mt-4 rounded-2xl border cl-border-semantic-warning-border cl-bg-semantic-warning-background p-6">
-                        <h3 className="text-xs font-bold uppercase tracking-widest cl-text-semantic-warning-text mb-4">Context missing from the reminder</h3>
-                        <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm cl-text-semantic-warning-text">
-                            <li>· Why the survey repeats</li>
-                            <li>· Practical anonymity</li>
-                            <li>· How open-text responses are processed</li>
-                            <li>· Who sees results</li>
-                            <li>· What happened after previous responses</li>
-                            <li>· Visible impact or closure</li>
-                        </ul>
-                    </div>
-                </section>
-
-                {/* ── Practical anonymity ────────────────────────── */}
-                <section className="pt-20">
-                    <SectionHeading eyebrow="Evidence · Safety" id="anonymity" title="Stated anonymity is not the same as practical anonymity" />
-
-                    <div className="grid md:grid-cols-3 gap-4">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">Stated</h3>
-                            <p className="text-base font-medium cl-text-neutral-text-high-contrast">“Your response is anonymous.”</p>
-                        </div>
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">Respondent questions</h3>
-                            <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· Can my manager infer it was me?</li>
-                                <li>· What happens in a small team?</li>
-                                <li>· Is my written response shown directly?</li>
-                                <li>· Who sees raw answers?</li>
-                                <li>· When are results hidden?</li>
-                            </ul>
-                        </div>
-                        <div style={{ borderColor: 'var(--cl-color-brand-primary-base)' }} className="rounded-2xl border cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-3">Improved explanation direction</h3>
-                            <p className="text-sm cl-text-neutral-text-medium-contrast">
-                                Responses are combined into group-level patterns. Individual feedback is not shown
-                                as a named response. Reporting appears only when privacy conditions are met —
-                                a minimum group threshold applies.
+                    <div className="space-y-3">
+                        <CaseStudyDisclosure summary="Compare the invitation and reminder communication">
+                            <p className="text-base cl-text-neutral-text-medium-contrast mb-6">
+                                The reminder became the real entry point, but carried less of the context
+                                respondents needed. This is analysis of the existing communications, not a
+                                redesign that shipped.
                             </p>
-                        </div>
+                            <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-3">Welcome contained</h3>
+                                    <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· Three quick questions</li>
+                                        <li>· Under two minutes</li>
+                                        <li>· An anonymity statement</li>
+                                        <li>· Broad purpose</li>
+                                        <li>· A request for candid responses</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-3">Reminder contained</h3>
+                                    <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· The survey still open</li>
+                                        <li>· Under two minutes</li>
+                                        <li>· Three simple questions</li>
+                                        <li>· A participation call to action</li>
+                                        <li>· A broad “better decisions” statement</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="mt-6 pt-5 border-t cl-border-border-color-default">
+                                <h3 className="text-xs font-bold uppercase tracking-widest cl-text-semantic-warning-text mb-3">Context missing from the reminder</h3>
+                                <ul className="grid sm:grid-cols-2 gap-x-10 gap-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                    <li>· Why the survey repeats</li>
+                                    <li>· Practical anonymity</li>
+                                    <li>· How open-text responses are processed</li>
+                                    <li>· Who sees results</li>
+                                    <li>· What happened after previous responses</li>
+                                    <li>· Visible impact or closure</li>
+                                </ul>
+                            </div>
+                        </CaseStudyDisclosure>
+
+                        <CaseStudyDisclosure summary="How respondents interpreted anonymity">
+                            <div className="space-y-6">
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Stated</h3>
+                                    <p className="text-base font-medium cl-text-neutral-text-high-contrast">“Your response is anonymous.”</p>
+                                </div>
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Respondent questions</h3>
+                                    <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
+                                        <li>· Can my manager infer it was me?</li>
+                                        <li>· What happens in a small team?</li>
+                                        <li>· Is my written response shown directly?</li>
+                                        <li>· Who sees raw answers?</li>
+                                        <li>· When are results hidden?</li>
+                                    </ul>
+                                </div>
+                                <div className="pt-5 border-t cl-border-border-color-default">
+                                    <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-2">Improved explanation direction</h3>
+                                    <p className="text-sm cl-text-neutral-text-medium-contrast">
+                                        Responses are combined into group-level patterns. Individual feedback is not
+                                        shown as a named response. Reporting appears only when privacy conditions are
+                                        met — a minimum group threshold applies. Framed as a direction, not a
+                                        guarantee of anonymity, and no numeric threshold is published.
+                                    </p>
+                                </div>
+                            </div>
+                        </CaseStudyDisclosure>
                     </div>
-                    <p className="mt-4 text-sm cl-text-neutral-text-low-contrast">
-                        Framed as a recommended direction — not a guarantee of anonymity, and no specific numeric
-                        threshold is published.
-                    </p>
                 </section>
 
                 {/* ── Participation vs honesty ───────────────────── */}
                 <section className="pt-20">
                     <SectionHeading eyebrow="Interpretation" id="participation-honesty" title="Completion does not automatically equal candour" />
-                    <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
+                    <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         Submission count is not the complete measure of survey quality. Four factors matter
-                        together — this is a way of thinking, not a literal formula.
+                        together — a way of thinking, not a literal formula:
+                        {' '}
+                        <strong className="cl-text-neutral-text-high-contrast">participation</strong>,{' '}
+                        <strong className="cl-text-neutral-text-high-contrast">honesty</strong>,{' '}
+                        <strong className="cl-text-neutral-text-high-contrast">representation</strong> and{' '}
+                        <strong className="cl-text-neutral-text-high-contrast">actionability</strong>.
                     </p>
-                    <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {['Participation', 'Honesty', 'Representation', 'Actionability'].map((f) => (
-                            <li key={f} className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-5 text-center">
-                                <div className="text-base font-bold cl-text-neutral-text-high-contrast">{f}</div>
-                            </li>
-                        ))}
-                    </ul>
                 </section>
 
                 {/* ── 6. Evidence → insight → decision ───────────── */}
@@ -537,17 +593,22 @@ export function RespondentExperience() {
                         Strengthening all five conditions together turns a one-off ask into a lifecycle that
                         earns the next response.
                     </p>
-                    <ol className="space-y-2">
-                        {FUTURE_STATE.map((step, i, arr) => (
-                            <li key={step}>
-                                <div className="flex items-center gap-4 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 px-5 py-3">
-                                    <span className="text-sm font-mono font-bold cl-text-brand-primary-base w-6 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                                    <span className="text-base font-semibold cl-text-neutral-text-high-contrast">{step}</span>
-                                </div>
-                                {i < arr.length - 1 && <ArrowDown aria-hidden="true" className="w-4 h-4 my-1 ml-8 cl-text-neutral-text-low-contrast" />}
+                    {/* Plain numbered lifecycle — no repeated card chrome */}
+                    <ol className="border-l cl-border-border-color-default pl-6 space-y-3">
+                        {FUTURE_STATE.map((step, i) => (
+                            <li key={step} className="flex items-baseline gap-4">
+                                <span className="text-sm font-mono font-bold cl-text-brand-primary-base w-6 shrink-0">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <span className="text-base font-semibold cl-text-neutral-text-high-contrast">{step}</span>
                             </li>
                         ))}
                     </ol>
+                    <p className="mt-8 text-base leading-relaxed cl-text-neutral-text-medium-contrast">
+                        Shorter surveys reduce interaction effort, and conversational formats may improve
+                        engagement — but neither creates relevance, safety, impact or ownership on its own. Any
+                        format still depends on a credible respondent contract.
+                    </p>
                 </section>
 
                 {/* ── 9. Ownership model ─────────────────────────── */}
@@ -572,48 +633,25 @@ export function RespondentExperience() {
                             </tbody>
                         </table>
                     </div>
-                    <p style={{ borderColor: 'var(--cl-color-brand-primary-base)' }} className="mt-6 text-base italic cl-text-neutral-text-medium-contrast border-l-2 pl-5">
+                    <p
+                        style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                        className="mt-6 text-base italic cl-text-neutral-text-medium-contrast border-l-2 pl-5"
+                    >
                         When governance owns the entire activity, it risks becoming an HR survey. When managers
                         own follow-up, it becomes a management practice.
                     </p>
                 </section>
 
-                {/* ── 10. Recommended vs validated ───────────────── */}
+                {/* ── 10. Limitations ────────────────────────────── */}
                 <section className="pt-20">
-                    <SectionHeading eyebrow="10 · Status" id="status" title="What was recommended versus validated" />
-                    <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
-                        Every item below is a <strong>recommendation</strong>. None has shipped, and none has
-                        post-change measurement — so each is <strong>not yet validated</strong>.
-                    </p>
-                    <ul className="grid sm:grid-cols-2 gap-3">
-                        {RECOMMENDATIONS.map((r) => (
-                            <li key={r} className="flex items-start justify-between gap-3 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-4">
-                                <span className="text-sm font-medium cl-text-neutral-text-high-contrast">{r}</span>
-                                <span className="shrink-0"><EvidenceTag kind="Not validated" /></span>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                        <span className="text-xs cl-text-neutral-text-low-contrast mr-2 self-center">Evidence key used in this case:</span>
-                        {['Confirmed evidence', 'Participant perspective', 'Stakeholder feedback', 'Research interpretation', 'Recommendation', 'Not validated'].map((k) => (
-                            <EvidenceTag key={k} kind={k} />
-                        ))}
-                    </div>
-                </section>
-
-                {/* ── 11. Limitations ────────────────────────────── */}
-                <section className="pt-20">
-                    <SectionHeading eyebrow="11 · Limitations" id="limitations" title="Limitations" />
+                    <SectionHeading eyebrow="10 · Limitations" id="limitations" title="Limitations" />
                     <ul className="space-y-2.5 text-base cl-text-neutral-text-medium-contrast">
                         {[
-                            'Small, early qualitative study.',
-                            'One internal organisation.',
-                            'One employee / respondent interview.',
-                            'One HR / governance stakeholder interview.',
+                            'Small, early qualitative study in one internal organisation.',
+                            'One employee interview and one governance stakeholder interview.',
                             'Management input was stakeholder feedback, not a formal interview.',
-                            'Findings are directional hypotheses.',
-                            'No post-recommendation measurement.',
-                            'Not statistically representative.',
+                            'Findings are directional hypotheses, not statistically representative.',
+                            'No post-recommendation measurement exists.',
                         ].map((l) => (
                             <li key={l} className="flex gap-3">
                                 <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2.5 shrink-0" />
@@ -621,11 +659,32 @@ export function RespondentExperience() {
                             </li>
                         ))}
                     </ul>
+
+                    <p className="mt-8 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
+                        Everything proposed in this case study is a <strong>recommendation</strong>. None has
+                        shipped and none has post-change measurement, so none is yet validated.
+                    </p>
+
+                    <div className="mt-6">
+                        <CaseStudyDisclosure summary="View recommendation and validation status">
+                            <ul className="grid sm:grid-cols-2 gap-x-10 gap-y-2 text-sm cl-text-neutral-text-medium-contrast">
+                                {RECOMMENDATIONS.map((r) => (
+                                    <li key={r}>· {r}</li>
+                                ))}
+                            </ul>
+                            <div className="mt-6 pt-5 border-t cl-border-border-color-default flex flex-wrap gap-2">
+                                <span className="text-xs cl-text-neutral-text-low-contrast mr-2 self-center">Evidence key used in this case:</span>
+                                {['Confirmed evidence', 'Participant perspective', 'Stakeholder feedback', 'Research interpretation', 'Recommendation', 'Not validated'].map((k) => (
+                                    <EvidenceTag key={k} kind={k} />
+                                ))}
+                            </div>
+                        </CaseStudyDisclosure>
+                    </div>
                 </section>
 
-                {/* ── 12. Reflection ─────────────────────────────── */}
+                {/* ── 11. Reflection ─────────────────────────────── */}
                 <section className="pt-20">
-                    <SectionHeading eyebrow="12 · Reflection" id="reflection" title="What I learned" />
+                    <SectionHeading eyebrow="11 · Reflection" id="reflection" title="What I learned" />
                     <div className="space-y-5 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         <p>
                             Participation was the visible symptom. Underneath it sat a system of purpose, trust,
@@ -638,31 +697,6 @@ export function RespondentExperience() {
                             upstream respondent-experience problem — and staying honest about the line between
                             what the evidence confirmed and what it only suggested.
                         </p>
-                    </div>
-                </section>
-
-                {/* ── Methods & tools ────────────────────────────── */}
-                <section className="pt-20">
-                    <SectionHeading eyebrow="Appendix" id="methods" title="Methods and tools" />
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-3">Methods</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· Qualitative interviews (respondent, governance stakeholder)</li>
-                                <li>· Stakeholder feedback synthesis</li>
-                                <li>· Communication / artifact review</li>
-                                <li>· Respondent journey mapping</li>
-                                <li>· Evidence → insight → decision mapping</li>
-                            </ul>
-                        </div>
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
-                            <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-high-contrast mb-3">Considerations</h3>
-                            <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                <li>· Privacy: grouped reporting, minimum group threshold</li>
-                                <li>· Accessibility: plain language, clear hierarchy</li>
-                                <li>· Trust: practical anonymity over stated anonymity</li>
-                            </ul>
-                        </div>
                     </div>
                 </section>
             </div>
