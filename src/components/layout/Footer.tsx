@@ -21,11 +21,15 @@ export function Footer() {
 
                 {/* Links */}
                 <div className="flex items-center gap-6 text-sm font-medium cl-text-neutral-text-medium-contrast">
-                    <Link to="/about" className="hover:cl-text-brand-primary-base transition-colors">
-                        About
+                    <Link to="/profile" className="hover:cl-text-brand-primary-base transition-colors">
+                        Profile
                     </Link>
+                    <Link to="/contact" className="hover:cl-text-brand-primary-base transition-colors">
+                        Contact
+                    </Link>
+                    {/* Keeps /blog reachable without returning it to the primary nav */}
                     <Link to="/blog" className="hover:cl-text-brand-primary-base transition-colors">
-                        Insights
+                        Writing
                     </Link>
                     <a
                         href="https://linkedin.com/in/hariteja-nandipati"
