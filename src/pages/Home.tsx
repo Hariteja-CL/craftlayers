@@ -1,463 +1,293 @@
-import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, MoveRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { HeroSection } from '../components/portfolio/HeroSection';
-import { ActionFooter } from '../components/portfolio/ActionFooter';
-import profileHero from '../assets/images/profile.png';
-import linkedinIcon from '../assets/images/linkedin.svg';
-import { FileText } from 'lucide-react';
+import { WorkCard, type WorkCardProps } from '../components/work/WorkCard';
+import { ArrowRight } from 'lucide-react';
 
-// ─── About Strip ──────────────────────────────────────────────────────────────
-function AboutStrip() {
+/**
+ * Home — eight sections, in the approved order.
+ *
+ * Written plain-language first: the audience includes recruiters and HR
+ * professionals who do not read design vocabulary. Specialist terms are used
+ * where recruiters search for them, but each is explained on first use rather
+ * than assumed.
+ *
+ * Featured work sits before the process section, so a reader reaches evidence
+ * quickly rather than wading through methodology.
+ */
+
+const PROBLEMS = [
+    {
+        title: 'Complex products are hard to understand',
+        body: 'Dashboards and enterprise tools often hold the right information but still need someone to explain them. I make the meaning, the evidence and the next step visible on the screen itself.',
+    },
+    {
+        title: 'Research is not reaching product decisions',
+        body: 'Findings get collected and then quietly ignored. I connect what users and stakeholders actually said to the decisions a team is about to make.',
+    },
+    {
+        title: 'Product experiences are becoming inconsistent',
+        body: 'As teams grow, the same problem gets solved five different ways. I turn design decisions into reusable rules so consistency survives handover.',
+    },
+    {
+        title: 'AI is accelerating delivery without enough control',
+        body: 'AI can produce interfaces faster than anyone can review them. I keep the speed while making sure a person still checks what ships.',
+    },
+];
+
+const FEATURED: WorkCardProps[] = [
+    {
+        title: 'Three Questions Were Not the Problem',
+        problem:
+            'Found that the real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe, or what happened after they responded.',
+        contribution: 'Diagnosed the cause and set out what would need to change.',
+        method: 'Interviews, communication review and a walk-through of the respondent journey.',
+        status: 'Public case study',
+        confidentiality: 'Public · Anonymised',
+        category: 'UX Research · Enterprise UX',
+        readTime: '7 min read',
+        href: '/work/respondent-experience',
+    },
+    {
+        title: 'Designing Dashboards People Can Read, Trust and Act On',
+        problem:
+            'Created a four-step model for making dashboards easier to understand, plus rules for showing deeper detail only when users need it.',
+        contribution: 'A dashboard philosophy, four explanation principles and a card-level rule.',
+        method: 'Product and artifact review with feedback from an operational user.',
+        status: 'Sanitised case study',
+        confidentiality: 'Sanitised enterprise case',
+        category: 'Dashboard Design · Information Architecture',
+        readTime: '7 min read',
+        href: '/work/dashboard-explainability',
+    },
+];
+
+const WORKING_MODEL = [
+    { step: 'Evidence', body: 'Gather what users, stakeholders and product data actually show.' },
+    { step: 'Interpretation', body: 'Work out what it means, and what it does not mean.' },
+    { step: 'Decision', body: 'Choose a direction and record why.' },
+    { step: 'System', body: 'Turn that decision into a reusable rule, component or principle.' },
+    { step: 'Implementation', body: 'Hand it over in a form engineers can build directly from.' },
+    { step: 'Validation', body: 'Test whether it worked — and say so plainly when it has not been tested.' },
+];
+
+const LAYERS = [
+    {
+        name: 'Design',
+        plain: 'Product framing, UX research, enterprise workflows, dashboards and accessibility.',
+    },
+    {
+        name: 'AI-enabled Delivery',
+        plain: 'Using AI to speed up research, documentation and implementation while keeping decisions human-reviewed.',
+    },
+    {
+        name: 'Privacy-aware UX',
+        plain: 'Designing experiences that minimise personal-data exposure and protect anonymity.',
+    },
+];
+
+function Section({
+    id,
+    eyebrow,
+    title,
+    intro,
+    children,
+}: {
+    id?: string;
+    eyebrow: string;
+    title: string;
+    intro?: string;
+    children: React.ReactNode;
+}) {
     return (
-        <section className="py-16 border-t cl-border-border-color-default cl-bg-neutral-surface-level-1">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
-                    {/* Photo + identity */}
-                    <div className="flex items-center gap-5 shrink-0">
-                        <div className="w-14 h-14 rounded-full border-2 cl-border-neutral-surface-level-2 overflow-hidden shadow-sm">
-                            <img src={profileHero} alt="Hariteja Nandipati" className="w-full h-full object-cover" />
-                        </div>
-                        <div>
-                            <div className="text-sm font-bold cl-text-neutral-text-high-contrast">Hariteja Nandipati</div>
-                            <div className="text-xs cl-text-neutral-text-low-contrast font-mono">Hyderabad, India · 12+ yrs</div>
-                        </div>
+        <section id={id} className="pt-20">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] cl-text-neutral-text-low-contrast mb-3">
+                {eyebrow}
+            </p>
+            <h2 className="text-2xl md:text-4xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-tight">
+                {title}
+            </h2>
+            {intro && (
+                <p className="mt-3 text-lg cl-text-neutral-text-medium-contrast leading-relaxed max-w-3xl">
+                    {intro}
+                </p>
+            )}
+            <div className="mt-8">{children}</div>
+        </section>
+    );
+}
+
+export function Home() {
+    return (
+        <div className="cl-bg-neutral-surface-level-0 min-h-screen pb-24">
+            {/* 1 · Hero */}
+            <HeroSection />
+
+            <div className="max-w-5xl mx-auto px-6">
+
+                {/* 2 · Problems I help solve */}
+                <Section
+                    eyebrow="01 · The problems"
+                    title="Problems I help solve"
+                    intro="Four situations I am usually brought in for."
+                >
+                    <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+                        {PROBLEMS.map((p) => (
+                            <div key={p.title}>
+                                <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">{p.title}</h3>
+                                <p className="mt-2 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                                    {p.body}
+                                </p>
+                            </div>
+                        ))}
                     </div>
+                </Section>
 
-                    {/* Divider */}
-                    <div className="hidden md:block w-px h-12 cl-bg-border-color-default opacity-40" />
+                {/* 3 · Featured work — before the process section, on purpose */}
+                <Section
+                    eyebrow="02 · Selected work"
+                    title="Featured work"
+                    intro="Two cases written up in full, including what the evidence did and did not support."
+                >
+                    <div className="grid gap-5 md:grid-cols-2">
+                        {FEATURED.map((c) => (
+                            <WorkCard key={c.href} {...c} />
+                        ))}
+                    </div>
+                    <Link
+                        to="/work"
+                        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold cl-text-brand-primary-base hover:underline cl-focus-ring rounded"
+                    >
+                        See all work
+                        <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                    </Link>
+                </Section>
 
-                    {/* Bio */}
-                    <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed max-w-2xl">
-                        Lead UX Designer specialised in enterprise SaaS, design systems, and AI-assisted product execution.
-                        8+ years at the intersection of design, usability, and production frontend code.
+                {/* 4 · How I work */}
+                <Section
+                    eyebrow="03 · Method"
+                    title="How I work"
+                    intro="The same six steps, whatever the product."
+                >
+                    <ol className="border-l cl-border-border-color-default pl-6 space-y-5">
+                        {WORKING_MODEL.map((m, i) => (
+                            <li key={m.step} className="relative">
+                                <span aria-hidden="true" className="absolute -left-[1.85rem] top-2 w-2.5 h-2.5 rounded-full border-2 cl-border-border-color-strong cl-bg-neutral-surface-level-0" />
+                                <div className="flex items-baseline gap-3">
+                                    <span className="text-sm font-mono cl-text-neutral-text-low-contrast">{`0${i + 1}`}</span>
+                                    <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">{m.step}</h3>
+                                </div>
+                                <p className="mt-1 text-base cl-text-neutral-text-medium-contrast leading-relaxed">{m.body}</p>
+                            </li>
+                        ))}
+                    </ol>
+                    <p className="mt-6 text-base cl-text-neutral-text-medium-contrast max-w-3xl">
+                        Not every engagement reached formal validation. Recommendations remain unvalidated until
+                        tested, and I say which is which.
                     </p>
+                </Section>
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-3 ml-auto shrink-0">
-                        <a
-                            href="/resume.html"
-                            target="_blank"
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-all cl-focus-ring"
+                {/* 5 · Product systems */}
+                <Section
+                    eyebrow="04 · Systems"
+                    title="Turning design decisions into implementation rules"
+                    intro="Product systems are reusable principles, components and implementation guidance that help teams build consistently."
+                >
+                    <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
+                        <p className="text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                            A decision that only exists in a design file gets re-argued every few months. The work
+                            is converting it into something durable — principles, tokens, component rules,
+                            documentation and review criteria that survive handover.
+                        </p>
+                        <dl className="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-4">
+                            {[
+                                ['Design governance', 'Creating reusable rules that help design and engineering stay consistent.'],
+                                ['Implementation alignment', 'Making sure design decisions are carried through accurately into the built product.'],
+                            ].map(([term, plain]) => (
+                                <div key={term}>
+                                    <dt className="text-sm font-bold cl-text-neutral-text-high-contrast">{term}</dt>
+                                    <dd className="text-sm cl-text-neutral-text-medium-contrast mt-0.5">{plain}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                        <Link
+                            to="/work/design"
+                            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold cl-text-brand-primary-base hover:underline cl-focus-ring rounded"
                         >
-                            <FileText size={13} />
-                            Resume
+                            Read the system story
+                            <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </Section>
+
+                {/* 6 · Design · AI-enabled Delivery · Privacy-aware UX */}
+                <Section
+                    eyebrow="05 · Capabilities"
+                    title="Design, AI-enabled Delivery and Privacy-aware UX"
+                    intro="Three supporting capabilities, not three separate professions."
+                >
+                    <dl className="grid md:grid-cols-3 gap-6">
+                        {LAYERS.map((l) => (
+                            <div key={l.name} className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
+                                <dt className="text-lg font-bold cl-text-neutral-text-high-contrast">{l.name}</dt>
+                                <dd className="mt-2 text-base cl-text-neutral-text-medium-contrast leading-relaxed">{l.plain}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </Section>
+
+                {/* 7 · Profile preview */}
+                <Section
+                    eyebrow="06 · Profile"
+                    title="A little more context"
+                    intro="8+ years in UX and product design since 2017, mostly in enterprise SaaS — culture and people analytics, assessments, dashboards and decision-support workflows."
+                >
+                    <p className="text-base cl-text-neutral-text-medium-contrast leading-relaxed max-w-3xl">
+                        I work comfortably across technical, AI and privacy-sensitive product areas, while
+                        partnering with specialists for backend architecture, cybersecurity engineering,
+                        penetration testing, data science and frontend engineering leadership.
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                        <Link
+                            to="/profile"
+                            className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-strong px-5 py-3 text-sm font-semibold cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-colors cl-focus-ring"
+                        >
+                            Explore profile
+                            <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                        </Link>
+                        <a
+                            href="/resume.pdf"
+                            download="Hariteja-Nandipati-Resume.pdf"
+                            className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-default px-5 py-3 text-sm font-semibold cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast transition-colors cl-focus-ring"
+                        >
+                            Download résumé
                         </a>
+                    </div>
+                </Section>
+
+                {/* 8 · Contact CTA */}
+                <Section eyebrow="07 · Contact" title="Working on something complex?">
+                    <p className="text-lg cl-text-neutral-text-medium-contrast leading-relaxed max-w-3xl">
+                        If you are building an enterprise product, an analytics experience or an AI-enabled
+                        workflow, I would be glad to talk it through.
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-colors cl-focus-ring"
+                        >
+                            Contact Hari
+                        </Link>
                         <a
                             href="https://linkedin.com/in/hariteja-nandipati"
                             target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold border cl-border-border-color-default cl-bg-neutral-surface-level-0 cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-all cl-focus-ring"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-default px-5 py-3 text-sm font-semibold cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast transition-colors cl-focus-ring"
                         >
-                            <img src={linkedinIcon} alt="in" className="w-3.5 h-3.5" />
                             LinkedIn
                         </a>
                     </div>
-                </div>
+                </Section>
             </div>
-        </section>
-    );
-}
-
-// ─── The Two Flows ────────────────────────────────────────────────────────────
-function ApproachSection() {
-    const flowA = [
-        "Business requirements come in",
-        "I define structured UX formats & flows",
-        "Design system — tokens, components, patterns",
-        "Prototype & user testing",
-        "Stakeholder sign-off",
-        "I build the frontend myself",
-    ];
-
-    const flowB = [
-        "Developer ships AI-generated frontend",
-        "I audit the UX and usability",
-        "Map friction points & design system drift",
-        "Fix directly in the codebase",
-        "Validate changes with users",
-        "Align with design system standards",
-    ];
-
-    return (
-        <section id="approach" className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-0">
-            <div className="max-w-7xl mx-auto px-6">
-
-                {/* Header */}
-                <div className="mb-12">
-                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">How I engage</span>
-                    <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">
-                        Two ways I operate.
-                    </h2>
-                    <p className="cl-text-neutral-text-medium-contrast mt-3 max-w-xl text-base leading-relaxed">
-                        Unlike most UX designers, I stay end-to-end — either leading the design system from scratch
-                        or stepping into an existing codebase and fixing it directly.
-                    </p>
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-6">
-
-                    {/* Flow A */}
-                    <div className="border cl-border-border-color-default rounded-2xl p-8 cl-bg-neutral-surface-level-0 hover:shadow-md transition-shadow">
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-brand-primary-base">Flow 01</span>
-                            <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast">UX-Led</span>
-                        </div>
-                        <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast mb-2">
-                            I lead from requirements to production.
-                        </h3>
-                        <p className="text-sm cl-text-neutral-text-medium-contrast mb-8 leading-relaxed">
-                            I take raw business requirements, structure the problem space, design and test,
-                            then build the frontend myself — closing the loop between intention and implementation.
-                        </p>
-                        <ol className="space-y-3">
-                            {flowA.map((step, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                    <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast w-5 shrink-0 mt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                                    <span className="text-sm cl-text-neutral-text-high-contrast font-medium leading-snug">{step}</span>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-
-                    {/* Flow B */}
-                    <div className="border cl-border-brand-primary-base/20 rounded-2xl p-8 cl-bg-brand-primary-background hover:shadow-md transition-shadow">
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-brand-primary-base">Flow 02</span>
-                            <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast">Dev-Led → UX Audit</span>
-                        </div>
-                        <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast mb-2">
-                            I inherit what's built and make it right.
-                        </h3>
-                        <p className="text-sm cl-text-neutral-text-medium-contrast mb-8 leading-relaxed">
-                            When a developer has already shipped the frontend from business requirements,
-                            I come in, find the usability gaps, and fix them directly in the code — no handoff cycle.
-                        </p>
-                        <ol className="space-y-3">
-                            {flowB.map((step, i) => (
-                                <li key={i} className="flex items-start gap-3">
-                                    <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast w-5 shrink-0 mt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                                    <span className="text-sm cl-text-neutral-text-high-contrast font-medium leading-snug">{step}</span>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-                </div>
-
-                {/* Differentiator callout */}
-                <div className="mt-6 flex items-center gap-4 px-6 py-4 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1">
-                    <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast shrink-0 uppercase tracking-widest">Why this matters</span>
-                    <div className="w-px h-4 cl-bg-border-color-default opacity-40 shrink-0" />
-                    <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
-                        Most UX designers stop at the Figma file. I stay until the product ships — reducing
-                        handoff loss, design drift, and interpretation gaps between intent and implementation.
-                    </p>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-// ─── Focus Areas ─────────────────────────────────────────────────────────────
-function FocusSection() {
-    const areas = [
-        { label: "Design System Architecture", desc: "Token systems, component libraries, pattern governance, and health audits that scale across teams." },
-        { label: "Frontend Development", desc: "Production React / TypeScript built from design intent — components, states, responsiveness, accessibility." },
-        { label: "AI-Enabled Workflows", desc: "Structured prompting formats and AI-assisted flows that accelerate idea-to-implementation speed." },
-        { label: "Usability & UX Audits", desc: "Finding friction, hierarchy failures, empty states, error handling gaps, and accessibility issues — then fixing them." },
-        { label: "SaaS Dashboards & Enterprise UX", desc: "Complex data surfaces: tables, filters, charts, permissions, decision-support — cognitive load by design." },
-        { label: "Privacy-aware UX", desc: "Anonymity, PII minimisation, role-aware access, safe data exposure and responsible defaults." },
-    ];
-
-    return (
-        <section className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-1">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                    <div>
-                        <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">Capabilities</span>
-                        <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">What I focus on.</h2>
-                    </div>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px border cl-border-border-color-default rounded-2xl overflow-hidden">
-                    {areas.map((area, i) => (
-                        <div key={i} className="p-6 cl-bg-neutral-surface-level-0 hover:cl-bg-neutral-surface-level-1 transition-colors group">
-                            <div className="flex items-start gap-3">
-                                <CheckCircle2 className="w-4 h-4 cl-text-brand-primary-base mt-0.5 shrink-0" />
-                                <div>
-                                    <div className="text-sm font-bold cl-text-neutral-text-high-contrast mb-1 group-hover:cl-text-brand-primary-base transition-colors">{area.label}</div>
-                                    <div className="text-xs cl-text-neutral-text-medium-contrast leading-relaxed">{area.desc}</div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-// ─── Selected Work ────────────────────────────────────────────────────────────
-function SelectedWorkSection() {
-    const navigate = useNavigate();
-
-    const projects = [
-        {
-            index: "01",
-            title: "Inwards",
-            category: "Mental Wellness SaaS",
-            tags: ["Design System", "SaaS Dashboard", "Usability"],
-            desc: "Dual-role dashboard system for users and therapists — mood tracking, AI recommendations, and sentiment analysis.",
-            path: "/work/inwards",
-            year: "2024",
-        },
-        {
-            index: "02",
-            title: "Enculture",
-            category: "Culture Analytics Platform",
-            tags: ["AI-Assisted", "Enterprise UX", "Frontend"],
-            desc: "Prescriptive AI engine and action cards for culture data — turning survey signals into human-readable interventions.",
-            path: "/work/enculture",
-            year: "2024",
-        },
-        {
-            index: "03",
-            title: "Architecturing Governance",
-            category: "Design System Overhaul",
-            tags: ["Token System", "Design QA", "Governance"],
-            desc: "End-to-end design system rebuild — 3-layer token architecture, component standards, and implementation handoff documentation.",
-            path: "/work/architecturing-governance",
-            year: "2024",
-        },
-    ];
-
-    return (
-        <section id="work" className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-0">
-            <div className="max-w-7xl mx-auto px-6">
-
-                <div className="flex items-end justify-between mb-10">
-                    <div>
-                        <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">Case Studies</span>
-                        <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">
-                            Selected work.
-                        </h2>
-                    </div>
-                    <button
-                        onClick={() => navigate('/work')}
-                        className="hidden md:flex items-center gap-2 text-xs font-semibold cl-text-brand-primary-base hover:gap-3 transition-all"
-                    >
-                        All projects <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                </div>
-
-                <div className="space-y-px border cl-border-border-color-default rounded-2xl overflow-hidden">
-                    {projects.map((p) => (
-                        <button
-                            key={p.index}
-                            onClick={() => navigate(p.path)}
-                            className="w-full text-left p-6 cl-bg-neutral-surface-level-0 hover:cl-bg-neutral-surface-level-1 transition-colors group flex flex-col md:flex-row md:items-center gap-4"
-                        >
-                            {/* Index */}
-                            <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast w-8 shrink-0">
-                                {p.index}
-                            </span>
-
-                            {/* Main content */}
-                            <div className="flex-1 min-w-0">
-                                <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
-                                    <span className="text-base font-bold cl-text-neutral-text-high-contrast group-hover:cl-text-brand-primary-base transition-colors">
-                                        {p.title}
-                                    </span>
-                                    <span className="text-xs cl-text-neutral-text-low-contrast md:ml-1">— {p.category}</span>
-                                </div>
-                                <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed line-clamp-1">
-                                    {p.desc}
-                                </p>
-                            </div>
-
-                            {/* Tags */}
-                            <div className="hidden lg:flex items-center gap-2 shrink-0">
-                                {p.tags.map((t) => (
-                                    <span
-                                        key={t}
-                                        className="px-2.5 py-1 rounded-md text-[10px] md:text-xs font-bold uppercase tracking-wider cl-bg-neutral-surface-level-2 cl-text-neutral-text-low-contrast"
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-
-                            {/* Year + arrow */}
-                            <div className="flex items-center gap-3 shrink-0">
-                                <span className="text-xs font-mono cl-text-neutral-text-low-contrast">{p.year}</span>
-                                <MoveRight className="w-4 h-4 cl-text-neutral-text-low-contrast group-hover:cl-text-brand-primary-base group-hover:translate-x-1 transition-all" />
-                            </div>
-                        </button>
-                    ))}
-                </div>
-
-                <button
-                    onClick={() => navigate('/work')}
-                    className="mt-4 md:hidden flex items-center gap-2 text-xs font-semibold cl-text-brand-primary-base"
-                >
-                    All projects <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-            </div>
-        </section>
-    );
-}
-
-// ─── Process ──────────────────────────────────────────────────────────────────
-function ProcessSection() {
-    const steps = [
-        {
-            id: "01",
-            title: "Understand",
-            desc: "User workflows, business context, product constraints, and decision-making surfaces.",
-        },
-        {
-            id: "02",
-            title: "Systemize",
-            desc: "Tokens, components, accessibility rules, patterns — the design system as a living product.",
-        },
-        {
-            id: "03",
-            title: "Validate",
-            desc: "Prototypes, usability reviews, stakeholder feedback — before a line of production code.",
-        },
-        {
-            id: "04",
-            title: "Ship",
-            desc: "I write the frontend. React, TypeScript, Tailwind — design intent stays intact to production.",
-        },
-    ];
-
-    return (
-        <section className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-1">
-            <div className="max-w-7xl mx-auto px-6">
-
-                <div className="mb-10">
-                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">Process</span>
-                    <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">
-                        How every project moves.
-                    </h2>
-                </div>
-
-                {/* Horizontal steps */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    {steps.map((step, i) => (
-                        <div key={step.id} className="relative">
-                            {/* Connector line */}
-                            {i < steps.length - 1 && (
-                                <div className="hidden lg:block absolute top-5 left-[calc(100%_-_8px)] w-4 h-px cl-bg-border-color-default opacity-60 z-10" />
-                            )}
-                            <div className="p-5 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 h-full">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <span className="text-[10px] md:text-xs font-mono cl-text-neutral-text-low-contrast">{step.id}</span>
-                                    <div className="h-px flex-1 cl-bg-border-color-default opacity-40" />
-                                </div>
-                                <div className="text-sm font-bold cl-text-neutral-text-high-contrast mb-1.5">
-                                    {step.title}
-                                </div>
-                                <div className="text-xs cl-text-neutral-text-medium-contrast leading-relaxed">
-                                    {step.desc}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Principle strip */}
-                <div className="mt-6 px-5 py-4 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 flex flex-wrap items-center gap-x-6 gap-y-1">
-                    {[
-                        "Clarity before complexity",
-                        "Reusable before custom",
-                        "Evidence before assumption",
-                        "Accessible by default",
-                        "Design intent must survive handoff",
-                    ].map((p, i, arr) => (
-                        <span key={p} className="flex items-center gap-6">
-                            <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-low-contrast">
-                                {p}
-                            </span>
-                            {i < arr.length - 1 && (
-                                <span className="cl-text-neutral-text-low-contrast opacity-30 text-base">·</span>
-                            )}
-                        </span>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-// ─── System Layers ────────────────────────────────────────────────────────────
-function LayersSection() {
-    const navigate = useNavigate();
-
-    const layers = [
-        {
-            id: "Design",
-            desc: "Human-centred UX for complex enterprise platforms. Cognitive load reduction, mental models, design system governance.",
-            path: "/work/design",
-        },
-        {
-            id: "AI",
-            desc: "Generative UI and AI-enabled product workflows — structured prompting formats and AI-assisted execution for faster, research-led delivery.",
-            path: "/work/ai",
-        },
-        {
-            id: "Security",
-            desc: "Anonymity, PII minimisation, role-aware access, safe data exposure and explainable, responsible defaults.",
-            path: "/work/security",
-        },
-    ];
-
-    return (
-        <section className="py-20 border-t cl-border-border-color-default cl-bg-neutral-surface-level-0">
-            <div className="max-w-7xl mx-auto px-6">
-
-                <div className="mb-10">
-                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast">Workspace</span>
-                    <h2 className="text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight mt-2">
-                        Three layers. Every product.
-                    </h2>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-4">
-                    {layers.map((l) => (
-                        <button
-                            key={l.id}
-                            onClick={() => navigate(l.path)}
-                            className="text-left p-6 rounded-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 hover:cl-border-brand-primary-base hover:cl-bg-neutral-surface-level-0 transition-all group"
-                        >
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="text-base font-bold cl-text-neutral-text-high-contrast group-hover:cl-text-brand-primary-base transition-colors">
-                                    {l.id} Layer
-                                </span>
-                                <ArrowRight className="w-4 h-4 cl-text-neutral-text-low-contrast group-hover:cl-text-brand-primary-base group-hover:translate-x-1 transition-all" />
-                            </div>
-                            <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
-                                {l.desc}
-                            </p>
-                        </button>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-// ─── Home ─────────────────────────────────────────────────────────────────────
-export function Home() {
-    return (
-        <div className="cl-bg-neutral-surface-level-0 min-h-screen">
-            <HeroSection />
-            <AboutStrip />
-            <ApproachSection />
-            <FocusSection />
-            <SelectedWorkSection />
-            <ProcessSection />
-            <LayersSection />
-            <ActionFooter />
         </div>
     );
 }
