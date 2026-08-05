@@ -90,7 +90,12 @@ export interface MetricVariant {
     value: string;
     status: string;
     statusToken: Segment['token'];
-    summary: string;
+    /** The one takeaway. Kept visually ahead of the description. */
+    insight: string;
+    /** What the metric is — never confused with what the result means. */
+    description: string;
+    /** The next useful step, following from the insight. */
+    action: string;
     segments: Segment[];
 }
 
@@ -100,7 +105,9 @@ export const METRIC_VARIANTS: MetricVariant[] = [
         value: '72',
         status: 'Moderate',
         statusToken: 'warning',
-        summary: 'Steady overall, with a meaningful share in the middle band — the most movable group.',
+        insight: 'Overall conditions are stable, but one contributing dimension needs closer review.',
+        description: 'A composite index of four contributing dimensions, on a 0–100 scale.',
+        action: 'Review the lowest contributing dimension before selecting an intervention.',
         segments: SEGMENTS,
     },
 ];
@@ -135,11 +142,18 @@ export function ParticipationCard() {
     ];
     return (
         <div className={shell}>
-            <h4 className={cardTitle}>Response Completion</h4>
+            <p className={cardTitle}>Response Completion</p>
             <div className="mt-3 flex items-baseline gap-2">
                 <span className="text-3xl font-bold cl-text-neutral-text-high-contrast leading-none">68</span>
                 <span className="text-sm cl-text-neutral-text-medium-contrast">of 100 invited</span>
             </div>
+            <p className="mt-3 text-[15px] font-semibold cl-text-neutral-text-high-contrast leading-snug">
+                Most invited participants have responded, while a smaller pending group still has time to
+                complete.
+            </p>
+            <p className="mt-1.5 text-xs cl-text-neutral-text-low-contrast leading-relaxed">
+                Share of invited participants by completion state.
+            </p>
             <div className="mt-4 flex h-2.5 rounded-full overflow-hidden" role="img"
                 aria-label={`Completion: ${states.map(s => `${s.name} ${s.pct} percent`).join(', ')}`}>
                 {states.map((s) => (
@@ -154,6 +168,9 @@ export function ParticipationCard() {
                     </li>
                 ))}
             </ul>
+            <p className="mt-4 text-sm font-semibold cl-text-brand-primary-base">
+                → Send targeted reminders only to the follow-up-due group.
+            </p>
         </div>
     );
 }
@@ -170,7 +187,7 @@ export function ParticipationCard() {
 export function OverloadedCard() {
     return (
         <div className={shell}>
-            <h4 className={cardTitle}>Organisational Health Index</h4>
+            <p className={cardTitle}>Organisational Health Index</p>
 
             <div className="mt-3 flex items-baseline gap-2 flex-wrap">
                 <span className="text-3xl font-bold cl-text-neutral-text-high-contrast leading-none">72</span>
@@ -245,8 +262,11 @@ export function DistributionCard() {
     ];
     return (
         <div className={shell}>
-            <h4 className={cardTitle}>Team Alignment Distribution</h4>
-            <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
+            <p className={cardTitle}>Team Alignment Distribution</p>
+            <p className="mt-3 text-[15px] font-semibold cl-text-neutral-text-high-contrast leading-snug">
+                Responses are concentrated in two alignment patterns rather than one dominant group.
+            </p>
+            <p className="mt-1.5 text-xs cl-text-neutral-text-low-contrast leading-relaxed">
                 Share of responses by team group. Categories, not grades — no group is better than another.
             </p>
             {/* Gaps between categories — separation never depends on hue alone */}
@@ -264,6 +284,9 @@ export function DistributionCard() {
                     </li>
                 ))}
             </ul>
+            <p className="mt-4 text-sm font-semibold cl-text-brand-primary-base">
+                → Compare the two largest groups before forming a single organisation-wide conclusion.
+            </p>
         </div>
     );
 }
@@ -318,9 +341,11 @@ export function SyntheticMetricCard({ forcedPanel, forcedSegment, compact = fals
         <div className="relative rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-5 w-full">
             {/* Header: title + info affordance (click / tap, never hover) */}
             <div className="flex items-center gap-2 mb-4">
-                <h4 className="text-[11px] font-bold uppercase tracking-[0.08em] cl-text-neutral-text-medium-contrast">
+                {/* A label inside an illustrative mock, not document structure —
+                    so deliberately not a heading (it would skip h2 -> h4). */}
+                <p className="text-[11px] font-bold uppercase tracking-[0.08em] cl-text-neutral-text-medium-contrast">
                     {m.title}
-                </h4>
+                </p>
                 {!controlled && (
                     <button
                         type="button"
@@ -363,9 +388,14 @@ export function SyntheticMetricCard({ forcedPanel, forcedSegment, compact = fals
                 </span>
             </div>
 
+            {/* One card, one primary insight — carried ahead of the description
+                so the takeaway is never competing with the definition. */}
+            <p className="mt-3 text-[15px] font-semibold cl-text-neutral-text-high-contrast leading-snug">
+                {m.insight}
+            </p>
             {!compact && (
-                <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
-                    {m.summary}
+                <p className="mt-1.5 text-xs cl-text-neutral-text-low-contrast leading-relaxed">
+                    {m.description}
                 </p>
             )}
 
@@ -476,10 +506,8 @@ export function SyntheticMetricCard({ forcedPanel, forcedSegment, compact = fals
                 </div>
             )}
 
-            {/* Explore action — always visible, never hover-revealed */}
-            {!compact && (
-                <p className="mt-4 text-sm font-semibold cl-text-brand-primary-base">Explore →</p>
-            )}
+            {/* The next step, following from the insight above */}
+            <p className="mt-4 text-sm font-semibold cl-text-brand-primary-base">→ {m.action}</p>
         </div>
     );
 }

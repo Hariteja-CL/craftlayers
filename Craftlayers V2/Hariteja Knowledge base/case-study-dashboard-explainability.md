@@ -131,7 +131,13 @@ organisational model."* **Never present a formula.**
 
 ---
 
-## 7. Four design principles
+## 7. Principle model
+
+**Four core explanation principles, supported by one cross-cutting
+progressive-disclosure principle.** Never describe the case as containing only
+"four design principles".
+
+### Four core explanation principles
 
 1. **Explain the number** — what it represents; score/percentage/index/count;
    contributing inputs; rating model at an appropriate level; what it means;
@@ -146,6 +152,33 @@ organisational model."* **Never present a formula.**
    category context preserved.
 4. **Support the decision** — why it matters, what decision it supports, what to
    do next, who owns it, what evidence makes it defensible.
+
+### One cross-cutting disclosure principle
+
+5. **Disclose detail on demand** — Senior decision-makers need the essential
+   signal first, while client-facing operational users need access to deeper
+   metric definitions, calculation context, contributing inputs and supporting
+   evidence. The default view remains concise; deeper reasoning is available
+   when requested.
+
+> Clarity does not mean showing everything. It means showing the right level of
+> information at the right moment.
+
+> The summary stays simple; the reasoning remains available.
+
+Information was **not removed** — it was reorganised by priority and revealed on
+demand.
+
+### Component rule
+
+> **One card, one primary insight** — each summary card should communicate one
+> clear takeaway, supported by evidence and connected to a next action.
+
+This is a card-level rule, **not** a sixth top-level principle. The hierarchy is
+Metric → Description → Primary insight → Supporting context → Action. A
+*description* defines the metric, an *insight* explains what the current result
+means, and a *recommendation* says what to do next — never conflate them.
+Memorable form: **one metric, one insight, one next action.**
 
 ---
 
@@ -223,12 +256,49 @@ Hari.
 
 ---
 
+## 11b. Colour semantics
+
+Four principles govern colour:
+
+> Brand colour identifies the product. Data colour explains the data.
+> Different data meanings require different colour systems.
+> Missing data is not bad data. Pending is a state, not a risk.
+> Not every incomplete or missing state is negative.
+
+**Five colour roles**
+
+| Role | Used for |
+|---|---|
+| Brand | Navigation, actions, product identity, interface chrome. Never analytical status by default |
+| Evaluative status | Positive, attention, risk — only where the data genuinely expresses evaluation |
+| Participation state | Completed, pending, follow-up due, unavailable, delivery failure |
+| Categorical | Groups, segments and distributions carrying no positive or negative meaning |
+| Interaction state | Hover, focus, selection, active — never confused with analytical status |
+
+**Participation palette (approved):** completed → green · pending → neutral grey
+or cream · follow-up due → amber · failed delivery → red. **Red is reserved for
+genuine failure, error or risk.**
+
+**Three cards, three data meanings** — the published composition deliberately
+uses three *different* structures, because one universal card treatment would
+create false meaning:
+
+| Card | Meaning | Structure |
+|---|---|---|
+| Organisational Health Index | Evaluative | Score, status, explanation, evidence, action |
+| Response Completion | Workflow / participation | Count, labelled states, neutral pending, action |
+| Team Alignment Distribution | Categorical | Proportions, labelled groups, no score or valence |
+
+---
+
 ## 12. Safe answers to likely questions
 
 **"What is this case about?"** — An enterprise analytics dashboard where
 interpretation frequently depended on explanation from the product team. The
 work reframed that as an explainability problem and produced a Read → Interpret
-→ Trust → Act philosophy plus four design principles.
+→ Trust → Act philosophy, four core explanation principles supported by one
+cross-cutting progressive-disclosure principle, and a one-card-one-insight
+component rule.
 
 **"What was the main insight?"** — Trust is created through inspectability. A
 reader trusts a number when they can see what it represents, how it was produced
@@ -252,6 +322,33 @@ discuss the real evidence privately in an interview.
 **"What formula was used?"** — Not published. The public example describes a
 composite index as calculated from four weighted dimensions using a selected
 organisational model; the real calculation is confidential.
+
+**"What principles did you create?"** — Four core explanation principles —
+explain the number, explain the colour, show the evidence, support the decision
+— supported by one cross-cutting progressive-disclosure principle, disclose
+detail on demand. Alongside them sits a component rule: one card, one primary
+insight.
+
+**"Why use popovers or layered information?"** — They support two information
+depths on one screen without overwhelming the default card. Senior
+decision-makers needed a concise view of the most important signal, while
+client-facing operational users needed access to the explanation behind it.
+
+**"Did you remove information?"** — No. The same information remained
+available, but the default view prioritised the primary signal while deeper
+reasoning was disclosed on demand.
+
+**"Why are the three cards different?"** — Each card represents a different
+data meaning: evaluation, workflow state or categorical composition. Their
+structures and colours differ because one universal card treatment would create
+false meaning.
+
+**"Why is pending grey rather than red?"** — Pending is a neutral workflow
+state, not a failure or risk. Red is reserved for genuine error, failure or
+danger.
+
+**"What should every card communicate?"** — One metric, one primary insight and
+one next action.
 
 ---
 

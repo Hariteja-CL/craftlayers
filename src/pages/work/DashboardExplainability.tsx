@@ -38,6 +38,15 @@ const CALLOUTS: { title: string; body: string }[] = [
     { title: 'Width tuned for reading', body: 'The card is sized so labels and summary text never wrap awkwardly; readability was chosen over density.' },
 ];
 
+/** What a summary card has to answer, in order. */
+const CARD_HIERARCHY: { term: string; body: string }[] = [
+    { term: 'Metric', body: 'What is being measured?' },
+    { term: 'Description', body: 'What is this metric?' },
+    { term: 'Primary insight', body: 'What does the current result mean?' },
+    { term: 'Supporting context', body: 'Why is that interpretation credible?' },
+    { term: 'Action', body: 'What should happen next?' },
+];
+
 /** The five colour roles a dashboard has to keep apart. */
 const COLOUR_ROLES: { role: string; body: string }[] = [
     { role: 'Brand', body: 'Navigation, actions and product identity. Never analytical status by default.' },
@@ -585,10 +594,14 @@ export function DashboardExplainability() {
                     </figure>
                 </section>
 
-                {/* ── 6. Four design principles ──────────────────── */}
+                {/* ── 6. Four core principles + disclosure + card rule ── */}
                 <section {...narratable('principles')}>
                     <NowReading id="principles" />
-                    <SectionHeading eyebrow="05 · Principles" id="principles" title="Five design principles" />
+                    <SectionHeading eyebrow="05 · Principles" id="principles" title="Four core explanation principles" />
+                    <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
+                        Four core explanation principles, supported by one cross-cutting progressive-disclosure
+                        principle.
+                    </p>
                     <ol className="space-y-6">
                         {PRINCIPLES.map((p, i) => (
                             <li key={p.name} className="flex gap-5">
@@ -602,6 +615,40 @@ export function DashboardExplainability() {
                             </li>
                         ))}
                     </ol>
+
+                    {/* Component-level rule — sits below the four, not beside them */}
+                    <div className="mt-10 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6">
+                        <p className="text-[11px] font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">
+                            Component rule
+                        </p>
+                        <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast mb-3">
+                            One card, one primary insight
+                        </h3>
+                        <p className="text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                            A summary card should not ask the reader to interpret several competing messages. It
+                            should surface one primary insight, support it with evidence and make the next action
+                            clear.
+                        </p>
+                        <dl className="mt-5 grid sm:grid-cols-2 gap-x-10 gap-y-3">
+                            {CARD_HIERARCHY.map((h) => (
+                                <div key={h.term}>
+                                    <dt className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast">{h.term}</dt>
+                                    <dd className="text-sm cl-text-neutral-text-medium-contrast">{h.body}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                        <p className="mt-5 text-sm cl-text-neutral-text-medium-contrast">
+                            The three are easy to blur: a <strong>description</strong> defines the metric, an{' '}
+                            <strong>insight</strong> explains what this result means, and a{' '}
+                            <strong>recommendation</strong> says what to do next.
+                        </p>
+                        <p
+                            style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                            className="mt-5 border-l-2 pl-5 text-base font-semibold cl-text-neutral-text-high-contrast"
+                        >
+                            One metric, one insight, one next action.
+                        </p>
+                    </div>
 
                     {/* Fifth principle — cross-cutting, not a fifth card */}
                     <div className="mt-10 pt-8 border-t cl-border-border-color-default">
