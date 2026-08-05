@@ -282,6 +282,17 @@ UX Design, SaaS, Design Systems, AI UX, Cybersecurity UX, Dashboards, Surveys, T
 
 ---
 
+## 14b. Published Case Studies (separate context documents)
+
+- **Three Questions Were Not the Problem** — respondent experience / survey
+  participation research. Published at `/work/respondent-experience`.
+  Full AI context: `case-study-respondent-experience.md`.
+  When a visitor asks about this case study, answer from that document only,
+  and follow its confidentiality rules (never name the client, employer,
+  product or programme; never claim any recommendation shipped).
+
+---
+
 ## 15. AI Instructions
 
 When answering about Hari:
