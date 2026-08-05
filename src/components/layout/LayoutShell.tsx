@@ -15,9 +15,10 @@ export function LayoutShell() {
         let title = 'Hari Nandipati — Senior Product Designer | CraftLayers';
 
         if (path === '/') title = 'Hari Nandipati — Senior Product Designer | CraftLayers';
+        else if (path === '/profile') title = 'Profile — Hari Nandipati | CraftLayers';
+        else if (path === '/contact') title = 'Contact — Hari Nandipati | CraftLayers';
         else if (path.includes('/work')) title = 'Work — Hari Nandipati | CraftLayers';
-        else if (path.includes('/blog')) title = 'Insights — Hari Nandipati | CraftLayers';
-        else if (path === '/about') title = 'About — Hari Nandipati | CraftLayers';
+        else if (path.includes('/blog')) title = 'Writing — Hari Nandipati | CraftLayers';
 
         document.title = title;
     }, [location]);

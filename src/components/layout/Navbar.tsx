@@ -3,11 +3,19 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Check, Mail } from 'lucide-react';
 import { cn } from '../ui/Button';
 
+/**
+ * Primary navigation, kept deliberately compact.
+ *
+ * Insights is intentionally absent: /blog and its articles stay live and
+ * reachable by direct URL, search and a subtle footer link, but writing does
+ * not return to the primary nav until there is a consistent body of approved
+ * content behind it.
+ */
 const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'Profile', path: '/profile' },
     { name: 'Work', path: '/work' },
-    { name: 'Insights', path: '/blog' },
-    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
 ];
 
 export function Navbar() {

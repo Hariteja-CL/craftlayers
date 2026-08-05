@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/about", "destination": "/profile", "permanent": true }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "headers": [
     {
