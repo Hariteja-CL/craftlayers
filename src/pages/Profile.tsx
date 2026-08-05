@@ -75,31 +75,86 @@ const DOMAINS = [
     'Healthcare and access-control workflows',
 ];
 
-const CAPABILITIES = [
-    { group: 'Product discovery and framing', body: 'Reframing a reported symptom into the problem actually worth solving.' },
-    { group: 'UX research and synthesis', body: 'Qualitative interviews, stakeholder feedback, artifact review and evidence mapping.' },
-    { group: 'Enterprise workflows', body: 'Multi-role flows, permissions, governance and long-running processes.' },
-    { group: 'Analytics and dashboard UX', body: 'Metric explainability, chart semantics, evidence traceability and decision support.' },
-    { group: 'Design systems and governance', body: 'Tokens, components, interaction states, naming and drift prevention.' },
-    { group: 'AI interaction and evaluation', body: 'Designing AI features that show their evidence, with human review retained.' },
-    { group: 'Accessibility', body: 'Semantics, keyboard paths, non-colour cues and readable defaults.' },
-    { group: 'Privacy-aware UX', body: 'Anonymity, PII minimisation, role-aware access and safe data exposure.' },
-    { group: 'Implementation alignment', body: 'Turning decisions into rules engineers can build against.' },
+/**
+ * What I can own — each entry says what Hari handles, the outcome it supports,
+ * and which public case or system story evidences it. Evidence links point
+ * only at work already published; nothing here is asserted without a page
+ * behind it.
+ */
+const OWNERSHIP: {
+    group: string;
+    handles: string;
+    outcome: string;
+    evidence?: { label: string; href: string };
+}[] = [
+    {
+        group: 'Product discovery and UX research',
+        handles: 'Interviews, stakeholder feedback, artifact review and evidence mapping.',
+        outcome: 'The team works on the problem that actually matters, not the reported symptom.',
+        evidence: { label: 'Three Questions Were Not the Problem', href: '/work/respondent-experience' },
+    },
+    {
+        group: 'Enterprise workflows',
+        handles: 'Multi-role flows, permissions, approvals and long-running processes.',
+        outcome: 'Complex processes stay usable as roles and rules multiply.',
+        evidence: { label: 'Three Questions Were Not the Problem', href: '/work/respondent-experience' },
+    },
+    {
+        group: 'Dashboards and analytics',
+        handles: 'Metric explanation, chart meaning, evidence traceability and decision support.',
+        outcome: 'People can read a dashboard and act on it without someone explaining it.',
+        evidence: { label: 'Designing Dashboards People Can Read, Trust and Act On', href: '/work/dashboard-explainability' },
+    },
+    {
+        group: 'Design systems',
+        handles: 'Tokens, components, interaction states, naming and the rules that hold them together.',
+        outcome: 'Teams build consistently as the product and the team grow.',
+        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+    },
+    {
+        group: 'AI-enabled product workflows',
+        handles: 'AI-assisted research, synthesis, documentation and concept development.',
+        outcome: 'Delivery speeds up without losing human review of what ships.',
+        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+    },
+    {
+        group: 'Accessibility',
+        handles: 'Semantic structure, keyboard paths, non-colour cues and readable defaults.',
+        outcome: 'The product works for people using it in ways the team did not assume.',
+        evidence: { label: 'Designing Dashboards People Can Read, Trust and Act On', href: '/work/dashboard-explainability' },
+    },
+    {
+        group: 'Privacy-aware UX',
+        handles: 'Anonymity, minimising personal data, role-aware access and safe data exposure.',
+        outcome: 'People can answer honestly because they can see they are protected.',
+        evidence: { label: 'Three Questions Were Not the Problem', href: '/work/respondent-experience' },
+    },
+    {
+        group: 'Implementation alignment',
+        handles: 'Turning decisions into rules, states and edge cases engineers can build from.',
+        outcome: 'What ships matches what was decided.',
+        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+    },
 ];
 
-const PRINCIPLES = [
-    'Evidence before assumption.',
-    'Explain the system — a screen that needs a narrator is unfinished.',
-    'Protect the person before the data.',
-    'One screen, one primary decision.',
-    'Simple things get used.',
-    'Recommendations remain unvalidated until tested.',
+const PRINCIPLES: { rule: string; plain?: string }[] = [
+    { rule: 'Evidence before assumption.' },
+    { rule: 'Real insight changes the decision.', plain: 'If a finding would not have changed what we did, it was not an insight.' },
+    { rule: 'Conversations reveal the truth.', plain: 'The useful detail usually arrives in a sentence someone says in passing.' },
+    { rule: 'Simple things get used.' },
+    { rule: 'Turn decisions into reusable rules.', plain: 'Otherwise the same argument gets had again in three months.' },
+    { rule: 'One card, one primary insight.', plain: 'A screen element should make one point, not compete with itself.' },
+    { rule: 'Disclose detail on demand.', plain: 'Show the essential information first and reveal the depth when it is asked for.' },
+    { rule: 'Protect the person before the data.' },
+    { rule: 'Trust is created through inspectability.', plain: 'People believe a number when they can see how it was produced.' },
+    { rule: 'Recommendations remain unvalidated until tested.' },
 ];
 
 const TOOLS = [
-    { purpose: 'Design and systems', items: 'Figma · design tokens · component documentation · CSS references' },
-    { purpose: 'Research and synthesis', items: 'Interview notes · product analytics · AI-assisted synthesis · journey mapping' },
-    { purpose: 'Implementation and handoff', items: 'Cursor · GitHub · small reviewable PRs · Markdown documentation' },
+    { purpose: 'Design and systems', items: 'Figma · design tokens · component rules · CSS references · responsive systems' },
+    { purpose: 'Research and synthesis', items: 'Interviews · analytics review · journey mapping · product audits · AI-assisted synthesis' },
+    { purpose: 'AI-enabled delivery', items: 'ChatGPT · Claude · prompt and context design · AI evaluation · documentation support' },
+    { purpose: 'Implementation and handoff', items: 'Cursor · Antigravity · GitHub · Vercel · implementation QA' },
 ];
 
 function Section({ eyebrow, title, children }: { eyebrow: string; title: string; children: React.ReactNode }) {
@@ -198,14 +253,36 @@ export function Profile() {
 
                 {/* 4 · Capabilities */}
                 <Section eyebrow="03 · Capabilities" title="What I can own">
-                    <dl className="grid sm:grid-cols-2 gap-x-10 gap-y-5">
-                        {CAPABILITIES.map((c) => (
-                            <div key={c.group}>
-                                <dt className="text-sm font-bold cl-text-neutral-text-high-contrast">{c.group}</dt>
-                                <dd className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed mt-0.5">{c.body}</dd>
-                            </div>
+                    <p className="text-base cl-text-neutral-text-medium-contrast leading-relaxed max-w-3xl mb-8">
+                        What I handle, the outcome it supports, and where you can see the evidence.
+                    </p>
+                    <ul className="space-y-6">
+                        {OWNERSHIP.map((o) => (
+                            <li key={o.group} className="border-t cl-border-border-color-default pt-5">
+                                <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">{o.group}</h3>
+                                <p className="mt-1 text-base cl-text-neutral-text-medium-contrast leading-relaxed">{o.handles}</p>
+                                <p className="mt-1 text-sm cl-text-neutral-text-low-contrast">
+                                    <span className="font-semibold">Supports:</span> {o.outcome}
+                                </p>
+                                {o.evidence && (
+                                    <Link
+                                        to={o.evidence.href}
+                                        className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold cl-text-brand-primary-base hover:underline cl-focus-ring rounded"
+                                    >
+                                        Evidence: {o.evidence.label}
+                                        <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
+                                    </Link>
+                                )}
+                            </li>
                         ))}
-                    </dl>
+                    </ul>
+
+                    {/* Ownership boundaries — what Hari partners on rather than owns */}
+                    <p className="mt-8 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                        I work comfortably across technical, AI and privacy-sensitive product areas, while
+                        partnering with specialists for backend architecture, cybersecurity engineering,
+                        penetration testing, data science and frontend engineering leadership.
+                    </p>
                 </Section>
 
                 {/* 5 · Product-system approach */}
@@ -280,14 +357,21 @@ export function Profile() {
 
                 {/* 8 · Working principles */}
                 <Section eyebrow="07 · Principles" title="How I work">
-                    <ul className="space-y-2.5">
-                        {PRINCIPLES.map((p) => (
-                            <li key={p} className="flex gap-3 text-lg cl-text-neutral-text-medium-contrast leading-relaxed">
-                                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-3 shrink-0" />
-                                <span>{p}</span>
+                    <ol className="space-y-3">
+                        {PRINCIPLES.map((p, i) => (
+                            <li key={p.rule} className="flex gap-4">
+                                <span className="text-sm font-mono cl-text-neutral-text-low-contrast pt-1 shrink-0">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                                <div>
+                                    <p className="text-lg cl-text-neutral-text-high-contrast font-medium leading-relaxed">{p.rule}</p>
+                                    {p.plain && (
+                                        <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed mt-0.5">{p.plain}</p>
+                                    )}
+                                </div>
                             </li>
                         ))}
-                    </ul>
+                    </ol>
                 </Section>
 
                 {/* 9 · Tools by purpose */}

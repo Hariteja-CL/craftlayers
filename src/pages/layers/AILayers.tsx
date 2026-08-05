@@ -14,12 +14,13 @@ export function AILayers() {
 
                 {/* Header */}
                 <div className="mb-16 max-w-2xl">
-                    <Badge variant="warning" className="mb-4">AI & Agentic Design</Badge>
+                    <Badge variant="warning" className="mb-4">AI Product Design</Badge>
                     <h1 className="text-4xl md:text-5xl font-extrabold text-content-primary mb-6 leading-tight">
-                        Designing <span className="text-orange-500">Intelligent</span> Interfaces.
+                        AI-enabled Delivery
                     </h1>
                     <p className="text-xl text-content-secondary leading-relaxed">
-                        Moving beyond static screens to adaptive, generative, and proactive experiences.
+                        Using AI to speed up research, documentation and implementation while keeping decisions
+                        human-reviewed. AI accelerates the work; it does not decide what ships.
                     </p>
                 </div>
 

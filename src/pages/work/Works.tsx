@@ -13,9 +13,9 @@ const PRODUCT_CASES: WorkCardProps[] = [
     {
         title: 'Three Questions Were Not the Problem',
         problem:
-            'A recurring three-question survey kept going unanswered, and the dashboard built on it could not be read with confidence.',
-        contribution: 'Reframed a dashboard-value problem as an upstream respondent-experience problem.',
-        method: 'Early qualitative study — interviews, communication review, respondent-journey mapping.',
+            'Found that the real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe, or what happened after they responded.',
+        contribution: 'Diagnosed the cause and set out what would need to change.',
+        method: 'Interviews, communication review and a walk-through of the respondent journey.',
         status: 'Public case study',
         confidentiality: 'Public · Anonymised',
         category: 'Respondent Experience · UX Research · Enterprise SaaS',
@@ -25,10 +25,9 @@ const PRODUCT_CASES: WorkCardProps[] = [
     {
         title: 'Designing Dashboards People Can Read, Trust and Act On',
         problem:
-            'A polished analytics dashboard still needed someone from the product team to explain what it meant.',
-        contribution:
-            'A Read → Interpret → Trust → Act philosophy, four explanation principles and a progressive-disclosure rule.',
-        method: 'Product and artifact review with operational-user feedback.',
+            'Created a four-step model for making dashboards easier to understand, plus rules for showing deeper detail only when users need it.',
+        contribution: 'A dashboard philosophy, four explanation principles and a card-level rule.',
+        method: 'Product and artifact review with feedback from an operational user.',
         status: 'Sanitised case study',
         confidentiality: 'Sanitised enterprise case',
         category: 'Analytics UX · Explainability · Design Systems',
