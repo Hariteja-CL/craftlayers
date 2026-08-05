@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Layers, Zap, Shield } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Layers, Zap, Shield, ArrowRight } from 'lucide-react';
 import { ServiceCard } from '../../components/portfolio/ServiceCard';
 
 export function Works() {
@@ -46,6 +46,30 @@ export function Works() {
                     <p className="cl-text-neutral-text-medium-contrast cl-mt-scale-200 opacity-80 cl-text-075 italic">
                         Each layer contains case studies and working systems that demonstrate how these connect in real products.
                     </p>
+                </div>
+
+                {/* Product Cases — featured case studies */}
+                <div className="cl-mb-scale-1000">
+                    <h2 className="cl-text-050 cl-weight-bold uppercase tracking-[0.3em] cl-text-neutral-text-low-contrast cl-mb-scale-300">Product Cases :</h2>
+                    <Link
+                        to="/work/respondent-experience"
+                        className="group block cl-radius-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-p-scale-600 hover:cl-border-border-color-strong hover:shadow-xl transition-all cl-focus-ring"
+                    >
+                        <div className="flex flex-wrap items-center gap-2 cl-mb-scale-300">
+                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border cl-border-border-color-strong cl-text-neutral-text-medium-contrast">Public · Anonymised</span>
+                            <span className="text-[10px] font-bold tracking-wider uppercase cl-text-neutral-text-low-contrast">Respondent Experience · UX Research · Enterprise SaaS</span>
+                        </div>
+                        <h3 className="cl-text-400 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight cl-mb-scale-200 group-hover:cl-text-brand-primary-base transition-colors">
+                            Three Questions Were Not the Problem
+                        </h3>
+                        <p className="cl-text-100 cl-leading-150 cl-text-neutral-text-medium-contrast max-w-2xl">
+                            A respondent-experience study showing why a short survey still failed to earn sustained and honest participation.
+                        </p>
+                        <div className="cl-mt-scale-400 flex items-center gap-2 cl-text-075 cl-weight-medium cl-text-brand-primary-base">
+                            Read the case study
+                            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
+                    </Link>
                 </div>
 
                 {/* Gateway View - Only the 3 cards requested */}

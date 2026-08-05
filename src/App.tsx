@@ -10,6 +10,7 @@ import { UserDashboard } from './pages/work/UserDashboard';
 import { TherapistDashboard } from './pages/work/TherapistDashboard';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
 import { Works } from './pages/work/Works';
+import { RespondentExperience } from './pages/work/RespondentExperience';
 import { Governance } from './pages/work/Governance';
 import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/blog/secure-ux" element={<BlogPost />} />
           <Route path="/blog/governance" element={<Governance />} />
           <Route path="/work" element={<Works />} />
+          <Route path="/work/respondent-experience" element={<RespondentExperience />} />
           <Route path="/work/design" element={<DesignLayers />} />
 
           <Route path="/work/architecturing-governance" element={<ArchitecturingGovernance />} />
