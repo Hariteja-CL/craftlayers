@@ -40,7 +40,7 @@ export function Works() {
                             <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">AI</span> — where workflows are accelerated through agent-driven execution
                         </li>
                         <li className="cl-text-neutral-text-medium-contrast">
-                            <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">Security</span> — where systems are hardened for real-world risks
+                            <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">Privacy-aware UX</span> — where data exposure, anonymity and safe defaults are designed
                         </li>
                     </ul>
                     <p className="cl-text-neutral-text-medium-contrast cl-mt-scale-200 opacity-80 cl-text-075 italic">
@@ -111,8 +111,8 @@ export function Works() {
                         onClick={() => navigate('/work/ai')}
                     />
                     <ServiceCard
-                        title="Security Layer"
-                        description="Defensive architecture and zero-trust design patterns for high-stakes environments."
+                        title="Privacy-aware UX"
+                        description="Anonymity, PII minimisation, role-aware access and safe data exposure, designed into the product."
                         icon={<Shield className="w-6 h-6 text-emerald-500" />}
                         variant="light"
                         className="h-full cl-radius-xl border cl-border-border-color-default cl-p-scale-200 hover:shadow-xl transition-all"

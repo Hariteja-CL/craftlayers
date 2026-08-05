@@ -165,7 +165,7 @@ function FocusSection() {
         { label: "AI-Enabled Workflows", desc: "Structured prompting formats and AI-assisted flows that accelerate idea-to-implementation speed." },
         { label: "Usability & UX Audits", desc: "Finding friction, hierarchy failures, empty states, error handling gaps, and accessibility issues — then fixing them." },
         { label: "SaaS Dashboards & Enterprise UX", desc: "Complex data surfaces: tables, filters, charts, permissions, decision-support — cognitive load by design." },
-        { label: "Security-Aware UX", desc: "Data least-privilege, obscured inputs, session-aware state, and zero-trust design patterns." },
+        { label: "Privacy-aware UX", desc: "Anonymity, PII minimisation, role-aware access, safe data exposure and responsible defaults." },
     ];
 
     return (
@@ -406,7 +406,7 @@ function LayersSection() {
         },
         {
             id: "Security",
-            desc: "Zero-trust design patterns, defensive UI architecture, data least-privilege, and privacy-first UX.",
+            desc: "Anonymity, PII minimisation, role-aware access, safe data exposure and explainable, responsible defaults.",
             path: "/work/security",
         },
     ];
