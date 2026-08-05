@@ -379,19 +379,29 @@ export function RespondentExperience() {
                             research period. In one observed cycle roughly 8 people responded, and participation
                             declined across repeated iterations. These figures are approximate and kept separate.
                         </p>
+                        <p>
+                            The case combined two stakeholder interviews with management feedback, communication
+                            analysis, respondent-journey review and role/dashboard-flow analysis.
+                        </p>
                     </div>
 
                     <div className="mt-8">
                         <CaseStudyDisclosure summary="Research methods and evidence boundaries">
+                            <p className="text-sm cl-text-neutral-text-medium-contrast mb-6">
+                                The qualitative evidence included one respondent interview and one HR/governance
+                                interview, supported by management feedback and multiple experience and
+                                communication reviews.
+                            </p>
                             <div className="grid sm:grid-cols-2 gap-x-10 gap-y-6">
                                 <div>
                                     <h3 className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-3">Evidence base</h3>
                                     <ul className="space-y-2 text-sm cl-text-neutral-text-medium-contrast">
-                                        <li>· One employee / respondent interview</li>
-                                        <li>· One HR / governance stakeholder interview</li>
-                                        <li>· Management / lead feedback</li>
+                                        <li>· Respondent interview</li>
+                                        <li>· HR / governance interview</li>
+                                        <li>· Management / lead stakeholder feedback</li>
                                         <li>· Welcome &amp; reminder communication review</li>
-                                        <li>· Respondent journey &amp; role-flow review</li>
+                                        <li>· Respondent-journey review</li>
+                                        <li>· Role &amp; dashboard-flow review</li>
                                     </ul>
                                 </div>
                                 <div>
@@ -747,8 +757,8 @@ export function RespondentExperience() {
                     <SectionHeading eyebrow="10 · Limitations" id="limitations" title="Limitations" />
                     <ul className="space-y-2.5 text-base cl-text-neutral-text-medium-contrast">
                         {[
-                            'Small, early qualitative study in one internal organisation.',
-                            'One employee interview and one governance stakeholder interview.',
+                            'The study was early and directional, with a small interview sample and no broad quantitative validation.',
+                            'Conducted in one internal organisation.',
                             'Management input was stakeholder feedback, not a formal interview.',
                             'Findings are directional hypotheses, not statistically representative.',
                             'No post-recommendation measurement exists.',

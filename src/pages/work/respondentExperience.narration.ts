@@ -21,7 +21,7 @@ export const NARRATION_SECTIONS: NarrationSection[] = [
     {
         title: 'The problem',
         body:
-            'To investigate, I studied an internal recurring workplace-survey pilot. Approximately 98 employees were invited, the survey contained three short questions, and participation remained around 11 percent during the research period. Participation also declined across repeated iterations. Because the form was only three questions and took under about two minutes, low participation could not be explained by length or complexity. The instinct was to treat this as survey friction. The evidence pointed elsewhere, from a surface symptom to an underlying respondent contract.',
+            'To investigate, I studied an internal recurring workplace-survey pilot. Approximately 98 employees were invited, the survey contained three short questions, and participation remained around 11 percent during the research period. Participation also declined across repeated iterations. Because the form was only three questions and took under about two minutes, low participation could not be explained by length or complexity. The case combined two stakeholder interviews with management feedback, communication analysis, respondent-journey review and role and dashboard-flow analysis. The instinct was to treat this as survey friction. The evidence pointed elsewhere, from a surface symptom to an underlying respondent contract.',
     },
     {
         title: 'Respondent journey',
@@ -56,7 +56,7 @@ export const NARRATION_SECTIONS: NarrationSection[] = [
     {
         title: 'Limitations',
         body:
-            'This was a small, early qualitative study in one internal organisation, drawing on one employee interview, one governance stakeholder interview, management feedback, communication reviews and a respondent journey review. Management input was stakeholder feedback rather than a formal interview. The findings are directional hypotheses, not statistically representative conclusions. Every recommendation described here is exactly that, a recommendation: none has shipped, and none has post-change measurement, so none is yet validated.',
+            'The study was early and directional, with a small interview sample and no broad quantitative validation. It was conducted in one internal organisation. The qualitative evidence included one respondent interview and one HR and governance interview, supported by management feedback and multiple experience and communication reviews. Management input was stakeholder feedback rather than a formal interview. The findings are directional hypotheses, not statistically representative conclusions. Every recommendation described here is exactly that, a recommendation: none has shipped, and none has post-change measurement, so none is yet validated.',
     },
     {
         title: 'Reflection',

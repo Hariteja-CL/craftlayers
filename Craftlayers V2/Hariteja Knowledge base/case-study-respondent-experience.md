@@ -48,17 +48,35 @@ statistically representative result. Always say "approximately" / "around".
 
 ## 3. Evidence base
 
-- One employee / respondent interview
-- One HR / governance stakeholder interview
-- Management / lead feedback (stakeholder feedback, **not** a formal interview)
+**Lead with this framing — do not open with the interview count:**
+
+> The case combined two stakeholder interviews with management feedback,
+> communication analysis, respondent-journey review and role/dashboard-flow
+> analysis.
+
+When more precision is needed:
+
+> The qualitative evidence included one respondent interview and one
+> HR/governance interview, supported by management feedback and multiple
+> experience and communication reviews.
+
+The seven confirmed sources:
+
+- Respondent interview
+- HR / governance interview
+- Management / lead stakeholder feedback (**not** a formal interview)
 - Welcome communication review
 - Reminder communication review
-- Respondent journey review
+- Respondent-journey review
 - Role and dashboard-flow review
 
 Describe this as **early qualitative research** used to surface hypotheses and
 immediate improvement directions. It is explicitly **not** broad quantitative
 research and does **not** explain all survey non-response.
+
+**Never inflate the evidence.** There was one respondent interview, not several.
+Do not describe management feedback as an interview, and do not invent
+additional participants.
 
 ---
 
@@ -214,8 +232,9 @@ improved or that the problem was solved.
 
 ## 14. Limitations (state these if asked about rigour)
 
-- Small, early qualitative study in one internal organisation.
-- One employee interview and one governance stakeholder interview.
+- The study was early and directional, with a small interview sample and no
+  broad quantitative validation.
+- Conducted in one internal organisation.
 - Management input was stakeholder feedback, not a formal interview.
 - Findings are directional hypotheses, not statistically representative.
 - No post-recommendation measurement exists.
