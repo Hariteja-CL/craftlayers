@@ -27,6 +27,12 @@ const PAGE_CONTEXTS: Record<string, PageContext> = {
         context_id: 'respondent-experience',
         title: 'Three Questions Were Not the Problem',
     },
+    '/work/dashboard-explainability': {
+        route: '/work/dashboard-explainability',
+        content_type: 'case_study',
+        context_id: 'dashboard-explainability',
+        title: 'Designing Dashboards People Can Read, Trust and Act On',
+    },
 };
 
 function normalise(pathname: string): string {
@@ -56,6 +62,10 @@ export function resolvePageContext(pathname: string): PageContext | null {
  * ------------------------------------------------------------------ */
 const ASSISTANT_SUPPRESSED_ROUTES = new Set<string>([
     '/work/respondent-experience',
+    // Same reason: the gateway does not yet support context_id
+    // "dashboard-explainability", and this case is confidential-adjacent, so a
+    // wrong answer here carries more risk than on any other route.
+    '/work/dashboard-explainability',
 ]);
 
 /** True when the chat launcher must not be shown on this route. */

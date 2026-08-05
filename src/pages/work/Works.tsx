@@ -70,6 +70,26 @@ export function Works() {
                             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                     </Link>
+
+                    <Link
+                        to="/work/dashboard-explainability"
+                        className="group block cl-radius-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-p-scale-600 hover:cl-border-border-color-strong hover:shadow-xl transition-all cl-focus-ring cl-mt-scale-400"
+                    >
+                        <div className="flex flex-wrap items-center gap-2 cl-mb-scale-300">
+                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border cl-border-border-color-strong cl-text-neutral-text-medium-contrast">Sanitised enterprise case study</span>
+                            <span className="text-[10px] font-bold tracking-wider uppercase cl-text-neutral-text-low-contrast">Analytics UX · Enterprise SaaS · Explainability · Design Systems</span>
+                        </div>
+                        <h3 className="cl-text-400 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight cl-mb-scale-200 group-hover:cl-text-brand-primary-base transition-colors">
+                            Designing Dashboards People Can Read, Trust and Act On
+                        </h3>
+                        <p className="cl-text-100 cl-leading-150 cl-text-neutral-text-medium-contrast max-w-2xl">
+                            Why a polished analytics dashboard still needed an expert to explain it — and the explanation layer built to replace that dependency.
+                        </p>
+                        <div className="cl-mt-scale-400 flex items-center gap-2 cl-text-075 cl-weight-medium cl-text-brand-primary-base">
+                            Read the case study
+                            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
+                    </Link>
                 </div>
 
                 {/* Gateway View - Only the 3 cards requested */}
