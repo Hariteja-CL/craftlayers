@@ -15,8 +15,31 @@ import {
     NARRATION_WPM,
     READING_WPM,
 } from '../../components/case-study/readingTime';
+import {
+    SyntheticMetricCard,
+    PrototypeLabel,
+    SEGMENTS,
+    type CardPanel,
+} from '../../components/case-study/SyntheticMetricCard';
 import { NARRATION_SECTIONS } from './dashboardExplainability.narration';
 import { ArrowRight, ArrowDown } from 'lucide-react';
+
+/** Numbered callouts — each points at a real decision from the concept. */
+const CALLOUTS: { title: string; body: string }[] = [
+    { title: 'Metric definition on demand', body: 'The info affordance carries stable metric-level context. It opens on click or tap, never on hover, so it cannot fire by accident while someone scans the screen.' },
+    { title: 'Calculation context on the score', body: 'The number itself answers “how was this produced?” — contributing dimensions, weighting and the previous period, kept apart from the metric definition.' },
+    { title: 'Category context on the bar', body: 'Each segment explains its own band: share, meaning and the action it implies. Three narrow layers instead of one overloaded tooltip.' },
+    { title: 'Semantic data colour', body: 'Band colour comes from a semantic scale, not the brand accent. The same colour means the same thing on every metric.' },
+    { title: 'Labels beside every colour', body: 'The bar, legend and detail panel all repeat the band name and percentage, so nothing depends on colour perception.' },
+    { title: 'Action attached to evidence', body: 'Every band ends in a next step — sustain, review or escalate — so a reader leaves with a decision, not just a number.' },
+    { title: 'Width tuned for reading', body: 'The card is sized so labels and summary text never wrap awkwardly; readability was chosen over density.' },
+];
+
+const STATE_SHOWCASE: { panel: CardPanel; label: string }[] = [
+    { panel: 'info', label: 'Metric context — click or tap' },
+    { panel: 'score', label: 'Calculation context — hover, focus or tap' },
+    { panel: 'segment', label: 'Category context — hover, focus or tap' },
+];
 
 /* ------------------------------------------------------------------ *
  * Page-local building blocks. Signature to this case study; kept here
@@ -36,16 +59,6 @@ function SectionHeading({ eyebrow, title, id }: { eyebrow: string; title: string
                 {title}
             </h2>
         </div>
-    );
-}
-
-/** Marks a figure as containing invented data, so no reader mistakes it
- *  for the confidential product. */
-function SyntheticLabel() {
-    return (
-        <p className="mt-4 text-[11px] uppercase tracking-widest cl-text-neutral-text-low-contrast">
-            Illustrative data created for portfolio demonstration
-        </p>
     );
 }
 
@@ -147,15 +160,16 @@ const DECISIONS = [
 
 const IMPLEMENTED = [
     { item: 'Dashboard UX philosophy', status: 'Accepted design direction' },
-    { item: 'Read → Interpret → Trust → Act framework', status: 'Accepted design direction' },
-    { item: 'Philosophy applied across dashboard work', status: 'Implemented design solution' },
-    { item: 'Metric explanation approach', status: 'Implemented in recommended direction' },
-    { item: 'Chart and summary-card explanation', status: 'Implemented in recommended design' },
-    { item: 'Colour semantics improvements', status: 'Implemented or incorporated — verify scope' },
-    { item: 'Evidence-linked explanation', status: 'Implemented in recommended design — verify screens' },
-    { item: 'Export issue', status: 'Resolved or covered — verify status' },
+    { item: 'Read → Interpret → Trust → Act framework', status: 'Incorporated into the dashboard philosophy' },
+    { item: 'Philosophy informing subsequent dashboard work', status: 'Accepted design direction' },
+    { item: 'Summary-card explanation model', status: 'Demonstrated in prototype' },
+    { item: 'Metric, score and segment explanation layers', status: 'Demonstrated in prototype' },
+    { item: 'Semantic colour separation', status: 'Demonstrated in prototype' },
+    { item: 'Evidence-linked recommendation', status: 'Demonstrated in prototype' },
+    { item: 'The HTML concept itself', status: 'High-fidelity concept prototype' },
+    { item: 'Shipped product', status: 'Production implementation differed' },
     { item: 'Client-facing response', status: 'Reported positive response' },
-    { item: 'Adoption, trust and decision-quality impact', status: 'Not formally measured' },
+    { item: 'Adoption, trust and decision-quality impact', status: 'Effect not formally measured' },
 ];
 
 const JUMP_TARGETS = [
@@ -510,50 +524,51 @@ export function DashboardExplainability() {
                         </p>
                     </div>
 
-                    {/* Visual 3 — synthetic composite metric, layered */}
-                    <figure className="mt-10 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-8">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 p-6">
-                            <div className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast">Surface</div>
-                            <div className="mt-2 flex flex-wrap items-baseline gap-3">
-                                <span className="text-3xl font-bold cl-text-neutral-text-high-contrast">72</span>
-                                <span className="text-base font-semibold cl-text-neutral-text-medium-contrast">Organisational Health Index</span>
-                                <span className="rounded-full border cl-border-border-color-strong px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider cl-text-neutral-text-medium-contrast">
-                                    Moderate
-                                </span>
-                            </div>
-
-                            <div className="mt-6 pt-5 border-t cl-border-border-color-default">
-                                <div className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Explanation</div>
-                                <p className="text-sm cl-text-neutral-text-medium-contrast">
-                                    A composite index summarising four organisational dimensions. Index score,
-                                    0–100 scale. Based on the responses collected for the selected period.
-                                </p>
-                            </div>
-
-                            <div className="mt-5 pt-5 border-t cl-border-border-color-default">
-                                <div className="text-xs font-bold uppercase tracking-widest cl-text-brand-primary-base mb-2">Inspectability</div>
-                                <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
-                                    <li>· Contributing dimensions: Clarity · Workload · Recognition · Direction</li>
-                                    <li>· Calculated from four weighted dimensions using the selected organisational model</li>
-                                    <li>· Classified “Moderate” because the index sits in the middle band of the chosen scale</li>
-                                    <li>· Compared with the previous period and the selected benchmark</li>
-                                    <li>· Changing the model or weighting changes both the score and its classification</li>
-                                </ul>
-                            </div>
-
-                            <div className="mt-5 pt-5 border-t cl-border-border-color-default">
-                                <div className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Decision</div>
-                                <p className="text-sm cl-text-neutral-text-medium-contrast">
-                                    May indicate uneven experience across dimensions. Suggested next step: review the
-                                    lowest-scoring dimension alongside its supporting evidence.
-                                </p>
-                            </div>
+                    {/* Visual 3 — reconstructed summary card + numbered callouts.
+                        Anatomy, layering and action guidance follow the private
+                        high-fidelity concept; every value is fictional. */}
+                    <figure className="mt-10 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
+                        <div className="grid lg:grid-cols-[minmax(0,340px)_1fr] gap-8 items-start">
+                            <SyntheticMetricCard />
+                            <ol className="space-y-4">
+                                {CALLOUTS.map((c, i) => (
+                                    <li key={c.title} className="flex gap-3">
+                                        <span className="shrink-0 w-6 h-6 rounded-full border cl-border-border-color-strong cl-bg-neutral-surface-level-0 flex items-center justify-center text-[11px] font-bold font-mono cl-text-brand-primary-base">
+                                            {i + 1}
+                                        </span>
+                                        <div>
+                                            <p className="text-sm font-bold cl-text-neutral-text-high-contrast">{c.title}</p>
+                                            <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">{c.body}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
                         <figcaption className="mt-6 text-sm cl-text-neutral-text-medium-contrast">
-                            The same number, progressively inspectable: what it is, how it was produced, and what
-                            it implies. No proprietary formula is shown.
+                            The card is live — open the info affordance, focus the score, or move across the bar
+                            segments to see each explanation layer.
                         </figcaption>
-                        <SyntheticLabel />
+                        <PrototypeLabel />
+                    </figure>
+
+                    {/* Visual 3b — the same card in each explanation state */}
+                    <figure className="mt-6 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
+                        <p className="text-[11px] font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-5">
+                            One component, three explanation layers
+                        </p>
+                        <div className="grid md:grid-cols-3 gap-5">
+                            {STATE_SHOWCASE.map((s) => (
+                                <div key={s.panel}>
+                                    <p className="text-xs font-semibold cl-text-neutral-text-medium-contrast mb-2">{s.label}</p>
+                                    <SyntheticMetricCard forcedPanel={s.panel} forcedSegment="watch" />
+                                </div>
+                            ))}
+                        </div>
+                        <figcaption className="mt-6 text-sm cl-text-neutral-text-medium-contrast">
+                            Keeping the layers separate is deliberate — one combined tooltip would have to answer
+                            three different questions at once.
+                        </figcaption>
+                        <PrototypeLabel />
                     </figure>
                 </section>
 
@@ -575,35 +590,47 @@ export function DashboardExplainability() {
                         ))}
                     </ol>
 
-                    {/* Visual 4 — brand colour vs data colour */}
-                    <figure className="mt-10 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-8">
-                        <p className="text-base font-semibold cl-text-neutral-text-high-contrast mb-6">
-                            Brand colour identifies the product. Data colour must explain the data.
+                    {/* Visual 4 — semantic colour shown on the same component */}
+                    <figure className="mt-10 rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
+                        <p className="text-base font-semibold cl-text-neutral-text-high-contrast mb-5">
+                            Brand colour identifies the product. Data colour explains the data.
                         </p>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">Brand colour</h3>
-                                <p className="text-sm cl-text-neutral-text-medium-contrast">
-                                    Identity, primary actions and navigation. Carries no analytical meaning — reusing
-                                    it inside a chart tells the reader nothing about the data.
+                        <div className="grid md:grid-cols-2 gap-8 items-start">
+                            <SyntheticMetricCard forcedPanel="none" />
+                            <div className="space-y-5">
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Brand accent</h4>
+                                    <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
+                                        Used only for chrome and actions — the “Explore” link on the card. It carries no
+                                        analytical meaning, so it never fills a bar segment.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-2">Semantic data colour</h4>
+                                    <ul className="space-y-2">
+                                        {SEGMENTS.map((s) => (
+                                            <li key={s.key} className="flex items-baseline gap-2 text-sm cl-text-neutral-text-medium-contrast">
+                                                <span
+                                                    aria-hidden="true"
+                                                    style={{ backgroundColor: `var(--cl-color-semantic-${s.token}-500)` }}
+                                                    className="w-2.5 h-2.5 rounded-sm shrink-0 translate-y-0.5"
+                                                />
+                                                <span>
+                                                    <strong className="cl-text-neutral-text-high-contrast">{s.name}</strong>
+                                                    {' '}— one fixed meaning across every metric, always paired with its label
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <p className="text-sm cl-text-neutral-text-low-contrast leading-relaxed">
+                                    Because each colour is labelled in the bar, the legend and the detail panel, the
+                                    component still reads in greyscale. The principle is semantic consistency, not a
+                                    mandatory palette.
                                 </p>
                             </div>
-                            <div>
-                                <h3 className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-3">Data colour</h3>
-                                <ul className="space-y-1.5 text-sm cl-text-neutral-text-medium-contrast">
-                                    <li>· <strong>Status</strong> — positive, attention, risk</li>
-                                    <li>· <strong>Category</strong> — distinguishing series, not ranking them</li>
-                                    <li>· <strong>Comparison</strong> — current versus previous or benchmark</li>
-                                    <li>· <strong>Interaction</strong> — hover, focus and selection states</li>
-                                </ul>
-                            </div>
                         </div>
-                        <div className="mt-6 pt-5 border-t cl-border-border-color-default text-sm cl-text-neutral-text-medium-contrast">
-                            Each role gets one consistent meaning, reinforced by labels, legends and non-colour
-                            cues so nothing depends on colour perception alone. The principle is semantic
-                            consistency — not a mandatory palette.
-                        </div>
-                        <SyntheticLabel />
+                        <PrototypeLabel />
                     </figure>
                 </section>
 
@@ -657,7 +684,7 @@ export function DashboardExplainability() {
                             Every step stays inspectable, so the recommendation can be explained to a client
                             rather than taken on faith.
                         </figcaption>
-                        <SyntheticLabel />
+                        <PrototypeLabel />
                     </figure>
                 </section>
 
@@ -666,74 +693,40 @@ export function DashboardExplainability() {
                     <NowReading id="implemented" />
                     <SectionHeading eyebrow="07 · What was built on" id="implemented" title="The implemented design direction" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
-                        The philosophy was accepted and applied across the dashboard work — carried into a final
-                        recommended design covering metric explanation, chart semantics, colour logic and evidence
-                        traceability.
+                        The design philosophy was accepted and informed subsequent dashboard work. A high-fidelity
+                        HTML concept was created to demonstrate the proposed interaction model using illustrative
+                        content. The production implementation used different data and product-specific logic.
                     </p>
 
-                    {/* Visual 6 — synthetic dashboard fragment */}
-                    <figure className="rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-8">
-                        <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 p-6 space-y-5">
-                            <div className="flex flex-wrap items-baseline justify-between gap-3">
-                                <div>
-                                    <div className="text-sm font-bold cl-text-neutral-text-high-contrast">Direction &amp; Clarity</div>
-                                    <p className="text-xs cl-text-neutral-text-medium-contrast">
-                                        Percentage of favourable responses · current period
-                                    </p>
-                                </div>
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-2xl font-bold cl-text-neutral-text-high-contrast">64%</span>
-                                    <span className="rounded-full border cl-border-border-color-strong px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider cl-text-neutral-text-medium-contrast">
-                                        Attention
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs cl-text-neutral-text-medium-contrast border-y cl-border-border-color-default py-3">
-                                <span className="inline-flex items-center gap-1.5">
-                                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-sm cl-bg-brand-primary-base" />
-                                    Current period
-                                </span>
-                                <span className="inline-flex items-center gap-1.5">
-                                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-sm border cl-border-border-color-strong" />
-                                    Previous period
-                                </span>
-                                <span className="cl-text-neutral-text-low-contrast">Legend explains encoding · labels shown, not colour alone</span>
-                            </div>
-
-                            <details className="rounded-lg border cl-border-border-color-default px-4 py-2.5">
-                                <summary className="cursor-pointer text-sm font-semibold cl-text-neutral-text-high-contrast cl-focus-ring rounded">
-                                    How this is calculated
-                                </summary>
-                                <p className="mt-3 text-sm cl-text-neutral-text-medium-contrast">
-                                    Share of favourable responses across the questions mapped to this dimension,
-                                    using the selected organisational model. Changing the model changes both the
-                                    value and its classification.
-                                </p>
-                            </details>
-
-                            <div
-                                style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
-                                className="rounded-lg border-l-2 pl-4 py-1"
-                            >
-                                <div className="text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base mb-1">
-                                    Recommendation
-                                </div>
-                                <p className="text-sm cl-text-neutral-text-high-contrast">
-                                    Review priority alignment with team leads.
-                                </p>
-                                <p className="text-xs cl-text-neutral-text-medium-contrast mt-1">
-                                    Based on: this metric · three-period trend · recurring comment theme —
-                                    each openable as evidence.
-                                </p>
-                            </div>
+                    {/* Visual 6 — compact composition built from the same card */}
+                    <figure className="rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
+                        <div className="grid md:grid-cols-3 gap-5">
+                            <SyntheticMetricCard compact forcedPanel="none" />
+                            <SyntheticMetricCard compact forcedPanel="none" />
+                            <SyntheticMetricCard compact forcedPanel="none" />
                         </div>
+
+                        <div
+                            style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                            className="mt-5 rounded-xl border-l-2 cl-bg-neutral-surface-level-0 px-5 py-4"
+                        >
+                            <div className="text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base mb-1">
+                                Recommendation
+                            </div>
+                            <p className="text-sm cl-text-neutral-text-high-contrast">
+                                Review priority alignment with team leads.
+                            </p>
+                            <p className="text-xs cl-text-neutral-text-medium-contrast mt-1">
+                                Based on: the index above · its middle-band share · a recurring comment theme —
+                                each openable as evidence.
+                            </p>
+                        </div>
+
                         <figcaption className="mt-6 text-sm cl-text-neutral-text-medium-contrast">
-                            A reconstructed pattern showing the principles together: an explained metric, a legend
-                            that carries meaning, inspectable calculation and an evidence-linked recommendation.
-                            Not a reproduction of the confidential product.
+                            The same card repeated across metrics, with a recommendation that inherits the evidence
+                            already on screen. A reconstruction of the concept — not the production product.
                         </figcaption>
-                        <SyntheticLabel />
+                        <PrototypeLabel />
                     </figure>
 
                     <div className="mt-8">
