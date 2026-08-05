@@ -33,11 +33,14 @@ export function HeroSection() {
                         <span className="cl-text-brand-primary-base">&amp; Product Systems Builder</span>
                     </h1>
 
-                    <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl font-medium">
-                        Enterprise UX · User Research · Analytics Dashboards · Design Systems · AI-Enabled Workflows
+                    {/* Plain-language explanation first — the title alone assumes
+                        the reader already knows what a "product system" is. */}
+                    <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-4 leading-relaxed max-w-2xl font-medium">
+                        I design enterprise products, dashboards and workflows, then turn the decisions behind
+                        them into reusable systems that product and engineering teams can implement consistently.
                     </p>
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-10">
-                        Designing systems, not just screens. AI-assisted workflows with production-ready execution.
+                    <p className="text-base cl-text-neutral-text-medium-contrast mb-10">
+                        8+ years in UX and product design since 2017.
                     </p>
 
                     {/* CTAs */}
@@ -46,13 +49,13 @@ export function HeroSection() {
                             onClick={() => navigate('/work')}
                             className="px-6 py-3 rounded-xl text-sm font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-all cl-focus-ring"
                         >
-                            View Work
+                            View selected work
                         </button>
                         <button
-                            onClick={() => document.getElementById('approach')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => navigate('/profile')}
                             className="px-6 py-3 rounded-xl text-sm font-semibold border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-all cl-focus-ring"
                         >
-                            How I work
+                            Explore profile
                         </button>
                         <button
                             onClick={handleCopyEmail}
@@ -70,7 +73,7 @@ export function HeroSection() {
 
                     {/* Keyword strip */}
                     <div className="mt-16 pt-8 border-t cl-border-border-color-default flex flex-wrap gap-x-5 gap-y-2 text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-low-contrast">
-                        {["Enterprise UX", "User Research", "Analytics Dashboards", "Design Systems", "AI-Enabled Workflows", "Privacy-Aware UX"].map((k, i, arr) => (
+                        {["Enterprise UX", "UX Research", "Dashboard Design", "Design Systems", "Information Architecture", "Interaction Design", "AI Product Design", "Privacy-aware UX"].map((k, i, arr) => (
                             <span key={k} className="flex items-center gap-5">
                                 {k}
                                 {i < arr.length - 1 && <span className="cl-text-neutral-text-low-contrast opacity-30">/</span>}

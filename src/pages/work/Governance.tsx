@@ -21,7 +21,7 @@ export function Governance() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        Critical fragmentation: Users faced three disparate login flows, 0% data synchronization between modules, and "dashboards" that were merely navigation lists. The cognitive load for compliance officers managing security audits across these silos was unsustainable.
+                        Critical fragmentation: Users faced three disparate login flows, no data synchronisation between modules, and "dashboards" that were merely navigation lists. The cognitive load for compliance officers managing security audits across these silos was unsustainable.
                     </p>
                 </div>
             )
@@ -42,7 +42,7 @@ export function Governance() {
                 <ul className="space-y-4">
                     <li className="flex gap-3">
                         <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
-                        <p><strong>Metrics:</strong> Stakeholder mandate for 15% reduction in churn via platform unification.</p>
+                        <p><strong>Mandate:</strong> Stakeholder goal to reduce churn through platform unification.</p>
                     </li>
                     <li className="flex gap-3">
                         <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
@@ -97,7 +97,7 @@ export function Governance() {
                 <ul className="space-y-4">
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>AI-Assisted Workflow:</strong> Performed a heuristic design audit of 150+ legacy screens in 72 hours using AI agents, leveraging taste-driven decisions to align UI.</p>
+                        <p><strong>AI-Assisted Workflow:</strong> Performed a heuristic design audit across the legacy screen inventory using AI agents, leveraging taste-driven decisions to align UI.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
@@ -185,11 +185,11 @@ export function Governance() {
                         <p className="text-xs opacity-80">Cognitive load reduction across workflows.</p>
                     </div>
                     <div className="p-6 rounded-2xl cl-bg-indigo-50 cl-text-indigo-900 border cl-border-indigo-100">
-                        <div className="text-2xl font-bold mb-1">65% Save</div>
+                        <div className="text-2xl font-bold mb-1">Lower rework</div>
                         <p className="text-xs opacity-80">Reduced refactoring costs.</p>
                     </div>
                     <div className="p-6 rounded-2xl cl-bg-amber-50 cl-text-amber-900 border cl-border-amber-100">
-                        <div className="text-2xl font-bold mb-1">100%</div>
+                        <div className="text-2xl font-bold mb-1">Token-based</div>
                         <p className="text-xs opacity-80">Compliance with design tokens.</p>
                     </div>
                 </div>
@@ -233,8 +233,8 @@ export function Governance() {
     return (
         <V2CaseStudyTemplate
             title="System-Driven UX: Architecting Governance"
-            subtitle="Transforming acquisition chaos into a unified, token-based system architecture."
-            impactValue="65% Cost Save"
+            subtitle="Transforming acquisition chaos into a unified, token-based system architecture. · Earlier work — retained as an exploration of the design direction. Some original outcome claims have been removed because measurement evidence is not available publicly."
+            impactValue="Lower rework"
             impactLabel="Refactor Reduction"
             role="Product System Designer"
             duration="3 Months"

@@ -19,8 +19,13 @@ export function DesignLayers() {
                             <Layers className="w-8 h-8" />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold cl-text-primary">
-                            Design Layer
+                            Turning Design Decisions into Implementation Rules
                         </h1>
+                        <p className="mt-6 text-lg cl-text-secondary leading-relaxed max-w-2xl">
+                            Product systems are reusable principles, components and implementation guidance that
+                            help teams build consistently. This is how a design decision stops living in a file
+                            and becomes something engineering can build against.
+                        </p>
                     </div>
                     <p className="text-xl cl-text-secondary max-w-2xl leading-relaxed">
                         Crafting intuitive, accessible, and scalable user experiences for complex enterprise ecosystems.

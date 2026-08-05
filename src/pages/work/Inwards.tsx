@@ -132,7 +132,7 @@ export function Inwards() {
     return (
         <V2CaseStudyTemplate
             title="Inwards—Emotional Connection Engine (System-Driven UX)"
-            subtitle="Optimizing retention and ROI through human-in-the-loop health systems."
+            subtitle="Optimizing retention and ROI through human-in-the-loop health systems. · Earlier work — retained as an exploration of the design direction. Some original outcome claims have been removed because measurement evidence is not available publicly."
             impactValue="High"
             impactLabel="User Engagement"
             role="UX Design Consultant"

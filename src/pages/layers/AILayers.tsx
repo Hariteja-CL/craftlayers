@@ -14,12 +14,13 @@ export function AILayers() {
 
                 {/* Header */}
                 <div className="mb-16 max-w-2xl">
-                    <Badge variant="warning" className="mb-4">AI & Agentic Design</Badge>
+                    <Badge variant="warning" className="mb-4">AI Product Design</Badge>
                     <h1 className="text-4xl md:text-5xl font-extrabold text-content-primary mb-6 leading-tight">
-                        Designing <span className="text-orange-500">Intelligent</span> Interfaces.
+                        AI-enabled Delivery
                     </h1>
                     <p className="text-xl text-content-secondary leading-relaxed">
-                        Moving beyond static screens to adaptive, generative, and proactive experiences.
+                        Using AI to speed up research, documentation and implementation while keeping decisions
+                        human-reviewed. AI accelerates the work; it does not decide what ships.
                     </p>
                 </div>
 
@@ -46,7 +47,7 @@ export function AILayers() {
                                         <span className="text-indigo-400">Agentic Action</span>
                                     </h2>
                                     <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg">
-                                        How we used Generative UI and Proactive Alerts to reduce "Insight to Action" time by 90% for HR Directors.
+                                        How we used Generative UI and Proactive Alerts to shorten the path from insight to action for HR leaders.
                                     </p>
                                     <div className="inline-flex items-center gap-2 text-white font-medium group-hover:translate-x-1 transition-transform">
                                         Read Case Study <ArrowRight className="w-5 h-5 ml-1" />
