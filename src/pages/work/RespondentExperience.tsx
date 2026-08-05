@@ -205,15 +205,30 @@ export function RespondentExperience() {
         []
     );
 
-    /** Props applied to a narratable <section>. Highlight is a soft tint plus
-     *  a visible "Now reading" label — never colour alone. */
+    /**
+     * Props applied to a narratable <section>. The highlight is a soft
+     * brand-tinted wash plus a thin accent bar, and is always accompanied by
+     * the visible "Now reading" label — never colour alone.
+     *
+     * The bar is always rendered (transparent when inactive) so activating a
+     * section never shifts the layout. A surface token is deliberately not
+     * used for the tint: surface-level-1 (#ffffff) is only two points from the
+     * page background (#f8f9fa) and reads as no highlight at all.
+     */
     const narratable = (id: string) => {
         const active = narratedSectionId === id;
         return {
             'aria-current': active ? ('true' as const) : undefined,
+            style: active
+                ? {
+                    backgroundColor:
+                        'color-mix(in srgb, var(--cl-color-brand-primary-base) 7%, transparent)',
+                    borderColor: 'var(--cl-color-brand-primary-base)',
+                }
+                : undefined,
             className:
-                'pt-20 -mx-4 px-4 rounded-2xl transition-colors motion-reduce:transition-none ' +
-                (active ? 'cl-bg-neutral-surface-level-1' : ''),
+                'pt-20 -mx-5 pl-4 pr-5 rounded-2xl border-l-2 border-transparent ' +
+                'transition-colors motion-reduce:transition-none',
         };
     };
 
