@@ -1,169 +1,155 @@
 import { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Layers, Zap, Shield, ArrowRight } from 'lucide-react';
-import { ServiceCard } from '../../components/portfolio/ServiceCard';
+import { WorkCard, type WorkCardProps } from '../../components/work/WorkCard';
+
+/**
+ * Work — three clearly separated categories.
+ *
+ * The two flagship Product Cases sit alone at the top; earlier work never
+ * appears beside them. Governance is listed once, pointing at the stronger
+ * public-safe destination — both routes stay alive, but only one is listed.
+ */
+
+const PRODUCT_CASES: WorkCardProps[] = [
+    {
+        title: 'Three Questions Were Not the Problem',
+        problem:
+            'A recurring three-question survey kept going unanswered, and the dashboard built on it could not be read with confidence.',
+        contribution: 'Reframed a dashboard-value problem as an upstream respondent-experience problem.',
+        method: 'Early qualitative study — interviews, communication review, respondent-journey mapping.',
+        status: 'Public case study',
+        confidentiality: 'Public · Anonymised',
+        category: 'Respondent Experience · UX Research · Enterprise SaaS',
+        readTime: '7 min read',
+        href: '/work/respondent-experience',
+    },
+    {
+        title: 'Designing Dashboards People Can Read, Trust and Act On',
+        problem:
+            'A polished analytics dashboard still needed someone from the product team to explain what it meant.',
+        contribution:
+            'A Read → Interpret → Trust → Act philosophy, four explanation principles and a progressive-disclosure rule.',
+        method: 'Product and artifact review with operational-user feedback.',
+        status: 'Sanitised case study',
+        confidentiality: 'Sanitised enterprise case',
+        category: 'Analytics UX · Explainability · Design Systems',
+        readTime: '7 min read',
+        href: '/work/dashboard-explainability',
+    },
+];
+
+const SYSTEMS: WorkCardProps[] = [
+    {
+        title: 'Turning Design Decisions into Implementation Rules',
+        problem:
+            'Design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
+        contribution:
+            'Principles, tokens, component rules, documentation and review criteria that survive handoff.',
+        status: 'System story',
+        category: 'Design Systems · Governance · Implementation alignment',
+        href: '/work/design',
+    },
+];
+
+const EARLIER: WorkCardProps[] = [
+    {
+        title: 'Enculture',
+        problem: 'Culture analytics platform — survey flows, dashboards and action planning.',
+        status: 'Earlier experiment',
+        category: 'B2B SaaS · Culture analytics',
+        href: '/work/enculture',
+    },
+    {
+        title: 'Inwards',
+        problem: 'Emotion-analytics SaaS, structuring emotional data into role-specific views.',
+        status: 'Earlier experiment',
+        category: 'SaaS · Analytics',
+        href: '/work/inwards',
+    },
+    {
+        // Listed once. /work/governance stays reachable but is not listed
+        // separately; this points at the stronger public-safe destination.
+        title: 'Design-System Governance',
+        problem: 'Keeping AI-generated and hand-written UI from drifting apart as a product grows.',
+        status: 'Earlier experiment',
+        category: 'Design Systems · Governance',
+        href: '/work/architecturing-governance',
+    },
+    {
+        title: 'Culture dashboard concept',
+        problem: 'An interactive concept exploring how culture signals could be read and acted on.',
+        status: 'Concept prototype',
+        category: 'Analytics UX · Prototype',
+        href: '/dashboard/culture',
+    },
+];
+
+function Category({
+    eyebrow,
+    title,
+    blurb,
+    items,
+}: {
+    eyebrow: string;
+    title: string;
+    blurb: string;
+    items: WorkCardProps[];
+}) {
+    return (
+        <section className="pt-16">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] cl-text-neutral-text-low-contrast mb-3">
+                {eyebrow}
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold cl-text-neutral-text-high-contrast tracking-tight">
+                {title}
+            </h2>
+            <p className="mt-2 text-base cl-text-neutral-text-medium-contrast max-w-2xl">{blurb}</p>
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+                {items.map((c) => (
+                    <WorkCard key={c.href} {...c} />
+                ))}
+            </div>
+        </section>
+    );
+}
 
 export function Works() {
-    const navigate = useNavigate();
-
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     return (
-        <div className="cl-bg-neutral-surface-level-0 min-h-screen cl-pt-scale-800 cl-pb-scale-1500">
-            <div className="cl-max-w-container-wide mx-auto cl-px-scale-300">
-                {/* Header */}
-                <header className="cl-mb-scale-400 cl-pt-scale-600">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between cl-gap-scale-400">
-                        <div className="cl-max-w-container-text">
-                            <h1 className="cl-text-600 cl-weight-bold cl-text-neutral-text-high-contrast cl-mb-scale-250 tracking-tight">
-                                Workspace.
-                            </h1>
-                            <p className="cl-text-neutral-text-medium-contrast cl-text-200 cl-leading-150">
-                                A choice selection of product systems focused on <span className="cl-text-neutral-text-high-contrast cl-weight-semibold">human cognition</span>, <span className="cl-text-neutral-text-high-contrast cl-weight-semibold">agentic AI</span>, and <span className="cl-text-neutral-text-high-contrast cl-weight-semibold">secure architecture</span>.
-                            </p>
-                        </div>
-                    </div>
+        <div className="cl-bg-neutral-surface-level-0 min-h-screen pb-24">
+            <div className="max-w-5xl mx-auto px-6">
+                <header className="pt-12">
+                    <h1 className="text-4xl md:text-6xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.1]">
+                        Work
+                    </h1>
+                    <p className="mt-6 text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-relaxed font-medium max-w-3xl">
+                        Two product cases with the reasoning shown in full, the system work behind them, and
+                        earlier explorations kept for context.
+                    </p>
                 </header>
 
-                {/* Section 1: Layer Explanation */}
-                <div className="cl-mb-scale-500 flex flex-col cl-gap-scale-200 cl-max-w-container-text cl-border-l-medium cl-border-border-color-default cl-pl-scale-400 cl-py-scale-050">
-                    <p className="cl-text-neutral-text-medium-contrast cl-text-100 cl-weight-medium cl-leading-150">
-                        This workspace is structured into three layers:
-                    </p>
-                    <ul className="flex flex-col cl-gap-scale-150">
-                        <li className="cl-text-neutral-text-medium-contrast">
-                            <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">Design</span> — where complexity is translated into usable systems
-                        </li>
-                        <li className="cl-text-neutral-text-medium-contrast">
-                            <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">AI</span> — where workflows are accelerated through agent-driven execution
-                        </li>
-                        <li className="cl-text-neutral-text-medium-contrast">
-                            <span className="cl-text-neutral-text-high-contrast cl-weight-bold tracking-tight">Privacy-aware UX</span> — where data exposure, anonymity and safe defaults are designed
-                        </li>
-                    </ul>
-                    <p className="cl-text-neutral-text-medium-contrast cl-mt-scale-200 opacity-80 cl-text-075 italic">
-                        Each layer contains case studies and working systems that demonstrate how these connect in real products.
-                    </p>
-                </div>
+                <Category
+                    eyebrow="01 · Product cases"
+                    title="Product cases"
+                    blurb="Research, product decisions and the evidence behind them — written up in full."
+                    items={PRODUCT_CASES}
+                />
 
-                {/* Product Cases — featured case studies */}
-                <div className="cl-mb-scale-1000">
-                    <h2 className="cl-text-050 cl-weight-bold uppercase tracking-[0.3em] cl-text-neutral-text-low-contrast cl-mb-scale-300">Product Cases :</h2>
-                    <Link
-                        to="/work/respondent-experience"
-                        className="group block cl-radius-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-p-scale-600 hover:cl-border-border-color-strong hover:shadow-xl transition-all cl-focus-ring"
-                    >
-                        <div className="flex flex-wrap items-center gap-2 cl-mb-scale-300">
-                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border cl-border-border-color-strong cl-text-neutral-text-medium-contrast">Public · Anonymised</span>
-                            <span className="text-[10px] font-bold tracking-wider uppercase cl-text-neutral-text-low-contrast">Respondent Experience · UX Research · Enterprise SaaS</span>
-                        </div>
-                        <h3 className="cl-text-400 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight cl-mb-scale-200 group-hover:cl-text-brand-primary-base transition-colors">
-                            Three Questions Were Not the Problem
-                        </h3>
-                        <p className="cl-text-100 cl-leading-150 cl-text-neutral-text-medium-contrast max-w-2xl">
-                            A respondent-experience study showing why a short survey still failed to earn sustained and honest participation.
-                        </p>
-                        <div className="cl-mt-scale-400 flex items-center gap-2 cl-text-075 cl-weight-medium cl-text-brand-primary-base">
-                            Read the case study
-                            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </div>
-                    </Link>
+                <Category
+                    eyebrow="02 · Systems"
+                    title="Systems"
+                    blurb="How decisions become rules, components and guidance a team can build against."
+                    items={SYSTEMS}
+                />
 
-                    <Link
-                        to="/work/dashboard-explainability"
-                        className="group block cl-radius-xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-p-scale-600 hover:cl-border-border-color-strong hover:shadow-xl transition-all cl-focus-ring cl-mt-scale-400"
-                    >
-                        <div className="flex flex-wrap items-center gap-2 cl-mb-scale-300">
-                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border cl-border-border-color-strong cl-text-neutral-text-medium-contrast">Sanitised enterprise case study</span>
-                            <span className="text-[10px] font-bold tracking-wider uppercase cl-text-neutral-text-low-contrast">Analytics UX · Enterprise SaaS · Explainability · Design Systems</span>
-                        </div>
-                        <h3 className="cl-text-400 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight cl-mb-scale-200 group-hover:cl-text-brand-primary-base transition-colors">
-                            Designing Dashboards People Can Read, Trust and Act On
-                        </h3>
-                        <p className="cl-text-100 cl-leading-150 cl-text-neutral-text-medium-contrast max-w-2xl">
-                            Why a polished analytics dashboard still needed an expert to explain it — and the explanation layer built to replace that dependency.
-                        </p>
-                        <div className="cl-mt-scale-400 flex items-center gap-2 cl-text-075 cl-weight-medium cl-text-brand-primary-base">
-                            Read the case study
-                            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </div>
-                    </Link>
-                </div>
-
-                {/* Gateway View - Only the 3 cards requested */}
-                <div className="grid grid-cols-1 md:grid-cols-3 cl-gap-scale-400 cl-mb-scale-1000">
-                    <ServiceCard
-                        title="Design Layer"
-                        description="UX for complex enterprise systems, focused on cognitive load and mental models."
-                        icon={<Layers className="w-6 h-6 cl-text-brand-primary-base" />}
-                        variant="light"
-                        className="h-full cl-radius-xl border cl-border-border-color-default cl-p-scale-200 hover:shadow-xl transition-all"
-                        onClick={() => navigate('/work/design')}
-                    />
-                    <ServiceCard
-                        title="AI Layer"
-                        description="Generative UI and agentic workflows that bridge human intent and machine execution."
-                        icon={<Zap className="w-6 h-6 text-amber-500" />}
-                        variant="light"
-                        className="h-full cl-radius-xl border cl-border-border-color-default cl-p-scale-200 hover:shadow-xl transition-all"
-                        onClick={() => navigate('/work/ai')}
-                    />
-                    <ServiceCard
-                        title="Privacy-aware UX"
-                        description="Anonymity, PII minimisation, role-aware access and safe data exposure, designed into the product."
-                        icon={<Shield className="w-6 h-6 text-emerald-500" />}
-                        variant="light"
-                        className="h-full cl-radius-xl border cl-border-border-color-default cl-p-scale-200 hover:shadow-xl transition-all"
-                        onClick={() => navigate('/work/security')}
-                    />
-                </div>
-
-                {/* Section 2: What You'll Find Inside */}
-                <div className="cl-mt-scale-900 cl-pt-scale-800 border-t cl-border-border-color-default">
-                    <h2 className="cl-text-050 cl-weight-bold uppercase tracking-[0.3em] cl-text-neutral-text-low-contrast cl-mb-scale-200">Inside each layer :</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 cl-gap-scale-600">
-                        <div className="flex flex-col cl-gap-scale-200">
-                            <h3 className="cl-text-200 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight underline decoration-neutral-200 underline-offset-8">Case Studies</h3>
-                            <p className="cl-text-neutral-text-medium-contrast cl-leading-150 cl-text-075">Real product problems and system-level solutions.</p>
-                        </div>
-                        <div className="flex flex-col cl-gap-scale-200">
-                            <h3 className="cl-text-200 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight underline decoration-neutral-200 underline-offset-8">Working Systems</h3>
-                            <p className="cl-text-neutral-text-medium-contrast cl-leading-150 cl-text-075">AI agents and workflows demonstrating execution.</p>
-                        </div>
-                        <div className="flex flex-col cl-gap-scale-200">
-                            <h3 className="cl-text-200 cl-weight-bold cl-text-neutral-text-high-contrast tracking-tight underline decoration-neutral-200 underline-offset-8">Design Decisions</h3>
-                            <p className="cl-text-neutral-text-medium-contrast cl-leading-150 cl-text-075">How complexity is structured into clarity.</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Section 3: How I Work (Pipeline) */}
-                <div className="cl-mt-scale-800 flex flex-col">
-                    <h2 className="cl-text-050 cl-weight-bold uppercase tracking-[0.3em] cl-text-neutral-text-low-contrast cl-mb-scale-200">Methodology :</h2>
-                    <div className="flex flex-wrap items-center cl-gap-scale-250 cl-text-neutral-text-high-contrast cl-text-200 cl-weight-semibold tracking-tight">
-                        <span>Research</span>
-                        <span className="cl-text-neutral-text-low-contrast cl-weight-light opacity-50">/</span>
-                        <span>System Design</span>
-                        <span className="cl-text-neutral-text-low-contrast cl-weight-light opacity-50">/</span>
-                        <span>AI-assisted generation</span>
-                        <span className="cl-text-neutral-text-low-contrast cl-weight-light opacity-50">/</span>
-                        <span>Refinement</span>
-                        <span className="cl-text-neutral-text-low-contrast cl-weight-light opacity-50">/</span>
-                        <span>Production UI</span>
-                    </div>
-                    <p className="cl-text-neutral-text-medium-contrast cl-max-w-container-text cl-leading-150 opacity-80 cl-mt-scale-200">
-                        This ensures every output is not just designed, but built and usable.
-                    </p>
-                </div>
-
-                {/* Section 4: Final Proof Line */}
-                <div className="cl-mt-scale-600 text-center border-t cl-border-border-color-default cl-pt-scale-600 cl-pb-scale-500">
-                    <p className="cl-text-050 cl-weight-bold uppercase tracking-[0.4em] cl-text-neutral-text-low-contrast opacity-40">
-                        From concept to working system — not just screens.
-                    </p>
-                </div>
+                <Category
+                    eyebrow="03 · Earlier work"
+                    title="Experiments and earlier work"
+                    blurb="Kept for context rather than as evidence. Some original outcome claims have been removed because measurement evidence is not available publicly."
+                    items={EARLIER}
+                />
             </div>
         </div>
     );
