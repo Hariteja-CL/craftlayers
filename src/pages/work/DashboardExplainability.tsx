@@ -17,6 +17,8 @@ import {
 } from '../../components/case-study/readingTime';
 import {
     SyntheticMetricCard,
+    ParticipationCard,
+    DistributionCard,
     PrototypeLabel,
     SEGMENTS,
     type CardPanel,
@@ -33,6 +35,15 @@ const CALLOUTS: { title: string; body: string }[] = [
     { title: 'Labels beside every colour', body: 'The bar, legend and detail panel all repeat the band name and percentage, so nothing depends on colour perception.' },
     { title: 'Action attached to evidence', body: 'Every band ends in a next step — sustain, review or escalate — so a reader leaves with a decision, not just a number.' },
     { title: 'Width tuned for reading', body: 'The card is sized so labels and summary text never wrap awkwardly; readability was chosen over density.' },
+];
+
+/** The five colour roles a dashboard has to keep apart. */
+const COLOUR_ROLES: { role: string; body: string }[] = [
+    { role: 'Brand', body: 'Navigation, actions and product identity. Never analytical status by default.' },
+    { role: 'Evaluative status', body: 'Positive, attention and risk — only where a value genuinely is better or worse.' },
+    { role: 'Participation state', body: 'Completed, pending, follow-up due, unavailable. Workflow states, not judgements.' },
+    { role: 'Categorical', body: 'Groups, segments and response types. Colour distinguishes; it does not rank.' },
+    { role: 'Interaction state', body: 'Hover, focus and selection. Never competing with data meaning.' },
 ];
 
 const STATE_SHOWCASE: { panel: CardPanel; label: string }[] = [
@@ -630,6 +641,43 @@ export function DashboardExplainability() {
                                 </p>
                             </div>
                         </div>
+
+                        {/* Five colour roles — the evaluative palette is only one of them */}
+                        <div className="mt-8 pt-6 border-t cl-border-border-color-default">
+                            <p className="text-base font-semibold cl-text-neutral-text-high-contrast mb-4">
+                                Different data meanings require different colour systems.
+                            </p>
+                            <dl className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
+                                {COLOUR_ROLES.map((r) => (
+                                    <div key={r.role}>
+                                        <dt className="text-xs font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast mb-1">{r.role}</dt>
+                                        <dd className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">{r.body}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        </div>
+
+                        {/* Participation semantics — the most common misuse */}
+                        <div className="mt-6 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 p-6">
+                            <p className="text-base font-semibold cl-text-neutral-text-high-contrast">
+                                Missing data is not bad data. Pending is a state, not a risk.
+                            </p>
+                            <p className="mt-2 text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
+                                Reaching for red, amber and green on every metric invents meaning that isn't there.
+                                Someone who has not answered yet has not failed — colouring them red makes a neutral
+                                workflow state feel punitive, and quietly tells a leader to worry about the wrong thing.
+                                Not every incomplete or missing state is negative.
+                            </p>
+                            <div className="mt-5">
+                                <ParticipationCard />
+                            </div>
+                            <p className="mt-4 text-sm cl-text-neutral-text-low-contrast">
+                                Completed reads as done, follow-up uses amber only where a reminder is genuinely due,
+                                pending stays neutral, and red is reserved for an actual failure. Every state is
+                                labelled, so none of this depends on colour alone.
+                            </p>
+                        </div>
+
                         <PrototypeLabel />
                     </figure>
                 </section>
@@ -700,10 +748,12 @@ export function DashboardExplainability() {
 
                     {/* Visual 6 — compact composition built from the same card */}
                     <figure className="rounded-3xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
-                        <div className="grid md:grid-cols-3 gap-5">
+                        {/* Three kinds of data, three colour systems — evaluative,
+                            participation state, and categorical distribution. */}
+                        <div className="grid md:grid-cols-3 gap-5 items-start">
                             <SyntheticMetricCard compact forcedPanel="none" />
-                            <SyntheticMetricCard compact forcedPanel="none" />
-                            <SyntheticMetricCard compact forcedPanel="none" />
+                            <ParticipationCard />
+                            <DistributionCard />
                         </div>
 
                         <div
@@ -723,8 +773,9 @@ export function DashboardExplainability() {
                         </div>
 
                         <figcaption className="mt-6 text-sm cl-text-neutral-text-medium-contrast">
-                            The same card repeated across metrics, with a recommendation that inherits the evidence
-                            already on screen. A reconstruction of the concept — not the production product.
+                            Three kinds of data, three colour systems: an evaluative index, a participation state
+                            where pending stays neutral, and a categorical split where colour distinguishes rather
+                            than ranks. A reconstruction of the concept, not the production product.
                         </figcaption>
                         <PrototypeLabel />
                     </figure>
