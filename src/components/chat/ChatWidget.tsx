@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ChatPanel } from './ChatPanel';
 import { ChatButton } from './ChatButton';
+import { resolvePageContext } from './pageContext';
 
 export interface Message {
     id: string;
@@ -17,6 +19,7 @@ const STORAGE_KEY = 'hariteja_chat_session';
 const MESSAGES_KEY = 'hariteja_chat_messages';
 
 export function ChatWidget() {
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [sessionId, setSessionId] = useState<string>('');
@@ -67,6 +70,9 @@ export function ChatWidget() {
         setMessages(prev => [...prev, userMsg]);
         setIsThinking(true);
 
+        // Resolved per send, so it always reflects the route the visitor is on.
+        const pageContext = resolvePageContext(location.pathname);
+
         try {
             const apiUrl = import.meta.env.VITE_B_GATEWAY_URL;
             const apiKey = import.meta.env.VITE_B_GATEWAY_AUTH;
@@ -84,7 +90,10 @@ export function ChatWidget() {
                 },
                 body: JSON.stringify({
                     message: content,
-                    session_id: sessionId
+                    session_id: sessionId,
+                    // Tells the gateway which approved knowledge document to
+                    // consult. Omitted entirely on routes with no mapping.
+                    ...(pageContext ? { page_context: pageContext } : {})
                 })
             });
 

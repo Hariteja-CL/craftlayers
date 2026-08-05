@@ -8,10 +8,20 @@ export interface NarrationSection {
     body: string;
 }
 
+/**
+ * Why a section changed. `start` means the listener deliberately began (Play
+ * from idle, or Repeat) and a one-time scroll is acceptable; `advance` means
+ * narration flowed into the next section on its own, where moving the page
+ * under the reader would be hostile.
+ */
+export type SectionChangeReason = 'start' | 'advance' | 'stop';
+
 interface Props {
     sections: NarrationSection[];
     /** Pre-computed listen estimate, e.g. "5 min". */
     estimatedDuration: string;
+    /** Reports the narration section index, or null when nothing is active. */
+    onSectionChange?: (index: number | null, reason: SectionChangeReason) => void;
 }
 
 type PlayerState = 'ready' | 'playing' | 'paused' | 'finished' | 'unavailable';
@@ -39,7 +49,7 @@ const STATE_LABEL: Record<PlayerState, string> = {
  * autoplays. When speech is unsupported the chip does not render at all, so
  * the page stays fully usable.
  */
-export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
+export function CaseStudyListenPlayer({ sections, estimatedDuration, onSectionChange }: Props) {
     const [supported, setSupported] = useState<boolean | null>(null);
     const [state, setState] = useState<PlayerState>('ready');
     const [sectionIndex, setSectionIndex] = useState(0);
@@ -58,6 +68,11 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
      * generations makes stale callbacks inert.
      */
     const genRef = useRef(0);
+    /** Held in a ref so utterance callbacks never close over a stale prop. */
+    const onSectionChangeRef = useRef(onSectionChange);
+    useEffect(() => {
+        onSectionChangeRef.current = onSectionChange;
+    }, [onSectionChange]);
 
     // Feature detection after mount, so no flash of the wrong state.
     useEffect(() => {
@@ -114,10 +129,11 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
      * Always cancels first so repeated Play taps replace rather than stack.
      */
     const speakFrom = useCallback(
-        (start: number) => {
+        (start: number, reason: SectionChangeReason = 'start') => {
             if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
             if (start >= sections.length) {
                 setState('finished');
+                onSectionChangeRef.current?.(null, 'stop');
                 return;
             }
 
@@ -126,6 +142,7 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
 
             indexRef.current = start;
             setSectionIndex(start);
+            onSectionChangeRef.current?.(start, reason);
 
             const section = sections[start];
             const utterance = new SpeechSynthesisUtterance(`${section.title}. ${section.body}`);
@@ -137,15 +154,18 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
                 if (generation !== genRef.current) return; // superseded
                 const next = indexRef.current + 1;
                 if (next < sections.length) {
-                    speakFrom(next);
+                    // Flowed onward by itself — update the highlight, don't scroll.
+                    speakFrom(next, 'advance');
                 } else {
                     setState('finished');
+                    onSectionChangeRef.current?.(null, 'stop');
                 }
             };
 
             utterance.onerror = () => {
                 if (generation !== genRef.current) return;
                 setState('ready');
+                onSectionChangeRef.current?.(null, 'stop');
             };
 
             window.speechSynthesis.speak(utterance);
@@ -166,12 +186,12 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
             setState('playing');
             return;
         }
-        speakFrom(state === 'finished' ? 0 : indexRef.current);
+        speakFrom(state === 'finished' ? 0 : indexRef.current, 'start');
     }, [supported, state, speakFrom]);
 
     const handleRepeat = useCallback(() => {
         if (!supported) return;
-        speakFrom(0);
+        speakFrom(0, 'start');
     }, [supported, speakFrom]);
 
     const handleStop = useCallback(() => {
@@ -181,6 +201,7 @@ export function CaseStudyListenPlayer({ sections, estimatedDuration }: Props) {
         indexRef.current = 0;
         setSectionIndex(0);
         setState('ready');
+        onSectionChangeRef.current?.(null, 'stop');
     }, [supported]);
 
     // Nothing to show until detection resolves; hidden entirely when

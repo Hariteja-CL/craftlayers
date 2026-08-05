@@ -1,8 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Badge } from '../../components/ui/Badge';
-import { CaseStudyListenPlayer } from '../../components/case-study/CaseStudyListenPlayer';
+import {
+    CaseStudyListenPlayer,
+    type SectionChangeReason,
+} from '../../components/case-study/CaseStudyListenPlayer';
 import { CaseStudyJumpNav } from '../../components/case-study/CaseStudyJumpNav';
 import { CaseStudyDisclosure } from '../../components/case-study/CaseStudyDisclosure';
 import {
@@ -129,6 +132,27 @@ const JUMP_TARGETS = [
 ];
 
 /**
+ * Maps each curated narration section (by index) to the id of the visible page
+ * section it corresponds to, so the page can show which part is being read.
+ *
+ * The narration is a condensed summary, so this is a best-fit mapping to the
+ * section whose content dominates that passage — not a literal 1:1 transcript
+ * of the page.
+ */
+const NARRATION_TO_SECTION: string[] = [
+    'overview',                    // 0  Overview
+    'evidence-environment',        // 1  The problem
+    'journey',                     // 2  Respondent journey
+    'five-conditions',             // 3  Five conditions
+    'evidence-insight-decision',   // 4  Key decisions
+    'feedback-loop',               // 5  Feedback loop
+    'ownership',                   // 6  Ownership
+    'future-state',                // 7  Future direction
+    'limitations',                 // 8  Limitations
+    'reflection',                  // 9  Reflection
+];
+
+/**
  * Listen time is derived from the curated narration transcript only — a
  * different, shorter source than the visible page. Computed once at module
  * load rather than hardcoded.
@@ -156,6 +180,51 @@ export function RespondentExperience() {
         const listen = `${formatMinutes(LISTEN_MINUTES)} listen`;
         return readMinutes ? `${formatMinutes(readMinutes)} read · ${listen}` : listen;
     }, [readMinutes]);
+
+    /** Id of the section currently being narrated, or null when idle. */
+    const [narratedSectionId, setNarratedSectionId] = useState<string | null>(null);
+
+    const handleSectionChange = useCallback(
+        (index: number | null, reason: SectionChangeReason) => {
+            if (index === null) {
+                setNarratedSectionId(null);
+                return;
+            }
+            const id = NARRATION_TO_SECTION[index] ?? null;
+            setNarratedSectionId(id);
+
+            // Scroll only when the listener deliberately started or repeated —
+            // never on automatic section advance, which would yank the page
+            // away from someone reading ahead.
+            if (reason !== 'start' || !id) return;
+            const el = document.getElementById(id);
+            if (!el) return;
+            const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+            el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+        },
+        []
+    );
+
+    /** Props applied to a narratable <section>. Highlight is a soft tint plus
+     *  a visible "Now reading" label — never colour alone. */
+    const narratable = (id: string) => {
+        const active = narratedSectionId === id;
+        return {
+            'aria-current': active ? ('true' as const) : undefined,
+            className:
+                'pt-20 -mx-4 px-4 rounded-2xl transition-colors motion-reduce:transition-none ' +
+                (active ? 'cl-bg-neutral-surface-level-1' : ''),
+        };
+    };
+
+    /** Small inline marker shown above the heading of the active section. */
+    const NowReading = ({ id }: { id: string }) =>
+        narratedSectionId === id ? (
+            <p className="mb-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base">
+                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base" />
+                Now reading
+            </p>
+        ) : null;
 
     return (
         <article className="cl-bg-neutral-surface-level-0 min-h-screen font-sans pb-28">
@@ -215,13 +284,15 @@ export function RespondentExperience() {
             <CaseStudyListenPlayer
                 sections={NARRATION_SECTIONS}
                 estimatedDuration={formatMinutes(LISTEN_MINUTES)}
+                onSectionChange={handleSectionChange}
             />
 
             <div ref={proseRef} className="max-w-4xl mx-auto px-6">
 
                 {/* ── Central question + hero visual ─────────────── */}
-                <section aria-labelledby="overview" className="pt-16">
+                <section aria-labelledby="overview" {...narratable('overview')}>
                     <h2 id="overview" className="sr-only scroll-mt-28">Overview</h2>
+                    <NowReading id="overview" />
                     <p
                         style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
                         className="text-xl md:text-2xl font-medium cl-text-neutral-text-high-contrast leading-relaxed border-l-2 pl-6"
@@ -276,7 +347,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 2. Internal evidence environment ───────────── */}
-                <section className="pt-20">
+                <section {...narratable('evidence-environment')}>
+                    <NowReading id="evidence-environment" />
                     <SectionHeading eyebrow="02 · Evidence environment" id="evidence-environment" title="The internal evidence environment" />
                     <div className="space-y-5 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         <p>
@@ -356,7 +428,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 4. Respondent journey ──────────────────────── */}
-                <section className="pt-20">
+                <section {...narratable('journey')}>
+                    <NowReading id="journey" />
                     <SectionHeading eyebrow="04 · The journey" id="journey" title="The respondent journey" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
                         Following one respondent through a single cycle showed where the experience thinned —
@@ -403,7 +476,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 5. Five respondent conditions ──────────────── */}
-                <section className="pt-20">
+                <section {...narratable('five-conditions')}>
+                    <NowReading id="five-conditions" />
                     <SectionHeading eyebrow="05 · The framework" id="five-conditions" title="The five respondent conditions" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
                         Together, these five conditions form the <strong>respondent contract</strong>. The pilot
@@ -519,7 +593,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 6. Evidence → insight → decision ───────────── */}
-                <section className="pt-20">
+                <section {...narratable('evidence-insight-decision')}>
+                    <NowReading id="evidence-insight-decision" />
                     <SectionHeading eyebrow="06 · Decisions" id="evidence-insight-decision" title="Evidence → insight → decision" />
                     <div className="grid md:grid-cols-2 gap-4">
                         {EVIDENCE_CARDS.map((c, i) => (
@@ -542,7 +617,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 7. Broken feedback loop ────────────────────── */}
-                <section className="pt-20">
+                <section {...narratable('feedback-loop')}>
+                    <NowReading id="feedback-loop" />
                     <SectionHeading eyebrow="07 · The loop" id="feedback-loop" title="The broken feedback loop" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
                         A recurring survey is a loop. When one step is missing, the whole loop weakens.
@@ -587,7 +663,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 8. Recommended future-state journey ────────── */}
-                <section className="pt-20">
+                <section {...narratable('future-state')}>
+                    <NowReading id="future-state" />
                     <SectionHeading eyebrow="08 · The system" id="future-state" title="The recommended respondent-experience system" />
                     <p className="text-lg leading-relaxed cl-text-neutral-text-medium-contrast mb-8">
                         Strengthening all five conditions together turns a one-off ask into a lifecycle that
@@ -612,7 +689,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 9. Ownership model ─────────────────────────── */}
-                <section className="pt-20">
+                <section {...narratable('ownership')}>
+                    <NowReading id="ownership" />
                     <SectionHeading eyebrow="09 · Ownership" id="ownership" title="The ownership model" />
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse min-w-[520px]">
@@ -643,7 +721,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 10. Limitations ────────────────────────────── */}
-                <section className="pt-20">
+                <section {...narratable('limitations')}>
+                    <NowReading id="limitations" />
                     <SectionHeading eyebrow="10 · Limitations" id="limitations" title="Limitations" />
                     <ul className="space-y-2.5 text-base cl-text-neutral-text-medium-contrast">
                         {[
@@ -683,7 +762,8 @@ export function RespondentExperience() {
                 </section>
 
                 {/* ── 11. Reflection ─────────────────────────────── */}
-                <section className="pt-20">
+                <section {...narratable('reflection')}>
+                    <NowReading id="reflection" />
                     <SectionHeading eyebrow="11 · Reflection" id="reflection" title="What I learned" />
                     <div className="space-y-5 text-lg leading-relaxed cl-text-neutral-text-medium-contrast">
                         <p>
