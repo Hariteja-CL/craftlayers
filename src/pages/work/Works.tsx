@@ -49,14 +49,11 @@ const SYSTEMS: WorkCardProps[] = [
     },
 ];
 
+// The Enculture entry is deliberately absent. Its route names the client, and
+// the two flagship cases anonymise that same client — so listing it here, even
+// under a generic title, would undo the anonymisation. The route stays alive to
+// avoid breaking existing links, but is not listed or promoted anywhere.
 const EARLIER: WorkCardProps[] = [
-    {
-        title: 'Enculture',
-        problem: 'Culture analytics platform — survey flows, dashboards and action planning.',
-        status: 'Earlier experiment',
-        category: 'B2B SaaS · Culture analytics',
-        href: '/work/enculture',
-    },
     {
         title: 'Inwards',
         problem: 'Emotion-analytics SaaS, structuring emotional data into role-specific views.',
