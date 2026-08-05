@@ -227,15 +227,21 @@ export function RespondentExperience() {
                 }
                 : undefined,
             className:
-                'pt-20 -mx-5 pl-4 pr-5 rounded-2xl border-l-2 border-transparent ' +
+                'relative pt-20 -mx-5 pl-4 pr-5 rounded-2xl border-l-2 border-transparent ' +
                 'transition-colors motion-reduce:transition-none',
         };
     };
 
-    /** Small inline marker shown above the heading of the active section. */
+    /**
+     * "Now reading" marker for the active section.
+     *
+     * Absolutely positioned inside the section's existing top padding, so
+     * activating a section adds no height and never reflows the content below
+     * it — important on mobile, where a 35px insert is a visible jump.
+     */
     const NowReading = ({ id }: { id: string }) =>
         narratedSectionId === id ? (
-            <p className="mb-3 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base">
+            <p className="absolute top-10 left-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base">
                 <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base" />
                 Now reading
             </p>
