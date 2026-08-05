@@ -11,12 +11,13 @@ export function LayoutShell() {
     // Audit Issue A: Unique Page Titles
     useEffect(() => {
         const path = location.pathname;
-        let title = 'Hariteja Anandipati | Portfolio';
+        // Format: "[Page Name] — Hari Nandipati | CraftLayers"
+        let title = 'Hari Nandipati — Senior Product Designer | CraftLayers';
 
-        if (path === '/') title = 'CraftLayers | Design System Architect';
-        else if (path.includes('/work')) title = 'Work | CraftLayers';
-        else if (path.includes('/blog')) title = 'Insights | CraftLayers';
-        else if (path === '/about') title = 'About | Hariteja';
+        if (path === '/') title = 'Hari Nandipati — Senior Product Designer | CraftLayers';
+        else if (path.includes('/work')) title = 'Work — Hari Nandipati | CraftLayers';
+        else if (path.includes('/blog')) title = 'Insights — Hari Nandipati | CraftLayers';
+        else if (path === '/about') title = 'About — Hari Nandipati | CraftLayers';
 
         document.title = title;
     }, [location]);

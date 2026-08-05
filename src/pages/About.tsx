@@ -25,7 +25,7 @@ export function About() {
 
                     <div className="space-y-6 text-lg cl-text-secondary leading-relaxed font-medium">
                         <p>
-                            I am <span className="cl-text-primary font-bold">Hariteja Nandipati</span>, a Design System Architect based in Hyderabad.
+                            I am <span className="cl-text-primary font-bold">Hariteja Nandipati</span>, a Senior Product Designer based in Hyderabad.
                         </p>
                         <p>
                             My philosophy sits at the intersection of three disciplines that rarely talk to each other:
@@ -47,13 +47,13 @@ export function About() {
                             <li className="flex items-start gap-3">
                                 <div className="mt-2 w-1.5 h-1.5 rounded-full cl-bg-semantic-warning-icon shrink-0" />
                                 <span>
-                                    <span className="cl-text-primary font-bold">Security Protocol:</span> Trust by design.
+                                    <span className="cl-text-primary font-bold">Privacy-Aware UX:</span> Trust by design.
                                 </span>
                             </li>
                         </ul>
 
                         <p className="pt-2">
-                            Currently serving as an <span className="cl-text-primary font-bold">AI-Native UX Lead</span>, I help enterprise teams transform "vibe-coded" chaos into governed, production-ready systems.
+                            Currently serving as a <span className="cl-text-primary font-bold">Senior Product Designer</span>, I help enterprise teams turn AI-generated, ungoverned UI into researched, governed, production-ready systems.
                         </p>
                     </div>
                 </div>

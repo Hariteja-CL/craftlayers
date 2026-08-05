@@ -29,12 +29,12 @@ export function HeroSection() {
 
                     {/* Headline */}
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.05] mb-6">
-                        UX lead who<br />
-                        <span className="cl-text-brand-primary-base">ships the frontend.</span>
+                        Senior Product Designer<br />
+                        <span className="cl-text-brand-primary-base">&amp; Product Systems Builder</span>
                     </h1>
 
                     <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-2 leading-relaxed max-w-2xl font-medium">
-                        AI-Native UX Engineer / System-Driven Product Designer | Cybersecurity Practitioner
+                        Enterprise UX · User Research · Analytics Dashboards · Design Systems · AI-Enabled Workflows
                     </p>
                     <p className="text-xs font-bold uppercase tracking-[0.2em] cl-text-neutral-text-low-contrast mb-10">
                         Designing systems, not just screens. AI-assisted workflows with production-ready execution.
@@ -70,7 +70,7 @@ export function HeroSection() {
 
                     {/* Keyword strip */}
                     <div className="mt-16 pt-8 border-t cl-border-border-color-default flex flex-wrap gap-x-5 gap-y-2 text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-low-contrast">
-                        {["Design Systems", "React / TypeScript", "Vibe Coding", "Usability Audits", "Design QA", "Security-Aware UX", "Figma → Frontend"].map((k, i, arr) => (
+                        {["Enterprise UX", "User Research", "Analytics Dashboards", "Design Systems", "AI-Enabled Workflows", "Privacy-Aware UX"].map((k, i, arr) => (
                             <span key={k} className="flex items-center gap-5">
                                 {k}
                                 {i < arr.length - 1 && <span className="cl-text-neutral-text-low-contrast opacity-30">/</span>}

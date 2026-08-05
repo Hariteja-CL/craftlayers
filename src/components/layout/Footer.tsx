@@ -13,8 +13,9 @@ export function Footer() {
                         &copy; {currentYear} Hariteja Nandipati. All rights reserved.
                     </div>
                     <p className="text-xs cl-text-neutral-text-low-contrast leading-relaxed opacity-70">
-                        CraftLayers is the professional portfolio and brand of Hariteja Nandipati, showcasing advanced UX design,
-                        system architecture, and security protocols.
+                        CraftLayers is the product design portfolio of Hari Nandipati, a Senior Product Designer specialising in
+                        enterprise UX, user research, analytics dashboards, design systems, AI-enabled workflows, and privacy-aware
+                        product experiences.
                     </p>
                 </div>
 
