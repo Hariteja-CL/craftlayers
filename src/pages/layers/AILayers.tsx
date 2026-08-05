@@ -27,7 +27,9 @@ export function AILayers() {
                 {/* Bento Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                    <Link to="/work/enculture" className="group md:col-span-2">
+                    {/* Points at the anonymised flagship case rather than the
+                        client-named route, which is no longer linked publicly. */}
+                    <Link to="/work/dashboard-explainability" className="group md:col-span-2">
                         <div className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 border border-neutral-800 p-6 md:p-12 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-900/20 group-hover:-translate-y-1">
                             {/* Background Glow */}
                             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[120px] mix-blend-screen opacity-40 group-hover:opacity-60 transition-opacity" />
@@ -43,7 +45,7 @@ export function AILayers() {
                                         </span>
                                     </div>
                                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                                        Enculture: From Passive Dashboards to <br />
+                                        From Passive Dashboards to <br />
                                         <span className="text-indigo-400">Agentic Action</span>
                                     </h2>
                                     <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg">

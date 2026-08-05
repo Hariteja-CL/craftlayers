@@ -58,11 +58,12 @@ export function DesignLayers() {
                         />
                     </div>
 
-                    {/* Enculture Case Study */}
-                    <div onClick={() => navigate('/work/enculture')} className="cursor-pointer">
+                    {/* Points at the anonymised flagship case. The client-named
+                        route is no longer linked from any public page. */}
+                    <div onClick={() => navigate('/work/dashboard-explainability')} className="cursor-pointer">
                         <ServiceCard
-                            title="Enculture"
-                            description="Prescriptive AI engine and culture analytics dashboards for enterprise retention intelligence."
+                            title="Enterprise analytics dashboards"
+                            description="Metric explanation, semantic colour and evidence-linked recommendations for enterprise decision-support."
                             icon={<Zap className="w-8 h-8 cl-text-brand-primary-base" />}
                             className="h-full hover:cl-border-brand-primary-base"
                         />

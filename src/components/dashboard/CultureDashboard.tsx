@@ -50,10 +50,10 @@ export function CultureDashboard() {
                     </div>
                     <Button
                         variant="outline"
-                        onClick={() => navigate('/work/enculture')}
+                        onClick={() => navigate('/work')}
                         className="bg-white"
                     >
-                        Back to Case Study
+                        Back to Work
                     </Button>
                 </header>
 
