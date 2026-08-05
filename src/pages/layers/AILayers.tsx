@@ -46,7 +46,7 @@ export function AILayers() {
                                         <span className="text-indigo-400">Agentic Action</span>
                                     </h2>
                                     <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg">
-                                        How we used Generative UI and Proactive Alerts to reduce "Insight to Action" time by 90% for HR Directors.
+                                        How we used Generative UI and Proactive Alerts to shorten the path from insight to action for HR leaders.
                                     </p>
                                     <div className="inline-flex items-center gap-2 text-white font-medium group-hover:translate-x-1 transition-transform">
                                         Read Case Study <ArrowRight className="w-5 h-5 ml-1" />

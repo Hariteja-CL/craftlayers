@@ -66,7 +66,7 @@ export function Enculture() {
                     </li>
                     <li className="flex gap-3 text-sm">
                         <div className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2 shrink-0" />
-                        <p><strong>Market:</strong> Goal to reduce development cycles by ~45% while optimizing for user retention.</p>
+                        <p><strong>Market:</strong> Goal to shorten development cycles while optimising for user retention.</p>
                     </li>
                 </ul>
             )
@@ -108,7 +108,7 @@ export function Enculture() {
                 <ul className="space-y-4">
                     <li className="flex gap-3">
                         <CheckIcon />
-                        <p><strong>Live Prototyping:</strong> Designed and deployed React/TypeScript frontends directly into the dev cycle, reducing time-to-market validation by 45%.</p>
+                        <p><strong>Live Prototyping:</strong> Designed and deployed React/TypeScript frontends directly into the dev cycle to shorten time-to-market validation.</p>
                     </li>
                     <li className="flex gap-3">
                         <CheckIcon />
@@ -182,7 +182,7 @@ export function Enculture() {
             content: (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
                     <div className="p-8 rounded-3xl cl-bg-emerald-50 cl-text-emerald-900 border cl-border-emerald-100 text-center">
-                        <div className="text-3xl font-bold">~45%</div>
+                        <div className="text-3xl font-bold">Faster cycles</div>
                         <p className="text-[10px] uppercase font-bold tracking-[0.2em] mt-3">Dev Cycle Reduction</p>
                     </div>
                     <div className="p-8 rounded-3xl cl-bg-indigo-50 cl-text-indigo-900 border cl-border-indigo-100 text-center">
@@ -201,8 +201,8 @@ export function Enculture() {
     return (
         <V2CaseStudyTemplate
             title="Enculture—The Action Engine (System-Driven UX)"
-            subtitle="Bridging engineering requirements with Human-in-the-Loop workflows."
-            impactValue="~45%"
+            subtitle="Bridging engineering requirements with Human-in-the-Loop workflows. · Earlier work — retained as an exploration of the design direction. Some original outcome claims have been removed because measurement evidence is not available publicly."
+            impactValue="Faster cycles"
             impactLabel="Dev Velocity"
             role="Senior UX Designer"
             duration="Jan 2024 - Present"
