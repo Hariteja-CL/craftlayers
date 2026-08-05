@@ -47,7 +47,7 @@ export function DesignLayers() {
                     <div onClick={() => navigate('/work/architecturing-governance')} className="cursor-pointer">
                         <ServiceCard
                             title="Architecturing Governance"
-                            description="Managing 'Vibe Coding' debt with a 3-tier token architecture."
+                            description="Managing AI-generated UI debt with a 3-tier token architecture."
                             icon={<Layers className="w-8 h-8 cl-text-brand-primary-base" />}
                             className="h-full hover:cl-border-brand-primary-base"
                         />

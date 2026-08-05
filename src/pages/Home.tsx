@@ -62,7 +62,7 @@ function AboutStrip() {
 function ApproachSection() {
     const flowA = [
         "Business requirements come in",
-        "I create vibe coding formats & structure",
+        "I define structured UX formats & flows",
         "Design system — tokens, components, patterns",
         "Prototype & user testing",
         "Stakeholder sign-off",
@@ -70,7 +70,7 @@ function ApproachSection() {
     ];
 
     const flowB = [
-        "Developer ships vibe-coded frontend",
+        "Developer ships AI-generated frontend",
         "I audit the UX and usability",
         "Map friction points & design system drift",
         "Fix directly in the codebase",
@@ -162,7 +162,7 @@ function FocusSection() {
     const areas = [
         { label: "Design System Architecture", desc: "Token systems, component libraries, pattern governance, and health audits that scale across teams." },
         { label: "Frontend Development", desc: "Production React / TypeScript built from design intent — components, states, responsiveness, accessibility." },
-        { label: "Vibe Coding & AI-Assisted Execution", desc: "Structured prompting formats and AI-assisted flows that accelerate idea-to-implementation speed." },
+        { label: "AI-Enabled Workflows", desc: "Structured prompting formats and AI-assisted flows that accelerate idea-to-implementation speed." },
         { label: "Usability & UX Audits", desc: "Finding friction, hierarchy failures, empty states, error handling gaps, and accessibility issues — then fixing them." },
         { label: "SaaS Dashboards & Enterprise UX", desc: "Complex data surfaces: tables, filters, charts, permissions, decision-support — cognitive load by design." },
         { label: "Security-Aware UX", desc: "Data least-privilege, obscured inputs, session-aware state, and zero-trust design patterns." },
@@ -401,7 +401,7 @@ function LayersSection() {
         },
         {
             id: "AI",
-            desc: "Generative UI and agentic workflows. Vibe coding formats, AI-assisted execution, autonomous frontends.",
+            desc: "Generative UI and AI-enabled product workflows — structured prompting formats and AI-assisted execution for faster, research-led delivery.",
             path: "/work/ai",
         },
         {
