@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { LayoutShell } from './components/layout/LayoutShell';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
+// About.tsx is retained on disk until the Profile route has been reviewed,
+// but is no longer routed — /about redirects to /profile.
+import { Profile } from './pages/Profile';
+import { Contact } from './pages/Contact';
 import { BlogListing } from './pages/blog/BlogListing';
 import { BlogPost } from './pages/blog/BlogPost';
 import { Inwards } from './pages/work/Inwards';
@@ -28,7 +31,11 @@ function App() {
       <Routes>
         <Route element={<LayoutShell />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+          {/* /about now lives at /profile. Client-side redirect for in-app
+              navigation; vercel.json handles direct requests. About.tsx is
+              retained until the Profile route has been reviewed. */}
+          <Route path="/about" element={<Navigate to="/profile" replace />} />
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/blog/secure-ux" element={<BlogPost />} />
           <Route path="/blog/governance" element={<Governance />} />
@@ -45,7 +52,7 @@ function App() {
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />
           <Route path="/work/enculture" element={<Enculture />} />
           <Route path="/dashboard/culture" element={<CultureDashboard />} />
-          <Route path="/contact" element={<div className="p-20 text-center">Contact Page (Coming Soon)</div>} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>
