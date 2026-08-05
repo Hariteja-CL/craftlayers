@@ -89,7 +89,7 @@ const OWNERSHIP: {
 }[] = [
     {
         group: 'Product discovery and UX research',
-        handles: 'Interviews, stakeholder feedback, artifact review and evidence mapping.',
+        handles: 'Interviews, stakeholder feedback, artifact review and evidence mapping, feeding into product strategy.',
         outcome: 'The team works on the problem that actually matters, not the reported symptom.',
         evidence: { label: 'Three Questions Were Not the Problem', href: '/work/respondent-experience' },
     },
@@ -131,7 +131,7 @@ const OWNERSHIP: {
     },
     {
         group: 'Implementation alignment',
-        handles: 'Turning decisions into rules, states and edge cases engineers can build from.',
+        handles: 'Developer handoff — turning decisions into rules, states and edge cases engineers can build from.',
         outcome: 'What ships matches what was decided.',
         evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
     },
