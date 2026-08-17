@@ -17,6 +17,8 @@ export function LayoutShell() {
         if (path === '/') title = 'Hari Nandipati — Senior Product Designer | CraftLayers';
         else if (path === '/profile') title = 'Profile — Hari Nandipati | CraftLayers';
         else if (path === '/contact') title = 'Contact — Hari Nandipati | CraftLayers';
+        // Specific routes must be checked before the /work catch-all below.
+        else if (path === '/work/design') title = 'Turning Design Decisions into Implementation Rules — Hariteja Nandipati';
         else if (path.includes('/work')) title = 'Work — Hari Nandipati | CraftLayers';
         else if (path.includes('/blog')) title = 'Writing — Hari Nandipati | CraftLayers';
 
