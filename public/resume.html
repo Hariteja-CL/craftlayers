@@ -4,10 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hariteja Nandipati — Resume 2026</title>
+    <title>Hariteja Nandipati — Senior Product Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!--
+        RESUME CONTENT ARCHITECTURE
+        ---------------------------
+        Sections are named and ordered so this file can later migrate to a
+        data-driven React resume without rewriting the content architecture.
+
+          resume-header        identity, contact
+          resume-summary       positioning paragraph
+          resume-capabilities  capability list
+          resume-experience    roles (company / role / period / context / bullets / evidence)
+          resume-methods       methods and systems
+          resume-selected-work case-study pointers
+          resume-tools         tooling, split by weight
+          resume-education     education and certification
+          resume-awards        recognition
+
+        Every experience bullet carries data-emphasis. A future job profile
+        (product | systems | research | data) may reorder or promote bullets
+        using these tags. It may NOT add, invent or reword factual content —
+        the source of truth stays identical across profiles.
+        Default profile: product.
+    -->
 
     <style>
         :root {
@@ -27,7 +50,7 @@
             --fs-role:    10.5pt;
             --fs-h2:      9pt;
             --fs-h1:      30pt;
-            --fs-tagline: 10pt;
+            --fs-tagline: 12pt;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0;
@@ -66,7 +89,7 @@
         }
 
         /* ── Header ───────────────────────────────────── */
-        header {
+        .resume-header {
             border-bottom: 1px solid var(--border);
             padding-bottom: 1.1rem;
             margin-bottom: 1.3rem;
@@ -77,7 +100,6 @@
             grid-template-columns: 1fr auto;
             gap: 0 2rem;
             align-items: start;
-            margin-bottom: 0.6rem;
         }
 
         .header-left h1 {
@@ -86,24 +108,23 @@
             letter-spacing: -0.01em;
             line-height: 1.05;
             color: var(--primary);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
 
+        /* Single primary identity. No competing titles. */
         .tagline {
             font-size: var(--fs-tagline);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
             color: var(--accent);
-            margin-bottom: 0.35rem;
+            line-height: 1.25;
         }
 
-        .impact-line {
+        .experience-line {
             font-size: var(--fs-small);
-            font-weight: 600;
-            color: var(--primary);
-            font-style: italic;
-            line-height: 1.45;
+            font-family: 'DM Mono', monospace;
+            color: var(--secondary);
+            margin-top: 0.3rem;
         }
 
         .contact-block {
@@ -135,11 +156,22 @@
             border: 1px solid var(--border);
         }
 
-        /* ── Two-column body ──────────────────────────── */
-        .body-grid {
-            display: grid;
-            grid-template-columns: 1fr 2.2fr;
-            gap: 0 2rem;
+        /* ── Summary ──────────────────────────────────── */
+        .resume-summary { margin-bottom: 1.25rem; }
+
+        .summary-lead {
+            font-size: 10pt;
+            color: #334155;
+            line-height: 1.55;
+            max-width: 58em;
+        }
+
+        .summary-support {
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            line-height: 1.5;
+            margin-top: 0.4rem;
+            max-width: 58em;
         }
 
         /* ── Section headings ─────────────────────────── */
@@ -168,7 +200,45 @@
 
         section { margin-bottom: 1.3rem; }
 
-        /* ── Timeline ─────────────────────────────────── */
+        /* ── Capabilities ─────────────────────────────── */
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.3rem 1.3rem;
+            list-style: none;
+        }
+
+        .capability-grid li {
+            padding-left: 0.7rem;
+            margin-bottom: 0;
+            font-size: var(--fs-small);
+            font-weight: 600;
+            color: #334155;
+            line-height: 1.4;
+        }
+
+        .capability-grid li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.42em;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--accent-bar);
+        }
+
+        .capability-support {
+            margin-top: 0.6rem;
+            font-size: var(--fs-small);
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .capability-support strong {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* ── Experience timeline ──────────────────────── */
         .timeline {
             border-left: 1.5px solid var(--border);
             margin-left: 4px;
@@ -198,6 +268,10 @@
             background: var(--accent-bar);
             border-color: var(--accent-bar);
         }
+
+        /* Older roles carry progressively less visual weight. */
+        .job-item.tier-earlier .role { font-size: var(--fs-body); }
+        .job-item.tier-earlier::before { border-color: var(--muted); }
 
         .job-header {
             display: flex;
@@ -229,7 +303,7 @@
             flex-shrink: 0;
         }
 
-        .domain-badge {
+        .job-context {
             font-size: var(--fs-small);
             font-weight: 700;
             text-transform: uppercase;
@@ -239,23 +313,37 @@
             display: block;
         }
 
-        .impact-label {
-            font-size: var(--fs-small);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--secondary);
-            margin: 0.5rem 0 0.25rem;
-        }
-
-        .domain-row {
+        .context-row {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             flex-wrap: wrap;
             margin-bottom: 0.4rem;
         }
-        .domain-row .domain-badge { margin-bottom: 0; }
+        .context-row .job-context { margin-bottom: 0; }
+
+        .job-evidence {
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            line-height: 1.45;
+            margin-top: 0.4rem;
+            padding-left: 0.7rem;
+            border-left: 2px solid var(--accent-border);
+        }
+
+        .job-evidence strong {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-size: 8pt;
+        }
+
+        .job-summary {
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            line-height: 1.5;
+        }
 
         .badge-winner {
             display: inline-flex;
@@ -267,7 +355,6 @@
             border: 1px solid #fcd34d;
             padding: 2px 8px;
             border-radius: 999px;
-            margin-left: 0.5rem;
             vertical-align: middle;
         }
 
@@ -293,10 +380,101 @@
             top: 0px;
         }
 
-        /* ── Sidebar ──────────────────────────────────── */
-        .sidebar section { margin-bottom: 1.2rem; }
+        /* ── Methods & systems ────────────────────────── */
+        .method-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.55rem 1.6rem;
+            list-style: none;
+        }
 
-        .pill-list { display: flex; flex-direction: column; gap: 0.35rem; }
+        .method-list li {
+            padding-left: 0.75rem;
+            margin-bottom: 0;
+            border-left: 2px solid var(--accent-border);
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            line-height: 1.45;
+        }
+
+        .method-list li::before { content: none; }
+
+        .method-name {
+            display: block;
+            font-size: 8.2pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            margin-bottom: 0.1rem;
+        }
+
+        /* ── Selected work ────────────────────────────── */
+        .work-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .work-list li {
+            display: grid;
+            grid-template-columns: 1.9rem 1fr;
+            gap: 0 0.4rem;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .work-list li::before { content: none; }
+
+        .work-index {
+            font-family: 'DM Mono', monospace;
+            font-weight: 600;
+            font-size: var(--fs-small);
+            color: var(--accent);
+            padding-top: 0.06rem;
+        }
+
+        .work-title {
+            font-size: var(--fs-body);
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.35;
+        }
+
+        .work-meta {
+            display: block;
+            font-size: var(--fs-small);
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .work-link {
+            font-family: 'DM Mono', monospace;
+            font-size: var(--fs-small);
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .work-link:hover { color: var(--accent); }
+
+        /* ── Tools ────────────────────────────────────── */
+        .tool-groups {
+            display: grid;
+            grid-template-columns: 1.25fr 1.15fr 0.85fr;
+            gap: 0 1.6rem;
+        }
+
+        .tool-group-label {
+            font-size: 8.2pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
         .pill {
             font-size: var(--fs-small);
@@ -309,94 +487,46 @@
             display: inline-block;
         }
 
-
-        .skill-group { margin-bottom: 0.75rem; }
-        .skill-group:last-child { margin-bottom: 0; }
-        .skill-group-label {
+        /* Implementation and AI are literacy, not primary craft — plain text,
+           deliberately lighter than the design/research pills. */
+        .tool-plain {
             font-size: var(--fs-small);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
             color: var(--muted);
-            margin-bottom: 0.35rem;
-        }
-
-        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-
-        /* ── Key Systems band (full-width, vertical list of boxes) ── */
-        .ks-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0.45rem;
-        }
-
-        /* ── Skills band (plain comma text, label left) ─── */
-        .skills-band { margin-bottom: 1.3rem; }
-        .skill-line {
-            display: flex;
-            gap: 0.75rem;
-            align-items: baseline;
-            margin-bottom: 0.3rem;
-            font-size: var(--fs-body);
-            color: var(--secondary);
             line-height: 1.5;
         }
-        .skill-line:last-child { margin-bottom: 0; }
-        .skill-label {
-            flex-shrink: 0;
-            width: 6.5rem;
-            font-size: var(--fs-small);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--accent);
-        }
-
-        /* ── Impact cards (compact horizontal list items) ── */
-        .impact-box {
-            background: var(--accent-bg);
-            border: 1px solid var(--accent-border);
-            border-left: 3px solid var(--accent-bar);
-            border-radius: 0.5rem;
-            padding: 0.45rem 0.85rem;
-            display: flex;
-            gap: 0.9rem;
-            align-items: baseline;
-        }
-
-        .impact-box-label {
-            flex-shrink: 0;
-            width: 11rem;
-            font-size: var(--fs-small);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--accent);
-            margin-bottom: 0;
-            line-height: 1.3;
-        }
-
-        .impact-box p { font-size: var(--fs-small); color: #78350f; line-height: 1.45; margin: 0; }
-        .impact-line-arch { color: var(--secondary) !important; font-style: italic; margin-top: 0.2rem; }
 
         /* ── Education + Awards bands (full width) ───────── */
         .edu-band { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--border); }
         .awards-band { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--border); }
 
+        .edu-sub-label {
+            font-size: 8.2pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            margin: 0 0 0.25rem;
+        }
+        .edu-group + .edu-group { margin-top: 0.6rem; }
+
         /* ── Compact pointer lines (Education + Awards) ──── */
         .edu-list, .awards-list {
             list-style: none; display: flex; flex-direction: column;
-            gap: 0.35rem; margin-top: 0.2rem;
+            gap: 0.3rem;
         }
 
         .edu-list li, .awards-list li {
             display: flex;
             align-items: flex-start;
             gap: 0.5rem;
+            padding-left: 0;
+            margin-bottom: 0;
             font-size: var(--fs-small);
             color: var(--secondary);
             line-height: 1.4;
         }
+
+        .edu-list li::before, .awards-list li::before { content: none; }
 
         .award-icon { flex-shrink: 0; line-height: 1.3; }
         .edu-list strong, .awards-list strong { color: var(--accent); font-weight: 700; }
@@ -479,25 +609,21 @@
                 padding-top: 0;
             }
 
-            /* Key Systems: label above text inside each box on narrow screens */
-            .ks-grid { gap: 0.5rem; }
-            .impact-box { flex-direction: column; gap: 0.2rem; }
-            .impact-box-label { width: auto; margin-bottom: 0.1rem; }
-            .skill-line { flex-direction: column; gap: 0.15rem; }
-            .skill-label { width: auto; }
-
-            /* Two-column body → single column */
-            .body-grid { grid-template-columns: 1fr; gap: 0; }
-            .sidebar { margin-bottom: 1.5rem; }
-            .sidebar section { margin-bottom: 1.4rem; }
+            /* Capabilities, methods, tools reflow */
+            .capability-grid { grid-template-columns: 1fr 1fr; gap: 0.3rem 1rem; }
+            .method-list { grid-template-columns: 1fr; gap: 0.6rem; }
+            .tool-groups { grid-template-columns: 1fr; gap: 1rem 0; }
+            .tool-group + .tool-group { margin-top: 0.9rem; }
 
             /* Career timeline a touch more padding */
             .timeline { padding-left: 1rem; }
 
             /* Slightly larger body text for phone readability */
-            li, .job-company, .summary-block, .impact-box p {
+            li, .summary-support, .job-summary, .job-evidence, .method-list li,
+            .capability-grid li, .tool-plain, .edu-list li, .awards-list li {
                 font-size: 10.5pt;
             }
+            .summary-lead { font-size: 11.5pt; }
 
             /* Keep the PDF button clear of content */
             .btn-print { bottom: 1rem; right: 1rem; padding: 0.65rem 1.25rem; }
@@ -506,6 +632,8 @@
         /* Extra-small phones */
         @media screen and (max-width: 420px) {
             .header-left h1 { font-size: 22pt; }
+            .capability-grid { grid-template-columns: 1fr; }
+            .work-list li { grid-template-columns: 1.6rem 1fr; }
         }
 
         /* ── Print ────────────────────────────────────── */
@@ -527,40 +655,41 @@
             .btn-print, .dl-toast { display: none !important; }
 
             /* Header — compact */
-            header { margin-bottom: 0.6rem; padding-bottom: 0.5rem; }
-            .header-left h1 { font-size: 22pt; }
-            .tagline { margin-bottom: 0.25rem; }
-            .impact-line { line-height: 1.32; }
-            .summary-block { line-height: 1.32; margin-bottom: 0.35rem; }
-            .target-roles { line-height: 1.3; }
+            .resume-header { margin-bottom: 0.55rem; padding-bottom: 0.45rem; }
+            .header-left h1 { font-size: 21pt; }
+            .tagline { font-size: 10.5pt; }
+            .experience-line { margin-top: 0.15rem; }
+
+            .resume-summary { margin-bottom: 0.5rem; }
+            .summary-lead { font-size: 8pt; line-height: 1.34; }
+            .summary-support { font-size: 7.4pt; line-height: 1.32; margin-top: 0.22rem; }
 
             section { margin-bottom: 0.5rem; }
-
-            /* Key Systems band — vertical list, compact */
-            .ks-band { break-inside: avoid; page-break-inside: avoid; }
-            .ks-grid { gap: 0.28rem; }
-
-            /* Skills — compact comma text */
-            .skills-band { margin-bottom: 0.5rem; }
-            .skill-line { margin-bottom: 0.18rem; line-height: 1.35; }
 
             /* Headings stay with following content */
             h2 { break-after: avoid; page-break-after: avoid;
                 margin-top: 0.3rem; border-bottom: 1px solid #eee;
                 padding-bottom: 0.15rem; margin-bottom: 0.4rem; }
 
+            /* Capabilities — single compact band */
+            .resume-capabilities { break-inside: avoid; page-break-inside: avoid; }
+            .capability-grid { gap: 0.15rem 1.1rem; }
+            .capability-support { margin-top: 0.3rem; line-height: 1.3; }
+
             /* Jobs flow across page boundaries so pages fill fully */
-            .job-item { margin-bottom: 0.32rem; padding-bottom: 0.32rem; }
+            .job-item { margin-bottom: 0.35rem; padding-bottom: 0.35rem; }
             .job-header { break-after: avoid; page-break-after: avoid; }
             .job-item ul li { margin-bottom: 0.12rem; break-inside: avoid; }
+            .job-evidence { margin-top: 0.22rem; line-height: 1.28; break-inside: avoid; }
 
-            .impact-box { break-inside: avoid; page-break-inside: avoid;
-                background: transparent !important;
-                border: 1px solid var(--accent-border); border-left: 2.5px solid var(--accent-bar);
-                padding: 0.2rem 0.5rem; gap: 0.7rem; }
-            .impact-box p { color: #78350f !important; line-height: 1.2; }
-            .impact-box-label { width: 9rem; margin-bottom: 0; line-height: 1.2; }
-            .impact-line-arch { margin-top: 0.1rem; }
+            /* Methods, selected work, tools — keep each block whole */
+            .resume-methods, .resume-selected-work, .resume-tools {
+                break-inside: avoid; page-break-inside: avoid;
+            }
+            .method-list { gap: 0.28rem 1.3rem; }
+            .method-list li { line-height: 1.28; }
+            .work-list { gap: 0.24rem; }
+            .work-meta { line-height: 1.28; }
 
             a { text-decoration: none; color: #333; }
 
@@ -568,12 +697,14 @@
             .pill, .location-badge, .period {
                 border: 1px solid #ccc; background: transparent !important; color: black !important;
             }
+            .badge-winner { background: transparent !important; border: 1px solid #ccc; color: #78350f !important; }
 
             /* Education + Awards: compact pointer lines */
             .edu-band { margin-top: 0.35rem; padding-top: 0.3rem; }
             .awards-band { margin-top: 0.35rem; padding-top: 0.3rem; }
+            .edu-group + .edu-group { margin-top: 0.3rem; }
             /* Education and Awards in 2 columns to save vertical space */
-            .edu-list, .awards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1.5rem; }
+            .edu-list, .awards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.16rem 1.5rem; }
             .edu-list li, .awards-list li { break-inside: avoid; page-break-inside: avoid; }
         }
     </style>
@@ -581,7 +712,7 @@
 
 <body>
 
-<a class="btn-print" href="resume.pdf" download="Hariteja-Nandipati-Resume.pdf">↓ Download PDF</a>
+<a class="btn-print" href="Hariteja-Nandipati-Resume.pdf" download="Hariteja-Nandipati-Resume.pdf">↓ Download PDF</a>
 
 <!-- Download confirmation toast -->
 <div id="dl-toast" class="dl-toast" role="status" aria-live="polite">
@@ -591,190 +722,272 @@
         <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank" rel="noreferrer">LinkedIn</a>.</div>
 </div>
 
-<div class="page">
+<div class="page" data-resume-profile="product">
 
-    <!-- HEADER -->
-    <header>
+    <!-- ═══ resume-header ═══ -->
+    <header class="resume-header" id="resume-header">
         <div class="header-top">
             <div class="header-left">
-                <h1 class="serif">Hariteja Nandipati.</h1>
-                <div class="tagline">Senior Product Designer · UX Architect · Design System Specialist</div>
+                <h1 class="serif" data-field="name">Hariteja Nandipati.</h1>
+                <div class="tagline" data-field="title">Senior Product Designer</div>
+                <div class="experience-line" data-field="experience">15+ years across design · 8+ years in product &amp; UX</div>
             </div>
 
             <div class="contact-block">
-                <a href="https://craftlayers.com" target="_blank">craftlayers.com</a>
-                <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank">in/hariteja-nandipati</a>
-                <span>Contact available on request</span>
-                <span class="location-badge">Hyderabad, India</span>
+                <a href="https://craftlayers.com" target="_blank" data-field="portfolio">craftlayers.com</a>
+                <a href="https://linkedin.com/in/hariteja-nandipati" target="_blank" data-field="linkedin">in/hariteja-nandipati</a>
+                <span data-field="contact">Contact available on request</span>
+                <span class="location-badge" data-field="location">Hyderabad, India</span>
             </div>
         </div>
-
-        <p class="summary-block">
-            Senior Product Designer and UX Architect with <strong>15+ years of design experience, including 8+ years in B2B SaaS</strong>.
-            Experienced in UX strategy, enterprise dashboards, design systems, research-led product improvement, secure UX,
-            and frontend-aware design handoff.
-            <br><br>
-            I design scalable product experiences by combining user research, system thinking, dashboard usability,
-            accessibility, product analytics, and design-system governance. Strong focus on reducing complexity, improving
-            decision clarity, and aligning design with product, engineering, and business goals.
-        </p>
-
-        <p class="target-roles">
-            <strong>Target roles:</strong> Senior Product Designer · Senior UX Designer · UX Architect · Lead Product Designer · Design System Lead
-        </p>
     </header>
 
-    <!-- KEY SYSTEMS — full-width horizontal boxes, above skills & career -->
-    <section class="ks-band">
-        <h2>Key Systems & Frameworks</h2>
-        <div class="ks-grid">
-                <div class="impact-box">
-                    <div class="impact-box-label">Enculture Design System</div>
-                    <p>Created and maintained an end-to-end design system covering tokens, typography, spacing, color, components, dashboard patterns, interaction states, accessibility rules, and frontend-ready design guidance.</p>
-                </div>
-                <div class="impact-box">
-                    <div class="impact-box-label">Enculture UX Philosophy</div>
-                    <p>Created a product-specific UX philosophy focused on clarity, guided interaction, trusted evidence, and actionable outcomes. Used it to evaluate screens, improve respondent flows, and guide dashboard experience decisions.</p>
-                </div>
-                <div class="impact-box">
-                    <div class="impact-box-label">Evidence-Driven UX Framework</div>
-                    <p>Combined Google Analytics, Microsoft Clarity, client interviews, stakeholder feedback, and usability observations to identify friction, understand behavior, and recommend product improvements.</p>
-                </div>
-                <div class="impact-box">
-                    <div class="impact-box-label">Security-Aware UX</div>
-                    <p>Applied privacy-first UX, least-privilege thinking, role-based access awareness, and secure interaction design across sensitive workflows. Also completed responsible vulnerability disclosure involving client-side PII exposure.</p>
-                </div>
-        </div>
+    <!-- ═══ resume-summary ═══ -->
+    <section class="resume-summary" id="resume-summary">
+        <p class="summary-lead">
+            Senior Product Designer with <strong>8+ years in product and UX</strong> and <strong>15+ years across design</strong>.
+            I work on complex B2B products, turning research, behavioral evidence and ambiguous requirements into
+            clear product experiences, scalable systems and implementation-ready decisions.
+        </p>
+        <p class="summary-support">
+            My work spans enterprise dashboards, respondent experiences, design systems, product analytics
+            and AI-assisted design-to-development workflows.
+        </p>
     </section>
 
-    <!-- SKILLS — plain comma-separated text, compact -->
-    <section class="skills-band">
-        <h2>Skills</h2>
-        <div class="skill-line"><span class="skill-label">Core Skills</span><span>Product Design, UX Strategy, UX Research, Enterprise UX, SaaS Dashboard UX, Design Systems, Design Tokens, Data Visualization, Information Architecture, Usability Audits, Accessibility, Secure UX, Stakeholder Alignment, Design-to-Development Handoff, AI-Assisted UX Workflows</span></div>
-        <div class="skill-line"><span class="skill-label">Tools &amp; Tech</span><span>Figma, FigJam, Tokens Studio, Google Analytics, Microsoft Clarity, React, TypeScript, Tailwind CSS, Cursor, GitHub, Vercel, Cloudflare, OpenAI / LLM Workflows</span></div>
+    <!-- ═══ resume-capabilities ═══ -->
+    <section class="resume-capabilities" id="resume-capabilities">
+        <h2>Core Capabilities</h2>
+        <ul class="capability-grid">
+            <li data-capability="product-strategy">Product Design &amp; UX Strategy</li>
+            <li data-capability="research">UX Research &amp; Evidence</li>
+            <li data-capability="enterprise">Enterprise / B2B UX</li>
+            <li data-capability="data">Data-heavy Interfaces</li>
+            <li data-capability="systems">Design Systems</li>
+            <li data-capability="collaboration">Design → Engineering Collaboration</li>
+            <li data-capability="accessibility">Accessibility</li>
+            <li data-capability="ai">AI-assisted Workflows</li>
+        </ul>
+        <p class="capability-support">
+            <strong>Supporting</strong> — Information architecture · Usability review · Security- and privacy-aware UX
+        </p>
     </section>
 
-    <!-- CAREER EXPERIENCE — full width -->
-    <section>
+    <!-- ═══ resume-experience ═══ -->
+    <section class="resume-experience" id="resume-experience">
         <h2>Career Experience</h2>
         <div class="timeline">
 
-                    <!-- Enculture -->
-                    <div class="job-item current">
-                        <div class="job-header">
-                            <span class="role">Senior UX Designer / Senior Product Designer <span class="company">· Enculture, NHR Technologies</span></span>
-                            <span class="period mono">Jan 2024 – Present</span>
-                        </div>
-                        <div class="domain-row">
-                            <span class="domain-badge">B2B SaaS · Culture Analytics</span>
-                            <span class="badge-winner">🏆 Hackathon Winner 2025</span>
-                        </div>
-                        <ul>
-                            <li>Lead UX across culture analytics modules including program creation, respondent flows, dashboards, action planning, and role-based reporting.</li>
-                            <li>Created a product-specific UX philosophy to guide clarity, trust, interpretation, and action across the platform.</li>
-                            <li>Built and maintained a scalable design system with tokens, typography, spacing, components, interaction states, and accessibility rules.</li>
-                            <li>Designed dashboard experiences that help HR leaders understand participation, survey outcomes, trends, comparisons, and action areas.</li>
-                            <li>Used product signals — Google Analytics, Microsoft Clarity, client interviews, usability reviews, and stakeholder feedback — to identify friction, understand behavior, and recommend evidence-led design improvements.</li>
-                            <li>Reduced UI inconsistency across enterprise modules through reusable patterns, token-based decisions, and design-system governance.</li>
-                            <li>Worked with product, engineering, data, and leadership teams to convert ambiguous requirements into structured UX flows.</li>
-                            <li>Applied security-aware UX principles across sensitive workflows, including privacy, role-based access, and data exposure prevention.</li>
-                            <li>Supported AI-assisted design and frontend-ready prototyping where useful for faster iteration and engineering alignment.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Clinic Mantra -->
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">Product Designer <span class="company">· Clinic Mantra</span></span>
-                            <span class="period mono">Jan 2023 – Aug 2023</span>
-                        </div>
-                        <span class="domain-badge">Healthcare Tech</span>
-                        <ul>
-                            <li>Redesigned multi-clinic appointment scheduling across web dashboards and mobile flows.</li>
-                            <li>Reduced booking flow complexity from 8 steps to 4.</li>
-                            <li>Improved task completion across patient and admin roles.</li>
-                            <li>Applied secure UX patterns for sensitive healthcare workflows.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Estate96 -->
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">UX Design Consultant <span class="company">· Estate96</span></span>
-                            <span class="period mono">Aug 2022 – Nov 2022</span>
-                        </div>
-                        <span class="domain-badge">Smart Access Solutions</span>
-                        <ul>
-                            <li>Designed UX architecture for mobile, tablet, and wall-panel access control experiences.</li>
-                            <li>Created flows for resident and admin roles.</li>
-                            <li>Delivered end-to-end design and prototype within an 8-week engagement.</li>
-                            <li>Aligned interface behavior with hardware access logic and development needs.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Opia Labs -->
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">UX Designer <span class="company">· Opia Labs</span></span>
-                            <span class="period mono">Nov 2019 – Jul 2022</span>
-                        </div>
-                        <span class="domain-badge">SaaS Platforms</span>
-                        <ul>
-                            <li>Led product design for Inwards, an emotion analytics SaaS platform for B2B customer insights.</li>
-                            <li>Structured emotional data into role-specific dashboards and insight views.</li>
-                            <li>Improved design handoff across multiple SaaS products through reusable component frameworks.</li>
-                            <li>Supported faster iteration through standardized UX patterns.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Foyr -->
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">UI / UX Designer <span class="company">· Foyr</span></span>
-                            <span class="period mono">Apr 2017 – Nov 2019</span>
-                        </div>
-                        <span class="domain-badge">Immersive Architecture Tech</span>
-                        <ul>
-                            <li>Standardized UX architecture across interconnected 3D visualization products.</li>
-                            <li>Built reusable UI components for multi-product design consistency.</li>
-                            <li>Improved onboarding for new designers through clearer design patterns and component reuse.</li>
-                            <li>Received the MAXIMUS Award in 2018 for cross-product UX contribution.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Foundational -->
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="role">Graphic Designer & Design Trainer <span class="company">· Multiple Ventures</span></span>
-                            <span class="period mono">2010 – 2017</span>
-                        </div>
-                        <ul>
-                            <li>Built strong foundations in visual hierarchy, typography, layout, and brand communication.</li>
-                            <li>Trained aspiring designers and developed strong communication and mentoring skills.</li>
-                            <li>Transitioned from visual design into digital product and UX design.</li>
-                        </ul>
-                    </div>
-
+            <!-- Enculture — current, full detail -->
+            <article class="job-item current tier-current" data-company="enculture">
+                <div class="job-header">
+                    <span class="role" data-field="role">Senior UX Designer / Senior Product Designer
+                        <span class="company" data-field="company">· Enculture, NHR Technologies</span></span>
+                    <span class="period mono" data-field="period">Jan 2024 – Present</span>
                 </div>
-        </section>
-        <!-- /career -->
+                <div class="context-row">
+                    <span class="job-context" data-field="context">B2B SaaS · Culture Analytics</span>
+                    <span class="badge-winner">🏆 Hackathon Winner 2025</span>
+                </div>
+                <ul data-field="bullets">
+                    <li data-emphasis="product">Lead UX across culture analytics modules including program creation, respondent flows, dashboards, action planning, and role-based reporting.</li>
+                    <li data-emphasis="product">Designed the respondent experience — how participants understand what a survey is for, whether it is safe to answer, and what happens after they respond.</li>
+                    <li data-emphasis="data">Designed dashboard experiences that help HR leaders understand participation, survey outcomes, trends, comparisons, and action areas.</li>
+                    <li data-emphasis="research">Identified friction and understood real behavior through analytics, client interviews, usability reviews, and stakeholder feedback, and recommended evidence-led design improvements.</li>
+                    <li data-emphasis="product">Converted ambiguous requirements into structured UX flows, decision criteria, and reviewable design intent.</li>
+                    <li data-emphasis="collaboration">Worked directly with product, engineering, data, and leadership teams to align design intent with what could be built and maintained.</li>
+                    <li data-emphasis="systems">Turned recurring decisions into reusable product and design rules — tokens, typography, spacing, components, interaction states, and accessibility rules — reducing UI inconsistency across enterprise modules.</li>
+                    <li data-emphasis="privacy">Applied security-aware UX principles across sensitive workflows, including privacy, role-based access, and data exposure prevention.</li>
+                    <li data-emphasis="ai">Supported AI-assisted design and frontend-ready prototyping where useful for faster iteration and engineering alignment.</li>
+                </ul>
+                <p class="job-evidence" data-field="evidence">
+                    <strong>Evidence</strong> — Google Analytics · Microsoft Clarity · client interviews · usability reviews · stakeholder feedback.
+                </p>
+            </article>
 
+            <!-- Clinic Mantra — mid-career, moderate detail -->
+            <article class="job-item tier-mid" data-company="clinic-mantra">
+                <div class="job-header">
+                    <span class="role" data-field="role">Product Designer
+                        <span class="company" data-field="company">· Clinic Mantra</span></span>
+                    <span class="period mono" data-field="period">Jan 2023 – Aug 2023</span>
+                </div>
+                <span class="job-context" data-field="context">Healthcare Tech</span>
+                <ul data-field="bullets">
+                    <li data-emphasis="product">Redesigned multi-clinic appointment scheduling across web dashboards and mobile flows, reducing the booking flow from eight steps to four.</li>
+                    <li data-emphasis="product">Improved task completion across patient and admin roles.</li>
+                    <li data-emphasis="privacy">Applied secure UX patterns for sensitive healthcare workflows.</li>
+                </ul>
+            </article>
 
-    <!-- Education — compact pointer lines (one after another) -->
-    <section class="edu-band">
-        <h2>Education</h2>
-        <ul class="edu-list">
-            <li><span><strong>Advanced Certificate Program in Cyber Security</strong> — IIT Guwahati × Edureka · 2023–2024</span></li>
-            <li><span><strong>Design for Augmented &amp; Virtual Reality</strong> — Interaction Design Foundation · 2019</span></li>
-            <li><span><strong>Foundation Course for UX Designers</strong> — Interaction Design Foundation · 2018</span></li>
-            <li><span><strong>Diploma in Game Art &amp; Design</strong> — AAG · 2009–2011</span></li>
-            <li><span><strong>Bachelor of Commerce</strong> — Osmania University · 2006–2009</span></li>
+            <!-- Estate96 — mid-career, moderate detail -->
+            <article class="job-item tier-mid" data-company="estate96">
+                <div class="job-header">
+                    <span class="role" data-field="role">UX Design Consultant
+                        <span class="company" data-field="company">· Estate96</span></span>
+                    <span class="period mono" data-field="period">Aug 2022 – Nov 2022</span>
+                </div>
+                <span class="job-context" data-field="context">Smart Access Solutions</span>
+                <ul data-field="bullets">
+                    <li data-emphasis="product">Designed UX architecture for mobile, tablet, and wall-panel access control experiences, with flows for resident and admin roles.</li>
+                    <li data-emphasis="collaboration">Aligned interface behavior with hardware access logic and development needs.</li>
+                    <li data-emphasis="product">Delivered end-to-end design and prototype within an 8-week engagement.</li>
+                </ul>
+            </article>
+
+            <!-- Opia Labs — mid-career, moderate detail -->
+            <article class="job-item tier-mid" data-company="opia-labs">
+                <div class="job-header">
+                    <span class="role" data-field="role">UX Designer
+                        <span class="company" data-field="company">· Opia Labs</span></span>
+                    <span class="period mono" data-field="period">Nov 2019 – Jul 2022</span>
+                </div>
+                <span class="job-context" data-field="context">SaaS Platforms</span>
+                <ul data-field="bullets">
+                    <li data-emphasis="product">Led product design for Inwards, an emotion analytics SaaS platform for B2B customer insights.</li>
+                    <li data-emphasis="data">Structured emotional data into role-specific dashboards and insight views.</li>
+                    <li data-emphasis="systems">Improved design handoff across multiple SaaS products through reusable component frameworks and standardized UX patterns.</li>
+                </ul>
+            </article>
+
+            <!-- Foyr — mid-career, moderate detail -->
+            <article class="job-item tier-mid" data-company="foyr">
+                <div class="job-header">
+                    <span class="role" data-field="role">UI / UX Designer
+                        <span class="company" data-field="company">· Foyr</span></span>
+                    <span class="period mono" data-field="period">Apr 2017 – Nov 2019</span>
+                </div>
+                <span class="job-context" data-field="context">Immersive Architecture Tech</span>
+                <ul data-field="bullets">
+                    <li data-emphasis="product">Standardized UX architecture across interconnected 3D visualization products.</li>
+                    <li data-emphasis="systems">Built reusable UI components for multi-product design consistency, improving onboarding for new designers.</li>
+                </ul>
+                <p class="job-evidence" data-field="evidence">
+                    <strong>Recognition</strong> — MAXIMUS Award 2018, for cross-product UX contribution.
+                </p>
+            </article>
+
+            <!-- Foundational — earliest, compact -->
+            <article class="job-item tier-earlier" data-company="multiple-ventures">
+                <div class="job-header">
+                    <span class="role" data-field="role">Graphic Designer &amp; Design Trainer
+                        <span class="company" data-field="company">· Multiple Ventures</span></span>
+                    <span class="period mono" data-field="period">2010 – 2017</span>
+                </div>
+                <p class="job-summary" data-field="context">
+                    Visual-design foundation — hierarchy, typography, layout, and brand communication — alongside
+                    training aspiring designers. Transitioned from visual design into digital product and UX design.
+                </p>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ═══ resume-methods ═══ -->
+    <section class="resume-methods" id="resume-methods">
+        <h2>Selected Methods &amp; Systems</h2>
+        <ul class="method-list">
+            <li data-method="evidence">
+                <span class="method-name">Evidence-led product decisions</span>
+                Combining analytics, interviews, usability observation and stakeholder evidence.
+            </li>
+            <li data-method="governance">
+                <span class="method-name">Design-system governance</span>
+                Turning recurring UX decisions into reusable patterns, tokens and implementation guidance.
+            </li>
+            <li data-method="principles">
+                <span class="method-name">Product experience principles</span>
+                Using clarity, trust, interpretation and action as review criteria across product experiences.
+            </li>
+            <li data-method="privacy">
+                <span class="method-name">Privacy-aware interaction design</span>
+                Considering data exposure, role boundaries and sensitive workflows as part of UX decisions.
+                Includes a responsible disclosure of client-side PII exposure.
+            </li>
         </ul>
     </section>
 
-    <!-- Awards — compact pointer lines (not boxes) -->
-    <section class="awards-band">
-        <h2>Awards & Recognition</h2>
+    <!-- ═══ resume-selected-work ═══ -->
+    <section class="resume-selected-work" id="resume-selected-work">
+        <h2>Selected Work</h2>
+        <ul class="work-list">
+            <li data-case="respondent-experience">
+                <span class="work-index">01</span>
+                <span>
+                    <span class="work-title">Three Questions Were Not the Problem</span>
+                    <span class="work-meta">Respondent experience · research · participation · trust —
+                        <a class="work-link" href="https://craftlayers.com/work/respondent-experience" target="_blank">craftlayers.com/work/respondent-experience</a></span>
+                </span>
+            </li>
+            <li data-case="dashboard-explainability">
+                <span class="work-index">02</span>
+                <span>
+                    <span class="work-title">Dashboard Explainability</span>
+                    <span class="work-meta">Enterprise UX · data hierarchy · interpretation · decision support —
+                        <a class="work-link" href="https://craftlayers.com/work/dashboard-explainability" target="_blank">craftlayers.com/work/dashboard-explainability</a></span>
+                </span>
+            </li>
+            <li data-case="design-to-implementation">
+                <span class="work-index">03</span>
+                <span>
+                    <span class="work-title">Design Decisions → Implementation Rules</span>
+                    <span class="work-meta">Design systems · implementation · AI-assisted delivery —
+                        <a class="work-link" href="https://craftlayers.com/work/design" target="_blank">craftlayers.com/work/design</a></span>
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ═══ resume-tools ═══ -->
+    <section class="resume-tools" id="resume-tools">
+        <h2>Tools</h2>
+        <div class="tool-groups">
+            <div class="tool-group tool-group--primary" data-tool-group="design-research">
+                <div class="tool-group-label">Design &amp; Research</div>
+                <div class="skill-pills">
+                    <span class="pill">Figma</span>
+                    <span class="pill">FigJam</span>
+                    <span class="pill">Tokens Studio</span>
+                    <span class="pill">Google Analytics</span>
+                    <span class="pill">Microsoft Clarity</span>
+                </div>
+            </div>
+            <div class="tool-group tool-group--support" data-tool-group="implementation">
+                <div class="tool-group-label">Implementation Collaboration</div>
+                <p class="tool-plain">GitHub · React familiarity · TypeScript familiarity · Tailwind familiarity · Cursor · Vercel</p>
+            </div>
+            <div class="tool-group tool-group--support" data-tool-group="ai">
+                <div class="tool-group-label">AI Workflow</div>
+                <p class="tool-plain">Claude · OpenAI / LLM-assisted workflows</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ resume-education ═══ -->
+    <section class="resume-education edu-band" id="resume-education">
+        <h2>Education &amp; Certification</h2>
+
+        <div class="edu-group">
+            <p class="edu-sub-label">Education</p>
+            <ul class="edu-list">
+                <li><span><strong>Diploma in Game Art &amp; Design</strong> — AAG · 2009–2011</span></li>
+                <li><span><strong>Bachelor of Commerce</strong> — Osmania University · 2006–2009</span></li>
+            </ul>
+        </div>
+
+        <div class="edu-group">
+            <p class="edu-sub-label">Certification</p>
+            <ul class="edu-list">
+                <li><span><strong>Foundation Course for UX Designers</strong> — Interaction Design Foundation · 2018</span></li>
+                <li><span><strong>Design for Augmented &amp; Virtual Reality</strong> — Interaction Design Foundation · 2019</span></li>
+                <li><span><strong>Advanced Certificate Program in Cyber Security</strong> — IIT Guwahati × Edureka · 2023–2024</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ═══ resume-awards ═══ -->
+    <section class="resume-awards awards-band" id="resume-awards">
+        <h2>Awards &amp; Recognition</h2>
         <ul class="awards-list">
             <li>
                 <span class="award-icon">🏆</span>

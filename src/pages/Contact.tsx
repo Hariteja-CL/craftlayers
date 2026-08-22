@@ -99,7 +99,7 @@ export function Contact() {
                                 Connect on LinkedIn
                             </a>
                             <a
-                                href="/resume.pdf"
+                                href="/Hariteja-Nandipati-Resume.pdf"
                                 download="Hariteja-Nandipati-Resume.pdf"
                                 className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-strong px-5 py-3 text-sm font-semibold cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-colors cl-focus-ring"
                             >
