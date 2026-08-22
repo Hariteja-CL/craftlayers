@@ -193,7 +193,7 @@ export function Profile() {
                     </p>
                     <div className="mt-8 flex flex-wrap gap-3">
                         <a
-                            href="/resume.pdf"
+                            href="/Hariteja-Nandipati-Resume.pdf"
                             download="Hariteja-Nandipati-Resume.pdf"
                             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-colors cl-focus-ring"
                         >
@@ -394,7 +394,7 @@ export function Profile() {
                 <Section eyebrow="09 · Next" title="Résumé and contact">
                     <div className="flex flex-wrap gap-3">
                         <a
-                            href="/resume.pdf"
+                            href="/Hariteja-Nandipati-Resume.pdf"
                             download="Hariteja-Nandipati-Resume.pdf"
                             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-colors cl-focus-ring"
                         >

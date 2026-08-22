@@ -1,6 +1,7 @@
 {
   "redirects": [
-    { "source": "/about", "destination": "/profile", "permanent": true }
+    { "source": "/about", "destination": "/profile", "permanent": true },
+    { "source": "/resume.pdf", "destination": "/Hariteja-Nandipati-Resume.pdf", "permanent": true }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "headers": [

@@ -255,7 +255,7 @@ export function Home() {
                             <ArrowRight aria-hidden="true" className="w-4 h-4" />
                         </Link>
                         <a
-                            href="/resume.pdf"
+                            href="/Hariteja-Nandipati-Resume.pdf"
                             download="Hariteja-Nandipati-Resume.pdf"
                             className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-default px-5 py-3 text-sm font-semibold cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast transition-colors cl-focus-ring"
                         >
