@@ -179,9 +179,14 @@ export function Profile() {
                 {/* 1 · Professional summary */}
                 <header className="pt-12">
                     <h1 className="text-4xl md:text-6xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.1]">
-                        Senior Product Designer &amp; Product Systems Builder
+                        Senior Product Designer
                     </h1>
-                    <p className="mt-6 text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-relaxed font-medium max-w-3xl">
+                    {/* Matches the homepage hero. The systems work is stated as
+                        operating context rather than as a second profession. */}
+                    <p className="mt-5 text-lg md:text-xl font-semibold cl-text-neutral-text-high-contrast leading-snug max-w-3xl">
+                        Complex B2B products, analytics and decision-support experiences
+                    </p>
+                    <p className="mt-5 text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-relaxed font-medium max-w-3xl">
                         I turn research, analytics and complex product constraints into clear product decisions,
                         scalable experience rules and implementation-ready systems.
                     </p>

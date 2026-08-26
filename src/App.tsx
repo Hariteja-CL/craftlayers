@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 // but is no longer routed — /about redirects to /profile.
 import { Profile } from './pages/Profile';
 import { Contact } from './pages/Contact';
+import { ForRole } from './pages/ForRole';
 import { BlogListing } from './pages/blog/BlogListing';
 import { BlogPost } from './pages/blog/BlogPost';
 import { Inwards } from './pages/work/Inwards';
@@ -53,6 +54,9 @@ function App() {
           <Route path="/work/enculture" element={<Enculture />} />
           <Route path="/dashboard/culture" element={<CultureDashboard />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Role-specific readings of the existing evidence. Not in the nav —
+              these are links you send someone. */}
+          <Route path="/for/:slug" element={<ForRole />} />
         </Route>
       </Routes>
     </Router>

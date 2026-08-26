@@ -27,17 +27,27 @@ export function HeroSection() {
                         Available for Q3 2026 Projects
                     </div>
 
-                    {/* Headline */}
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.05] mb-6">
-                        Senior Product Designer<br />
-                        <span className="cl-text-brand-primary-base">&amp; Product Systems Builder</span>
+                    {/* Headline — one profession. "Product Systems Builder" used to
+                        sit here as a second brand-coloured line, which read as an
+                        equal second identity and made the positioning ambiguous.
+                        The systems work is still stated, as operating context. */}
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.05] mb-5">
+                        Senior Product Designer
                     </h1>
 
-                    {/* Plain-language explanation first — the title alone assumes
-                        the reader already knows what a "product system" is. */}
+                    {/* High-contrast, not brand colour: the brand orange measures
+                        2.66:1 on this background, which fails AA. Size and weight
+                        already separate this line from the H1. */}
+                    <p className="text-xl md:text-2xl font-semibold cl-text-neutral-text-high-contrast mb-6 leading-snug max-w-2xl">
+                        Complex B2B products, analytics and decision-support experiences
+                    </p>
+
+                    {/* Trimmed: the old version restated the positioning line above
+                        before getting to the point. Inputs, decision, implementation
+                        — nothing else. */}
                     <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-4 leading-relaxed max-w-2xl font-medium">
-                        I design enterprise products, dashboards and workflows, then turn the decisions behind
-                        them into reusable systems that product and engineering teams can implement consistently.
+                        I turn research, product behaviour and complex requirements into product
+                        decisions, and systems teams can implement consistently.
                     </p>
                     <p className="text-base cl-text-neutral-text-medium-contrast mb-10">
                         8+ years in UX and product design since 2017.
@@ -71,12 +81,16 @@ export function HeroSection() {
                         </button>
                     </div>
 
-                    {/* Keyword strip */}
-                    <div className="mt-16 pt-8 border-t cl-border-border-color-default flex flex-wrap gap-x-5 gap-y-2 text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-low-contrast">
+                    {/* Keyword strip — Option A, at its smallest. The terms were
+                        set in the low-contrast token, which reads as decoration and
+                        gets skipped. Same size, same rhythm, one step up in contrast
+                        so it functions as supporting context; the separators stay
+                        faint so the strip still does not compete with the hero. */}
+                    <div className="mt-16 pt-8 border-t cl-border-border-color-default flex flex-wrap gap-x-5 gap-y-2 text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-medium-contrast">
                         {["Enterprise UX", "UX Research", "Dashboard Design", "Design Systems", "Information Architecture", "Interaction Design", "AI Product Design", "Privacy-aware UX"].map((k, i, arr) => (
                             <span key={k} className="flex items-center gap-5">
                                 {k}
-                                {i < arr.length - 1 && <span className="cl-text-neutral-text-low-contrast opacity-30">/</span>}
+                                {i < arr.length - 1 && <span className="cl-text-neutral-text-low-contrast opacity-40">/</span>}
                             </span>
                         ))}
                     </div>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { WorkCard, type WorkCardProps } from '../../components/work/WorkCard';
+import { getCases, type EvidenceCase } from '../../data/evidence';
 
 /**
  * Work — three clearly separated categories.
@@ -7,47 +8,35 @@ import { WorkCard, type WorkCardProps } from '../../components/work/WorkCard';
  * The two flagship Product Cases sit alone at the top; earlier work never
  * appears beside them. Governance is listed once, pointing at the stronger
  * public-safe destination — both routes stay alive, but only one is listed.
+ *
+ * Product cases and systems now read from the evidence library rather than
+ * restating it here. They previously carried different category lines from the
+ * same cases on the homepage, which is exactly the drift the library prevents.
  */
 
-const PRODUCT_CASES: WorkCardProps[] = [
-    {
-        title: 'Three Questions Were Not the Problem',
-        problem:
-            'Found that the real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe, or what happened after they responded.',
-        contribution: 'Diagnosed the cause and set out what would need to change.',
-        method: 'Interviews, communication review and a walk-through of the respondent journey.',
-        status: 'Public case study',
-        confidentiality: 'Public · Anonymised',
-        category: 'Respondent Experience · UX Research · Enterprise SaaS',
-        readTime: '7 min read',
-        href: '/work/respondent-experience',
-    },
-    {
-        title: 'Designing Dashboards People Can Read, Trust and Act On',
-        problem:
-            'Created a four-step model for making dashboards easier to understand, plus rules for showing deeper detail only when users need it.',
-        contribution: 'A dashboard philosophy, four explanation principles and a card-level rule.',
-        method: 'Product and artifact review with feedback from an operational user.',
-        status: 'Sanitised case study',
-        confidentiality: 'Sanitised enterprise case',
-        category: 'Analytics UX · Explainability · Design Systems',
-        readTime: '7 min read',
-        href: '/work/dashboard-explainability',
-    },
-];
+/** Evidence-library entry to card props. Earlier work is not in the library. */
+function toCard(c: EvidenceCase): WorkCardProps {
+    return {
+        title: c.title,
+        problem: c.problem,
+        contribution: c.contribution,
+        method: c.method,
+        status: c.status,
+        confidentiality: c.confidentiality,
+        evidenceLabel: c.evidenceLabel,
+        evidenceSummary: c.evidenceSummary,
+        readTime: c.readTime,
+        cta: 'See the decision story',
+        href: c.href,
+    };
+}
 
-const SYSTEMS: WorkCardProps[] = [
-    {
-        title: 'Turning Design Decisions into Implementation Rules',
-        problem:
-            'Design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
-        contribution:
-            'Principles, tokens, component rules, documentation and review criteria that survive handoff.',
-        status: 'System story',
-        category: 'Design Systems · Governance · Implementation alignment',
-        href: '/work/design',
-    },
-];
+const PRODUCT_CASES: WorkCardProps[] = getCases([
+    'respondent-experience',
+    'dashboard-explainability',
+]).map(toCard);
+
+const SYSTEMS: WorkCardProps[] = getCases(['design-system']).map(toCard);
 
 // The Enculture entry is deliberately absent. Its route names the client, and
 // the two flagship cases anonymise that same client — so listing it here, even
