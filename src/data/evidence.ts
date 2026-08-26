@@ -42,9 +42,19 @@ export const EVIDENCE_AREAS = [
 
 export type EvidenceArea = (typeof EVIDENCE_AREAS)[number];
 
+/**
+ * Every valid case id. Role configs are typed against this, so referencing a
+ * case that does not exist is a compile error rather than a silently missing
+ * block on a live role page. Adding a case means adding its id here too.
+ */
+export type EvidenceCaseId =
+    | 'respondent-experience'
+    | 'dashboard-explainability'
+    | 'design-system';
+
 export interface EvidenceCase {
     /** Stable key used by role configs. Not the URL. */
-    id: string;
+    id: EvidenceCaseId;
     title: string;
     href: string;
     status: WorkStatus;
@@ -103,6 +113,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
             'Tell me about a time when you used research to identify the real product problem.',
             'Tell me about a time when the evidence contradicted what the team believed.',
             'How do you design for participation and trust in a sensitive workflow?',
+            'Tell me about a time when you had to act on directional evidence rather than statistically valid data.',
         ],
         recommendedFor: [
             'Senior Product Designer',
@@ -136,6 +147,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
             'Tell me about a time when you made complex data understandable.',
             'How do you decide what detail to show and what to hold back?',
             'Tell me about a time when you turned a specific fix into a general rule.',
+            'Tell me about a time when you had to use colour to communicate meaning without making colour the only signal.',
         ],
         recommendedFor: [
             'Senior Product Designer',
@@ -177,12 +189,12 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
 ];
 
 /** Lookup by id. Returns undefined for an unknown key rather than throwing. */
-export function getCase(id: string): EvidenceCase | undefined {
+export function getCase(id: EvidenceCaseId): EvidenceCase | undefined {
     return EVIDENCE_CASES.find((c) => c.id === id);
 }
 
 /** Resolve a list of ids, silently dropping any that no longer exist. */
-export function getCases(ids: string[]): EvidenceCase[] {
+export function getCases(ids: readonly EvidenceCaseId[]): EvidenceCase[] {
     return ids.map(getCase).filter((c): c is EvidenceCase => Boolean(c));
 }
 
@@ -190,7 +202,7 @@ export function getCases(ids: string[]): EvidenceCase[] {
  * The two strongest cases, in reading order. Drives "Start here" on the
  * homepage. Deliberately two: a third would dilute rather than add.
  */
-export const START_HERE_IDS = ['respondent-experience', 'dashboard-explainability'];
+export const START_HERE_IDS: EvidenceCaseId[] = ['respondent-experience', 'dashboard-explainability'];
 
 /**
  * The four situations Hari is usually brought in for, each tied to the case
@@ -201,7 +213,7 @@ export interface ProblemArea {
     title: string;
     body: string;
     /** Case that demonstrates this. */
-    caseId: string;
+    caseId: EvidenceCaseId;
     /** Names the proof. Rendered after an "Evidence" label, so it carries
      *  no prefix of its own. */
     evidenceLabel: string;
