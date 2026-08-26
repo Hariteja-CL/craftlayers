@@ -34,8 +34,21 @@ export interface WorkCardProps {
     confidentiality?: string;
     /** Tag line, e.g. "Analytics UX · Enterprise SaaS". */
     category?: string;
+    /**
+     * What this case is evidence *of*, e.g. "Research · Problem diagnosis".
+     * Rendered in place of `category` when present — same slot, so cards keep
+     * a single shape whichever page they appear on.
+     */
+    evidenceLabel?: string;
+    /**
+     * One sentence on what the case proves. Shown under "Why this matters",
+     * for readers deciding whether this case answers their question.
+     */
+    evidenceSummary?: string;
     /** e.g. "7 min read". */
     readTime?: string;
+    /** Overrides the default "Read more". */
+    cta?: string;
     href: string;
 }
 
@@ -47,9 +60,13 @@ export function WorkCard({
     status,
     confidentiality,
     category,
+    evidenceLabel,
+    evidenceSummary,
     readTime,
+    cta,
     href,
 }: WorkCardProps) {
+    const tagline = evidenceLabel ?? category;
     const meta = [status, confidentiality, readTime].filter(Boolean) as string[];
 
     return (
@@ -73,9 +90,9 @@ export function WorkCard({
                 ))}
             </div>
 
-            {category && (
+            {tagline && (
                 <p className="text-[10px] font-bold uppercase tracking-wider cl-text-neutral-text-low-contrast mb-2">
-                    {category}
+                    {tagline}
                 </p>
             )}
 
@@ -108,8 +125,19 @@ export function WorkCard({
                 </dl>
             )}
 
+            {evidenceSummary && (
+                <div className="mt-4 border-l-2 cl-border-border-color-strong pl-4">
+                    <p className="text-[11px] font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast">
+                        Why this matters
+                    </p>
+                    <p className="mt-1 text-sm cl-text-neutral-text-medium-contrast leading-relaxed">
+                        {evidenceSummary}
+                    </p>
+                </div>
+            )}
+
             <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold cl-text-brand-primary-base">
-                Read more
+                {cta ?? 'Read more'}
                 <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </span>
         </Link>

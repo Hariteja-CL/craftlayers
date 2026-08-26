@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { HeroSection } from '../components/portfolio/HeroSection';
-import { WorkCard, type WorkCardProps } from '../components/work/WorkCard';
+import { WorkCard } from '../components/work/WorkCard';
 import { ArrowRight } from 'lucide-react';
+import { PROBLEM_AREAS, START_HERE_IDS, getCase, getCases } from '../data/evidence';
 
 /**
  * Home — eight sections, in the approved order.
@@ -15,59 +16,16 @@ import { ArrowRight } from 'lucide-react';
  * quickly rather than wading through methodology.
  */
 
-const PROBLEMS = [
-    {
-        title: 'Complex products are hard to understand',
-        body: 'Dashboards and enterprise tools often hold the right information but still need someone to explain them. I make the meaning, the evidence and the next step visible on the screen itself.',
-    },
-    {
-        title: 'Research is not reaching product decisions',
-        body: 'Findings get collected and then quietly ignored. I connect what users and stakeholders actually said to the decisions a team is about to make.',
-    },
-    {
-        title: 'Product experiences are becoming inconsistent',
-        body: 'As teams grow, the same problem gets solved five different ways. I turn design decisions into reusable rules so consistency survives handover.',
-    },
-    {
-        title: 'AI is accelerating delivery without enough control',
-        body: 'AI can produce interfaces faster than anyone can review them. I keep the speed while making sure a person still checks what ships.',
-    },
-];
-
-const FEATURED: WorkCardProps[] = [
-    {
-        title: 'Three Questions Were Not the Problem',
-        problem:
-            'Found that the real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe, or what happened after they responded.',
-        contribution: 'Diagnosed the cause and set out what would need to change.',
-        method: 'Interviews, communication review and a walk-through of the respondent journey.',
-        status: 'Public case study',
-        confidentiality: 'Public · Anonymised',
-        category: 'UX Research · Enterprise UX',
-        readTime: '7 min read',
-        href: '/work/respondent-experience',
-    },
-    {
-        title: 'Designing Dashboards People Can Read, Trust and Act On',
-        problem:
-            'Created a four-step model for making dashboards easier to understand, plus rules for showing deeper detail only when users need it.',
-        contribution: 'A dashboard philosophy, four explanation principles and a card-level rule.',
-        method: 'Product and artifact review with feedback from an operational user.',
-        status: 'Sanitised case study',
-        confidentiality: 'Sanitised enterprise case',
-        category: 'Dashboard Design · Information Architecture',
-        readTime: '7 min read',
-        href: '/work/dashboard-explainability',
-    },
-];
-
+/**
+ * Four steps, not six. "System" and "Validation" were separate entries, which
+ * made this read as a methodology diagram rather than how decisions get made.
+ * Both meanings survive inside step 04 and the note beneath the list.
+ */
 const WORKING_MODEL = [
     { step: 'Evidence', body: 'Gather what users, stakeholders and product data actually show.' },
-    { step: 'Interpretation', body: 'Work out what it means, and what it does not mean.' },
+    { step: 'Interpretation', body: 'Work out what it means and what the real problem is.' },
     { step: 'Decision', body: 'Choose a direction and record why.' },
-    { step: 'System', body: 'Turn that decision into a reusable rule, component or principle.' },
-    { step: 'Implementation', body: 'Hand it over in a form engineers can build directly from.' },
-    { step: 'Validation', body: 'Test whether it worked — and say so plainly when it has not been tested.' },
+    { step: 'Implementation', body: 'Turn the decision into something the product team can build and validate.' },
 ];
 
 const LAYERS = [
@@ -76,12 +34,12 @@ const LAYERS = [
         plain: 'Product framing, UX research, enterprise workflows, dashboards and accessibility.',
     },
     {
-        name: 'AI-enabled Delivery',
-        plain: 'Using AI to speed up research, documentation and implementation while keeping decisions human-reviewed.',
+        name: 'AI-enabled delivery',
+        plain: 'Using AI to accelerate research, documentation and implementation while keeping decisions human-reviewed.',
     },
     {
         name: 'Privacy-aware UX',
-        plain: 'Designing experiences that minimise personal-data exposure and protect anonymity.',
+        plain: 'Designing experiences that minimise unnecessary data exposure and protect anonymity.',
     },
 ];
 
@@ -124,33 +82,75 @@ export function Home() {
 
             <div className="max-w-5xl mx-auto px-6">
 
-                {/* 2 · Problems I help solve */}
+                {/* 2 · Problems I help solve — each one now carries a link to the
+                    case that evidences it. A problem statement with no proof
+                    behind it is a claim; the link is what makes it evidence. */}
                 <Section
                     eyebrow="01 · The problems"
                     title="Problems I help solve"
-                    intro="Four situations I am usually brought in for."
+                    intro="Four situations I am usually brought in for, and the work that shows each one."
                 >
                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
-                        {PROBLEMS.map((p) => (
-                            <div key={p.title}>
-                                <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">{p.title}</h3>
-                                <p className="mt-2 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
-                                    {p.body}
-                                </p>
-                            </div>
-                        ))}
+                        {PROBLEM_AREAS.map((p) => {
+                            const evidence = getCase(p.caseId);
+                            return (
+                                <div key={p.title}>
+                                    <h3 className="text-lg font-bold cl-text-neutral-text-high-contrast">{p.title}</h3>
+                                    <p className="mt-2 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                                        {p.body}
+                                    </p>
+                                    {/* A hairline rule turns the link from a trailing
+                                        afterthought into the second half of the block,
+                                        so Problem → evidence reads as structure rather
+                                        than a stray link. Structural, not colour. */}
+                                    {evidence && (
+                                        <div className="mt-4 pt-3 border-t cl-border-border-color-default">
+                                            <Link
+                                                to={evidence.href}
+                                                className="group inline-flex items-baseline gap-2 cl-focus-ring rounded"
+                                            >
+                                                <span className="text-[11px] font-bold uppercase tracking-widest cl-text-neutral-text-low-contrast">
+                                                    Evidence
+                                                </span>{' '}
+                                                <span className="text-sm font-semibold cl-text-brand-primary-base group-hover:underline">
+                                                    {p.evidenceLabel}
+                                                </span>
+                                                <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 shrink-0 self-center cl-text-brand-primary-base transition-transform group-hover:translate-x-0.5" />
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </Section>
 
-                {/* 3 · Featured work — before the process section, on purpose */}
+                {/* 3 · Evidence — before the process section, on purpose. A hiring
+                    manager should not have to decide what to open first. */}
                 <Section
-                    eyebrow="02 · Selected work"
-                    title="Featured work"
-                    intro="Two cases written up in full, including what the evidence did and did not support."
+                    eyebrow="02 · Selected evidence"
+                    title="Start here"
+                    intro="If you want to understand how I approach complex product problems, start with these two cases. Both are written up in full, including what the evidence did and did not support."
                 >
                     <div className="grid gap-5 md:grid-cols-2">
-                        {FEATURED.map((c) => (
-                            <WorkCard key={c.href} {...c} />
+                        {/* Contribution and Method are deliberately not passed here.
+                            The homepage card answers "why should I open this?" — the
+                            case study itself answers "what exactly did you do?".
+                            Both fields stay in the evidence library and still render
+                            on /work and /for/:slug. */}
+                        {getCases(START_HERE_IDS).map((c) => (
+                            <WorkCard
+                                key={c.id}
+                                title={c.title}
+                                problem={c.problem}
+                                status={c.status}
+                                confidentiality={c.confidentiality}
+                                evidenceLabel={c.evidenceLabel}
+                                evidenceSummary={c.evidenceSummary}
+                                readTime={c.readTime}
+                                cta="See the decision story"
+                                href={c.href}
+                            />
                         ))}
                     </div>
                     <Link
@@ -165,8 +165,8 @@ export function Home() {
                 {/* 4 · How I work */}
                 <Section
                     eyebrow="03 · Method"
-                    title="How I work"
-                    intro="The same six steps, whatever the product."
+                    title="How I make product decisions"
+                    intro="The same four steps, whatever the product."
                 >
                     <ol className="border-l cl-border-border-color-default pl-6 space-y-5">
                         {WORKING_MODEL.map((m, i) => (
@@ -222,7 +222,7 @@ export function Home() {
                 {/* 6 · Design · AI-enabled Delivery · Privacy-aware UX */}
                 <Section
                     eyebrow="05 · Capabilities"
-                    title="Design, AI-enabled Delivery and Privacy-aware UX"
+                    title="Capabilities I bring into product work"
                     intro="Three supporting capabilities, not three separate professions."
                 >
                     <dl className="grid md:grid-cols-3 gap-6">
