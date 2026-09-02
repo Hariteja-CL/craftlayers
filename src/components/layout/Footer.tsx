@@ -31,6 +31,11 @@ export function Footer() {
                     <Link to="/blog" className="hover:cl-text-brand-primary-base transition-colors">
                         Writing
                     </Link>
+                    {/* Library follows the same rule as Writing: live and reachable,
+                        but not competing with Work in the primary nav. */}
+                    <Link to="/library" className="hover:cl-text-brand-primary-base transition-colors">
+                        Library
+                    </Link>
                     <a
                         href="https://linkedin.com/in/hariteja-nandipati"
                         target="_blank"

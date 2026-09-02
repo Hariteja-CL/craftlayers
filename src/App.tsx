@@ -1,4 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+
+// The Library is lazy-loaded. Its reader pulls in react-markdown + remark-gfm,
+// which added ~182 kB (~55 kB gzip) to the main bundle when imported eagerly —
+// a cost paid by every visitor, including those who never open the Library.
+const Library = lazy(() => import('./pages/library/Library').then((m) => ({ default: m.Library })));
+const HandbookLanding = lazy(() => import('./pages/library/HandbookLanding').then((m) => ({ default: m.HandbookLanding })));
+const HandbookChapter = lazy(() => import('./pages/library/HandbookChapter').then((m) => ({ default: m.HandbookChapter })));
 import { LayoutShell } from './components/layout/LayoutShell';
 import { Home } from './pages/Home';
 // About.tsx is retained on disk until the Profile route has been reviewed,
@@ -25,6 +33,14 @@ import { ArchitecturingGovernance } from './pages/work/ArchitecturingGovernance'
 
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
 
+function LibraryFallback() {
+    return (
+        <p className="cl-text-200 cl-text-neutral-text-low-contrast py-20" role="status">
+            Loading…
+        </p>
+    );
+}
+
 function App() {
   return (
     <Router>
@@ -37,6 +53,9 @@ function App() {
               navigation; vercel.json handles direct requests. About.tsx is
               retained until the Profile route has been reviewed. */}
           <Route path="/about" element={<Navigate to="/profile" replace />} />
+          <Route path="/library" element={<Suspense fallback={<LibraryFallback />}><Library /></Suspense>} />
+          <Route path="/library/ai-product-development" element={<Suspense fallback={<LibraryFallback />}><HandbookLanding /></Suspense>} />
+          <Route path="/library/ai-product-development/:chapterSlug" element={<Suspense fallback={<LibraryFallback />}><HandbookChapter /></Suspense>} />
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/blog/secure-ux" element={<BlogPost />} />
           <Route path="/blog/governance" element={<Governance />} />
