@@ -22,6 +22,11 @@ export function LayoutShell() {
         else if (path.includes('/work')) title = 'Work — Hari Nandipati | CraftLayers';
         else if (path.startsWith('/for/')) title = 'Senior Product Designer — Hari Nandipati | CraftLayers';
         else if (path.includes('/blog')) title = 'Writing — Hari Nandipati | CraftLayers';
+        // Library: the handbook reader sets a chapter-specific title itself,
+        // so only the index and landing page are named here.
+        else if (path === '/library') title = 'Library — Hari Nandipati | CraftLayers';
+        else if (path === '/library/ai-product-development') title = 'AI Product Development Handbook — CraftLayers';
+        else if (path.startsWith('/library/ai-product-development/')) title = 'AI Product Development Handbook — CraftLayers';
 
         document.title = title;
     }, [location]);
