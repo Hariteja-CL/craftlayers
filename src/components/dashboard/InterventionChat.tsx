@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, User, Bot, Sparkles } from 'lucide-react';
-import { createOpenAI } from '@ai-sdk/openai';
-import { streamText, tool } from 'ai';
 import { toast } from 'sonner';
-import { z } from 'zod';
 import { ActionPlanWidget } from './ActionPlanWidget';
 
 export interface Message {
@@ -28,17 +25,11 @@ interface InterventionChatProps {
     setMessages?: React.Dispatch<React.SetStateAction<Message[]>>;
 }
 
-const API_KEY = import.meta.env.VITE_OPENAI_API_KEY || '';
-
 const SUGGESTION_CHIPS = [
     { label: '🔥 Focus on Burnout', value: 'Prioritize tasks that reduce burnout risk.' },
     { label: '🎨 Design Dept Only', value: 'Filter specific actions for the Design department.' },
     { label: '⚡ Quick Wins', value: 'Show only high-impact, low-effort tasks.' },
 ];
-
-const openai = createOpenAI({
-    apiKey: API_KEY || 'dummy-key', // Prevent crash if key is empty
-});
 
 export function InterventionChat({ currentData, messages: externalMessages, setMessages: setExternalMessages }: InterventionChatProps) {
     const [localMessages, setLocalMessages] = useState<Message[]>([]);
@@ -47,11 +38,16 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
 
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    /* The client can no longer ask whether an API key exists — that check
+       moved to the server. The banner now reflects what actually happened:
+       it turns on when a reply came from the local simulation. */
+    const [simulationActive, setSimulationActive] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
     const hasInitialized = useRef(false);
 
     const runSimulationFallback = async (existingMessageId?: string) => {
         console.log("⚠️ Starting Simulation Fallback...");
+        setSimulationActive(true);
         const simulationTool = {
             toolCallId: 'mock-' + Date.now(),
             toolName: 'suggest_intervention_plan',
@@ -91,107 +87,50 @@ export function InterventionChat({ currentData, messages: externalMessages, setM
         const assistantMessageId = Date.now().toString() + '-' + Math.random().toString(36).substring(2, 9) + '-ai';
         setMessages(prev => [...prev, { id: assistantMessageId, role: 'assistant', content: '' }]);
 
-        // 🛑 STRICT MODE: Check for valid API Key before attempting call
-        if (!API_KEY || API_KEY === 'dummy-key') {
-            console.warn("⚠️ No valid API Key found. Skipping OpenAI call and using Simulation Mode.");
-            // Slight delay to simulate "thinking"
-            setTimeout(async () => {
-                await runSimulationFallback(assistantMessageId);
-            }, 1500);
-            return;
-        }
-
-        // Create controller for timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-        console.log("🚀 REAL AI MODE: Calling OpenAI API...");
-
         try {
-            const { textStream, toolCalls, toolResults } = await streamText({
-                model: openai('gpt-4o-mini'),
-                messages: history.map(m => ({
-                    role: m.role,
-                    content: m.content,
-                })),
-                tools: {
-                    // ... tools config ...
-                    suggest_intervention_plan: tool({
-                        description: 'Generate a list of intervention actions based on the analysis.',
-                        parameters: z.object({
-                            analysis_briefing: z.string().describe('A concise, strategic psychological analysis of WHY these interventions are needed. Focus on root causes (e.g., Burnout, Trust) based on the data.'),
-                            items: z.array(z.object({
-                                id: z.string().describe('Unique ID (e.g. action-1)'),
-                                title: z.string().describe('Action title'),
-                                department: z.string().describe('Target department'),
-                                rationale: z.string().describe('Why this helps'),
-                                effort: z.enum(['Low', 'Medium', 'High']).describe('Effort level'),
-                                impact: z.enum(['High', 'Medium', 'Low']).describe('Impact level'),
-                            })).describe('Array of intervention actions'),
-                        }),
-                        execute: async (args) => {
-                            console.log("🛠️ Tool Executed with args:", args);
-                            // MAP new strictly-typed fields to legacy UI props
-                            const mappedItems = args.items.map(item => ({
-                                id: item.id,
-                                title: item.title,
-                                description: item.rationale, // Mapping rationale -> description
-                                team: item.department,       // Mapping department -> team
-                                estimatedImpact: item.impact // Mapping impact -> estimatedImpact
-                            }));
-                            return {
-                                analysis_briefing: args.analysis_briefing,
-                                items: mappedItems
-                            };
-                        },
-                    }),
-                },
-                temperature: 0,
-                // @ts-ignore - Required for client-side API calls
-                dangerouslyAllowBrowser: true,
-                abortSignal: controller.signal,
+            // Server-side now: /api/intervention holds the OpenAI key and
+            // requires a valid dashboard session, so no credential and no
+            // model call originates in the browser.
+            const response = await fetch('/api/intervention', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages: history.map(m => ({ role: m.role, content: m.content })),
+                }),
+                signal: AbortSignal.timeout(25000),
             });
 
-            let fullContent = '';
-
-            for await (const textPart of textStream) {
-                fullContent += textPart;
-                setMessages(prev =>
-                    prev.map(m => m.id === assistantMessageId ? { ...m, content: fullContent } : m)
-                );
+            // 401 (session expired) and 503 (model not configured) both land on
+            // the local simulation — the same path the old client took when no
+            // key was present.
+            if (!response.ok) {
+                console.warn('Intervention API unavailable:', response.status);
+                await runSimulationFallback(assistantMessageId);
+                return;
             }
 
-            // Clear timeout if stream completes (though minimal effect on logic flow)
-            clearTimeout(timeoutId);
+            const data = await response.json();
+            setSimulationActive(false);
+            const fullContent: string = typeof data.text === 'string' ? data.text : '';
 
-            // ... rest of logic ...
+            // The server returns the completed text rather than a token stream,
+            // so this lands in one update instead of progressively.
+            setMessages(prev =>
+                prev.map(m => m.id === assistantMessageId ? { ...m, content: fullContent } : m)
+            );
 
+            const toolInvocations: ToolInvocation[] = Array.isArray(data.toolInvocations)
+                ? data.toolInvocations
+                : [];
 
-
-            const calls = await toolCalls;
-            if (calls.length > 0) {
-                console.log("✅ Tool called by AI");
-                const results = await toolResults;
-                const toolInvocations: ToolInvocation[] = calls.map(call => {
-                    const resultPart = results.find(r => (r as any).toolCallId === (call as any).toolCallId);
-                    const result = (resultPart as any)?.result;
-                    return {
-                        toolCallId: (call as any).toolCallId,
-                        toolName: (call as any).toolName,
-                        args: (call as any).args,
-                        state: result ? 'result' : 'call',
-                        result: result
-                    };
-                });
-
-                // Attach tool invocations
+            if (toolInvocations.length > 0) {
                 setMessages(prev =>
                     prev.map(m => m.id === assistantMessageId ? { ...m, toolInvocations } : m)
                 );
             } else {
                 // FALLBACK: If AI didn't call the tool
-                console.warn("⚠️ AI failed to call tool. Triggering Simulation Fallback.");
-                // Update IN PLACE
+                console.warn("AI did not call the tool. Triggering simulation fallback.");
                 await runSimulationFallback(assistantMessageId);
             }
 
@@ -285,7 +224,7 @@ Your GOAL is to transform raw department data into a prescriptive JSON Action Pl
     return (
         <div className="flex flex-col h-full bg-white">
             {/* Simulation Mode Indicator */}
-            {(!API_KEY || API_KEY === 'dummy-key') && (
+            {simulationActive && (
                 <div className="bg-amber-50 border-b border-amber-100 px-4 py-2 flex items-center justify-between text-xs text-amber-800">
                     <span className="font-medium flex items-center gap-2">
                         <Sparkles className="w-3 h-3" />

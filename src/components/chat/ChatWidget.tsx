@@ -74,19 +74,13 @@ export function ChatWidget() {
         const pageContext = resolvePageContext(location.pathname);
 
         try {
-            const apiUrl = import.meta.env.VITE_B_GATEWAY_URL;
-            const apiKey = import.meta.env.VITE_B_GATEWAY_AUTH;
-
-            if (!apiUrl || apiUrl === 'undefined') {
-                console.error('B_GATEWAY_URL is missing. Please check your .env or Vercel settings.');
-                throw new Error('Configuration error');
-            }
-
-            const response = await fetch(apiUrl, {
+            // Routed through our own function: the gateway URL and its key are
+            // server-only env now, so nothing sensitive reaches the browser.
+            const response = await fetch('/api/chat', {
                 method: 'POST',
-                headers: { 
+                credentials: 'same-origin',
+                headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': apiKey || ''
                 },
                 body: JSON.stringify({
                     message: content,
