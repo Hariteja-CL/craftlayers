@@ -383,4 +383,56 @@ describe('intervention endpoint', () => {
         await interventionHandler(mockReq('GET'), res);
         expect(captured.status).toBe(405);
     });
+
+    /**
+     * These prove an authenticated request gets PAST the session gate without
+     * ever reaching OpenAI. A real model call would cost money and need a live
+     * key, so the assertion is that the handler stops at the next gate
+     * (missing config, or invalid input) rather than at 401.
+     */
+    it('accepts a valid session and proceeds past auth', async () => {
+        const cookie = await login();
+        const saved = process.env.OPENAI_API_KEY;
+        delete process.env.OPENAI_API_KEY;
+        try {
+            const { res, captured } = mockRes();
+            await interventionHandler(
+                mockReq('POST', { cookie, body: { messages: [{ role: 'user', content: 'hi' }] } }),
+                res
+            );
+            // 503 (not 401) proves the session was accepted and the request
+            // stopped only because no model is configured.
+            expect(captured.status).toBe(503);
+            expect(captured.body).toEqual({ error: 'Model unavailable' });
+        } finally {
+            if (saved !== undefined) process.env.OPENAI_API_KEY = saved;
+        }
+    });
+
+    it('validates input only after authenticating', async () => {
+        const cookie = await login();
+        process.env.OPENAI_API_KEY = 'test-key-never-used-no-call-is-made';
+        try {
+            const { res, captured } = mockRes();
+            // Empty message list: rejected at validation, still no model call.
+            await interventionHandler(mockReq('POST', { cookie, body: { messages: [] } }), res);
+            expect(captured.status).toBe(400);
+            expect(captured.body).toEqual({ error: 'Invalid messages' });
+        } finally {
+            delete process.env.OPENAI_API_KEY;
+        }
+    });
+
+    it('rejects an oversized message list', async () => {
+        const cookie = await login();
+        process.env.OPENAI_API_KEY = 'test-key-never-used-no-call-is-made';
+        try {
+            const messages = Array.from({ length: 41 }, () => ({ role: 'user', content: 'x' }));
+            const { res, captured } = mockRes();
+            await interventionHandler(mockReq('POST', { cookie, body: { messages } }), res);
+            expect(captured.status).toBe(400);
+        } finally {
+            delete process.env.OPENAI_API_KEY;
+        }
+    });
 });
