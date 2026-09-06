@@ -45,6 +45,18 @@ export function rateLimit(key: string, limit: number, windowMs: number, now = Da
     return { allowed: true, retryAfter: 0 };
 }
 
+/**
+ * Clear one key's history.
+ *
+ * Used after a successful login so that only FAILED attempts accumulate.
+ * Without it, five legitimate sign-ins inside the window would lock the owner
+ * out of their own dashboard — and an attacker who already knows the password
+ * gains nothing from the reset.
+ */
+export function resetKey(key: string): void {
+    buckets.delete(key);
+}
+
 /** Test seam. Not used in production paths. */
 export function __resetRateLimit(): void {
     buckets.clear();

@@ -19,7 +19,7 @@ import {
     issueToken,
     safeEqual,
 } from './_lib/session';
-import { rateLimit } from './_lib/rateLimit';
+import { rateLimit, resetKey } from './_lib/rateLimit';
 
 /** Five attempts per fifteen minutes per client key. See rateLimit.ts for
  *  why this is a speed bump rather than a guarantee. */
@@ -45,7 +45,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const limit = rateLimit(`auth:${clientKey(req.headers['x-forwarded-for'])}`, MAX_ATTEMPTS, ATTEMPT_WINDOW_MS);
+    // POST only. GET (session status) and DELETE (logout) return above, so
+    // neither a page load nor a sign-out can consume a login attempt.
+    // The `auth:` prefix keeps this bucket separate from `chat:`.
+    const attemptKey = `auth:${clientKey(req.headers['x-forwarded-for'])}`;
+    const limit = rateLimit(attemptKey, MAX_ATTEMPTS, ATTEMPT_WINDOW_MS);
     if (!limit.allowed) {
         res.setHeader('Retry-After', String(limit.retryAfter));
         return res.status(429).json({ error: 'Too many attempts' });
@@ -69,6 +73,8 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(401).json(GENERIC_FAILURE);
     }
 
+    // Only failures should count towards the lockout.
+    resetKey(attemptKey);
     res.setHeader('Set-Cookie', buildSessionCookie(issueToken(secret)));
     return res.status(200).json({ authenticated: true });
 }
