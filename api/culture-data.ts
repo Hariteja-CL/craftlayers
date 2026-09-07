@@ -10,7 +10,7 @@
  * They are not real employee data.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { hasValidSession } from './_lib/session';
+import { hasValidSession } from './_lib/session.js';
 
 const DEPARTMENT_METRICS = [
     { id: '1', department: 'Engineering', headcount: 24, sentiment: 62, topThemes: ['Legacy Code', 'Siloed Teams', 'Knowledge Gap'] },

@@ -9,8 +9,8 @@ import {
     parseCookies,
     safeEqual,
     verifyToken,
-} from './session';
-import { rateLimit, __resetRateLimit } from './rateLimit';
+} from './session.js';
+import { rateLimit, __resetRateLimit } from './rateLimit.js';
 
 const SECRET = 'test-secret-value-not-used-anywhere-real';
 

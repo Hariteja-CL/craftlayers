@@ -19,7 +19,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createOpenAI } from '@ai-sdk/openai';
 import { generateText, tool } from 'ai';
 import { z } from 'zod';
-import { hasValidSession } from './_lib/session';
+import { hasValidSession } from './_lib/session.js';
 
 const MAX_MESSAGES = 40;
 

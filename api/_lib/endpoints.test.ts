@@ -7,12 +7,12 @@
  * upstream request.
  */
 import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
-import authHandler from '../auth';
-import cultureHandler from '../culture-data';
-import interventionHandler from '../intervention';
-import chatHandler from '../chat';
-import { COOKIE_NAME } from './session';
-import { __resetRateLimit } from './rateLimit';
+import authHandler from '../auth.js';
+import cultureHandler from '../culture-data.js';
+import interventionHandler from '../intervention.js';
+import chatHandler from '../chat.js';
+import { COOKIE_NAME } from './session.js';
+import { __resetRateLimit } from './rateLimit.js';
 
 const PASSWORD = 'correct-horse-battery-staple';
 const SECRET = 'unit-test-signing-secret-0123456789';

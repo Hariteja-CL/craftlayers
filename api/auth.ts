@@ -18,8 +18,8 @@ import {
     hasValidSession,
     issueToken,
     safeEqual,
-} from './_lib/session';
-import { rateLimit, resetKey } from './_lib/rateLimit';
+} from './_lib/session.js';
+import { rateLimit, resetKey } from './_lib/rateLimit.js';
 
 /** Five attempts per fifteen minutes per client key. See rateLimit.ts for
  *  why this is a speed bump rather than a guarantee. */

@@ -18,8 +18,8 @@
  * fields. None of these is airtight on its own.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { clientKey } from './_lib/session';
-import { rateLimit } from './_lib/rateLimit';
+import { clientKey } from './_lib/session.js';
+import { rateLimit } from './_lib/rateLimit.js';
 
 const MAX_REQUESTS = 20;
 const WINDOW_MS = 5 * 60 * 1000;
