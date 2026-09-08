@@ -213,10 +213,12 @@ Authoring notes — NOT application code, never imported, safe to ignore:
 - **Branch that triggers deployment:** `UNKNOWN — requires verification`. No `.github/`
   workflows and no `.vercel/` directory exist. Vercel Git integration is the likely
   mechanism but is not evidenced in the repo.
-- **Server components:** none on `main`. PR #106 (`security/pr1-secrets-and-auth`,
-  open and mergeable) introduces `api/*.ts` Vercel serverless functions with a signed
-  session cookie, rate limiting and server-side secrets; it also deletes the client-side
-  `PasswordGate`. Until it merges, this repo is a purely static SPA.
+- **Server components:** `api/*.ts` Vercel serverless functions, live on `main` since
+  PR #106 (merged 2026-09-08, squash commit `5e2fc48`). They provide a signed HttpOnly
+  session cookie, rate limiting and server-side secrets, and replaced the client-side
+  `PasswordGate`. Verified in production: `GET /api/auth` returns
+  `{"authenticated":false}` as JSON with `Cache-Control: no-store`, and
+  `/api/culture-data` returns 401 without a session.
 - **Requires VPS changes, not repo changes:** anything behind `api.craftlayers.com`,
   the chat gateway, and `factory-service.craftlayers.com`.
 - **`claud.craftlayers.com` deployment:** `UNKNOWN — requires verification`.
@@ -380,17 +382,17 @@ same change or PR. Routine UI and copy edits should not cause memory churn.
 
 ```text
 Last verified:            2026-09-08
-Repository/commit:        branch feat/crawler-tracker (off security/pr1-secrets-and-auth)
-                          main is at 7c50f582 "Publish AI Product Development
-                          Handbook in Library (#105)"
+Repository/commit:        main at 5e2fc486 "Security: move secrets server-side and
+                          replace client dashboard gate (#106)"
 Repository visibility:    PUBLIC (Hariteja-CL/craftlayers), default branch main
 Production domain:        https://www.craftlayers.com
 Production deployment:    Vercel, configured by vercel.json.
                           Branch trigger UNKNOWN — requires verification
                           (no .github/ workflows, no .vercel/ in repo)
-Server-side code:         None on main. PR #106 adds api/* serverless functions — OPEN.
-                          feat/crawler-tracker builds on #106 and adds middleware.ts,
-                          so it cannot merge before #106 does
+Server-side code:         api/* serverless functions live on main since #106.
+                          Verified in production 2026-09-08: /api/auth serves JSON,
+                          /api/culture-data 401s without a session, and the public
+                          bundle carries no key, gateway host or hardcoded password
 VPS dependency:           Chat widget only (VITE_B_GATEWAY_URL). Page rendering: none.
                           api.craftlayers.com and factory-service.craftlayers.com are
                           VPS-hosted and NOT deployable from this repo
@@ -402,6 +404,10 @@ Known unresolved architecture questions:
   - Whether Vercel PR previews are enabled
   - Whether the api.craftlayers.com backend (port 8000) is still running, and what it serves
   - Stable location and sync direction for handbook chapters vs their upstream source
+  - B_GATEWAY_URL and/or B_GATEWAY_AUTH are NOT set in production as of
+    2026-09-08: POST /api/chat returns 503 "Chat is unavailable", which that
+    endpoint returns only when one of those two is missing. The chat widget is
+    down until they are set
   - Whether a Vercel Blob store has been provisioned (BLOB_READ_WRITE_TOKEN).
     Until it is, crawler capture runs but records nothing
   - Whether Google Search Console is verified — see docs/search-console-setup.md
