@@ -117,27 +117,64 @@ export function parseHitPathname(pathname: string): CrawlerHit | null {
     };
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+const DEFAULT_LOOKBACK_DAYS = 30;
+
+/** Guard against one pathological day costing an unbounded number of list
+ *  calls. 20 pages of 1000 is far beyond anything a portfolio will see. */
+const MAX_PAGES_PER_DAY = 20;
+
 /**
  * Read hits, newest first.
  *
- * `limit` caps how many objects are listed at all, which bounds both the cost
- * and the response size. The dashboard only ever shows recent activity, so
- * there is no reason to page through the entire history.
+ * WHY THIS WALKS DAY PREFIXES INSTEAD OF LISTING THE WHOLE STORE.
+ *
+ * Vercel does not document the sort order of `list()`. An earlier version
+ * listed `crawlers/` globally, took the first N results and sorted them
+ * afterwards — which is only correct if the API happens to return newest
+ * first. Past a couple of thousand objects that would have shown a stale
+ * window while labelling it "recent activity", and it would have broken
+ * silently if Vercel ever changed the order.
+ *
+ * Walking `crawlers/YYYY-MM-DD/` from today backwards removes the assumption
+ * entirely: recency comes from the prefix we choose, not from the API. Each
+ * day is read in full and sorted before being appended, so ordering within a
+ * day does not matter either.
+ *
+ * It also bounds the work. Only the days needed to satisfy `limit` are
+ * listed, so the whole store is never scanned no matter how large it grows —
+ * which is what makes the absence of a retention policy tolerable for now.
  */
-export async function readHits(limit = 1000): Promise<CrawlerHit[]> {
+export async function readHits(
+    limit = 1000,
+    lookbackDays = DEFAULT_LOOKBACK_DAYS,
+    now = Date.now(),
+): Promise<CrawlerHit[]> {
     if (!isStoreConfigured()) return [];
 
     const hits: CrawlerHit[] = [];
-    let cursor: string | undefined;
 
-    do {
-        const page = await list({ prefix: PREFIX, limit: 1000, cursor });
-        for (const blob of page.blobs) {
-            const hit = parseHitPathname(blob.pathname);
-            if (hit) hits.push(hit);
-        }
-        cursor = page.hasMore ? page.cursor : undefined;
-    } while (cursor && hits.length < limit);
+    for (let dayOffset = 0; dayOffset < lookbackDays && hits.length < limit; dayOffset++) {
+        const prefix = `${PREFIX}${dayKey(now - dayOffset * DAY_MS)}/`;
+        const forDay: CrawlerHit[] = [];
+        let cursor: string | undefined;
+        let pages = 0;
 
-    return hits.sort((a, b) => b.at - a.at).slice(0, limit);
+        do {
+            const page = await list({ prefix, limit: 1000, cursor });
+            for (const blob of page.blobs) {
+                const hit = parseHitPathname(blob.pathname);
+                if (hit) forDay.push(hit);
+            }
+            cursor = page.hasMore ? page.cursor : undefined;
+            pages += 1;
+        } while (cursor && pages < MAX_PAGES_PER_DAY);
+
+        // Sorted per day, so a day returned in any order still contributes
+        // its newest hits first.
+        forDay.sort((a, b) => b.at - a.at);
+        hits.push(...forDay);
+    }
+
+    return hits.slice(0, limit);
 }

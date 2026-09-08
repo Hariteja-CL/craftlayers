@@ -175,6 +175,17 @@ export function truncateUserAgent(userAgent: string | null | undefined): string 
 }
 
 /**
+ * Files every crawler fetches as protocol, not as content.
+ *
+ * robots.txt and sitemap.xml are usually the FIRST things a search crawler
+ * requests, and often the most frequent — counting them would put them at the
+ * top of "most crawled pages" and inflate the totals, while saying nothing
+ * about whether anyone is reading the case studies. 404.html is a leftover
+ * GitHub Pages shim that is inert on Vercel.
+ */
+const IGNORED_EXACT_PATHS = new Set(['/robots.txt', '/sitemap.xml', '/404.html']);
+
+/**
  * Paths that say nothing about discoverability.
  *
  * Build assets and Vercel's internal endpoints would dominate the "top pages"
@@ -183,10 +194,11 @@ export function truncateUserAgent(userAgent: string | null | undefined): string 
  */
 export function isIgnorablePath(pathname: string): boolean {
     return (
+        IGNORED_EXACT_PATHS.has(pathname) ||
         pathname.startsWith('/assets/') ||
         pathname.startsWith('/_vercel/') ||
         pathname.startsWith('/api/') ||
-        /\.(js|css|map|png|jpe?g|svg|webp|ico|woff2?|ttf)$/i.test(pathname)
+        /\.(js|css|map|png|jpe?g|svg|webp|ico|woff2?|ttf|otf|eot)$/i.test(pathname)
     );
 }
 

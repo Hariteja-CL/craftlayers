@@ -204,8 +204,37 @@ describe('isIgnorablePath', () => {
         (p) => expect(isIgnorablePath(p)).toBe(true),
     );
 
-    it.each(['/', '/work/respondent-experience', '/library/ai-product-development', '/profile'])(
-        'keeps %s',
-        (p) => expect(isIgnorablePath(p)).toBe(false),
-    );
+    /** These are protocol, not content. Every search crawler requests
+     *  robots.txt and sitemap.xml first and often most, so counting them
+     *  would top the "most crawled pages" table with files nobody reads. */
+    it.each(['/robots.txt', '/sitemap.xml', '/404.html'])('ignores the non-content file %s', (p) => {
+        expect(isIgnorablePath(p)).toBe(true);
+    });
+
+    it.each(['/fonts/x.otf', '/fonts/y.eot', '/z.OTF'])('ignores the font file %s', (p) => {
+        expect(isIgnorablePath(p)).toBe(true);
+    });
+
+    it.each([
+        '/',
+        '/work/respondent-experience',
+        '/work/dashboard-explainability',
+        '/blog/secure-ux',
+        '/library/ai-product-development',
+        '/library/ai-product-development/tool-use',
+        '/profile',
+        '/contact',
+        // Public résumé content. Deliberately still counted — these are
+        // portfolio pages, not protocol files.
+        '/resume.html',
+        '/resume-ats.html',
+        '/Hariteja-Nandipati-Resume.pdf',
+    ])('keeps %s', (p) => expect(isIgnorablePath(p)).toBe(false));
+
+    /** Exact-match only. A page that merely ends in one of those names is
+     *  still real content. */
+    it('does not ignore a content path that merely resembles a protocol file', () => {
+        expect(isIgnorablePath('/blog/robots.txt-explained')).toBe(false);
+        expect(isIgnorablePath('/work/sitemap.xml.case-study')).toBe(false);
+    });
 });

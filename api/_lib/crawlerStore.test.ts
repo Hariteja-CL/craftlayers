@@ -1,6 +1,12 @@
-import { describe, expect, it } from 'vitest';
-import { parseHitPathname, type CrawlerHit } from './crawlerStore.js';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { parseHitPathname, readHits, type CrawlerHit } from './crawlerStore.js';
 import { summarise } from '../crawler-stats.js';
+import { list } from '@vercel/blob';
+
+/** Stubbed so the read path can be exercised without a live Blob store. */
+vi.mock('@vercel/blob', () => ({ list: vi.fn(), put: vi.fn() }));
+
+const mockList = vi.mocked(list);
 
 describe('parseHitPathname', () => {
     it('round-trips a normal hit', () => {
@@ -93,5 +99,121 @@ describe('summarise', () => {
         expect(s.totals.families).toBe(0);
         expect(s.firstSeen).toBeNull();
         expect(s.topPages).toEqual([]);
+    });
+});
+
+/**
+ * The read path.
+ *
+ * These exist because an earlier version listed the whole `crawlers/` prefix
+ * and trusted the order Vercel happened to return. Vercel does not document
+ * that order, so these tests assert the behaviour the implementation now
+ * guarantees on its own: recency comes from the day prefix, never from the API.
+ */
+describe('readHits — day-prefixed reads', () => {
+    /** Noon UTC, so day-boundary arithmetic is unambiguous. */
+    const NOW = Date.UTC(2026, 8, 8, 12, 0, 0);
+    const DAY0 = 'crawlers/2026-09-08/';
+    const DAY1 = 'crawlers/2026-09-07/';
+    const DAY2 = 'crawlers/2026-09-06/';
+
+    function blob(day: string, at: number, family: string, path: string) {
+        const enc = encodeURIComponent(path).replace(/_/g, '%5F');
+        return { pathname: `${day}${at}-aa11bb__ai__${family}__${enc}.json` };
+    }
+
+    function stubStore(byPrefix: Record<string, { pathname: string }[]>) {
+        mockList.mockImplementation((async (opts: unknown) => ({
+            blobs: byPrefix[(opts as { prefix?: string }).prefix ?? ''] ?? [],
+            cursor: undefined,
+            hasMore: false,
+            folders: [],
+        })) as unknown as typeof list);
+    }
+
+    const prefixesQueried = () =>
+        mockList.mock.calls.map((c) => (c[0] as { prefix?: string }).prefix);
+
+    beforeEach(() => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
+        mockList.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+    });
+
+    it('reads the newest day first', async () => {
+        stubStore({
+            [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a')],
+            [DAY1]: [blob(DAY1, 200, 'GPTBot', '/b')],
+        });
+        await readHits(10, 30, NOW);
+        expect(prefixesQueried()[0]).toBe(DAY0);
+        expect(prefixesQueried()[1]).toBe(DAY1);
+    });
+
+    it('aggregates across multiple day prefixes, newest hit first', async () => {
+        stubStore({
+            [DAY0]: [blob(DAY0, 300, 'GPTBot', '/newest')],
+            [DAY1]: [blob(DAY1, 200, 'Googlebot', '/middle')],
+            [DAY2]: [blob(DAY2, 100, 'Bingbot', '/oldest')],
+        });
+        const hits = await readHits(10, 30, NOW);
+        expect(hits.map((h) => h.path)).toEqual(['/newest', '/middle', '/oldest']);
+    });
+
+    it('stops listing once the limit is reached', async () => {
+        stubStore({
+            [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a'), blob(DAY0, 290, 'GPTBot', '/b')],
+            [DAY1]: [blob(DAY1, 200, 'GPTBot', '/c')],
+        });
+        const hits = await readHits(2, 30, NOW);
+        expect(hits).toHaveLength(2);
+        // The second day is never queried, so cost scales with the limit
+        // rather than with the size of the store.
+        expect(prefixesQueried()).toEqual([DAY0]);
+    });
+
+    it('does not depend on the order a day is returned in', async () => {
+        stubStore({
+            [DAY0]: [
+                blob(DAY0, 100, 'GPTBot', '/oldest'),
+                blob(DAY0, 300, 'GPTBot', '/newest'),
+                blob(DAY0, 200, 'GPTBot', '/middle'),
+            ],
+        });
+        const hits = await readHits(10, 30, NOW);
+        expect(hits.map((h) => h.path)).toEqual(['/newest', '/middle', '/oldest']);
+    });
+
+    it('never lists the store globally', async () => {
+        stubStore({ [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a')] });
+        await readHits(10, 3, NOW);
+        expect(prefixesQueried()).not.toContain('crawlers/');
+        for (const p of prefixesQueried()) {
+            expect(p).toMatch(/^crawlers\/\d{4}-\d{2}-\d{2}\/$/);
+        }
+    });
+
+    it('honours the lookback window', async () => {
+        stubStore({});
+        await readHits(10, 2, NOW);
+        expect(prefixesQueried()).toEqual([DAY0, DAY1]);
+    });
+
+    it('reads nothing and never touches the store when unconfigured', async () => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+        stubStore({ [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a')] });
+        expect(await readHits(10, 30, NOW)).toEqual([]);
+        expect(mockList).not.toHaveBeenCalled();
+    });
+
+    it('skips unparseable objects instead of failing the whole read', async () => {
+        stubStore({
+            [DAY0]: [{ pathname: `${DAY0}garbage.json` }, blob(DAY0, 300, 'GPTBot', '/a')],
+        });
+        const hits = await readHits(10, 30, NOW);
+        expect(hits.map((h) => h.path)).toEqual(['/a']);
     });
 });
