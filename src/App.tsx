@@ -21,6 +21,7 @@ import { Enculture } from './pages/work/Enculture';
 import { UserDashboard } from './pages/work/UserDashboard';
 import { TherapistDashboard } from './pages/work/TherapistDashboard';
 import { CultureDashboard } from './components/dashboard/CultureDashboard';
+import { CrawlerTracker } from './pages/CrawlerTracker';
 import { Works } from './pages/work/Works';
 import { RespondentExperience } from './pages/work/RespondentExperience';
 import { DashboardExplainability } from './pages/work/DashboardExplainability';
@@ -72,6 +73,9 @@ function App() {
           <Route path="/work/inwards/therapist" element={<TherapistDashboard />} />
           <Route path="/work/enculture" element={<Enculture />} />
           <Route path="/dashboard/culture" element={<CultureDashboard />} />
+          {/* Internal. Not in the nav, and disallowed in robots.txt — the
+              session gate is what actually keeps it private. */}
+          <Route path="/dashboard/crawlers" element={<CrawlerTracker />} />
           <Route path="/contact" element={<Contact />} />
           {/* Role-specific readings of the existing evidence. Not in the nav —
               these are links you send someone. */}

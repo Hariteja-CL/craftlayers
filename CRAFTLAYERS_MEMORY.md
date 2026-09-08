@@ -54,6 +54,15 @@ PATH B — the chat widget (optional, degrades if unset)
 
 PATH C — unrelated to page rendering
   api.craftlayers.com → nginx → 127.0.0.1:8000 (VPS backend, not in this repo)
+
+PATH D — crawler capture (observes Path A, never alters it)
+  Any request
+    ↓
+  middleware.ts  ── runs at the edge, BEFORE the CDN cache
+    ↓ bot user-agents only; humans are discarded and never stored
+  Vercel Blob  ── one object per hit, summary encoded in the pathname
+    ↓
+  api/crawler-stats.ts (session-gated) → /dashboard/crawlers
 ```
 
 **The important consequence:** for every page the portfolio renders, the data source is
@@ -89,6 +98,8 @@ on the VPS to render pages. Editing this repo can never change VPS behaviour.
 | **Case-study prose** | Section copy | Inside each `src/pages/work/*.tsx` | That page | Static | Yes | No | No | The page component |
 | **Chat gateway** | Chat widget replies | `VITE_B_GATEWAY_URL` (external) | `ChatWidget.tsx` | **Dynamic** | No | **Yes** | No | The VPS gateway |
 | **Static resume** | Resume HTML/PDF | `public/resume.html`, `public/resume-ats.html`, `public/Hariteja-Nandipati-Resume.pdf` | Direct URL | Static | Yes | No | No | These files |
+| **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store. Needs `BLOB_READ_WRITE_TOKEN`; without it capture is a silent no-op |
+| **Sitemap** | Crawler discovery | `public/sitemap.xml` | Search engines | Static | Yes | No | **No — hand-maintained** | The file. Add new routes by hand |
 
 **Rule this table exists to enforce:** data visible locally does not originate locally
 just because you can see it. Trace it here before changing behaviour.
@@ -138,6 +149,17 @@ Notes: See §15 for two dead files here.
 /dist
 Purpose: Build output. Gitignored. Never edit, never commit.
 
+middleware.ts
+Purpose: Edge crawler capture. Runs before the CDN cache on every non-asset request.
+Source of truth?: Yes    Safe to edit?: Yes, carefully    Generated?: No
+Notes: MUST always return next(). It observes traffic and must never alter a
+       response. Storage happens in waitUntil, after the response is sent.
+       Typechecked via tsconfig.api.json, not the app config.
+
+/docs
+Purpose: Operational guides that are not agent context (e.g. Search Console setup).
+Safe to edit?: Yes    Generated?: No
+
 vercel.json
 Purpose: Production redirects, SPA rewrite, cache and robots headers.
 Notes: Production-only. Has no effect on localhost.
@@ -171,6 +193,12 @@ Authoring notes — NOT application code, never imported, safe to ignore:
    is not retractable.
 7. **A local build proves nothing about production.** See §9.
 8. **Prefer accurate wording over impressive wording** in all portfolio copy. See §12.
+9. **Client-side analytics cannot see crawlers.** GA4 does not execute for most bots and
+   filters known ones from its reports. Crawler questions are answered by
+   `middleware.ts` (who requested what) and Google Search Console (what got indexed) —
+   never by adding browser tracking.
+10. **A user-agent is a claim, not an identity.** It is trivially forged. Never present
+    crawler data as verified without reverse-DNS or published IP-range checks.
 
 ---
 
@@ -352,14 +380,17 @@ same change or PR. Routine UI and copy edits should not cause memory churn.
 
 ```text
 Last verified:            2026-09-08
-Repository/commit:        7c50f5827a348355e0c7e98223fd06cb87a4f109
-                          "Publish AI Product Development Handbook in Library (#105)"
+Repository/commit:        branch feat/crawler-tracker (off security/pr1-secrets-and-auth)
+                          main is at 7c50f582 "Publish AI Product Development
+                          Handbook in Library (#105)"
 Repository visibility:    PUBLIC (Hariteja-CL/craftlayers), default branch main
 Production domain:        https://www.craftlayers.com
 Production deployment:    Vercel, configured by vercel.json.
                           Branch trigger UNKNOWN — requires verification
                           (no .github/ workflows, no .vercel/ in repo)
-Server-side code:         None on main. PR #106 adds api/* serverless functions — OPEN
+Server-side code:         None on main. PR #106 adds api/* serverless functions — OPEN.
+                          feat/crawler-tracker builds on #106 and adds middleware.ts,
+                          so it cannot merge before #106 does
 VPS dependency:           Chat widget only (VITE_B_GATEWAY_URL). Page rendering: none.
                           api.craftlayers.com and factory-service.craftlayers.com are
                           VPS-hosted and NOT deployable from this repo
@@ -371,4 +402,7 @@ Known unresolved architecture questions:
   - Whether Vercel PR previews are enabled
   - Whether the api.craftlayers.com backend (port 8000) is still running, and what it serves
   - Stable location and sync direction for handbook chapters vs their upstream source
+  - Whether a Vercel Blob store has been provisioned (BLOB_READ_WRITE_TOKEN).
+    Until it is, crawler capture runs but records nothing
+  - Whether Google Search Console is verified — see docs/search-console-setup.md
 ```

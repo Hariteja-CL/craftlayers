@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.60",
+    "@vercel/blob": "^2.8.0",
+    "@vercel/functions": "^3.9.5",
     "ai": "^3.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

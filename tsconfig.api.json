@@ -23,5 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["api"]
+  /* middleware.ts sits at the repo root but is server code and imports from
+     api/_lib, so it is typechecked with the functions rather than the app. */
+  "include": ["api", "middleware.ts"]
 }
