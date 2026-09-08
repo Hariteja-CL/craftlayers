@@ -7,7 +7,8 @@
  * client-side analytics — GA4 included — can see them; GA4 additionally
  * filters known bots out of its own reports by design. Routing Middleware is
  * the only layer in this stack that observes the raw request, and it runs
- * before the CDN cache, so it still sees a hit that is served statically.
+ * before the CDN cache, so it still sees a hit that is served statically —
+ * cache hits included.
  *
  * WHAT THIS DOES NOT DO.
  *
@@ -26,14 +27,20 @@ import { classifyUserAgent, isIgnorablePath, sanitizePath, truncateUserAgent } f
 import { recordHit } from './api/_lib/crawlerStore.js';
 
 /**
- * Skip build assets, the API and Vercel's own endpoints.
+ * `runtime` is set explicitly. The file convention defaults to the Edge
+ * runtime, which Vercel has deprecated — its build warns and tells you to
+ * migrate. Node.js is also the better fit here: `@vercel/blob` and
+ * `process.env` are first-class on it, and none of this work is latency
+ * sensitive because it happens after the response is sent.
  *
- * Filtering here rather than in code means the middleware is not invoked at
- * all for those paths, so they cost nothing. `isIgnorablePath` still runs
- * below as a second line of defence, because this pattern is easy to get
- * subtly wrong and a miss would flood the "top pages" table with .js files.
+ * `matcher` skips build assets, the API and Vercel's own endpoints. Filtering
+ * here rather than in code means the middleware is not invoked at all for
+ * those paths, so they cost nothing. `isIgnorablePath` still runs below as a
+ * second line of defence, because this pattern is easy to get subtly wrong
+ * and a miss would flood the "top pages" table with .js files.
  */
 export const config = {
+    runtime: 'nodejs',
     matcher: ['/((?!api/|assets/|_vercel/|favicon\\.ico).*)'],
 };
 

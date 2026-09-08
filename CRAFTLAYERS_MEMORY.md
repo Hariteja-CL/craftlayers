@@ -48,7 +48,9 @@ PATH A — the portfolio (what this repo builds)
 PATH B — the chat widget (optional, degrades if unset)
   Browser
     ↓
-  fetch(import.meta.env.VITE_B_GATEWAY_URL)
+  fetch('/api/chat')  ── same-origin; no credential in the browser
+    ↓
+  api/chat.ts  ── reads B_GATEWAY_URL / B_GATEWAY_AUTH server-side
     ↓
   External gateway on a VPS  ← NOT in this repo
 
@@ -58,7 +60,7 @@ PATH C — unrelated to page rendering
 PATH D — crawler capture (observes Path A, never alters it)
   Any request
     ↓
-  middleware.ts  ── runs at the edge, BEFORE the CDN cache
+  middleware.ts  ── Node.js runtime, runs BEFORE the CDN cache
     ↓ bot user-agents only; humans are discarded and never stored
   Vercel Blob  ── one object per hit, summary encoded in the pathname
     ↓
@@ -96,7 +98,7 @@ on the VPS to render pages. Editing this repo can never change VPS behaviour.
 | **Design tokens** | Colour, type, spacing | `craftlayers-ds/themes/*.theme.json` | CSS generator | Static | Yes | No | No | **These JSON files** |
 | **Generated CSS** | `--cl-*` vars + `.cl-*` utilities | `src/styles/variables.css`, `src/styles/utilities.css` | `src/index.css` | Static | Yes (committed) | No | **YES** | Never edit — regenerate (§6) |
 | **Case-study prose** | Section copy | Inside each `src/pages/work/*.tsx` | That page | Static | Yes | No | No | The page component |
-| **Chat gateway** | Chat widget replies | `VITE_B_GATEWAY_URL` (external) | `ChatWidget.tsx` | **Dynamic** | No | **Yes** | No | The VPS gateway |
+| **Chat gateway** | Chat widget replies | `B_GATEWAY_URL` (server-only), via `api/chat.ts` | `ChatWidget.tsx` → `/api/chat` | **Dynamic** | No | **Yes** | No | The VPS gateway |
 | **Static resume** | Resume HTML/PDF | `public/resume.html`, `public/resume-ats.html`, `public/Hariteja-Nandipati-Resume.pdf` | Direct URL | Static | Yes | No | No | These files |
 | **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store. Needs `BLOB_READ_WRITE_TOKEN`; without it capture is a silent no-op |
 | **Sitemap** | Crawler discovery | `public/sitemap.xml` | Search engines | Static | Yes | No | **No — hand-maintained** | The file. Add new routes by hand |
@@ -150,7 +152,7 @@ Notes: See §15 for two dead files here.
 Purpose: Build output. Gitignored. Never edit, never commit.
 
 middleware.ts
-Purpose: Edge crawler capture. Runs before the CDN cache on every non-asset request.
+Purpose: Crawler capture. Node.js runtime; runs before the CDN cache on every non-asset request.
 Source of truth?: Yes    Safe to edit?: Yes, carefully    Generated?: No
 Notes: MUST always return next(). It observes traffic and must never alter a
        response. Storage happens in waitUntil, after the response is sent.
