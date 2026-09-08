@@ -7,7 +7,7 @@ import { Button } from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LayerInsightTabs } from './LayerInsightTabs';
 import profileHero from '../../assets/images/profile.png';
-import { PasswordGate } from '../ui/PasswordGate';
+import { DashboardGate } from '../auth/DashboardGate';
 
 
 export interface DepartmentMetric {
@@ -18,19 +18,39 @@ export interface DepartmentMetric {
     topThemes: string[];
 }
 
-const INITIAL_DATA: DepartmentMetric[] = [
-    { id: '1', department: 'Engineering', headcount: 24, sentiment: 62, topThemes: ['Legacy Code', 'Siloed Teams', 'Knowledge Gap'] }, // Merger Context
-    { id: '2', department: 'Design', headcount: 12, sentiment: 42, topThemes: ['Burnout', 'Feedback Loops', 'Overtime'] }, // Burnout Context (Critical)
-    { id: '3', department: 'Product Management', headcount: 8, sentiment: 78, topThemes: ['Strategy Clarity', 'Alignment'] },
-    { id: '4', department: 'Sales & Marketing', headcount: 18, sentiment: 55, topThemes: ['Budget Cuts', 'Travel Freeze', 'Morale'] }, // Budget Context
-    { id: '5', department: 'Customer Support', headcount: 15, sentiment: 88, topThemes: ['Autonomy', 'Mastery'] },
-];
-
-export function CultureDashboard() {
+/**
+ * The dataset used to be a module-level constant here, which meant it was in
+ * the public JavaScript bundle regardless of what the access gate did. It now
+ * comes from /api/culture-data, which returns 401 without a session cookie —
+ * so an unauthenticated browser receives nothing to render.
+ */
+function CultureDashboardContent() {
     const navigate = useNavigate();
-    const [data, setData] = useState<DepartmentMetric[]>(INITIAL_DATA);
+    const [data, setData] = useState<DepartmentMetric[]>([]);
+    const [loadError, setLoadError] = useState(false);
 
-    const averageSentiment = data.reduce((acc, curr) => acc + curr.sentiment, 0) / data.length;
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/api/culture-data', { credentials: 'same-origin' })
+            .then((r) => {
+                if (!r.ok) throw new Error(String(r.status));
+                return r.json();
+            })
+            .then((d) => {
+                if (!cancelled) setData(Array.isArray(d.data) ? d.data : []);
+            })
+            .catch(() => {
+                if (!cancelled) setLoadError(true);
+            });
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    // Guarded: data is empty until the fetch resolves, and 0/0 is NaN.
+    const averageSentiment = data.length
+        ? data.reduce((acc, curr) => acc + curr.sentiment, 0) / data.length
+        : 0;
 
     const handleUpdate = (id: string, field: keyof DepartmentMetric, value: any) => {
         setData((prev) =>
@@ -41,8 +61,13 @@ export function CultureDashboard() {
     const [, setSelectedDept] = useState<string | null>(null);
 
     return (
-        <PasswordGate scope="enculture_dashboard">
+        <>
             <div className="min-h-screen bg-neutral-50/50 p-8 space-y-8">
+                {loadError && (
+                    <p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                        Could not load dashboard data. Your session may have expired — sign out and back in.
+                    </p>
+                )}
                 <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">Proactive Culture Dashboard</h1>
@@ -85,7 +110,15 @@ export function CultureDashboard() {
                     <LayerInsightTabs />
                 </div>
             </div>
-        </PasswordGate>
+        </>
+    );
+}
+
+export function CultureDashboard() {
+    return (
+        <DashboardGate>
+            <CultureDashboardContent />
+        </DashboardGate>
     );
 }
 

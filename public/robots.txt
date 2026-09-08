@@ -1,0 +1,13 @@
+# CraftLayers — crawler guidance.
+#
+# IMPORTANT: robots.txt is advisory, not a security control. Well-behaved
+# crawlers honour it; anything else ignores it entirely. The private areas
+# below are protected by server-side authentication (an HttpOnly session
+# cookie checked inside the API routes), and that — not this file — is what
+# actually keeps them private.
+
+User-agent: *
+Disallow: /dashboard
+Disallow: /api/
+
+Sitemap: https://www.craftlayers.com/sitemap.xml
