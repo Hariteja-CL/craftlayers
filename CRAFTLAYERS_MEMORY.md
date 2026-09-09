@@ -62,7 +62,8 @@ PATH D — crawler capture (observes Path A, never alters it)
     ↓
   middleware.ts  ── Node.js runtime, runs BEFORE the CDN cache
     ↓ bot user-agents only; humans are discarded and never stored
-  Vercel Blob  ── one object per hit, summary encoded in the pathname
+    ↓ the write is AWAITED (not waitUntil — see §15 trap 12)
+  Vercel Blob  ── one PRIVATE object per hit, summary in the pathname
     ↓
   api/crawler-stats.ts (session-gated) → /dashboard/crawlers
 ```
@@ -100,7 +101,7 @@ on the VPS to render pages. Editing this repo can never change VPS behaviour.
 | **Case-study prose** | Section copy | Inside each `src/pages/work/*.tsx` | That page | Static | Yes | No | No | The page component |
 | **Chat gateway** | Chat widget replies | `B_GATEWAY_URL` (server-only), via `api/chat.ts` | `ChatWidget.tsx` → `/api/chat` | **Dynamic** | No | **Yes** | No | The VPS gateway |
 | **Static resume** | Resume HTML/PDF | `public/resume.html`, `public/resume-ats.html`, `public/Hariteja-Nandipati-Resume.pdf` | Direct URL | Static | Yes | No | No | These files |
-| **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store. Needs **either** `BLOB_STORE_ID` (OIDC, what the current Vercel integration provisions) **or** `BLOB_READ_WRITE_TOKEN`; with neither, capture is a silent no-op |
+| **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store — **private**, so writes must use `access: 'private'`. Needs **either** `BLOB_STORE_ID` (OIDC, what the current Vercel integration provisions) **or** `BLOB_READ_WRITE_TOKEN`; with neither, capture is a no-op. Verified working in production 2026-09-09 |
 | **Sitemap** | Crawler discovery | `public/sitemap.xml` | Search engines | Static | Yes | No | **No — hand-maintained** | The file. Add new routes by hand |
 
 **Rule this table exists to enforce:** data visible locally does not originate locally
@@ -154,8 +155,14 @@ Purpose: Build output. Gitignored. Never edit, never commit.
 middleware.ts
 Purpose: Crawler capture. Node.js runtime; runs before the CDN cache on every non-asset request.
 Source of truth?: Yes    Safe to edit?: Yes, carefully    Generated?: No
-Notes: MUST always return next(). It observes traffic and must never alter a
-       response. Storage happens in waitUntil, after the response is sent.
+Notes: MUST always return next(). It observes traffic and must never change
+       what a page returns. The Blob write is AWAITED — waitUntil silently
+       drops it under the Node.js runtime (§15 trap 12).
+       Sets an `x-cl-crawler` response header reporting the write outcome,
+       for automated clients ONLY; a human's response is untouched. That
+       header is the only health signal available, since this deployment has
+       no readable logs — removing it makes a dead write path look identical
+       to an unvisited site.
        Typechecked via tsconfig.api.json, not the app config.
 
 /docs
@@ -384,15 +391,25 @@ same change or PR. Routine UI and copy edits should not cause memory churn.
     a naive `process.env.BLOB_READ_WRITE_TOKEN` check reports it as missing.
     That exact bug silently dropped every crawler hit in production on
     2026-09-09. Any code gating on Blob availability must accept both.
+12. **Three separate bugs made the crawler tracker read "no traffic" while
+    being completely broken** — worth knowing as a pattern, not just as history.
+    The Blob credential check was too narrow (trap 11); `waitUntil` silently
+    dropped the write under the Node.js runtime, where its ambient context is
+    not always present; and the store is **private**, so `access: 'public'`
+    was rejected on every write. Each failure was invisible because
+    `recordHit` swallowed its errors, which made a dead write path
+    indistinguishable from a site no crawler had visited. **Telemetry that
+    cannot report its own failure is not debuggable** — that is why the write
+    is awaited and its outcome surfaced in `x-cl-crawler`.
 
 ---
 
 ## 16. Current known architecture status
 
 ```text
-Last verified:            2026-09-08
-Repository/commit:        main at 5e2fc486 "Security: move secrets server-side and
-                          replace client dashboard gate (#106)"
+Last verified:            2026-09-09
+Repository/commit:        main at 1748ec8a "Write crawler hits with private
+                          access (#110)"
 Repository visibility:    PUBLIC (Hariteja-CL/craftlayers), default branch main
 Production domain:        https://www.craftlayers.com
 Production deployment:    Vercel, configured by vercel.json.
@@ -402,7 +419,8 @@ Server-side code:         api/* serverless functions live on main since #106.
                           Verified in production 2026-09-08: /api/auth serves JSON,
                           /api/culture-data 401s without a session, and the public
                           bundle carries no key, gateway host or hardcoded password
-VPS dependency:           Chat widget only (VITE_B_GATEWAY_URL). Page rendering: none.
+VPS dependency:           Chat widget only, via api/chat.ts (B_GATEWAY_URL,
+                          server-side). Page rendering: none.
                           api.craftlayers.com and factory-service.craftlayers.com are
                           VPS-hosted and NOT deployable from this repo
 Localhost dependency:     None. Site renders fully offline without env vars
@@ -413,8 +431,10 @@ Known unresolved architecture questions:
   - Whether Vercel PR previews are enabled
   - Whether the api.craftlayers.com backend (port 8000) is still running, and what it serves
   - Stable location and sync direction for handbook chapters vs their upstream source
-  - B_GATEWAY_URL and/or B_GATEWAY_AUTH are NOT set in production as of
-    2026-09-08. RESOLVED 2026-09-09: both are now set and POST /api/chat
-    returns 400 for an empty message, i.e. it gets past the config check
+  - RESOLVED 2026-09-09: B_GATEWAY_URL and B_GATEWAY_AUTH are now set;
+    POST /api/chat returns 400 for an empty message, i.e. past the config check
+  - RESOLVED 2026-09-09: the crawler tracker is live and verified end to end
+    in production — 20 crawler user-agents classified correctly across all five
+    categories, humans and protocol files excluded, every write reporting ok
   - Whether Google Search Console is verified — see docs/search-console-setup.md
 ```
