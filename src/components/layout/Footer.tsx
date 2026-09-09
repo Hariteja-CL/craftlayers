@@ -31,11 +31,12 @@ export function Footer() {
                     <Link to="/blog" className="hover:cl-text-brand-primary-base transition-colors">
                         Writing
                     </Link>
-                    {/* Library follows the same rule as Writing: live and reachable,
-                        but not competing with Work in the primary nav. */}
-                    <Link to="/library" className="hover:cl-text-brand-primary-base transition-colors">
-                        Library
-                    </Link>
+                    {/* The Library link is gone on purpose. It is private now, and
+                        a public link to a sign-in wall tells a visitor a private
+                        area exists without letting them do anything about it. The
+                        route still works for anyone who knows it and holds a
+                        session; authentication, not obscurity, is what protects
+                        it — this only stops advertising it. */}
                     <a
                         href="https://linkedin.com/in/hariteja-nandipati"
                         target="_blank"

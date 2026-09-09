@@ -1,33 +1,63 @@
 {
   "redirects": [
-    { "source": "/about", "destination": "/profile", "permanent": true },
-    { "source": "/resume.pdf", "destination": "/Hariteja-Nandipati-Resume.pdf", "permanent": true }
+    {
+      "source": "/about",
+      "destination": "/profile",
+      "permanent": true
+    },
+    {
+      "source": "/resume.pdf",
+      "destination": "/Hariteja-Nandipati-Resume.pdf",
+      "permanent": true
+    }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/work/enculture",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
       ]
     },
     {
       "source": "/resume.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/resume-ats.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/(.*).html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/library.ts": {
+      "includeFiles": "api/_content/**"
+    }
+  }
 }

@@ -95,15 +95,68 @@ export const chapterNeighbours = (slug: string) => {
 };
 
 /**
- * Raw markdown, loaded lazily so a chapter's text is fetched only when that
- * chapter is opened. Eager loading would put ~700 KB of prose into the main
- * bundle for visitors who never open the handbook.
+ * Landing-page content. Server-side for the same reason the chapters are: the
+ * lessons quote the chapters, the counts describe the project's real evidence
+ * base, and the gap IDs map to its open-questions register. All of it tells a
+ * reader what is in the handbook, so none of it belongs in a public bundle.
  */
-const files = import.meta.glob('./*.md', { query: '?raw', import: 'default' });
+export type Lesson = string;
+export type EvidenceStat = { value: string; label: string };
+export type Gap = { id: string; title: string; detail: string };
+
+export const LESSONS: Lesson[] = [
+  'A model proposes; it does not authorize.',
+  'Relevance is not trust.',
+  'A protocol connection is not a trust relationship.',
+  'Rollback is not undo.',
+  'Instrumentation is not observability.',
+  'Observability is not operability.',
+  'A passing test is not product quality.',
+  'A test fixture is not a source of truth.',
+];
+
+export const EVIDENCE: EvidenceStat[] = [
+  { value: '789', label: 'deterministic tests' },
+  { value: '272', label: 'runtime checks across 7 harnesses' },
+  { value: '9', label: 'evaluation harnesses' },
+  { value: '52', label: 'recorded failures' },
+  { value: '75', label: 'retrieved sources' },
+];
+
+export const GAPS: Gap[] = [
+  { id: 'G-18', title: 'No real model execution',
+    detail: 'No model call was ever made, so every claim about AI behaviour in this handbook is unmeasured.' },
+  { id: 'G-69', title: 'No real-user evidence',
+    detail: 'The experiment application has never served a user, so nothing is known about a real task distribution or real usefulness.' },
+  { id: 'G-80', title: 'No real deployment evidence',
+    detail: 'Nothing has run under load, over time, or across more than one machine.' },
+];
+
+/**
+ * Chapter markdown, read from disk inside the Function.
+ *
+ * This file and the .md files beside it live under `api/_content/` — outside
+ * `src/`, so Vite cannot see them and cannot compile them into the public
+ * bundle. That placement IS the security boundary: before it, every chapter
+ * shipped as a public JS chunk and the whole handbook could be downloaded
+ * without a session.
+ *
+ * `vercel.json` includes `api/_content/**` with the function, because Vercel's
+ * file tracing cannot follow a path built at runtime.
+ */
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+const CONTENT_DIR = join(process.cwd(), 'api', '_content', 'library', 'ai-product-development');
 
 export async function loadChapter(number: number, slug: string): Promise<string | null> {
-  const key = `./${String(number).padStart(2, '0')}-${slug}.md`;
-  const loader = files[key];
-  if (!loader) return null;
-  return (await loader()) as string;
+  // The filename is rebuilt from the manifest entry, never from user input, so
+  // a caller cannot reach outside this directory. The slug is additionally
+  // checked against the manifest before this is called.
+  const file = `${String(number).padStart(2, '0')}-${slug}.md`;
+  try {
+    return await readFile(join(CONTENT_DIR, file), 'utf8');
+  } catch {
+    return null;
+  }
 }

@@ -3,55 +3,76 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, List } from 'lucide-react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { ChapterMarkdown } from '../../components/library/ChapterMarkdown';
+import { DashboardGate } from '../../components/auth/DashboardGate';
 import {
-  HANDBOOK, CHAPTERS, chapterBySlug, chapterNeighbours, loadChapter,
-} from '../../content/library/ai-product-development/manifest';
+  fetchChapter, HANDBOOK_SLUG, UnauthorizedError, type ChapterPayload,
+} from '../../content/library/handbook';
 
 /**
- * Loaded markdown is stored WITH the slug it belongs to, so switching chapters
- * cannot briefly render the previous chapter's text under the new title. The
- * effect only ever sets state from its async callback -- the unknown-slug case
- * is derived during render, because it is knowable without any I/O.
+ * Everything about the chapter — its title, number, neighbours and prose —
+ * arrives together from `/api/library`, which checks the session first. The
+ * client holds no manifest, so it cannot even name a chapter until the server
+ * has authorised the request.
+ *
+ * The payload is stored WITH the slug it belongs to, so switching chapters
+ * cannot briefly render the previous chapter's text under the new title.
  */
 type Loaded =
-  | { slug: string; kind: 'ready'; markdown: string }
-  | { slug: string; kind: 'missing' };
+  | { slug: string; kind: 'ready'; data: ChapterPayload }
+  | { slug: string; kind: 'missing' }
+  | { slug: string; kind: 'expired' };
 
-export function HandbookChapter() {
+function HandbookChapterBody() {
   const { chapterSlug = '' } = useParams();
-  const chapter = chapterBySlug(chapterSlug);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
 
   useEffect(() => {
-    if (!chapter) return;
     let cancelled = false;
-    loadChapter(chapter.number, chapter.slug)
-      .then((markdown) => {
-        if (cancelled) return;
-        setLoaded(markdown
-          ? { slug: chapter.slug, kind: 'ready', markdown }
-          : { slug: chapter.slug, kind: 'missing' });
+    // No synchronous reset here. `current` below already discards a payload
+    // whose slug no longer matches the route, which is what stops the previous
+    // chapter's text appearing under the new title.
+    fetchChapter(chapterSlug)
+      .then((data) => {
+        if (!cancelled) setLoaded({ slug: chapterSlug, kind: 'ready', data });
       })
-      .catch(() => {
-        if (!cancelled) setLoaded({ slug: chapter.slug, kind: 'missing' });
+      .catch((e) => {
+        if (cancelled) return;
+        setLoaded({
+          slug: chapterSlug,
+          kind: e instanceof UnauthorizedError ? 'expired' : 'missing',
+        });
       });
     return () => { cancelled = true; };
-  }, [chapter]);
+  }, [chapterSlug]);
 
-  const current = loaded && chapter && loaded.slug === chapter.slug ? loaded : null;
+  const current = loaded && loaded.slug === chapterSlug ? loaded : null;
 
-  // An unknown chapter slug is a real 404 rather than an empty reader.
-  if (!chapter || current?.kind === 'missing') {
+  if (!current) {
+    return <p className="pt-8 cl-text-100 cl-text-neutral-text-low-contrast">Loading…</p>;
+  }
+
+  if (current.kind === 'expired') {
+    return (
+      <p className="pt-8 cl-text-100 cl-text-neutral-text-low-contrast">
+        This session has expired. Sign in again to continue.
+      </p>
+    );
+  }
+
+  // An unknown chapter slug is a real 404 rather than an empty reader. The
+  // chapter count is no longer stated here: it is manifest data, and this
+  // branch renders before any authorised payload has arrived.
+  if (current.kind === 'missing') {
     return (
       <div className="max-w-3xl py-20">
         <h1 className="cl-text-500 cl-weight-bold cl-text-neutral-text-high-contrast mb-4">
           Chapter not found
         </h1>
         <p className="cl-text-200 cl-text-neutral-text-medium-contrast mb-8">
-          There is no chapter at this address. The handbook has {CHAPTERS.length} chapters.
+          There is no chapter at this address.
         </p>
         <Link
-          to={`/library/${HANDBOOK.slug}`}
+          to={`/library/${HANDBOOK_SLUG}`}
           className="inline-flex items-center gap-2 cl-text-100 cl-weight-medium cl-text-brand-primary-base cl-focus-ring rounded-sm"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden="true" />
@@ -61,7 +82,9 @@ export function HandbookChapter() {
     );
   }
 
-  const { previous, next } = chapterNeighbours(chapter.slug);
+  const { chapter, previous, next, totalChapters } = current.data;
+  const HANDBOOK = current.data.handbook;
+  const CHAPTERS = { length: totalChapters };
 
   return (
     <article className="pb-20">
@@ -89,8 +112,8 @@ export function HandbookChapter() {
 
       {/* Comfortable measure for long-form reading. */}
       <div className="max-w-[68ch]">
-        {current?.kind === 'ready' ? (
-          <ChapterMarkdown>{current.markdown}</ChapterMarkdown>
+        {current.data.markdown ? (
+          <ChapterMarkdown>{current.data.markdown}</ChapterMarkdown>
         ) : (
           <p className="cl-text-200 cl-text-neutral-text-low-contrast py-12" role="status">
             Loading chapter…
@@ -146,5 +169,16 @@ export function HandbookChapter() {
         </Link>
       </div>
     </article>
+  );
+}
+
+/** Private. The gate renders the sign-in surface for a signed-out visitor and
+ *  keeps them on this URL, so a deep link resolves to the requested chapter as
+ *  soon as the session exists. */
+export function HandbookChapter() {
+  return (
+    <DashboardGate>
+      <HandbookChapterBody />
+    </DashboardGate>
   );
 }

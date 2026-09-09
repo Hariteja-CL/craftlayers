@@ -1,10 +1,16 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
-import { HANDBOOK, CHAPTERS } from '../../content/library/ai-product-development/manifest';
+import { DashboardGate } from '../../components/auth/DashboardGate';
+import {
+  fetchLibraryIndex,
+  UnauthorizedError,
+  type LibraryIndex,
+} from '../../content/library/handbook';
 
 /**
- * Landing page for the AI Product Development Handbook.
+ * Landing page for the private handbook.
  *
  * The framing rules for this page are load-bearing rather than decorative:
  * it is a personal learning record, its evidence limits are stated on the same
@@ -12,35 +18,9 @@ import { HANDBOOK, CHAPTERS } from '../../content/library/ai-product-development
  * from the source project is softened for a public audience.
  */
 
-const LESSONS = [
-  'A model proposes; it does not authorize.',
-  'Relevance is not trust.',
-  'A protocol connection is not a trust relationship.',
-  'Rollback is not undo.',
-  'Instrumentation is not observability.',
-  'Observability is not operability.',
-  'A passing test is not product quality.',
-  'A test fixture is not a source of truth.',
-];
+function HandbookLandingBody({ data }: { data: LibraryIndex }) {
+  const { handbook: HANDBOOK, chapters: CHAPTERS, lessons: LESSONS, evidence: EVIDENCE, gaps: GAPS } = data;
 
-const EVIDENCE = [
-  { value: '789', label: 'deterministic tests' },
-  { value: '272', label: 'runtime checks across 7 harnesses' },
-  { value: '9', label: 'evaluation harnesses' },
-  { value: '52', label: 'recorded failures' },
-  { value: '75', label: 'retrieved sources' },
-];
-
-const GAPS = [
-  { id: 'G-18', title: 'No real model execution',
-    detail: 'No model call was ever made, so every claim about AI behaviour in this handbook is unmeasured.' },
-  { id: 'G-69', title: 'No real-user evidence',
-    detail: 'The experiment application has never served a user, so nothing is known about a real task distribution or real usefulness.' },
-  { id: 'G-80', title: 'No real deployment evidence',
-    detail: 'Nothing has run under load, over time, or across more than one machine.' },
-];
-
-export function HandbookLanding() {
   return (
     <div className="pb-20">
       <div className="pt-8 mb-8">
@@ -249,5 +229,45 @@ export function HandbookLanding() {
         </dl>
       </section>
     </div>
+  );
+}
+
+/**
+ * Private. Everything this page renders — the handbook's title and summary,
+ * the chapter list, the lessons, the evidence counts and the open gaps — is
+ * fetched from `/api/library` after the session check. None of it is compiled
+ * into the public bundle.
+ */
+export function HandbookLanding() {
+  const [data, setData] = useState<LibraryIndex | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchLibraryIndex()
+      .then((d) => !cancelled && setData(d))
+      .catch((e) => {
+        if (cancelled) return;
+        setError(
+          e instanceof UnauthorizedError
+            ? 'This session has expired. Sign in again to continue.'
+            : 'Could not load the handbook.',
+        );
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <DashboardGate>
+      {error ? (
+        <p className="pt-8 cl-text-100 cl-text-neutral-text-low-contrast">{error}</p>
+      ) : !data ? (
+        <p className="pt-8 cl-text-100 cl-text-neutral-text-low-contrast">Loading…</p>
+      ) : (
+        <HandbookLandingBody data={data} />
+      )}
+    </DashboardGate>
   );
 }

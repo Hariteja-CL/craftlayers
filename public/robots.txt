@@ -8,6 +8,7 @@
 
 User-agent: *
 Disallow: /dashboard
+Disallow: /library
 Disallow: /api/
 
 Sitemap: https://www.craftlayers.com/sitemap.xml

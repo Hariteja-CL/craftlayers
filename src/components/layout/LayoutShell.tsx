@@ -25,8 +25,10 @@ export function LayoutShell() {
         // Library: the handbook reader sets a chapter-specific title itself,
         // so only the index and landing page are named here.
         else if (path === '/library') title = 'Library — Hari Nandipati | CraftLayers';
-        else if (path === '/library/ai-product-development') title = 'AI Product Development Handbook — CraftLayers';
-        else if (path.startsWith('/library/ai-product-development/')) title = 'AI Product Development Handbook — CraftLayers';
+        // Deliberately generic. The handbook's real title is private content
+        // and naming it here would compile it straight back into the public
+        // bundle — the exact leak this route was moved server-side to close.
+        else if (path.startsWith('/library/')) title = 'Library — Hari Nandipati | CraftLayers';
 
         document.title = title;
     }, [location]);
