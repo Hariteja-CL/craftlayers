@@ -79,12 +79,35 @@ function dayKey(at: number): string {
     return new Date(at).toISOString().slice(0, 10);
 }
 
+/** What happened to a write. Returned rather than thrown, so the caller can
+ *  surface it without any risk of breaking the response. */
+export type RecordOutcome = 'ok' | 'no-store' | `error:${string}`;
+
+/**
+ * Describe a failure without leaking a credential.
+ *
+ * Blob errors are about missing or rejected credentials rather than their
+ * values, but the message is third-party text, so any long opaque run is
+ * redacted before it can reach a response header.
+ */
+function describeError(err: unknown): string {
+    if (!(err instanceof Error)) return 'unknown';
+    const msg = err.message.replace(/[A-Za-z0-9_-]{24,}/g, '<redacted>');
+    return `${err.name}: ${msg}`.slice(0, 160);
+}
+
 /**
  * Record one hit. Never throws — a storage failure must not turn into a failed
  * response for the crawler, which would look like an outage to a search engine.
+ *
+ * It does, however, REPORT. An earlier version swallowed every error silently,
+ * which meant a completely dead write path was indistinguishable from "no
+ * crawler has visited yet" — and with no log access that is close to
+ * undebuggable. The outcome is returned so the caller can decide what to do
+ * with it.
  */
-export async function recordHit(hit: CrawlerHit, userAgent: string): Promise<void> {
-    if (!isStoreConfigured()) return;
+export async function recordHit(hit: CrawlerHit, userAgent: string): Promise<RecordOutcome> {
+    if (!isStoreConfigured()) return 'no-store';
 
     const id = `${hit.at}-${Math.random().toString(36).slice(2, 8)}`;
     const name = [
@@ -100,9 +123,11 @@ export async function recordHit(hit: CrawlerHit, userAgent: string): Promise<voi
             contentType: 'application/json',
             addRandomSuffix: false,
         });
-    } catch {
-        // Intentionally swallowed. Losing an analytics row is always
+        return 'ok';
+    } catch (err) {
+        // Reported, never rethrown. Losing an analytics row is always
         // preferable to degrading the response.
+        return `error:${describeError(err)}`;
     }
 }
 
