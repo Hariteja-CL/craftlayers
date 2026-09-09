@@ -118,8 +118,19 @@ export async function recordHit(hit: CrawlerHit, userAgent: string): Promise<Rec
     ].join('__');
 
     try {
+        // `access: 'private'` is both required and correct here.
+        //
+        // Required because the store is provisioned as private, and the SDK
+        // rejects a public write against it outright — which is what silently
+        // dropped every hit until the write path started reporting its errors.
+        //
+        // Correct because these objects should never have been public. The
+        // pathname encodes the requested path, the crawler family and its
+        // category, and the body holds the user-agent; a public blob exposes
+        // all of that at a guessable URL to anyone. Operational data about the
+        // site belongs behind the same gate as the dashboard that reads it.
         await put(`${PREFIX}${dayKey(hit.at)}/${name}.json`, JSON.stringify({ ua: userAgent }), {
-            access: 'public',
+            access: 'private',
             contentType: 'application/json',
             addRandomSuffix: false,
         });
