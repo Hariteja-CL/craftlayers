@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { isStoreConfigured, parseHitPathname, readHits, type CrawlerHit } from './crawlerStore.js';
+import { isStoreConfigured, parseHitPathname, readHits, recordHit, type CrawlerHit } from './crawlerStore.js';
 import { summarise } from '../crawler-stats.js';
-import { list } from '@vercel/blob';
+import { list, put } from '@vercel/blob';
 
 /** Stubbed so the read path can be exercised without a live Blob store. */
 vi.mock('@vercel/blob', () => ({ list: vi.fn(), put: vi.fn() }));
@@ -285,5 +285,64 @@ describe('isStoreConfigured', () => {
         })) as unknown as typeof list);
         await readHits(10, 1, Date.UTC(2026, 8, 9, 12, 0, 0));
         expect(mockList).toHaveBeenCalled();
+    });
+});
+
+/**
+ * Write outcomes.
+ *
+ * recordHit used to swallow every error, which made a completely dead write
+ * path indistinguishable from "no crawler has visited yet" — and with no
+ * readable deployment logs, close to undebuggable. It now reports.
+ */
+describe('recordHit outcomes', () => {
+    const mockPut = vi.mocked(put);
+
+    beforeEach(() => {
+        process.env.BLOB_STORE_ID = 'store_testonly';
+        mockPut.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_STORE_ID;
+    });
+
+    const hit: CrawlerHit = { at: Date.UTC(2026, 8, 9, 10, 0, 0), path: '/x', family: 'GPTBot', category: 'ai' };
+
+    it('reports ok on a successful write', async () => {
+        mockPut.mockImplementation((async () => ({})) as unknown as typeof put);
+        expect(await recordHit(hit, 'GPTBot/1.1')).toBe('ok');
+    });
+
+    it('reports no-store when no credentials exist', async () => {
+        delete process.env.BLOB_STORE_ID;
+        expect(await recordHit(hit, 'GPTBot/1.1')).toBe('no-store');
+        expect(mockPut).not.toHaveBeenCalled();
+    });
+
+    it('reports the error instead of throwing', async () => {
+        mockPut.mockImplementation((async () => {
+            throw new Error('No blob credentials found.');
+        }) as unknown as typeof put);
+        const result = await recordHit(hit, 'GPTBot/1.1');
+        expect(result).toMatch(/^error:/);
+        expect(result).toContain('No blob credentials found');
+    });
+
+    /** The outcome reaches a response header, so it must never carry a token. */
+    it('redacts any long opaque run from the reported message', async () => {
+        mockPut.mockImplementation((async () => {
+            throw new Error('rejected token vercel_blob_rw_ZmFrZXRva2VuZmFrZXRva2Vu123456');
+        }) as unknown as typeof put);
+        const result = await recordHit(hit, 'GPTBot/1.1');
+        expect(result).toContain('<redacted>');
+        expect(result).not.toContain('ZmFrZXRva2VuZmFrZXRva2Vu123456');
+    });
+
+    it('never throws, whatever the SDK does', async () => {
+        mockPut.mockImplementation((() => {
+            throw 'not even an Error';
+        }) as unknown as typeof put);
+        await expect(recordHit(hit, 'GPTBot/1.1')).resolves.toContain('unknown');
     });
 });
