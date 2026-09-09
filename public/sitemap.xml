@@ -7,12 +7,12 @@
     /dashboard/*      private, session-gated
     /for/:slug        role-specific links meant to be sent directly, not indexed
     /about            permanent redirect to /profile
+    /library/*        private; requires an authenticated session
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.craftlayers.com/</loc></url>
   <url><loc>https://www.craftlayers.com/profile</loc></url>
   <url><loc>https://www.craftlayers.com/work</loc></url>
-  <url><loc>https://www.craftlayers.com/library</loc></url>
   <url><loc>https://www.craftlayers.com/blog</loc></url>
   <url><loc>https://www.craftlayers.com/contact</loc></url>
   <url><loc>https://www.craftlayers.com/work/respondent-experience</loc></url>
@@ -26,21 +26,4 @@
   <url><loc>https://www.craftlayers.com/work/inwards/therapist</loc></url>
   <url><loc>https://www.craftlayers.com/blog/secure-ux</loc></url>
   <url><loc>https://www.craftlayers.com/blog/governance</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/how-modern-software-products-work</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/working-like-a-modern-product-builder</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/testing-and-evaluation-foundations</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/building-with-model-apis</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/prompting-as-application-behaviour</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/context-and-memory</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/workflows-agents-and-autonomy</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/tool-use</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/retrieval-and-rag</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/mcp-and-external-systems</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/identity-authentication-authorization-rbac</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/secure-ai-product-development</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/advanced-evaluation-engineering</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/observability-and-production-behaviour</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/deployment</loc></url>
-  <url><loc>https://www.craftlayers.com/library/ai-product-development/complete-ai-product-capstone</loc></url>
 </urlset>

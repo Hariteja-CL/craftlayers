@@ -195,6 +195,12 @@ const IGNORED_EXACT_PATHS = new Set(['/robots.txt', '/sitemap.xml', '/404.html']
 export function isIgnorablePath(pathname: string): boolean {
     return (
         IGNORED_EXACT_PATHS.has(pathname) ||
+        // The library is private and authenticated. Recording hits to it would
+        // write private route names — chapter slugs included — into crawler
+        // storage, and a crawl of a page nobody can read is not a
+        // discoverability signal worth keeping.
+        pathname === '/library' ||
+        pathname.startsWith('/library/') ||
         pathname.startsWith('/assets/') ||
         pathname.startsWith('/_vercel/') ||
         pathname.startsWith('/api/') ||

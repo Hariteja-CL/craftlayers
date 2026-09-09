@@ -220,8 +220,6 @@ describe('isIgnorablePath', () => {
         '/work/respondent-experience',
         '/work/dashboard-explainability',
         '/blog/secure-ux',
-        '/library/ai-product-development',
-        '/library/ai-product-development/tool-use',
         '/profile',
         '/contact',
         // Public résumé content. Deliberately still counted — these are
@@ -236,5 +234,35 @@ describe('isIgnorablePath', () => {
     it('does not ignore a content path that merely resembles a protocol file', () => {
         expect(isIgnorablePath('/blog/robots.txt-explained')).toBe(false);
         expect(isIgnorablePath('/work/sitemap.xml.case-study')).toBe(false);
+    });
+});
+
+/**
+ * The private library must not appear in crawler storage.
+ *
+ * Recording it would write private route names — chapter slugs included — into
+ * the tracker, and a crawl of a page nobody can read is not a discoverability
+ * signal worth keeping. This was found live: an unrecognised bot walked every
+ * chapter URL and each hit was being stored.
+ */
+describe('isIgnorablePath — private library', () => {
+    it.each([
+        '/library',
+        '/library/ai-product-development',
+        '/library/ai-product-development/retrieval-and-rag',
+        '/library/ai-product-development/identity-authentication-authorization-rbac',
+    ])('ignores %s', (p) => expect(isIgnorablePath(p)).toBe(true));
+
+    /** Exact-match plus a trailing slash, so a public page whose name merely
+     *  starts with "library" is still counted. */
+    it('does not ignore a public path that only resembles the library', () => {
+        expect(isIgnorablePath('/work/library-systems')).toBe(false);
+        expect(isIgnorablePath('/blog/library-design')).toBe(false);
+    });
+
+    it('leaves public work and blog routes tracked', () => {
+        for (const p of ['/work', '/work/respondent-experience', '/blog', '/blog/secure-ux', '/profile', '/']) {
+            expect(isIgnorablePath(p)).toBe(false);
+        }
     });
 });
