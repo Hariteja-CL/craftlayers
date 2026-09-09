@@ -133,16 +133,20 @@ export function Home() {
                     intro="If you want to understand how I approach complex product problems, start with these two cases. Both are written up in full, including what the evidence did and did not support."
                 >
                     <div className="grid gap-5 md:grid-cols-2">
-                        {/* Contribution and Method are deliberately not passed here.
-                            The homepage card answers "why should I open this?" — the
-                            case study itself answers "what exactly did you do?".
-                            Both fields stay in the evidence library and still render
-                            on /work and /for/:slug. */}
+                        {/* Contribution IS passed now. It was previously withheld on
+                            the reasoning that the card answers "why open this?" and the
+                            case answers "what did you do?" — but that left a recruiter
+                            unable to judge ownership without committing to a 7-minute
+                            read, and /work (the lower-intent page) was showing more than
+                            the homepage. Method still stays on /work: it is useful when
+                            comparing cases side by side, not when deciding to open one. */}
                         {getCases(START_HERE_IDS).map((c) => (
                             <WorkCard
                                 key={c.id}
                                 title={c.title}
+                                productContext={c.productContext}
                                 problem={c.problem}
+                                contribution={c.contribution}
                                 status={c.status}
                                 confidentiality={c.confidentiality}
                                 evidenceLabel={c.evidenceLabel}

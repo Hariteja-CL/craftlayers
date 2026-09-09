@@ -61,6 +61,20 @@ export interface EvidenceCase {
     confidentiality?: string;
     readTime?: string;
 
+    /**
+     * The product this work happened in, named before the click.
+     *
+     * A recruiter's first question is "has he built something like ours?", and
+     * a case that names no product cannot answer it. The employer and the
+     * product environment are public — they are already on the résumé — so
+     * withholding them here bought nothing and cost comparability.
+     *
+     * What stays out: customer and tenant names, their data, and anything from
+     * a private pilot. Those are what the "anonymised" and "sanitised" labels
+     * on each case refer to, and they are unaffected by naming the product.
+     */
+    productContext?: string;
+
     /** What was wrong, in one line. */
     problem: string;
     /** What Hari actually did. */
@@ -95,8 +109,9 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         status: 'Public case study',
         confidentiality: 'Public · Anonymised',
         readTime: '7 min read',
+        productContext: 'EnCulture at NHR Technologies · B2B culture analytics · assessment workflows',
         problem:
-            'Found that the real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe, or what happened after they responded.',
+            'The real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe to answer honestly, or what happened after they responded.',
         contribution: 'Diagnosed the cause and set out what would need to change.',
         method: 'Interviews, communication review and a walk-through of the respondent journey.',
         evidenceFor: [
@@ -128,8 +143,13 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         status: 'Sanitised case study',
         confidentiality: 'Sanitised enterprise case',
         readTime: '7 min read',
+        productContext: 'EnCulture at NHR Technologies · multi-role dashboards · role-based reporting',
+        // Was: "Created a four-step model for making dashboards easier to
+        // understand…" — which described the solution. A card that opens with
+        // the answer gives a reader nothing to be curious about, and it made
+        // this case read weaker than the other two despite being just as strong.
         problem:
-            'Created a four-step model for making dashboards easier to understand, plus rules for showing deeper detail only when users need it.',
+            'Decision-makers and client-facing teams could read the numbers but not what produced them — how a metric was calculated, what a colour meant, or why a recommendation was being made.',
         contribution: 'A dashboard philosophy, four explanation principles and a card-level rule.',
         method: 'Product and artifact review with feedback from an operational user.',
         evidenceFor: [
@@ -160,10 +180,12 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         title: 'Turning Design Decisions into Implementation Rules',
         href: '/work/design',
         status: 'System story',
+        productContext:
+            'EnCulture Design System at NHR Technologies · governing three products: Assessments, Multi-Rater and Culture Intelligence',
         problem:
-            'Design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
+            'Three products with different implementation foundations were solving the same problems differently, and design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
         contribution:
-            'Principles, tokens, component rules, documentation and review criteria that survive handoff.',
+            'One decision became one governed rule applied across all three products: experience principles, product patterns, the Clarity theme and an implementation checklist.',
         evidenceFor: [
             'Design Systems',
             'Product Patterns',

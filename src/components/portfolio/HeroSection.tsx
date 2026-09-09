@@ -1,17 +1,48 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Check, Mail } from 'lucide-react';
-import { cn } from '../ui/Button';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+
+/**
+ * Hero — the recruiter's first twenty seconds.
+ *
+ * The previous version stated the role well and then proved nothing: the whole
+ * first viewport was five stacked claim blocks, three competing CTAs and a
+ * strip of eight keywords. A reader could reach the fold without seeing a
+ * single product, case or piece of evidence.
+ *
+ * Two changes fix that. The supporting line now names the product domains
+ * rather than describing them abstractly, and the keyword strip is replaced by
+ * three product-context lines that each link to the case proving them — so the
+ * first screen answers "has he built something like ours?" and "which one do I
+ * open?" at the same time.
+ *
+ * What is deliberately NOT here: no metrics, no team sizes, no adoption
+ * numbers. None of that is evidenced, and the cases below are explicit about
+ * being outcome-free.
+ */
+
+/** Named products, linked to their case. Employer-level context only —
+ *  customers, tenants and pilot data stay out, which is what the anonymised
+ *  and sanitised labels on each case refer to. */
+const PROOF = [
+    {
+        domain: 'B2B culture analytics',
+        detail: 'Assessment workflows and respondent experience',
+        href: '/work/respondent-experience',
+    },
+    {
+        domain: 'Multi-role dashboards',
+        detail: 'Role-based reporting and explainability',
+        href: '/work/dashboard-explainability',
+    },
+    {
+        domain: 'Design-system governance',
+        detail: 'One governed rule across three products',
+        href: '/work/design',
+    },
+];
 
 export function HeroSection() {
     const navigate = useNavigate();
-    const [copied, setCopied] = useState(false);
-
-    const handleCopyEmail = () => {
-        navigator.clipboard.writeText("haritejanandipati@gmail.com");
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
 
     return (
         <section className="pt-36 pb-24 cl-bg-neutral-surface-level-0">
@@ -27,71 +58,72 @@ export function HeroSection() {
                         Available for Q3 2026 Projects
                     </div>
 
-                    {/* Headline — one profession. "Product Systems Builder" used to
-                        sit here as a second brand-coloured line, which read as an
-                        equal second identity and made the positioning ambiguous.
-                        The systems work is still stated, as operating context. */}
+                    {/* The job title stays the H1 and stays alone. It is what a
+                        recruiter scans for, and anything sharing the line with it
+                        makes the positioning ambiguous. */}
                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-[1.05] mb-5">
                         Senior Product Designer
                     </h1>
 
-                    {/* High-contrast, not brand colour: the brand orange measures
-                        2.66:1 on this background, which fails AA. Size and weight
-                        already separate this line from the H1. */}
-                    <p className="text-xl md:text-2xl font-semibold cl-text-neutral-text-high-contrast mb-6 leading-snug max-w-2xl">
-                        Complex B2B products, analytics and decision-support experiences
+                    {/* Named domains, not adjectives. "Complex B2B products,
+                        analytics and decision-support experiences" described a
+                        category; this names the three things there is evidence for.
+                        High-contrast, not brand colour: the brand orange measures
+                        2.66:1 here and fails AA. */}
+                    <p className="text-xl md:text-2xl font-semibold cl-text-neutral-text-high-contrast mb-6 leading-snug max-w-3xl">
+                        Enterprise analytics, assessment workflows and design-system governance
                     </p>
 
-                    {/* Trimmed: the old version restated the positioning line above
-                        before getting to the point. Inputs, decision, implementation
-                        — nothing else. */}
                     <p className="text-lg md:text-xl cl-text-neutral-text-medium-contrast mb-4 leading-relaxed max-w-2xl font-medium">
-                        I turn research, product behaviour and complex requirements into product
-                        decisions, and systems teams can implement consistently.
+                        8+ years designing multi-role B2B products, where the hard part is not the screen —
+                        it is what the data means, who is allowed to act on it, and whether the decision
+                        survives implementation.
                     </p>
                     <p className="text-base cl-text-neutral-text-medium-contrast mb-10">
-                        8+ years in UX and product design since 2017.
+                        Most recently EnCulture at NHR Technologies. In product and UX since 2017.
                     </p>
 
-                    {/* CTAs */}
+                    {/* Two CTAs, not three. "Explore profile" competed with the
+                        work link for the same intent and won readers away from the
+                        evidence; it is still one section below and in the nav. */}
                     <div className="flex flex-col sm:flex-row items-start gap-3">
                         <button
                             onClick={() => navigate('/work')}
                             className="px-6 py-3 rounded-xl text-sm font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-all cl-focus-ring"
                         >
-                            View selected work
+                            See selected work
                         </button>
-                        <button
-                            onClick={() => navigate('/profile')}
+                        <a
+                            href="/Hariteja-Nandipati-Resume.pdf"
+                            download="Hariteja-Nandipati-Resume.pdf"
                             className="px-6 py-3 rounded-xl text-sm font-semibold border cl-border-border-color-default cl-bg-neutral-surface-level-1 cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-all cl-focus-ring"
                         >
-                            Explore profile
-                        </button>
-                        <button
-                            onClick={handleCopyEmail}
-                            className={cn(
-                                "px-6 py-3 rounded-xl text-sm font-semibold border transition-all cl-focus-ring flex items-center gap-2",
-                                copied
-                                    ? "cl-bg-semantic-success-background cl-text-semantic-success-text cl-border-semantic-success-border"
-                                    : "border-transparent cl-text-neutral-text-medium-contrast hover:cl-text-neutral-text-high-contrast"
-                            )}
-                        >
-                            {copied ? <Check className="w-3.5 h-3.5" /> : <Mail className="w-3.5 h-3.5" />}
-                            {copied ? "Email copied" : "Email me"}
-                        </button>
+                            Download résumé
+                        </a>
                     </div>
 
-                    {/* Keyword strip — Option A, at its smallest. The terms were
-                        set in the low-contrast token, which reads as decoration and
-                        gets skipped. Same size, same rhythm, one step up in contrast
-                        so it functions as supporting context; the separators stay
-                        faint so the strip still does not compete with the hero. */}
-                    <div className="mt-16 pt-8 border-t cl-border-border-color-default flex flex-wrap gap-x-5 gap-y-2 text-[10px] md:text-xs font-mono uppercase tracking-widest cl-text-neutral-text-medium-contrast">
-                        {["Enterprise UX", "UX Research", "Dashboard Design", "Design Systems", "Information Architecture", "Interaction Design", "AI Product Design", "Privacy-aware UX"].map((k, i, arr) => (
-                            <span key={k} className="flex items-center gap-5">
-                                {k}
-                                {i < arr.length - 1 && <span className="cl-text-neutral-text-low-contrast opacity-40">/</span>}
-                            </span>
+                    {/* Proof strip — replaces the eight-keyword strip.
+                        Keywords asserted capability; these name a product domain and
+                        link to the case that evidences it, so the first screen
+                        contains proof rather than only claims. */}
+                    <div className="mt-16 pt-8 border-t cl-border-border-color-default grid gap-x-8 gap-y-6 sm:grid-cols-3">
+                        {PROOF.map((p) => (
+                            <Link
+                                key={p.domain}
+                                to={p.href}
+                                className="group block cl-focus-ring rounded"
+                            >
+                                <span className="block text-sm font-bold cl-text-neutral-text-high-contrast group-hover:cl-text-brand-primary-base transition-colors">
+                                    {p.domain}
+                                </span>
+                                <span className="mt-1 block text-sm cl-text-neutral-text-medium-contrast leading-snug">
+                                    {p.detail}
+                                </span>
+                                <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest cl-text-brand-primary-base">
+                                    See the case
+                                    <ArrowRight aria-hidden="true" className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                                </span>
+                            </Link>
                         ))}
                     </div>
                 </div>

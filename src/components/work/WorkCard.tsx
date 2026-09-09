@@ -23,6 +23,12 @@ export type WorkStatus =
 
 export interface WorkCardProps {
     title: string;
+    /**
+     * The product this work happened in. Rendered directly under the title,
+     * because "has he built something like ours?" is the question a card has
+     * to answer before anyone clicks it.
+     */
+    productContext?: string;
     /** What was wrong, in one line. */
     problem: string;
     /** What Hari actually did. */
@@ -54,6 +60,7 @@ export interface WorkCardProps {
 
 export function WorkCard({
     title,
+    productContext,
     problem,
     contribution,
     method,
@@ -99,6 +106,12 @@ export function WorkCard({
             <h3 className="text-xl md:text-2xl font-bold cl-text-neutral-text-high-contrast tracking-tight group-hover:cl-text-brand-primary-base transition-colors">
                 {title}
             </h3>
+
+            {productContext && (
+                <p className="mt-2 text-sm font-medium cl-text-neutral-text-medium-contrast">
+                    {productContext}
+                </p>
+            )}
 
             <p className="mt-2 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
                 {problem}
