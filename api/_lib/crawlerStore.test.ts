@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { parseHitPathname, readHits, type CrawlerHit } from './crawlerStore.js';
+import { isStoreConfigured, parseHitPathname, readHits, type CrawlerHit } from './crawlerStore.js';
 import { summarise } from '../crawler-stats.js';
 import { list } from '@vercel/blob';
 
@@ -215,5 +215,75 @@ describe('readHits — day-prefixed reads', () => {
         });
         const hits = await readHits(10, 30, NOW);
         expect(hits.map((h) => h.path)).toEqual(['/a']);
+    });
+});
+
+/**
+ * Credential detection.
+ *
+ * These exist because of a real production failure: the store was connected
+ * correctly through Vercel's current integration, which provisions the OIDC
+ * pair and NO read-write token, while this check tested only for
+ * BLOB_READ_WRITE_TOKEN. Every hit was silently dropped and the dashboard
+ * reported "no storage provisioned" against a working store.
+ *
+ * @vercel/blob's resolveBlobAuth accepts either path, so this must too.
+ */
+describe('isStoreConfigured', () => {
+    const saved = {
+        rw: process.env.BLOB_READ_WRITE_TOKEN,
+        id: process.env.BLOB_STORE_ID,
+    };
+
+    beforeEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+        delete process.env.BLOB_STORE_ID;
+    });
+
+    afterEach(() => {
+        if (saved.rw === undefined) delete process.env.BLOB_READ_WRITE_TOKEN;
+        else process.env.BLOB_READ_WRITE_TOKEN = saved.rw;
+        if (saved.id === undefined) delete process.env.BLOB_STORE_ID;
+        else process.env.BLOB_STORE_ID = saved.id;
+    });
+
+    it('accepts the classic read-write token', () => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'vercel_blob_rw_test';
+        expect(isStoreConfigured()).toBe(true);
+    });
+
+    /** The regression this whole block exists for. */
+    it('accepts OIDC auth, where only BLOB_STORE_ID is set', () => {
+        process.env.BLOB_STORE_ID = 'store_testonly';
+        expect(isStoreConfigured()).toBe(true);
+    });
+
+    it('accepts both being present', () => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'vercel_blob_rw_test';
+        process.env.BLOB_STORE_ID = 'store_testonly';
+        expect(isStoreConfigured()).toBe(true);
+    });
+
+    it('reports unconfigured only when neither credential exists', () => {
+        expect(isStoreConfigured()).toBe(false);
+    });
+
+    it('treats an empty value as unconfigured', () => {
+        process.env.BLOB_STORE_ID = '';
+        process.env.BLOB_READ_WRITE_TOKEN = '';
+        expect(isStoreConfigured()).toBe(false);
+    });
+
+    it('lets readHits run on OIDC credentials alone', async () => {
+        process.env.BLOB_STORE_ID = 'store_testonly';
+        mockList.mockReset();
+        mockList.mockImplementation((async () => ({
+            blobs: [],
+            cursor: undefined,
+            hasMore: false,
+            folders: [],
+        })) as unknown as typeof list);
+        await readHits(10, 1, Date.UTC(2026, 8, 9, 12, 0, 0));
+        expect(mockList).toHaveBeenCalled();
     });
 });

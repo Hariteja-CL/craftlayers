@@ -100,7 +100,7 @@ on the VPS to render pages. Editing this repo can never change VPS behaviour.
 | **Case-study prose** | Section copy | Inside each `src/pages/work/*.tsx` | That page | Static | Yes | No | No | The page component |
 | **Chat gateway** | Chat widget replies | `B_GATEWAY_URL` (server-only), via `api/chat.ts` | `ChatWidget.tsx` → `/api/chat` | **Dynamic** | No | **Yes** | No | The VPS gateway |
 | **Static resume** | Resume HTML/PDF | `public/resume.html`, `public/resume-ats.html`, `public/Hariteja-Nandipati-Resume.pdf` | Direct URL | Static | Yes | No | No | These files |
-| **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store. Needs `BLOB_READ_WRITE_TOKEN`; without it capture is a silent no-op |
+| **Crawler hits** | Which bots requested which pages | Vercel Blob, prefix `crawlers/` | `api/crawler-stats.ts` → `/dashboard/crawlers` | **Dynamic** | No | No | Written by `middleware.ts` | The Blob store. Needs **either** `BLOB_STORE_ID` (OIDC, what the current Vercel integration provisions) **or** `BLOB_READ_WRITE_TOKEN`; with neither, capture is a silent no-op |
 | **Sitemap** | Crawler discovery | `public/sitemap.xml` | Search engines | Static | Yes | No | **No — hand-maintained** | The file. Add new routes by hand |
 
 **Rule this table exists to enforce:** data visible locally does not originate locally
@@ -377,6 +377,13 @@ same change or PR. Routine UI and copy edits should not cause memory churn.
    `UNKNOWN — requires verification` as a stable path). Editing one does not update the other.
 10. **`craftlayers-ds/marketplace` carries `PRICING.md`** — a separate commercial product,
     not portfolio content. Keep it out of portfolio work.
+11. **Vercel Blob has two credential shapes, and only one looks familiar.**
+    `@vercel/blob` accepts OIDC (`BLOB_STORE_ID` plus a runtime token) *or*
+    `BLOB_READ_WRITE_TOKEN`. The current Vercel integration provisions the OIDC
+    pair and no read-write token, so a project can be correctly connected while
+    a naive `process.env.BLOB_READ_WRITE_TOKEN` check reports it as missing.
+    That exact bug silently dropped every crawler hit in production on
+    2026-09-09. Any code gating on Blob availability must accept both.
 
 ---
 
@@ -407,10 +414,7 @@ Known unresolved architecture questions:
   - Whether the api.craftlayers.com backend (port 8000) is still running, and what it serves
   - Stable location and sync direction for handbook chapters vs their upstream source
   - B_GATEWAY_URL and/or B_GATEWAY_AUTH are NOT set in production as of
-    2026-09-08: POST /api/chat returns 503 "Chat is unavailable", which that
-    endpoint returns only when one of those two is missing. The chat widget is
-    down until they are set
-  - Whether a Vercel Blob store has been provisioned (BLOB_READ_WRITE_TOKEN).
-    Until it is, crawler capture runs but records nothing
+    2026-09-08. RESOLVED 2026-09-09: both are now set and POST /api/chat
+    returns 400 for an empty message, i.e. it gets past the config check
   - Whether Google Search Console is verified — see docs/search-console-setup.md
 ```

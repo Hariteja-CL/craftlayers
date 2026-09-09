@@ -36,11 +36,25 @@ export interface CrawlerHit {
     category: CrawlerCategory;
 }
 
-/** True when a Blob store has been provisioned for this deployment. Every
- *  entry point checks this so an unprovisioned deployment degrades to a
- *  no-op rather than throwing on each request. */
+/**
+ * True when a Blob store has been provisioned for this deployment. Every entry
+ * point checks this so an unprovisioned deployment degrades to a no-op rather
+ * than throwing on each request.
+ *
+ * BOTH of the SDK's credential paths count. `@vercel/blob` resolves auth in
+ * this order (see `resolveBlobAuth`): an explicit token, then OIDC — a Vercel
+ * runtime token plus `BLOB_STORE_ID` — and only then `BLOB_READ_WRITE_TOKEN`.
+ * Connecting a store through the current Vercel integration provisions the
+ * OIDC pair and no read-write token at all, so checking only for the latter
+ * reports a correctly configured store as missing and silently drops every
+ * hit. This function must stay in step with what the SDK actually accepts.
+ *
+ * If the OIDC token is somehow unavailable at runtime the SDK throws, which
+ * `recordHit` swallows — so a false positive here degrades to a lost row, never
+ * to a failed response.
+ */
 export function isStoreConfigured(): boolean {
-    return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+    return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 }
 
 /**

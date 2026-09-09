@@ -102,9 +102,10 @@ function TrackerBody() {
                     No storage provisioned yet
                 </h2>
                 <p className="cl-text-200 cl-text-neutral-text-medium-contrast cl-leading-175">
-                    Capture is deployed and running, but <code>BLOB_READ_WRITE_TOKEN</code> is not set, so
-                    nothing is being written. Create a Vercel Blob store, add the token to the project’s
-                    environment variables, and redeploy. Data starts from that moment — there is no backfill.
+                    Capture is deployed and running, but no Blob credentials were found, so nothing is being
+                    written. Connect a Vercel Blob store to this project — that provisions either{' '}
+                    <code>BLOB_STORE_ID</code> (OIDC) or <code>BLOB_READ_WRITE_TOKEN</code>, and either one is
+                    enough — then redeploy. Data starts from that moment; there is no backfill.
                 </p>
             </div>
         );
