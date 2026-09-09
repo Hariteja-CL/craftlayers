@@ -314,6 +314,20 @@ describe('recordHit outcomes', () => {
         expect(await recordHit(hit, 'GPTBot/1.1')).toBe('ok');
     });
 
+    /** The store is private, and the SDK rejects a public write against it —
+     *  which is what silently dropped every hit in production. These objects
+     *  should not be world-readable regardless: the pathname carries the
+     *  requested path and crawler family, and the body carries the user-agent. */
+    it('writes with private access, never public', async () => {
+        let seen: unknown;
+        mockPut.mockImplementation((async (_p: unknown, _b: unknown, opts: unknown) => {
+            seen = opts;
+            return {};
+        }) as unknown as typeof put);
+        await recordHit(hit, 'GPTBot/1.1');
+        expect((seen as { access?: string }).access).toBe('private');
+    });
+
     it('reports no-store when no credentials exist', async () => {
         delete process.env.BLOB_STORE_ID;
         expect(await recordHit(hit, 'GPTBot/1.1')).toBe('no-store');
