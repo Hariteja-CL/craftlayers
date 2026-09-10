@@ -120,7 +120,9 @@ const GENERIC_BOT = /(?:bot\b|bot[/\s;)]|crawler|crawling|spider|feedfetcher|scr
 /** Substrings that contain "bot" but belong to human devices or browsers. */
 const NOT_A_BOT = /\bcubot\b/i;
 
-const MAX_UA_LENGTH = 200;
+/** Exported so the storage read path re-clamps to exactly the same rule
+ *  the write path applied, rather than keeping a second copy of 200. */
+export const MAX_UA_LENGTH = 200;
 const MAX_PATH_LENGTH = 256;
 
 /**

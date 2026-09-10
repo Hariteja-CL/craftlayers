@@ -10,12 +10,13 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { hasValidSession } from './_lib/session.js';
-import { isStoreConfigured, readHits, type CrawlerHit } from './_lib/crawlerStore.js';
+import { attachUserAgents, isStoreConfigured, readHits, type CrawlerHit } from './_lib/crawlerStore.js';
 import type { CrawlerCategory } from './_lib/crawlers.js';
 
 /** How many rows to read. Bounds cost and response size; the view only ever
  *  shows recent activity, so older rows would not be displayed anyway. */
 const READ_LIMIT = 2000;
+/** Must stay at or below MAX_USER_AGENT_READS, which caps the body reads. */
 const RECENT_COUNT = 50;
 const TOP_PAGES = 15;
 
@@ -106,7 +107,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         const hits = await readHits(READ_LIMIT);
-        return res.status(200).json({ configured: true, ...summarise(hits) } satisfies CrawlerStats);
+        // Aggregation stays pathname-only across all READ_LIMIT rows. Only the
+        // recent slice pays for Blob body fetches, and only to recover the
+        // user-agent — which is the one field a pathname cannot carry, and the
+        // only thing that can identify an unrecognised bot.
+        const recent = await attachUserAgents(hits.slice(0, RECENT_COUNT));
+        return res
+            .status(200)
+            .json({ configured: true, ...summarise(hits), recent } satisfies CrawlerStats);
     } catch {
         return res.status(502).json({ error: 'Could not read crawler store' });
     }

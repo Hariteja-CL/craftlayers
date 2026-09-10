@@ -24,8 +24,8 @@
  * changes, the privacy-preserving option is a daily-rotating salted hash
  * truncated to 8 bytes — not a stored address.
  */
-import { list, put } from '@vercel/blob';
-import type { CrawlerCategory } from './crawlers.js';
+import { get, list, put } from '@vercel/blob';
+import { MAX_UA_LENGTH, type CrawlerCategory } from './crawlers.js';
 
 const PREFIX = 'crawlers/';
 
@@ -34,6 +34,25 @@ export interface CrawlerHit {
     path: string;
     family: string;
     category: CrawlerCategory;
+    /**
+     * The user-agent as it was stored, present only on rows something asked
+     * for it. Reading it costs one Blob body fetch per row, so it is attached
+     * to the recent slice and never to the aggregation set — see
+     * `attachUserAgents`.
+     */
+    userAgent?: string;
+}
+
+/**
+ * A hit plus the Blob pathname it was parsed from.
+ *
+ * The pathname is the address needed to read the body, and nothing more: it
+ * encodes only fields that are already sitting beside it. It stays internal
+ * to the store and the stats endpoint, and `attachUserAgents` drops it before
+ * anything reaches a client.
+ */
+export interface StoredHit extends CrawlerHit {
+    pathname: string;
 }
 
 /**
@@ -145,7 +164,7 @@ export async function recordHit(hit: CrawlerHit, userAgent: string): Promise<Rec
 /** Parse a stored pathname back into a hit. Returns null for anything that
  *  does not match the current layout, so an older or hand-made object cannot
  *  break the whole listing. */
-export function parseHitPathname(pathname: string): CrawlerHit | null {
+export function parseHitPathname(pathname: string): StoredHit | null {
     if (!pathname.startsWith(PREFIX) || !pathname.endsWith('.json')) return null;
 
     const name = pathname.slice(PREFIX.length, -'.json'.length);
@@ -164,6 +183,7 @@ export function parseHitPathname(pathname: string): CrawlerHit | null {
         category: decodeSegment(category) as CrawlerCategory,
         family: decodeSegment(family),
         path: decodeSegment(path),
+        pathname,
     };
 }
 
@@ -199,14 +219,14 @@ export async function readHits(
     limit = 1000,
     lookbackDays = DEFAULT_LOOKBACK_DAYS,
     now = Date.now(),
-): Promise<CrawlerHit[]> {
+): Promise<StoredHit[]> {
     if (!isStoreConfigured()) return [];
 
-    const hits: CrawlerHit[] = [];
+    const hits: StoredHit[] = [];
 
     for (let dayOffset = 0; dayOffset < lookbackDays && hits.length < limit; dayOffset++) {
         const prefix = `${PREFIX}${dayKey(now - dayOffset * DAY_MS)}/`;
-        const forDay: CrawlerHit[] = [];
+        const forDay: StoredHit[] = [];
         let cursor: string | undefined;
         let pages = 0;
 
@@ -227,4 +247,102 @@ export async function readHits(
     }
 
     return hits.slice(0, limit);
+}
+
+/**
+ * The most Blob bodies a single dashboard load may read.
+ *
+ * Bounded on purpose, and the bound is the whole design. Aggregation runs over
+ * up to 2,000 rows and stays pathname-only; reading a body per row would turn
+ * one page view into thousands of round trips, which is exactly the N+1 this
+ * cap exists to prevent. Only the recent slice — the rows a person actually
+ * reads — pays for bodies.
+ */
+export const MAX_USER_AGENT_READS = 50;
+
+/** Bodies are read in parallel, but not all at once. */
+const USER_AGENT_READ_CONCURRENCY = 10;
+
+/**
+ * Clean a stored user-agent before it can reach a dashboard.
+ *
+ * A user-agent is attacker-controlled text. The write path truncates it but
+ * does not sanitise it, so control characters are stripped here and the
+ * length is re-clamped rather than trusted — a body written by an older
+ * version, or by hand, cannot return an unbounded or terminal-hostile string.
+ *
+ * Clamping to `MAX_UA_LENGTH` is idempotent against what the write path
+ * produces: slicing a 200-characters-plus-ellipsis value back to 200 yields
+ * the original 200 characters.
+ */
+function cleanStoredUserAgent(raw: unknown): string | undefined {
+    if (typeof raw !== 'string') return undefined;
+    const cleaned = raw
+        .replace(/[\p{Cc}\p{Cf}]/gu, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    if (cleaned === '') return undefined;
+    return cleaned.length > MAX_UA_LENGTH ? cleaned.slice(0, MAX_UA_LENGTH) + '…' : cleaned;
+}
+
+/**
+ * Read one hit's stored user-agent. Never throws.
+ *
+ * Every failure resolves to undefined and the row is simply shown without a
+ * user-agent: a deleted object, a 304 carrying no body, a body that is not
+ * JSON, a body whose shape changed, a store that rejects the read. A
+ * diagnostic detail is never worth a failed dashboard.
+ */
+async function readStoredUserAgent(pathname: string): Promise<string | undefined> {
+    try {
+        const result = await get(pathname, { access: 'private' });
+        if (!result || result.statusCode !== 200 || !result.stream) return undefined;
+        const parsed: unknown = JSON.parse(await new Response(result.stream).text());
+        if (typeof parsed !== 'object' || parsed === null) return undefined;
+        return cleanStoredUserAgent((parsed as Record<string, unknown>).ua);
+    } catch {
+        return undefined;
+    }
+}
+
+/**
+ * Attach stored user-agents to a slice of hits, and drop the Blob pathname.
+ *
+ * This is the reason the tracker can name an unknown bot at all. `recordHit`
+ * has written the user-agent into every body since the tracker shipped, but
+ * each read reconstructed its rows from the pathname alone — so the strings
+ * were stored and unreachable, and the dashboard could count 29 requests from
+ * an "Unrecognised bot" without ever saying what it called itself. That is
+ * the same class of defect as trap 12: data captured in a form nothing can
+ * report.
+ *
+ * Order is preserved regardless of which reads finish first — index `i` of
+ * the result is index `i` of the input.
+ */
+export async function attachUserAgents(hits: StoredHit[]): Promise<CrawlerHit[]> {
+    const slice = hits.slice(0, MAX_USER_AGENT_READS);
+    const out: CrawlerHit[] = slice.map(({ at, path, family, category }) => ({
+        at,
+        path,
+        family,
+        category,
+    }));
+
+    if (!isStoreConfigured()) return out;
+
+    // A work-stealing pool: each worker takes the next unclaimed index, so a
+    // slow read delays only itself rather than a whole fixed-size batch.
+    let next = 0;
+    const worker = async () => {
+        for (let i = next++; i < slice.length; i = next++) {
+            const userAgent = await readStoredUserAgent(slice[i].pathname);
+            if (userAgent !== undefined) out[i] = { ...out[i], userAgent };
+        }
+    };
+
+    await Promise.all(
+        Array.from({ length: Math.min(USER_AGENT_READ_CONCURRENCY, slice.length) }, worker),
+    );
+
+    return out;
 }
