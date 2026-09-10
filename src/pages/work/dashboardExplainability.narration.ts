@@ -7,15 +7,24 @@ import type { NarrationSection } from '../../components/case-study/CaseStudyList
  * badges, navigation, button labels, figure captions, synthetic-data labels
  * and collapsed disclosures, so the spoken version is a genuine summary.
  *
- * Public-safe rules followed throughout: no client, product or programme name;
- * no participant name; no real values, formulas or thresholds; design artifacts
- * described as created and accepted, never as measured outcomes.
+ * One section per visible section, in the same order — the page maps narration
+ * index to section id, so the two files have to be edited together.
+ *
+ * Public-safe rules followed throughout: the employer and product environment
+ * are named because they are approved public context, but no client, tenant or
+ * participant name appears; no real values, formulas or thresholds; design
+ * artifacts are described as created and accepted, never as measured outcomes.
  */
 export const NARRATION_SECTIONS: NarrationSection[] = [
     {
         title: 'Overview',
         body:
-            'Designing dashboards people can read, trust and act on. A confidential enterprise dashboard review showed that both decision-makers and client-facing teams needed clearer explanations of how metrics, colours, evidence and recommendations were produced. The central question was this: how can an enterprise dashboard help users read, interpret, trust and act without requiring an expert to explain the screen?',
+            'Designing dashboards people can read, trust and act on. A review of the EnCulture analytics dashboards showed that both decision-makers and client-facing teams needed clearer explanations of how metrics, colours, evidence and recommendations were produced. The central question was this: how can an enterprise dashboard help users read, interpret, trust and act without requiring an expert to explain the screen?',
+    },
+    {
+        title: 'Context',
+        body:
+            'EnCulture at NHR Technologies is a B2B culture analytics platform. Its dashboards are multi-role: the same reporting has to serve a senior decision-maker who needs a conclusion, and a client-facing operational user who has to explain that conclusion to somebody else. Those two readers want different depths of the same screen, and that is the constraint the work turns on.',
     },
     {
         title: 'The explanation burden',
@@ -23,43 +32,28 @@ export const NARRATION_SECTIONS: NarrationSection[] = [
             'The dashboard had two connected jobs. It had to help decision-makers understand and act on results, and it had to help client-facing teams explain those results consistently and confidently. In practice, interpretation frequently depended on explanation from the product team. That explanation burden had moved out of the product and into a person\'s workflow. The strongest issues identified were not primarily visual. They sat in the explanation layer around metrics, colours, evidence and action.',
     },
     {
-        title: 'Evidence environment',
+        title: 'What I owned',
         body:
-            'The work combined dashboard and artifact analysis with feedback from a client-facing relationship manager and operational dashboard user. She supported clients through survey participation, reviewed results with them, and surfaced the questions and interpretation gaps that arose during those conversations. This provided direct evidence from her own product use and indirect evidence from client interactions. It was not a formally moderated client-user study.',
-    },
-    {
-        title: 'Read, interpret, trust, act',
-        body:
-            'Four things a dashboard reader needs, in order. Read: what am I seeing? The metric name, unit, score type, response base and a plain-language definition. Interpret: what does it mean? The scale, category boundaries, comparison context, and what good, average or poor looks like. Trust: can I inspect how this was produced? The calculation logic at an appropriate level, the contributing inputs, and the evidence behind the result. Act: what should happen next? The decision implication, the recommended action and who owns it. When one of these stages is weak, dashboard readers are more likely to depend on additional explanation or make decisions with incomplete context.',
+            'Analytics user experience, the explainability model, information architecture for the reporting surface, and the product reasoning that connected a metric to a decision. Evidence review came from dashboard and artifact analysis together with feedback from a client-facing relationship manager who used the product daily. That gave direct evidence from her own use and indirect evidence from her client conversations. It was not a formally moderated client-user study, and it is not described as one.',
     },
     {
         title: 'Trust through inspectability',
         body:
-            'This was the central advance in the work. Trust is created through inspectability. A reader does not trust a score simply because it is displayed. Trust develops when they can understand what it represents, inspect how it was calculated, see which inputs contributed, compare it against their own understanding, see why a category or colour was assigned, and understand how configuration changes the result. A composite score cannot rely on its label alone. Organisations may already use their own models, weighting systems and rating scales. Before relying on a displayed result, readers need to know which inputs were used, how they were weighted, how the result was classified, and how customisation changes the outcome.',
+            'Four things a dashboard reader needs, in order. Read: what am I seeing? Interpret: what does it mean? Trust: can I inspect how this was produced? Act: what should happen next? Trust sits in the middle because it is what carries someone from understanding a number to being willing to act on it. And trust is created through inspectability. A reader does not trust a score simply because it is displayed. Trust develops when they can inspect how it was calculated, see which inputs contributed, compare it against their own understanding, and see how configuration changes the result. A composite score cannot rely on its label alone, because organisations often already use their own models and rating scales.',
     },
     {
-        title: 'Design principles',
+        title: 'What changed',
         body:
-            'Four core explanation principles came out of the work, supported by one cross-cutting progressive-disclosure principle. Explain the number: every important metric should clarify what it represents, what type of value it is, which inputs contributed, what rating model was used at an appropriate level, what the result means and what action it supports. Explain the colour: brand colour identifies the product, but data colour must explain the data. Each colour needs a defined analytical purpose, consistent meaning, supporting labels and accessible non-colour cues. Show the evidence: scores, summaries and recommendations should connect to their contributing metrics, charts and qualitative evidence, with the question or category context preserved. Support the decision: the dashboard should make clear why the information matters, what decision it supports, what to do next and who owns the action. And running across all four, disclose detail on demand. Clarity does not mean showing everything; it means showing the right level of information at the right moment. Senior decision-makers needed a concise view of the most important signal, while client-facing operational users needed access to the explanation behind it. The summary stays simple, and the reasoning remains available. Information was not removed; it was reorganised by priority and revealed on demand. Alongside these sits a component rule: one card, one primary insight. Each summary card should communicate one clear takeaway, support it with evidence and connect it to a next action — one metric, one insight, one next action.',
+            'The explanation moved into the component. A summary card carries three separate layers of context: what the metric is, how the score was produced, and what a category band means. They are kept apart deliberately, because one combined tooltip would have to answer three different questions at once. Four principles came out of this: explain the number, explain the colour, show the evidence, and support the decision. Running across all four is a fifth: disclose detail on demand. Nothing was removed to achieve the simpler view; the same detail is present, it simply waits until someone asks for it.',
     },
     {
-        title: 'Key decisions',
+        title: 'Response',
         body:
-            'A composite score appeared without clear calculation context, so a label alone did not create trust; the decision was to add a definition, inputs, scale and an explanation of the calculation logic. Clients compared the displayed score against their own rating models, so trust depended on comparability; the decision was to show the methodology and explain how configuration affects results. Brand and data colours were mixed, so product identity colour did not communicate analytical meaning; the decision was to separate brand colour from semantic data colour with consistent rules and legends. Recommendations appeared without visible evidence, making them hard to defend; the decision was to link each recommendation to the metric, chart and qualitative evidence behind it. And because interpretation depended on a person explaining results, the decision was to build explanation directly into cards, charts and summaries.',
+            'The dashboard philosophy was accepted and informed subsequent dashboard work, and the recommended direction received positive feedback during demos and client-facing reviews. A high-fidelity concept demonstrated the interaction model using illustrative content; the production implementation used different data and product-specific logic. No formal post-implementation measurement was conducted.',
     },
     {
-        title: 'Implemented direction',
+        title: 'Limitations',
         body:
-            'The dashboard philosophy was accepted as a design direction and applied across the dashboard work. The recommended direction covered metric explanation, summary-card explanation, chart semantics, colour logic and evidence traceability, and was carried through to a final recommended design. Some elements are still being verified for exact implementation scope, and that is stated openly rather than smoothed over.',
-    },
-    {
-        title: 'Outcome',
-        body:
-            'The philosophy was accepted and implemented across the dashboard experience. The recommended direction received positive feedback during demos and client-facing reviews. No formal post-implementation measurement was conducted. That means there is no verified claim of increased trust, increased adoption, reduced support requests or improved decision quality. What can be claimed is a dashboard UX philosophy, a prioritised action plan, implementation-ready recommendations, interaction concepts for metric explanation and evidence traceability, and a clear list of what still needs validation.',
-    },
-    {
-        title: 'Limitations and reflection',
-        body:
-            'There was no formally moderated client-user study. Client evidence was mediated through the relationship manager rather than gathered directly. There was no formal post-implementation measurement, and the exact implementation scope of some elements still requires verification. All public examples use synthetic data. The reflection is this: the strongest contribution was not a new dashboard layout. It was creating a clearer explanation model for how metrics, charts, evidence and recommendations should help readers move from seeing information to acting on it. That does not establish that the previous layout was correct, and it has not yet been tested in measured use.',
+            'There was no formally moderated client-user study. Client evidence was mediated through the relationship manager rather than gathered directly. There was no formal post-implementation measurement, so this case makes no claim of increased trust, increased adoption, reduced support requests or improved decision quality. The exact implementation scope of some elements still requires verification, and every example shown publicly uses synthetic data. The strongest contribution was not a new layout. It was moving the explanation from a person\'s workflow back into the product, where both the decision-maker and the person explaining the data can reach it.',
     },
 ];

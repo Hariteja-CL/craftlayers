@@ -3,64 +3,55 @@ import type { NarrationSection } from '../../components/case-study/CaseStudyList
 /**
  * Curated narration transcript for the respondent-experience case study.
  *
- * This is written by hand rather than scraped from the DOM. It deliberately
- * omits breadcrumbs, badges, navigation labels, button labels, table headers,
- * decorative diagram labels, collapsed supporting evidence and the footer —
- * so the spoken version is a genuine summary, shorter than the visible page.
+ * Written by hand rather than scraped from the DOM. One section per visible
+ * section, in the same order — the page maps narration index to section id, so
+ * the two files have to be edited together.
  *
- * Wording follows the same public-safe rules as the page: approximate and
- * separate figures, no confidential identifiers, and every recommendation
- * described as not yet validated (stated once, in the limitations section).
+ * Public-safe rules: the employer and product environment are named because
+ * they are approved public context, but no participant, client or tenant name
+ * appears, and no pilot figures — invitation counts, participation rates or
+ * response counts — are spoken. Those are internal analytics and belong to the
+ * protected layer.
  */
 export const NARRATION_SECTIONS: NarrationSection[] = [
     {
         title: 'Overview',
         body:
-            'Three Questions Were Not the Problem. An internal low-participation workplace-survey pilot revealed that respondent experience depends on more than survey length. People also need relevance, manageable effort, practical safety, visible impact and confidence that someone will act. The central question behind this case study is: what prevents people from repeatedly providing honest feedback, even when a survey is short and easy to complete?',
+            'Three questions were not the problem. A recurring workplace feedback survey was short, simple and quick to complete, and people still were not answering it. The question this case works on is: what prevents people from repeatedly providing honest feedback, even when a survey is short and easy to complete?',
+    },
+    {
+        title: 'Context',
+        body:
+            'EnCulture at NHR Technologies is a B2B culture analytics platform, and the assessment experience is where its data comes from. Everything downstream — the dashboards, the insight, the recommendations — depends on people answering, and answering honestly. That makes the respondent experience an upstream product problem rather than a survey-design detail.',
     },
     {
         title: 'The problem',
         body:
-            'To investigate, I studied an internal recurring workplace-survey pilot. Approximately 98 employees were invited, the survey contained three short questions, and participation remained around 11 percent during the research period. Participation also declined across repeated iterations. Because the form was only three questions and took under about two minutes, low participation could not be explained by length or complexity. The case combined two stakeholder interviews with management feedback, communication analysis, respondent-journey review and role and dashboard-flow analysis. The instinct was to treat this as survey friction. The evidence pointed elsewhere, from a surface symptom to an underlying respondent contract.',
+            'The instinct was to treat low participation as survey friction: too long, too complex, too frequent. The evidence pointed elsewhere. The survey was three questions and took about two minutes, so friction was not what was stopping people. Underneath the symptom sat something else — a respondent contract. Repeatedly and honest are the demanding words in that question. A one-time form can succeed on novelty. A recurring one has to earn each response, and it competes with the respondent\'s memory of what happened, or did not happen, last time.',
     },
     {
-        title: 'Respondent journey',
+        title: 'What I owned',
         body:
-            'Following one respondent through a single cycle showed where the experience thinned. The invitation arrived as just another workplace email and was easy to miss. The reminder became the real entry point, but it was written as though the invitation had already been read, so it carried little context. Completion itself was genuinely easy. After submitting, there was silence: no signal about who would see the response or whether anything happened. Then the same request returned the following week. There were two primary breaks: between invitation and reminder, and between submission and any visible impact.',
+            'Research and problem diagnosis, the respondent experience itself, and the interaction design of the communications around it. The evidence was qualitative and early: stakeholder interviews, management feedback, a review of the welcome and reminder communications, a respondent-journey review, and a review of how roles and reporting connected. Behavioural analytics gave supporting signal on where people dropped away.',
     },
     {
-        title: 'Five conditions',
+        title: 'The decision',
         body:
-            'Five conditions form what I call the respondent contract. Relevance: why does this matter, and why am I being asked again? Effort: what does responding require beyond the time spent filling the form? Safety: can I answer honestly without being personally exposed? Impact: what happens after I submit? Ownership: who is responsible for acting? The pilot was weak on most of these.',
+            'Five conditions decide whether someone answers again: relevance, effort, safety, impact and ownership. Effort was the only one anybody had been designing for, and it was the only one that was not broken. The second decision follows from the first: completion is not the same as candour. Submission count is not the complete measure of survey quality, because participation, honesty, representation and actionability move independently. A survey can be fully completed and still be worth very little.',
     },
     {
-        title: 'Key decisions',
+        title: 'What changed',
         body:
-            'Four findings drove the main decisions. First, the reminder became the actual entry point, so the experience could not depend on the welcome communication being remembered; every reminder should be independently understandable. Second, anonymity was stated but not explained in practice, so an abstract privacy claim did not create felt safety; grouped reporting, open-text handling and minimum-response protection should be explained. Third, respondents saw no visible impact after submitting, so a recurring request had not earned the next response; a visible closure loop is needed. Fourth, governance and manager action ownership were blurred, so no role clearly owned what happens next; governance should be separated from action ownership.',
+            'The problem was reframed. It arrived as a dashboard-value question — the data is thin, so fix the reporting — and it left as an upstream respondent-experience problem. That changed what got worked on. Every reminder had to be independently understandable, because the reminder had become the real entry point rather than the welcome message. Anonymity had to be explained in practice rather than asserted as a word. And the loop had to close visibly, because a recurring request that shows no consequence has not earned the next response.',
     },
     {
-        title: 'Feedback loop',
+        title: 'Evidence',
         body:
-            'A recurring survey is a loop: ask, respond, protect and aggregate, interpret, act, communicate impact, then ask again. In this pilot the communicate-impact step was missing. The consequence follows a clear chain: no visible action leads to lower trust, which leads to weaker future participation. A recurring survey must earn the next response.',
-    },
-    {
-        title: 'Ownership',
-        body:
-            'The recommended ownership model separates five roles. Respondents provide honest feedback. Managers interpret team-level insight, discuss themes, take action and communicate closure. Governance runs the program, protects anonymity, monitors organisation-level patterns and enables managers. Leadership reviews systemic patterns and supports organisation-level action. The system aggregates responses, protects thresholds and supports communication. The guiding principle: when governance owns the entire activity, it risks becoming an HR survey. When managers own follow-up, it becomes a management practice.',
-    },
-    {
-        title: 'Future direction',
-        body:
-            'The recommended lifecycle strengthens all five conditions together. Explain purpose. Invite safely. Make completion easy. Protect and aggregate. Interpret at the right level. Act. Communicate what changed. And in doing so, earn the next response. It is worth noting that shorter surveys reduce interaction effort, and conversational formats may improve engagement, but neither creates relevance, safety, impact or ownership on its own.',
+            'This was early qualitative research intended to surface hypotheses, not a statistically representative study. It combined a small number of interviews with stakeholder feedback and communication review inside one organisation. It does not explain all survey non-response, and it is not presented as if it does.',
     },
     {
         title: 'Limitations',
         body:
-            'The study was early and directional, with a small interview sample and no broad quantitative validation. It was conducted in one internal organisation. The qualitative evidence included one respondent interview and one HR and governance interview, supported by management feedback and multiple experience and communication reviews. Management input was stakeholder feedback rather than a formal interview. The findings are directional hypotheses, not statistically representative conclusions. Every recommendation described here is exactly that, a recommendation: none has shipped, and none has post-change measurement, so none is yet validated.',
-    },
-    {
-        title: 'Reflection',
-        body:
-            'Participation was the visible symptom. Underneath it sat a system of purpose, trust, honesty, visible impact and ownership. A three-question form can be effortless to complete and still fail if people do not know why it repeats, whether it is genuinely safe, or whether anything happens afterward. The most useful contribution was diagnostic: reframing a dashboard-value problem as an upstream respondent-experience problem, and staying honest about the line between what the evidence confirmed and what it only suggested.',
+            'The study was early and directional, with a small interview sample and no broad quantitative validation. It was conducted in one organisation. Management input was stakeholder feedback rather than a formal interview. Everything proposed is a recommendation: none has shipped, none has post-change measurement, and so none is validated. The most useful contribution was diagnostic — reframing a dashboard-value problem as an upstream respondent-experience problem, and staying honest about the line between what the evidence confirmed and what it only suggested.',
     },
 ];
