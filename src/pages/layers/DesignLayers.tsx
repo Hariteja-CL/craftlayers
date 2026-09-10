@@ -5,50 +5,66 @@ import { Badge } from '../../components/ui/Badge';
 import { ArrowRight } from 'lucide-react';
 
 /**
- * /work/design — public system story, framed around system integrity.
+ * /work/design — the public case.
  *
- * The argument is that keeping product and UX decisions intact from design
- * through implementation matters more as AI increases the number of people and
- * tools interpreting a system. It shows what Hari believes and can own, with
- * one worked example as proof — not the operating method itself.
+ * Nine sections to eight, 732 words to 694 — on the rule that the public page
+ * proves judgement and the protected layer carries the operating detail.
  *
- * Proof, not playbook. The rule anatomy, implementation chain, token
- * architecture, AI context model and review procedures stay private.
+ * The word count barely moves, and that is the honest result rather than a
+ * disappointing one. Roughly 200 words of industry commentary and restated
+ * summary came out; roughly 160 words of product context, constraint and
+ * limitation went in, because the page previously named no product, no
+ * constraint and no measurement boundary at all. The page is not shorter so
+ * much as it is now about something.
+ *
+ * WHAT LEFT, AND WHY.
+ *
+ * The opening section argued that AI makes system maturity more important.
+ * True, and said by everyone; it spent the reader's first screen on an
+ * industry claim rather than on this product. "What this demonstrates" was a
+ * bulleted restatement of the three sections above it. Both are gone.
+ *
+ * WHAT IS MARKED TO MOVE, NOT DELETED.
+ *
+ * The rule anatomy, the implementation chain, the token architecture, the AI
+ * constraints and the review procedures are named in the closing section and
+ * live nowhere in this file. When the protected layer is built, that is the
+ * content it takes — none of it has to be recovered from git first.
+ *
+ * PROVENANCE. The product context — EnCulture at NHR Technologies, governing
+ * Assessments, Multi-Rater and Culture Intelligence — is the confirmed source
+ * of truth, and it matches the evidence library and the homepage card word for
+ * word. An earlier version of this page named no product at all and described
+ * a different consumer for the system; that wording was confirmed stale on
+ * 2026-09-10 and removed. If it resurfaces anywhere, it is wrong.
+ *
+ * What survives from the old caveat is the half that is independently true and
+ * unaffected by that correction: nothing on this page is a measured
+ * organisational outcome, and none is claimed.
  */
 
 const PROSE = 'text-[17px] md:text-lg leading-[1.75] cl-text-neutral-text-medium-contrast max-w-[65ch]';
 const LABEL = 'text-xs font-bold uppercase tracking-[0.18em] cl-text-neutral-text-medium-contrast';
+const QUOTE =
+    'mt-8 border-l-2 pl-6 text-lg md:text-xl font-medium cl-text-neutral-text-high-contrast leading-[1.6]';
 
-const PRINCIPLES = [
-    {
-        n: '01',
-        title: 'Design decisions should survive implementation',
-        body: 'The important product and UX decisions should still be visible in the built product, not only in the design files where they were first agreed.',
-    },
-    {
-        n: '02',
-        title: 'System language should express intent',
-        body: 'Shared naming and components should carry the meaning behind a decision rather than describe a temporary appearance. A name like brand-primary says what something is for; a name describing its current colour only says what it looked like that week.',
-    },
-    {
-        n: '03',
-        title: 'Human judgment stays above AI generation',
-        body: 'AI-assisted implementation works best inside clear product and design constraints, and stays subject to human review.',
-    },
-];
-
-const CAN_OWN = [
-    ['System definition', 'Turning recurring UX and product decisions into reusable design-system guidance.'],
-    ['Implementation alignment', 'Staying close to implementation so the built experience remains connected to the decisions behind it.'],
-    ['Design-system review', 'Identifying where production has drifted from shared UX rules, and resolving those gaps with product and engineering.'],
-    ['AI-aware governance', 'Defining enough product and design constraint that AI-assisted delivery operates inside the intended experience.'],
-];
-
-const DEMONSTRATES = [
-    'Design-system thinking beyond Figma organisation',
-    'Product decisions carried into implementation',
-    'Collaborative control of implementation drift',
-    'AI-assisted delivery governed by human-owned decisions',
+const OWNED = [
+    [
+        'Product and UX principles',
+        'The decisions that kept recurring, written so they could be applied without asking what was originally meant.',
+    ],
+    [
+        'Reusable product patterns',
+        'The shared expression of those decisions across all three product environments.',
+    ],
+    [
+        'Design-system governance',
+        'Deciding what becomes a rule, what stays a local choice, and how a disagreement between the two gets resolved.',
+    ],
+    [
+        'Implementation review',
+        'Staying close enough to production to see where the built experience had drifted from what was agreed.',
+    ],
 ];
 
 function Section({ id, label, title, children }: {
@@ -72,7 +88,6 @@ export function DesignLayers() {
         <article className="cl-bg-neutral-surface-level-0 min-h-screen pb-24">
             <div className="max-w-3xl mx-auto px-6">
 
-                {/* 1 · Hero */}
                 <header className="pt-10">
                     <div className="mb-8">
                         <Breadcrumbs items={[
@@ -93,84 +108,81 @@ export function DesignLayers() {
                         Turning Design Decisions into Implementation Rules
                     </h1>
                     <p className="mt-6 text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-[1.55] font-medium max-w-[48ch]">
-                        How I keep product and UX decisions intact from design through implementation and
-                        AI-assisted delivery.
+                        One UX decision, three products, and the difference between agreeing something and
+                        being able to build against it.
                     </p>
                     <p className="mt-5 text-sm cl-text-neutral-text-low-contrast">
-                        Public summary · deeper walkthrough available privately
+                        Public summary · EnCulture at NHR Technologies
                     </p>
                 </header>
 
-                {/* 2 · Market context */}
-                <Section id="context" label="01 · Context" title="AI makes system maturity more important">
+                {/* 1 · Product context, and the constraint that follows from it */}
+                <Section id="context" label="01 · Context" title="Three products, one set of decisions">
                     <p className={PROSE}>
-                        AI can generate interface work quickly, but it also increases the number of people and
-                        tools interpreting a product system. That makes clear design decisions, shared system
-                        language and implementation alignment more important, not less.
+                        EnCulture at NHR Technologies is a B2B culture analytics platform made of three product
+                        environments — Assessments, Multi-Rater and Culture Intelligence. They share users,
+                        they share vocabulary, and they were built on different implementation foundations.
                     </p>
                     <p className={`${PROSE} mt-5`}>
-                        The challenge is no longer only creating reusable components. It is keeping product
-                        decisions consistent across design, implementation and AI-assisted delivery.
+                        That last part is the constraint the rest of this follows from. Standardising the
+                        underlying stack was not on the table, so whatever kept the three products coherent had
+                        to work across foundations that were not going to converge.
                     </p>
                 </Section>
 
-                {/* 3 · Handoff is not the finish line */}
-                <Section id="handoff" label="02 · The argument" title="Handoff is not the finish line">
+                {/* 2 · The problem */}
+                <Section id="problem" label="02 · The problem" title="The same decision, implemented three ways">
                     <p className={PROSE}>
-                        A design system is not complete because the Figma library is organised. The decisions
-                        that system represents still need to survive into the built product. I stay close to
-                        implementation so the product continues to reflect the UX and product decisions behind
-                        the system.
+                        Not for want of agreement. Decisions were made, and then made again — they lived in
+                        design files and in conversations, which is to say they lived nowhere a team could build
+                        against. Six months later the same question came back, and whoever answered it that time
+                        answered it slightly differently.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        Handoff did not fix this, and could not. A handoff transfers a screen. It does not
+                        transfer the judgement behind the screen, so the next person implementing something
+                        similar inherits an example rather than a reason.
+                    </p>
+                </Section>
+
+                {/* 3 · Role */}
+                <Section id="owned" label="03 · My role" title="What I owned">
+                    <dl className="space-y-6">
+                        {OWNED.map(([t, d]) => (
+                            <div key={t}>
+                                <dt className="text-lg font-bold cl-text-neutral-text-high-contrast">{t}</dt>
+                                <dd className={`${PROSE} mt-1.5`}>{d}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </Section>
+
+                {/* 4 · The decision */}
+                <Section id="decision" label="04 · The decision" title="A decision is not finished until it can be built against">
+                    <p className={PROSE}>
+                        The change was not a better component library. It was treating a recurring decision as
+                        unfinished until it existed as a rule, in shared language, that someone could apply
+                        without me in the room.
                     </p>
 
-                    <p
-                        style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
-                        className="mt-8 border-l-2 pl-6 text-lg md:text-xl font-medium cl-text-neutral-text-high-contrast leading-[1.6] max-w-[46ch]"
-                    >
+                    <p style={{ borderColor: 'var(--cl-color-brand-primary-base)' }} className={`${QUOTE} max-w-[46ch]`}>
                         We are not maintaining a Figma file. We are maintaining the experience of a product.
                     </p>
 
                     <div className="mt-10">
                         <h3 className="text-xl font-bold cl-text-neutral-text-high-contrast">No silent drift</h3>
                         <p className={`${PROSE} mt-2`}>
-                            Design and engineering can challenge a system decision when technical, accessibility,
-                            performance or product constraints require it. What matters is that the result becomes
-                            an explicit shared decision rather than an undocumented difference between design and
-                            production.
-                        </p>
-                        <p className={`${PROSE} mt-4`}>
-                            Product, design and engineering share responsibility for keeping system decisions
-                            intact. My particular part is making the UX intent explicit, staying involved through
-                            implementation, and surfacing drift when the built product no longer reflects what was
-                            agreed.
+                            Design and engineering can challenge a rule when technical, accessibility,
+                            performance or product constraints require it. What matters is that the outcome
+                            becomes an explicit shared decision rather than an undocumented difference between
+                            design and production. Governance here means the disagreement is visible — not that
+                            the rule always wins.
                         </p>
                     </div>
                 </Section>
 
-                {/* 4 · Three public principles */}
-                <Section id="principles" label="03 · Principles" title="Three principles behind the system">
-                    <ol className="space-y-8">
-                        {PRINCIPLES.map((p) => (
-                            <li key={p.n} className="flex gap-5">
-                                <span className="text-sm font-mono font-bold cl-text-brand-primary-base pt-1.5 shrink-0">{p.n}</span>
-                                <div>
-                                    <h3 className="text-xl font-bold cl-text-neutral-text-high-contrast leading-snug">{p.title}</h3>
-                                    <p className={`${PROSE} mt-2`}>{p.body}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ol>
-                    <p
-                        style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
-                        className="mt-8 border-l-2 pl-6 text-lg font-medium cl-text-neutral-text-high-contrast leading-[1.6] max-w-[52ch]"
-                    >
-                        AI accelerates repetitive production work. Product and design decisions remain
-                        human-owned.
-                    </p>
-                </Section>
-
-                {/* 5 · One evidence example — Visual 1 */}
-                <Section id="evidence" label="04 · Evidence" title="One decision, expressed in the product">
+                {/* 5 · What changed — visual 1, the worked example */}
+                <Section id="changed" label="05 · What changed" title="One decision, expressed in the product">
                     <figure className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
                         <dl className="space-y-5">
                             <div>
@@ -180,31 +192,32 @@ export function DesignLayers() {
                                 </dd>
                             </div>
                             <div>
-                                <dt className={LABEL}>System expression</dt>
+                                <dt className={LABEL}>Governed rule</dt>
                                 <dd className="mt-1.5 text-lg font-semibold cl-text-neutral-text-high-contrast leading-relaxed">
                                     One primary action per view.
                                 </dd>
                             </div>
                             <div>
-                                <dt className={LABEL}>Product result</dt>
+                                <dt className={LABEL}>Across the products</dt>
                                 <dd className="mt-1.5 text-[17px] cl-text-neutral-text-medium-contrast leading-relaxed">
-                                    Components use a consistent primary and secondary hierarchy, so attention lands
-                                    in one place rather than being split between competing calls to action.
+                                    Components carry a consistent primary and secondary hierarchy, so attention
+                                    lands in one place instead of being split between competing calls to action.
                                 </dd>
                             </div>
                         </dl>
                     </figure>
                     <p className={`${PROSE} mt-6`}>
                         The decision is not a styling preference. It is a judgement about attention, in a form
-                        someone else can apply without having to ask what was originally meant.
+                        someone else can apply — in any of the three products, without having to ask what was
+                        originally meant.
                     </p>
                 </Section>
 
-                {/* 6 · From design to product — Visual 2 */}
-                <Section id="loop" label="05 · The loop" title="From design to product, and back">
+                {/* 6 · Evidence and outcome — visual 2, the loop */}
+                <Section id="outcome" label="06 · Outcome" title="How a decision stays decided">
                     <figure className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-6 md:p-8">
                         <ol className="flex flex-wrap items-center gap-x-3 gap-y-3">
-                            {['Evidence', 'Decision', 'System', 'Product'].map((s, i, arr) => (
+                            {['Evidence', 'Decision', 'Governed rule', 'Products'].map((s, i, arr) => (
                                 <li key={s} className="flex items-center gap-3">
                                     <span className="rounded-full border cl-border-border-color-default cl-bg-neutral-surface-level-0 px-4 py-2 text-[15px] font-semibold cl-text-neutral-text-high-contrast">
                                         {s}
@@ -214,95 +227,56 @@ export function DesignLayers() {
                             ))}
                         </ol>
                         <figcaption className="mt-5 text-[15px] leading-relaxed cl-text-neutral-text-medium-contrast">
-                            The product then becomes evidence again — what people do with it feeds the next
+                            What people do with the shipped product becomes evidence again, and feeds the next
                             decision.
                         </figcaption>
                     </figure>
                     <p className={`${PROSE} mt-6`}>
-                        Research, analytics and user feedback inform a product decision. That decision becomes
-                        part of the system, and the system should stay visible in the implemented experience.
+                        The result is a principle-driven governance model: recurring design decisions become
+                        shared rules across the three products, rather than being re-argued per product per
+                        quarter.
+                    </p>
+                    <p style={{ borderColor: 'var(--cl-color-brand-primary-base)' }} className={`${QUOTE} max-w-[52ch]`}>
+                        AI accelerates repetitive production work. Product and design decisions stay
+                        human-owned, and AI-assisted implementation works inside those constraints rather than
+                        around them.
                     </p>
                 </Section>
 
-                {/* 7 · What I can own */}
-                <Section id="own" label="06 · Ownership" title="What I can own">
-                    <dl className="space-y-6">
-                        {CAN_OWN.map(([t, d]) => (
-                            <div key={t}>
-                                <dt className="text-lg font-bold cl-text-neutral-text-high-contrast">{t}</dt>
-                                <dd className={`${PROSE} mt-1.5`}>{d}</dd>
-                            </div>
-                        ))}
-                    </dl>
-                </Section>
-
-                {/* 8 · What this demonstrates */}
-                <Section id="demonstrates" label="07 · Summary" title="What this demonstrates">
-                    <ul className="space-y-3">
-                        {DEMONSTRATES.map((d) => (
-                            <li key={d} className="flex gap-3.5 text-[17px] cl-text-neutral-text-medium-contrast leading-relaxed">
-                                <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-3 shrink-0" />
-                                <span>{d}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="mt-7 text-[15px] leading-relaxed cl-text-neutral-text-low-contrast max-w-[65ch]">
-                        CraftLayers is currently the primary consumer of this system. This story demonstrates
-                        system thinking, implementation alignment and application — not measured organisational
-                        impact.
-                    </p>
-                </Section>
-
-                {/* 9 · Private walkthrough */}
-                <Section id="walkthrough" label="08 · Going deeper" title="A deeper walkthrough is available privately">
+                {/* 7 · Limitations */}
+                <Section id="limitations" label="07 · Limitations" title="What this does not prove">
                     <p className={PROSE}>
-                        This page shows the public version of the system. Detailed operating rules,
-                        implementation structures, AI constraints and working artifacts are shared selectively
-                        during portfolio reviews and interviews.
+                        No adoption figure or organisational-impact measurement is attached to this work. What
+                        it demonstrates is system thinking, implementation alignment and application across
+                        three products — not a business outcome.
                     </p>
-                    <div className="mt-7 flex flex-wrap gap-3">
+                    <p className={`${PROSE} mt-5`}>
+                        Anyone claiming a design system moved a business metric should be able to show the
+                        measurement. I cannot, so I do not.
+                    </p>
+                </Section>
+
+                {/* 8 · Deeper detail. The CTA points at /contact, which is a real
+                    route — there is no access flow yet and this page does not
+                    pretend otherwise. The list here is also the manifest for the
+                    protected layer when it is built. */}
+                <Section id="deeper" label="08 · Going deeper" title="The detailed case study">
+                    <p className={PROSE}>
+                        The full model behind this — the rule anatomy, the implementation chain, the token
+                        architecture, the AI constraints and the review procedures — includes internal product
+                        material. Detailed project evidence is available for hiring and review conversations.
+                    </p>
+                    <div className="mt-7">
                         <Link
                             to="/contact"
                             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[15px] font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-colors cl-focus-ring"
                         >
-                            Request a private walkthrough
+                            Get in touch
                             <ArrowRight aria-hidden="true" className="w-4 h-4" />
-                        </Link>
-                        <Link
-                            to="/profile"
-                            className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-strong px-5 py-3 text-[15px] font-semibold cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-colors cl-focus-ring"
-                        >
-                            View my profile
                         </Link>
                     </div>
                 </Section>
-
-                {/* 10 · Closing */}
-                <Section id="closing" label="09 · Closing" title="Decisions that outlast the screen">
-                    <p className="text-xl md:text-2xl cl-text-neutral-text-high-contrast font-medium leading-[1.5] max-w-[44ch]">
-                        A design system becomes useful when decisions can survive beyond the screen where they
-                        were first made.
-                    </p>
-                    <p className={`${PROSE} mt-6`}>
-                        My goal is not to automate design judgment. It is to keep product decisions clear enough
-                        that people, systems and AI-assisted tools can apply them without losing the original
-                        intent.
-                    </p>
-                </Section>
             </div>
-
-            <footer className="mt-24 pt-16 border-t cl-border-border-color-default">
-                <div className="max-w-3xl mx-auto px-6 text-center">
-                    <p className={`${LABEL} mb-6`}>More work</p>
-                    <Link
-                        to="/work"
-                        className="group inline-flex items-center gap-3 text-2xl md:text-4xl font-bold cl-text-neutral-text-high-contrast hover:cl-text-brand-primary-base transition-colors cl-focus-ring rounded-lg px-2"
-                    >
-                        Return to Work
-                        <ArrowRight aria-hidden="true" className="w-7 h-7 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                </div>
-            </footer>
         </article>
     );
 }
