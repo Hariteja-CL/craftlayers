@@ -266,3 +266,98 @@ describe('isIgnorablePath — private library', () => {
         }
     });
 });
+
+/**
+ * SEO crawlers, added from observation rather than from a list.
+ *
+ * Both of these walked the sitemap on 2026-09-09 and were counted as
+ * "Unrecognised bot" for a day, because the user-agent that would have named
+ * them was stored in a Blob body nothing read. The strings below are the exact
+ * ones recovered from that storage, kept verbatim.
+ */
+describe('classifyUserAgent — observed SEO crawlers', () => {
+    /** Recovered from production storage, 26 requests on 2026-09-09. */
+    const AHREFS = 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)';
+    /** Recovered from production storage, 1 request on 2026-09-09. */
+    const SEZNAM =
+        'Mozilla/5.0 (compatible; SeznamBot/4.0; +https://o-seznam.cz/napoveda/vyhledavani/en/seznambot-crawler/)';
+
+    it('identifies the exact AhrefsBot agent seen in production', () => {
+        expect(classifyUserAgent(AHREFS)).toEqual({ family: 'AhrefsBot', category: 'search' });
+    });
+
+    it('identifies the exact SeznamBot agent seen in production', () => {
+        expect(classifyUserAgent(SEZNAM)).toEqual({ family: 'SeznamBot', category: 'search' });
+    });
+
+    /** Matching is a case-insensitive substring test, so a vendor changing the
+     *  capitalisation of its own name must not silently drop it back into
+     *  "Unrecognised bot". */
+    it.each([
+        ['lower case', 'mozilla/5.0 (compatible; ahrefsbot/7.0; +http://ahrefs.com/robot/)', 'AhrefsBot'],
+        ['upper case', 'MOZILLA/5.0 (COMPATIBLE; AHREFSBOT/7.0)', 'AhrefsBot'],
+        ['bare token', 'AhrefsBot', 'AhrefsBot'],
+        ['lower case', 'mozilla/5.0 (compatible; seznambot/4.0)', 'SeznamBot'],
+        ['bare token', 'SeznamBot/4.0', 'SeznamBot'],
+    ])('matches %s for %s', (_label, ua, family) => {
+        expect(classifyUserAgent(ua)).toEqual({ family, category: 'search' });
+    });
+
+    /** The Seznam agent carries "seznambot-crawler" inside its own help URL,
+     *  which the generic crawler pattern would also match. The named signature
+     *  has to win, or the family regresses to "Unrecognised bot". */
+    it('does not fall through to the generic crawler pattern', () => {
+        expect(classifyUserAgent(SEZNAM)?.family).not.toBe('Unrecognised bot');
+        expect(classifyUserAgent(AHREFS)?.family).not.toBe('Unrecognised bot');
+    });
+
+    /** The reason these two were added and four others were not: a crawler
+     *  nobody has observed is still correctly reported as unrecognised. */
+    it.each([
+        ['SemrushBot', 'Mozilla/5.0 (compatible; SemrushBot/7~bl; +http://www.semrush.com/bot.html)'],
+        ['DotBot', 'Mozilla/5.0 (compatible; DotBot/1.2; +https://opensiteexplorer.org/dotbot)'],
+        ['MJ12bot', 'Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)'],
+        ['DataForSeoBot', 'Mozilla/5.0 (compatible; DataForSeoBot/1.0; +https://dataforseo.com/dataforseo-bot)'],
+    ])('still reports unobserved %s as an unrecognised bot', (_label, ua) => {
+        expect(classifyUserAgent(ua)).toEqual({ family: 'Unrecognised bot', category: 'unknown' });
+    });
+});
+
+describe('classifyUserAgent — the new signatures change nothing else', () => {
+    /** Every previously known agent, asserted again after the insert. First
+     *  match wins in SIGNATURES, so adding a token in the middle of the list
+     *  is exactly the kind of edit that can shadow a neighbour. */
+    it.each([
+        [UA.googlebot, 'Googlebot', 'search'],
+        [UA.bingbot, 'Bingbot', 'search'],
+        [UA.applebot, 'Applebot', 'search'],
+        [UA.applebotExtended, 'Applebot-Extended', 'ai'],
+        [UA.duckduck, 'DuckDuckBot', 'search'],
+        [UA.yandex, 'YandexBot', 'search'],
+        [UA.baidu, 'Baiduspider', 'search'],
+        [UA.gptbot, 'GPTBot', 'ai'],
+        [UA.claudebot, 'ClaudeBot', 'ai'],
+        [UA.claudeUser, 'Claude-User', 'ai'],
+        [UA.perplexity, 'PerplexityBot', 'ai'],
+        [UA.linkedin, 'LinkedInBot', 'social'],
+        [UA.twitterbot, 'Twitterbot', 'social'],
+        [UA.facebook, 'FacebookExternalHit', 'social'],
+        [UA.uptimerobot, 'UptimeRobot', 'monitoring'],
+        [UA.curl, 'curl', 'monitoring'],
+    ])('still identifies %s', (ua, family, category) => {
+        expect(classifyUserAgent(ua)).toEqual({ family, category });
+    });
+
+    it('still refuses to classify humans', () => {
+        for (const ua of [UA.chrome, UA.safariIphone, UA.firefox, UA.cubot]) {
+            expect(classifyUserAgent(ua)).toBeNull();
+        }
+    });
+
+    it('still flags a genuinely unknown bot', () => {
+        expect(classifyUserAgent('Mozilla/5.0 (compatible; SomeNewBot/3.0)')).toEqual({
+            family: 'Unrecognised bot',
+            category: 'unknown',
+        });
+    });
+});
