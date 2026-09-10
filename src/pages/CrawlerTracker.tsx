@@ -22,7 +22,7 @@ interface Stats {
     totals: { requests: number; families: number; byCategory: Record<Category, number> };
     families: { family: string; category: Category; count: number; lastSeen: number }[];
     topPages: { path: string; count: number }[];
-    recent: { at: number; path: string; family: string; category: Category }[];
+    recent: { at: number; path: string; family: string; category: Category; userAgent?: string }[];
     firstSeen: number | null;
 }
 
@@ -61,6 +61,34 @@ function CategoryTag({ category }: { category: Category }) {
         <span className="inline-block cl-bg-neutral-surface-level-2 cl-text-neutral-text-medium-contrast cl-text-050 cl-weight-medium px-2 py-0.5 cl-radius-full whitespace-nowrap">
             {CATEGORY_LABELS[category] ?? category}
         </span>
+    );
+}
+
+/**
+ * The raw user-agent, collapsed.
+ *
+ * It is the only field that can identify an unrecognised bot, and it is also
+ * long, ugly and written by the client — so it is available on demand and
+ * never on sight. Unknown rows get the louder label because those are the ones
+ * worth opening; a known crawler's string is there for the rarer question of
+ * whether something calling itself Googlebot really said what Googlebot says.
+ */
+function UserAgent({ value, prominent }: { value: string; prominent: boolean }) {
+    return (
+        <details className="mt-1 w-full">
+            <summary
+                className={`cl-text-050 cursor-pointer cl-focus-ring ${
+                    prominent
+                        ? 'cl-text-neutral-text-medium-contrast'
+                        : 'cl-text-neutral-text-low-contrast'
+                }`}
+            >
+                {prominent ? 'Show user-agent' : 'user-agent'}
+            </summary>
+            <code className="block mt-1 p-2 cl-text-050 cl-text-neutral-text-medium-contrast cl-bg-neutral-surface-level-2 cl-radius-md break-all whitespace-pre-wrap">
+                {value}
+            </code>
+        </details>
     );
 }
 
@@ -193,14 +221,21 @@ function TrackerBody() {
                         {recent.map((h, i) => (
                             <li
                                 key={`${h.at}-${i}`}
-                                className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b cl-border-border-color-default pb-2 cl-text-100"
+                                className="border-b cl-border-border-color-default pb-2 cl-text-100"
                             >
-                                <span className="cl-text-neutral-text-low-contrast whitespace-nowrap">
-                                    {formatWhen(h.at)}
-                                </span>
-                                <span className="cl-text-neutral-text-high-contrast">{h.family}</span>
-                                <CategoryTag category={h.category} />
-                                <span className="cl-text-neutral-text-medium-contrast break-all">{h.path}</span>
+                                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                    <span className="cl-text-neutral-text-low-contrast whitespace-nowrap">
+                                        {formatWhen(h.at)}
+                                    </span>
+                                    <span className="cl-text-neutral-text-high-contrast">{h.family}</span>
+                                    <CategoryTag category={h.category} />
+                                    <span className="cl-text-neutral-text-medium-contrast break-all">
+                                        {h.path}
+                                    </span>
+                                </div>
+                                {h.userAgent && (
+                                    <UserAgent value={h.userAgent} prominent={h.category === 'unknown'} />
+                                )}
                             </li>
                         ))}
                     </ul>

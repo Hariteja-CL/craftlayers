@@ -1,12 +1,24 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { isStoreConfigured, parseHitPathname, readHits, recordHit, type CrawlerHit } from './crawlerStore.js';
-import { summarise } from '../crawler-stats.js';
-import { list, put } from '@vercel/blob';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+    attachUserAgents,
+    isStoreConfigured,
+    MAX_USER_AGENT_READS,
+    parseHitPathname,
+    readHits,
+    recordHit,
+    type CrawlerHit,
+    type StoredHit,
+} from './crawlerStore.js';
+import statsHandler, { summarise } from '../crawler-stats.js';
+import authHandler from '../auth.js';
+import { COOKIE_NAME } from './session.js';
+import { get, list, put } from '@vercel/blob';
 
 /** Stubbed so the read path can be exercised without a live Blob store. */
-vi.mock('@vercel/blob', () => ({ list: vi.fn(), put: vi.fn() }));
+vi.mock('@vercel/blob', () => ({ get: vi.fn(), list: vi.fn(), put: vi.fn() }));
 
 const mockList = vi.mocked(list);
+const mockGet = vi.mocked(get);
 
 describe('parseHitPathname', () => {
     it('round-trips a normal hit', () => {
@@ -16,6 +28,9 @@ describe('parseHitPathname', () => {
             category: 'ai',
             family: 'GPTBot',
             path: '/work/respondent-experience',
+            // Carried so the body can be located later; stripped again by
+            // attachUserAgents before anything reaches a client.
+            pathname,
         });
     });
 
@@ -137,6 +152,7 @@ describe('readHits — day-prefixed reads', () => {
     beforeEach(() => {
         process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
         mockList.mockReset();
+        mockGet.mockReset();
     });
 
     afterEach(() => {
@@ -207,6 +223,18 @@ describe('readHits — day-prefixed reads', () => {
         stubStore({ [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a')] });
         expect(await readHits(10, 30, NOW)).toEqual([]);
         expect(mockList).not.toHaveBeenCalled();
+    });
+
+    /** The cost guarantee. Aggregation runs over up to 2,000 rows, and one
+     *  body read per row would be the N+1 this design exists to avoid. */
+    it('never reads a Blob body', async () => {
+        stubStore({
+            [DAY0]: [blob(DAY0, 300, 'GPTBot', '/a'), blob(DAY0, 290, 'Googlebot', '/b')],
+            [DAY1]: [blob(DAY1, 200, 'Bingbot', '/c')],
+        });
+        const hits = await readHits(100, 30, NOW);
+        expect(hits).toHaveLength(3);
+        expect(mockGet).not.toHaveBeenCalled();
     });
 
     it('skips unparseable objects instead of failing the whole read', async () => {
@@ -358,5 +386,303 @@ describe('recordHit outcomes', () => {
             throw 'not even an Error';
         }) as unknown as typeof put);
         await expect(recordHit(hit, 'GPTBot/1.1')).resolves.toContain('unknown');
+    });
+});
+
+/**
+ * Recovering the stored user-agent.
+ *
+ * These exist because of a real investigation that could not be finished. On
+ * 2026-09-09 an unattributed bot made 28 requests, enumerating every handbook
+ * chapter, and the tracker could say how many and which paths but not what it
+ * called itself — the user-agent had been written into every Blob body since
+ * the tracker shipped, and no read path ever opened one.
+ *
+ * The two properties under test pull in opposite directions: the strings must
+ * become reachable, and reaching them must not cost a body read per row.
+ */
+describe('attachUserAgents', () => {
+    const pathnameFor = (i: number) =>
+        `crawlers/2026-09-08/${1000 + i}-aa11bb__unknown__Unrecognised%20bot__%2Fp${i}.json`;
+
+    const stored = (i: number): StoredHit => ({
+        at: 1000 + i,
+        path: `/p${i}`,
+        family: 'Unrecognised bot',
+        category: 'unknown',
+        pathname: pathnameFor(i),
+    });
+
+    /** A 200 carrying a JSON body, shaped the way recordHit writes one. */
+    function body(payload: unknown) {
+        return {
+            statusCode: 200,
+            stream: new Response(typeof payload === 'string' ? payload : JSON.stringify(payload)).body,
+            headers: new Headers(),
+            blob: {},
+        };
+    }
+
+    const stubGet = (fn: (pathname: string) => unknown) =>
+        mockGet.mockImplementation((async (pathname: string) => fn(pathname)) as unknown as typeof get);
+
+    beforeEach(() => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
+        mockGet.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+    });
+
+    it('reads the stored user-agent onto the row', async () => {
+        stubGet(() => body({ ua: 'SomeBot/2.1 (+http://example.invalid/bot)' }));
+        const [row] = await attachUserAgents([stored(0)]);
+        expect(row.userAgent).toBe('SomeBot/2.1 (+http://example.invalid/bot)');
+    });
+
+    /** The mapping must come from the index, not from whichever read wins the
+     *  race — with a concurrent pool those are different things. */
+    it('maps each row to its own user-agent regardless of completion order', async () => {
+        stubGet(async (pathname) => {
+            const n = Number(/%2Fp(\d+)\.json$/.exec(pathname)![1]);
+            // Later rows resolve first, so completion order is the reverse of
+            // input order.
+            await new Promise((resolve) => setTimeout(resolve, (6 - n) * 4));
+            return body({ ua: `agent-${n}` });
+        });
+        const out = await attachUserAgents([0, 1, 2, 3, 4, 5].map(stored));
+        expect(out.map((h) => h.userAgent)).toEqual([
+            'agent-0',
+            'agent-1',
+            'agent-2',
+            'agent-3',
+            'agent-4',
+            'agent-5',
+        ]);
+        expect(out.map((h) => h.path)).toEqual(['/p0', '/p1', '/p2', '/p3', '/p4', '/p5']);
+    });
+
+    it.each([
+        ['a deleted object', () => null],
+        ['a 304 with no body', () => ({ statusCode: 304, stream: null, headers: new Headers(), blob: {} })],
+        ['a body that is not JSON', () => body('<html>not json</html>')],
+        ['a body that is JSON but not an object', () => body(42)],
+        ['a body with no ua field', () => body({ something: 'else' })],
+        ['a ua that is not a string', () => body({ ua: { nested: true } })],
+        ['a ua that is empty', () => body({ ua: '   ' })],
+        [
+            'a read that throws',
+            () => {
+                throw new Error('blob unreachable');
+            },
+        ],
+    ])('returns the row without a user-agent for %s', async (_label, stub) => {
+        stubGet(stub as (pathname: string) => unknown);
+        const out = await attachUserAgents([stored(0)]);
+        expect(out).toHaveLength(1);
+        expect(out[0].userAgent).toBeUndefined();
+        // The row itself is intact — a missing diagnostic never costs the event.
+        expect(out[0]).toMatchObject({ at: 1000, path: '/p0', family: 'Unrecognised bot' });
+    });
+
+    it('keeps the good rows when only one body fails', async () => {
+        stubGet((pathname) => (pathname.includes('%2Fp1') ? null : body({ ua: 'GoodBot/1.0' })));
+        const out = await attachUserAgents([stored(0), stored(1), stored(2)]);
+        expect(out.map((h) => h.userAgent)).toEqual(['GoodBot/1.0', undefined, 'GoodBot/1.0']);
+    });
+
+    /** The pathname is an internal address. Nothing that leaves the store
+     *  should carry it, so no client can come to depend on the layout. */
+    it('never returns the Blob pathname', async () => {
+        stubGet(() => body({ ua: 'SomeBot/1.0' }));
+        const out = await attachUserAgents([stored(0)]);
+        expect(out[0]).not.toHaveProperty('pathname');
+        expect(JSON.stringify(out)).not.toContain('crawlers/');
+    });
+
+    it('reads no more than MAX_USER_AGENT_READS bodies however many rows it is given', async () => {
+        stubGet(() => body({ ua: 'SomeBot/1.0' }));
+        const out = await attachUserAgents(Array.from({ length: 400 }, (_, i) => stored(i)));
+        expect(MAX_USER_AGENT_READS).toBe(50);
+        expect(out).toHaveLength(MAX_USER_AGENT_READS);
+        expect(mockGet.mock.calls.length).toBe(MAX_USER_AGENT_READS);
+    });
+
+    it('touches the store not at all when it is unconfigured', async () => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+        const out = await attachUserAgents([stored(0)]);
+        expect(out[0].userAgent).toBeUndefined();
+        expect(mockGet).not.toHaveBeenCalled();
+    });
+
+    it('handles being given nothing', async () => {
+        expect(await attachUserAgents([])).toEqual([]);
+        expect(mockGet).not.toHaveBeenCalled();
+    });
+
+    /**
+     * A user-agent is written by the client. The write path truncates it and
+     * nothing else, so everything hostile about the string has to be handled
+     * on the way out.
+     */
+    describe('sanitisation', () => {
+        it('re-clamps a stored user-agent that is longer than the cap', async () => {
+            stubGet(() => body({ ua: 'A'.repeat(5000) }));
+            const [row] = await attachUserAgents([stored(0)]);
+            expect(row.userAgent).toHaveLength(201);
+            expect(row.userAgent!.endsWith('…')).toBe(true);
+        });
+
+        /** Idempotent against what the write path produces: a value already
+         *  truncated to 200 plus an ellipsis must survive unchanged. */
+        it('leaves an already-truncated value alone', async () => {
+            const written = 'B'.repeat(200) + '…';
+            stubGet(() => body({ ua: written }));
+            const [row] = await attachUserAgents([stored(0)]);
+            expect(row.userAgent).toBe(written);
+        });
+
+        it('strips control characters, including NUL and ANSI escapes', async () => {
+            stubGet(() => body({ ua: 'Evil\u0000Bot\u001b[31m/1.0\u0007' }));
+            const [row] = await attachUserAgents([stored(0)]);
+            expect(row.userAgent).toBe('Evil Bot [31m/1.0');
+            // Asserted by code point, not by a pattern: a control-character
+            // class inside a regex is the very thing no-control-regex forbids.
+            expect([...row.userAgent!].every((c) => c.codePointAt(0)! >= 0x20)).toBe(true);
+        });
+
+        it('collapses newlines rather than carrying them into a log or a page', async () => {
+            stubGet(() => body({ ua: 'Multi\nLine\r\nBot/1.0' }));
+            const [row] = await attachUserAgents([stored(0)]);
+            expect(row.userAgent).toBe('Multi Line Bot/1.0');
+        });
+    });
+});
+
+/**
+ * The endpoint wiring.
+ *
+ * attachUserAgents being correct is worth nothing if the handler never calls
+ * it, and the cost guarantee is worth nothing if it calls it on the whole
+ * aggregation set.
+ */
+describe('crawler-stats — user-agent wiring', () => {
+    const PASSWORD = 'correct-horse-battery-staple';
+    const saved = {
+        pw: process.env.ACCESS_DASHBOARD_PASSWORD,
+        sec: process.env.ACCESS_DASHBOARD_SECRET,
+    };
+
+    beforeAll(() => {
+        process.env.ACCESS_DASHBOARD_PASSWORD = PASSWORD;
+        process.env.ACCESS_DASHBOARD_SECRET = 'unit-test-signing-secret-0123456789';
+    });
+
+    afterAll(() => {
+        if (saved.pw === undefined) delete process.env.ACCESS_DASHBOARD_PASSWORD;
+        else process.env.ACCESS_DASHBOARD_PASSWORD = saved.pw;
+        if (saved.sec === undefined) delete process.env.ACCESS_DASHBOARD_SECRET;
+        else process.env.ACCESS_DASHBOARD_SECRET = saved.sec;
+    });
+
+    beforeEach(() => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
+        mockList.mockReset();
+        mockGet.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+    });
+
+    /* eslint-disable @typescript-eslint/no-explicit-any -- mocked Vercel req/res */
+    function mockRes() {
+        const captured: { status: number; body: any; headers: Record<string, string> } = {
+            status: 0,
+            body: undefined,
+            headers: {},
+        };
+        const res: any = {
+            setHeader(k: string, v: string) {
+                captured.headers[k.toLowerCase()] = String(v);
+                return res;
+            },
+            status(code: number) {
+                captured.status = code;
+                return res;
+            },
+            json(payload: unknown) {
+                captured.body = payload;
+                return res;
+            },
+        };
+        return { res, captured };
+    }
+
+    async function login(): Promise<string> {
+        const { res, captured } = mockRes();
+        // A fresh address each time, so logins never share a rate-limit bucket.
+        const ip = `10.7.7.${Math.floor(Math.random() * 250)}`;
+        await authHandler(
+            { method: 'POST', headers: { 'x-forwarded-for': ip }, body: { password: PASSWORD } } as any,
+            res,
+        );
+        expect(captured.status).toBe(200);
+        return `${COOKIE_NAME}=${captured.headers['set-cookie'].split(';')[0].split('=')[1]}`;
+    }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+
+    /** Stored hits on today's prefix, so readHits finds them on its first day. */
+    function stubStore(count: number) {
+        const now = Date.now();
+        const today = new Date(now).toISOString().slice(0, 10);
+        const blobs = Array.from({ length: count }, (_, i) => ({
+            pathname: `crawlers/${today}/${now - i}-aa11bb__unknown__Unrecognised%20bot__%2Fp${i}.json`,
+        }));
+        mockList.mockImplementation((async (opts: unknown) => ({
+            blobs: (opts as { prefix?: string }).prefix === `crawlers/${today}/` ? blobs : [],
+            cursor: undefined,
+            hasMore: false,
+            folders: [],
+        })) as unknown as typeof list);
+        mockGet.mockImplementation((async () => ({
+            statusCode: 200,
+            stream: new Response(JSON.stringify({ ua: 'MysteryBot/3.0' })).body,
+            headers: new Headers(),
+            blob: {},
+        })) as unknown as typeof get);
+    }
+
+    it('returns user-agents on recent rows, and reads one body per recent row only', async () => {
+        stubStore(120);
+        const cookie = await login();
+        const { res, captured } = mockRes();
+        await statsHandler({ method: 'GET', headers: { cookie }, query: {} } as never, res as never);
+
+        expect(captured.status).toBe(200);
+        // Aggregation still saw everything…
+        expect(captured.body.totals.requests).toBe(120);
+        // …while bodies were read only for the slice a person reads.
+        expect(captured.body.recent).toHaveLength(50);
+        expect(mockGet.mock.calls.length).toBe(50);
+        expect(captured.body.recent.every((h: CrawlerHit) => h.userAgent === 'MysteryBot/3.0')).toBe(true);
+    });
+
+    it('puts no Blob pathname on the wire', async () => {
+        stubStore(3);
+        const cookie = await login();
+        const { res, captured } = mockRes();
+        await statsHandler({ method: 'GET', headers: { cookie }, query: {} } as never, res as never);
+        expect(JSON.stringify(captured.body)).not.toContain('crawlers/');
+    });
+
+    it('still refuses an unauthenticated read, and reads no body doing it', async () => {
+        stubStore(3);
+        const { res, captured } = mockRes();
+        await statsHandler({ method: 'GET', headers: {}, query: {} } as never, res as never);
+        expect(captured.status).toBe(401);
+        expect(mockGet).not.toHaveBeenCalled();
+        expect(mockList).not.toHaveBeenCalled();
     });
 });
