@@ -76,6 +76,19 @@ const SIGNATURES: Signature[] = [
     { token: 'YandexBot', family: 'YandexBot', category: 'search' },
     { token: 'Baiduspider', family: 'Baiduspider', category: 'search' },
     { token: 'Slurp', family: 'Yahoo! Slurp', category: 'search' },
+    // Commercial SEO crawlers, added because they were actually observed —
+    // both spent 2026-09-09 walking the sitemap and were counted as
+    // "Unrecognised bot" until their stored user-agents became readable.
+    // Filed under search rather than a category of their own: what they do to
+    // the site is indistinguishable from a search crawl.
+    //
+    // Deliberately not joined here by SemrushBot, DotBot, MJ12bot or
+    // DataForSeoBot. They would very likely appear one day, and that is the
+    // argument against adding them: a signature nobody has seen fire is a
+    // guess with a test around it, and "Unrecognised bot" is already the
+    // correct answer for a crawler we have never met.
+    { token: 'AhrefsBot', family: 'AhrefsBot', category: 'search' },
+    { token: 'SeznamBot', family: 'SeznamBot', category: 'search' },
 
     // --- Social / link preview -------------------------------------------
     // These fire when someone pastes a link into a chat or a post. They are
