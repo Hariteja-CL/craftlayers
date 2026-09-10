@@ -8,6 +8,7 @@ import {
     recordHit,
     type CrawlerHit,
     type StoredHit,
+    type UserAgentReadReport,
 } from './crawlerStore.js';
 import statsHandler, { summarise } from '../crawler-stats.js';
 import authHandler from '../auth.js';
@@ -684,5 +685,94 @@ describe('crawler-stats — user-agent wiring', () => {
         expect(captured.status).toBe(401);
         expect(mockGet).not.toHaveBeenCalled();
         expect(mockList).not.toHaveBeenCalled();
+    });
+});
+
+/**
+ * The read report.
+ *
+ * These exist because the first version of this feature shipped, failed in
+ * production, and could not say why. Every read error degraded to "row without
+ * a user-agent" — correct behaviour, and indistinguishable from fifty crawlers
+ * that sent no user-agent. The rows alone cannot tell those apart, so the
+ * report has to.
+ */
+describe('attachUserAgents — read report', () => {
+    const stored = (i: number): StoredHit => ({
+        at: 2000 + i,
+        path: `/r${i}`,
+        family: 'Unrecognised bot',
+        category: 'unknown',
+        pathname: `crawlers/2026-09-09/${2000 + i}-bb22cc__unknown__Unrecognised%20bot__%2Fr${i}.json`,
+    });
+
+    const okBody = (ua: string) => ({
+        statusCode: 200,
+        stream: new Response(JSON.stringify({ ua })).body,
+        headers: new Headers(),
+        blob: {},
+    });
+
+    const stubGet = (fn: (pathname: string) => unknown) =>
+        mockGet.mockImplementation((async (pathname: string) => fn(pathname)) as unknown as typeof get);
+
+    beforeEach(() => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
+        mockGet.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+    });
+
+    it('counts what it attempted and what it resolved', async () => {
+        stubGet(() => okBody('SomeBot/1.0'));
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        await attachUserAgents([stored(0), stored(1), stored(2)], report);
+        expect(report).toEqual({ attempted: 3, resolved: 3 });
+        expect(report.error).toBeUndefined();
+    });
+
+    /** The whole point: a total failure must not look like an empty result. */
+    it('reports the error when every read fails', async () => {
+        stubGet(() => {
+            throw new Error('Access denied');
+        });
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const rows = await attachUserAgents(Array.from({ length: 50 }, (_, i) => stored(i)), report);
+        expect(rows.every((r) => r.userAgent === undefined)).toBe(true);
+        expect(report.attempted).toBe(50);
+        expect(report.resolved).toBe(0);
+        expect(report.error).toMatch(/Access denied/);
+    });
+
+    /** Scattered failures must not stop the reads that would have worked. */
+    it('keeps going past scattered failures', async () => {
+        stubGet((pathname) => {
+            // Every odd index, two-digit ones included — an earlier version of this
+            // pattern matched a single digit only and quietly tested half of what
+            // its name claimed.
+            if (/%2Fr\d*[13579]\.json$/.test(pathname)) throw new Error('transient');
+            return okBody('SomeBot/1.0');
+        });
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const rows = await attachUserAgents(Array.from({ length: 20 }, (_, i) => stored(i)), report);
+        expect(report.attempted).toBe(20);
+        expect(report.resolved).toBe(10);
+        expect(rows).toHaveLength(20);
+    });
+
+    it('distinguishes a missing object from a rejected read', async () => {
+        stubGet(() => null);
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        await attachUserAgents([stored(0)], report);
+        expect(report.error).toBe('not-found');
+    });
+
+    /** Callers that do not care keep the simple shape. */
+    it('works with no report passed at all', async () => {
+        stubGet(() => okBody('SomeBot/1.0'));
+        const rows = await attachUserAgents([stored(0)]);
+        expect(rows[0].userAgent).toBe('SomeBot/1.0');
     });
 });

@@ -263,6 +263,40 @@ export const MAX_USER_AGENT_READS = 50;
 /** Bodies are read in parallel, but not all at once. */
 const USER_AGENT_READ_CONCURRENCY = 10;
 
+/** A single body read that has not answered by now is not going to save the
+ *  page. Without this bound, fifty stalled reads make the dashboard unusable
+ *  rather than merely incomplete. */
+const USER_AGENT_READ_TIMEOUT_MS = 3000;
+
+/**
+ * What happened while reading bodies.
+ *
+ * This exists because of a production failure that this module was built to
+ * prevent and then reproduced anyway. Every read error resolved to "row without
+ * a user-agent", which is correct behaviour and completely undiagnosable: a
+ * store rejecting every read looked exactly like fifty crawlers that happened
+ * not to send a user-agent. That is trap 12 again — telemetry that cannot
+ * report its own failure.
+ *
+ * Passed in and mutated rather than returned so the common path keeps its
+ * simple `CrawlerHit[]` shape.
+ */
+export interface UserAgentReadReport {
+    attempted: number;
+    resolved: number;
+    /** First failure, already redacted by describeError. */
+    error?: string;
+}
+
+/*
+ * There is deliberately no early-abandon budget here. An earlier draft stopped
+ * after five consecutive failures with nothing resolved, which raced: with ten
+ * workers running at once, a first wave whose failures settle before its
+ * successes trips the budget against a store that is working fine. The per-read
+ * timeout already bounds the worst case at roughly five waves, so the budget
+ * bought little and could discard good reads.
+ */
+
 /**
  * Clean a stored user-agent before it can reach a dashboard.
  *
@@ -293,15 +327,23 @@ function cleanStoredUserAgent(raw: unknown): string | undefined {
  * JSON, a body whose shape changed, a store that rejects the read. A
  * diagnostic detail is never worth a failed dashboard.
  */
-async function readStoredUserAgent(pathname: string): Promise<string | undefined> {
+type ReadResult = { ok: true; userAgent?: string } | { ok: false; error: string };
+
+async function readStoredUserAgent(pathname: string): Promise<ReadResult> {
     try {
-        const result = await get(pathname, { access: 'private' });
-        if (!result || result.statusCode !== 200 || !result.stream) return undefined;
+        const result = await get(pathname, {
+            access: 'private',
+            abortSignal: AbortSignal.timeout(USER_AGENT_READ_TIMEOUT_MS),
+        });
+        if (!result) return { ok: false, error: 'not-found' };
+        if (result.statusCode !== 200 || !result.stream) {
+            return { ok: false, error: `status-${result.statusCode}` };
+        }
         const parsed: unknown = JSON.parse(await new Response(result.stream).text());
-        if (typeof parsed !== 'object' || parsed === null) return undefined;
-        return cleanStoredUserAgent((parsed as Record<string, unknown>).ua);
-    } catch {
-        return undefined;
+        if (typeof parsed !== 'object' || parsed === null) return { ok: false, error: 'body-not-an-object' };
+        return { ok: true, userAgent: cleanStoredUserAgent((parsed as Record<string, unknown>).ua) };
+    } catch (err) {
+        return { ok: false, error: describeError(err) };
     }
 }
 
@@ -319,7 +361,10 @@ async function readStoredUserAgent(pathname: string): Promise<string | undefined
  * Order is preserved regardless of which reads finish first — index `i` of
  * the result is index `i` of the input.
  */
-export async function attachUserAgents(hits: StoredHit[]): Promise<CrawlerHit[]> {
+export async function attachUserAgents(
+    hits: StoredHit[],
+    report: UserAgentReadReport = { attempted: 0, resolved: 0 },
+): Promise<CrawlerHit[]> {
     const slice = hits.slice(0, MAX_USER_AGENT_READS);
     const out: CrawlerHit[] = slice.map(({ at, path, family, category }) => ({
         at,
@@ -335,8 +380,16 @@ export async function attachUserAgents(hits: StoredHit[]): Promise<CrawlerHit[]>
     let next = 0;
     const worker = async () => {
         for (let i = next++; i < slice.length; i = next++) {
-            const userAgent = await readStoredUserAgent(slice[i].pathname);
-            if (userAgent !== undefined) out[i] = { ...out[i], userAgent };
+            report.attempted += 1;
+            const result = await readStoredUserAgent(slice[i].pathname);
+            if (result.ok) {
+                if (result.userAgent !== undefined) {
+                    report.resolved += 1;
+                    out[i] = { ...out[i], userAgent: result.userAgent };
+                }
+            } else if (report.error === undefined) {
+                report.error = result.error;
+            }
         }
     };
 
