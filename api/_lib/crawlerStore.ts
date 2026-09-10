@@ -53,6 +53,17 @@ export interface CrawlerHit {
  */
 export interface StoredHit extends CrawlerHit {
     pathname: string;
+    /**
+     * The canonical blob URL as `list()` reported it.
+     *
+     * Preferred over the pathname when reading the body. `get()` builds its
+     * URL by interpolating a pathname straight into a template with no
+     * encoding, and these pathnames carry percent-escapes of their own —
+     * `%20` in "Unrecognised bot", `%2F` in every stored path. Handing back
+     * the URL the API itself produced removes that round trip, and the
+     * question of who is meant to decode it, entirely.
+     */
+    url?: string;
 }
 
 /**
@@ -234,7 +245,9 @@ export async function readHits(
             const page = await list({ prefix, limit: 1000, cursor });
             for (const blob of page.blobs) {
                 const hit = parseHitPathname(blob.pathname);
-                if (hit) forDay.push(hit);
+                // The URL is not derivable from the pathname, so it is taken
+                // here, where the listing still has it.
+                if (hit) forDay.push(blob.url ? { ...hit, url: blob.url } : hit);
             }
             cursor = page.hasMore ? page.cursor : undefined;
             pages += 1;
@@ -269,6 +282,20 @@ const USER_AGENT_READ_CONCURRENCY = 10;
 const USER_AGENT_READ_TIMEOUT_MS = 3000;
 
 /**
+ * A hard ceiling on the whole read phase.
+ *
+ * The per-read abort was supposed to be enough and was not: in production the
+ * endpoint hung indefinitely and the dashboard never left "Loading…", which is
+ * a worse failure than the missing user-agents it was added to explain. A
+ * per-read bound only holds if every read reaches the point where the bound
+ * applies. This one does not depend on that — whatever has not finished by now
+ * is abandoned, the rows that did resolve are returned, and the report says
+ * what happened. A page that answers with partial data beats a page that never
+ * answers.
+ */
+const USER_AGENT_READ_DEADLINE_MS = 6000;
+
+/**
  * What happened while reading bodies.
  *
  * This exists because of a production failure that this module was built to
@@ -284,6 +311,7 @@ const USER_AGENT_READ_TIMEOUT_MS = 3000;
 export interface UserAgentReadReport {
     attempted: number;
     resolved: number;
+    failed: number;
     /** First failure, already redacted by describeError. */
     error?: string;
 }
@@ -329,9 +357,9 @@ function cleanStoredUserAgent(raw: unknown): string | undefined {
  */
 type ReadResult = { ok: true; userAgent?: string } | { ok: false; error: string };
 
-async function readStoredUserAgent(pathname: string): Promise<ReadResult> {
+async function readStoredUserAgent(target: string): Promise<ReadResult> {
     try {
-        const result = await get(pathname, {
+        const result = await get(target, {
             access: 'private',
             abortSignal: AbortSignal.timeout(USER_AGENT_READ_TIMEOUT_MS),
         });
@@ -363,7 +391,7 @@ async function readStoredUserAgent(pathname: string): Promise<ReadResult> {
  */
 export async function attachUserAgents(
     hits: StoredHit[],
-    report: UserAgentReadReport = { attempted: 0, resolved: 0 },
+    report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 },
 ): Promise<CrawlerHit[]> {
     const slice = hits.slice(0, MAX_USER_AGENT_READS);
     const out: CrawlerHit[] = slice.map(({ at, path, family, category }) => ({
@@ -378,24 +406,42 @@ export async function attachUserAgents(
     // A work-stealing pool: each worker takes the next unclaimed index, so a
     // slow read delays only itself rather than a whole fixed-size batch.
     let next = 0;
+    let stopped = false;
     const worker = async () => {
         for (let i = next++; i < slice.length; i = next++) {
+            if (stopped) return;
             report.attempted += 1;
-            const result = await readStoredUserAgent(slice[i].pathname);
+            const result = await readStoredUserAgent(slice[i].url ?? slice[i].pathname);
             if (result.ok) {
                 if (result.userAgent !== undefined) {
                     report.resolved += 1;
                     out[i] = { ...out[i], userAgent: result.userAgent };
                 }
-            } else if (report.error === undefined) {
-                report.error = result.error;
+            } else {
+                report.failed += 1;
+                if (report.error === undefined) report.error = result.error;
             }
         }
     };
 
-    await Promise.all(
+    const workers = Promise.all(
         Array.from({ length: Math.min(USER_AGENT_READ_CONCURRENCY, slice.length) }, worker),
-    );
+    ).then(() => 'done' as const);
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const deadline = new Promise<'deadline'>((resolve) => {
+        timer = setTimeout(() => resolve('deadline'), USER_AGENT_READ_DEADLINE_MS);
+    });
+
+    const outcome = await Promise.race([workers, deadline]);
+    if (timer) clearTimeout(timer);
+
+    if (outcome === 'deadline') {
+        // Left set so in-flight workers stop taking new rows; the ones already
+        // awaiting a response are simply no longer waited on.
+        stopped = true;
+        if (report.error === undefined) report.error = 'deadline-exceeded';
+    }
 
     return out;
 }

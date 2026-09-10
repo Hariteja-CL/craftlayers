@@ -31,7 +31,7 @@ interface Stats {
     topPages: { path: string; count: number }[];
     recent: { at: number; path: string; family: string; category: Category; userAgent?: string }[];
     firstSeen: number | null;
-    userAgentRead?: { attempted: number; resolved: number; error?: string };
+    userAgentRead?: { attempted: number; resolved: number; failed: number; error?: string };
 }
 
 function formatWhen(ms: number): string {
@@ -295,9 +295,12 @@ function TrackerBody() {
                     fact about the traffic, the other is a broken read path. */}
                 {userAgentRead?.error && (
                     <p className="mb-4 cl-text-100 cl-text-neutral-text-medium-contrast border-l-2 cl-border-semantic-warning-border pl-3">
-                        User-agents could not be read for these rows
-                        {userAgentRead.resolved > 0 && ` (${userAgentRead.resolved} of ${userAgentRead.attempted} succeeded)`}
-                        . The store reported: <code>{userAgentRead.error}</code>
+                        User-agents were read for {userAgentRead.resolved} of{' '}
+                        {userAgentRead.attempted} rows
+                        {userAgentRead.failed > 0 && `, ${userAgentRead.failed} failed`}. The store
+                        reported: <code>{userAgentRead.error}</code>
+                        {userAgentRead.error === 'deadline-exceeded' &&
+                            ' — reads were still running when the page had to answer.'}
                     </p>
                 )}
                 {recent.length === 0 ? (

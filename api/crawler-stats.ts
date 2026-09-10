@@ -124,7 +124,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // recent slice pays for Blob body fetches, and only to recover the
         // user-agent — which is the one field a pathname cannot carry, and the
         // only thing that can identify an unrecognised bot.
-        const userAgentRead: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const userAgentRead: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
         const recent = await attachUserAgents(hits.slice(0, RECENT_COUNT), userAgentRead);
         return res
             .status(200)
