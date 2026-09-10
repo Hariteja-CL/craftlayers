@@ -221,10 +221,20 @@ export function getCases(ids: readonly EvidenceCaseId[]): EvidenceCase[] {
 }
 
 /**
- * The two strongest cases, in reading order. Drives "Start here" on the
- * homepage. Deliberately two: a third would dilute rather than add.
+ * The three primary cases, in reading order. Drives "Start here" on the
+ * homepage.
+ *
+ * This was deliberately two, on the reasoning that a third would dilute
+ * rather than add. It did the opposite. The design-system case is the only
+ * one of the three that evidences systems and implementation work, so leaving
+ * it off put a whole capability behind a second click — and the hero already
+ * names design-system governance as one of three things to look at.
  */
-export const START_HERE_IDS: EvidenceCaseId[] = ['respondent-experience', 'dashboard-explainability'];
+export const START_HERE_IDS: EvidenceCaseId[] = [
+    'respondent-experience',
+    'dashboard-explainability',
+    'design-system',
+];
 
 /**
  * The four situations Hari is usually brought in for, each tied to the case
