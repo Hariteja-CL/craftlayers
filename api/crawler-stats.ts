@@ -10,7 +10,13 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { hasValidSession } from './_lib/session.js';
-import { attachUserAgents, isStoreConfigured, readHits, type CrawlerHit } from './_lib/crawlerStore.js';
+import {
+    attachUserAgents,
+    isStoreConfigured,
+    readHits,
+    type CrawlerHit,
+    type UserAgentReadReport,
+} from './_lib/crawlerStore.js';
 import type { CrawlerCategory } from './_lib/crawlers.js';
 
 /** How many rows to read. Bounds cost and response size; the view only ever
@@ -31,6 +37,13 @@ export interface CrawlerStats {
     topPages: { path: string; count: number }[];
     recent: CrawlerHit[];
     firstSeen: number | null;
+    /**
+     * How the user-agent body reads went. Present only when bodies were read,
+     * so the dashboard can tell "no crawler sent a user-agent" apart from
+     * "the store refused every read" — which are indistinguishable from the
+     * rows alone, and were, in production.
+     */
+    userAgentRead?: UserAgentReadReport;
 }
 
 function tally<T extends string>(counts: Map<T, number>, key: T): void {
@@ -111,10 +124,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // recent slice pays for Blob body fetches, and only to recover the
         // user-agent — which is the one field a pathname cannot carry, and the
         // only thing that can identify an unrecognised bot.
-        const recent = await attachUserAgents(hits.slice(0, RECENT_COUNT));
+        const userAgentRead: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const recent = await attachUserAgents(hits.slice(0, RECENT_COUNT), userAgentRead);
         return res
             .status(200)
-            .json({ configured: true, ...summarise(hits), recent } satisfies CrawlerStats);
+            .json({ configured: true, ...summarise(hits), recent, userAgentRead } satisfies CrawlerStats);
     } catch {
         return res.status(502).json({ error: 'Could not read crawler store' });
     }

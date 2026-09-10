@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
 import { DashboardGate } from '../components/auth/DashboardGate';
+import {
+    CATEGORY_LABELS,
+    nextSort,
+    sortFamilies,
+    type Category,
+    type FamilyColumn,
+    type FamilyRow,
+    type SortDirection,
+} from './crawlerSort';
 
 /**
  * Internal crawler tracker.
@@ -15,8 +24,6 @@ import { DashboardGate } from '../components/auth/DashboardGate';
  * language, so the tables below cannot be misread as proof of identity.
  */
 
-type Category = 'search' | 'ai' | 'social' | 'monitoring' | 'unknown';
-
 interface Stats {
     configured: boolean;
     totals: { requests: number; families: number; byCategory: Record<Category, number> };
@@ -24,15 +31,8 @@ interface Stats {
     topPages: { path: string; count: number }[];
     recent: { at: number; path: string; family: string; category: Category; userAgent?: string }[];
     firstSeen: number | null;
+    userAgentRead?: { attempted: number; resolved: number; error?: string };
 }
-
-const CATEGORY_LABELS: Record<Category, string> = {
-    search: 'Search crawler',
-    ai: 'AI crawler',
-    social: 'Social / link preview',
-    monitoring: 'Monitoring / tooling',
-    unknown: 'Unknown bot',
-};
 
 function formatWhen(ms: number): string {
     return new Date(ms).toLocaleString(undefined, {
@@ -92,6 +92,102 @@ function UserAgent({ value, prominent }: { value: string; prominent: boolean }) 
     );
 }
 
+/**
+ * Sortable column header.
+ *
+ * The sort state is announced through aria-sort rather than implied by the
+ * arrow alone, and the arrow is text, not colour — the same rule the category
+ * tags follow. The whole header is the control, so the hit target matches what
+ * a person is aiming at.
+ */
+function SortHeader<K extends string>({
+    column,
+    label,
+    active,
+    direction,
+    onSort,
+}: {
+    column: K;
+    label: string;
+    active: boolean;
+    direction: SortDirection;
+    onSort: (column: K) => void;
+}) {
+    return (
+        <th
+            scope="col"
+            aria-sort={active ? (direction === 'asc' ? 'ascending' : 'descending') : 'none'}
+            className="py-2 pr-4 font-medium"
+        >
+            <button
+                type="button"
+                onClick={() => onSort(column)}
+                className={
+                    'group inline-flex items-baseline gap-1.5 cl-focus-ring rounded transition-colors ' +
+                    (active
+                        ? 'cl-text-neutral-text-high-contrast'
+                        : 'cl-text-neutral-text-low-contrast hover:cl-text-neutral-text-medium-contrast')
+                }
+            >
+                {label}
+                <span aria-hidden="true" className={active ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'}>
+                    {active && direction === 'asc' ? '↑' : '↓'}
+                </span>
+            </button>
+        </th>
+    );
+}
+
+function FamiliesTable({ families }: { families: FamilyRow[] }) {
+    const [sort, setSort] = useState<{ column: FamilyColumn; direction: SortDirection }>({
+        column: 'count',
+        direction: 'desc',
+    });
+    const { column, direction } = sort;
+
+    const rows = sortFamilies(families, column, direction);
+
+    const header = (key: FamilyColumn, label: string) => (
+        <SortHeader
+            column={key}
+            label={label}
+            active={column === key}
+            direction={direction}
+            onSort={(clicked) => setSort((s) => nextSort(s, clicked))}
+        />
+    );
+
+    return (
+        <div className="overflow-x-auto">
+            <table className="w-full cl-text-100 text-left">
+                <caption className="sr-only">
+                    Crawler families, sortable by name, category, request count and last seen.
+                </caption>
+                <thead>
+                    <tr className="border-b cl-border-border-color-default">
+                        {header('family', 'Family (claimed)')}
+                        {header('category', 'Category')}
+                        {header('count', 'Requests')}
+                        {header('lastSeen', 'Last seen')}
+                    </tr>
+                </thead>
+                <tbody className="cl-text-neutral-text-medium-contrast">
+                    {rows.map((f) => (
+                        <tr key={f.family} className="border-t cl-border-border-color-default">
+                            <td className="py-2 pr-4 cl-text-neutral-text-high-contrast">{f.family}</td>
+                            <td className="py-2 pr-4">
+                                <CategoryTag category={f.category} />
+                            </td>
+                            <td className="py-2 pr-4 tabular-nums">{f.count}</td>
+                            <td className="py-2 whitespace-nowrap tabular-nums">{formatWhen(f.lastSeen)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
     return (
         <section className="mb-10">
@@ -139,7 +235,7 @@ function TrackerBody() {
         );
     }
 
-    const { totals, families, topPages, recent, firstSeen } = stats;
+    const { totals, families, topPages, recent, firstSeen, userAgentRead } = stats;
     const unknown = families.filter((f) => f.category === 'unknown');
 
     return (
@@ -155,28 +251,7 @@ function TrackerBody() {
                 {families.length === 0 ? (
                     <Empty>No crawler requests recorded yet.</Empty>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full cl-text-100 text-left">
-                            <thead className="cl-text-neutral-text-low-contrast">
-                                <tr>
-                                    <th className="py-2 pr-4 font-medium">Family (claimed)</th>
-                                    <th className="py-2 pr-4 font-medium">Category</th>
-                                    <th className="py-2 pr-4 font-medium">Requests</th>
-                                    <th className="py-2 font-medium">Last seen</th>
-                                </tr>
-                            </thead>
-                            <tbody className="cl-text-neutral-text-medium-contrast">
-                                {families.map((f) => (
-                                    <tr key={f.family} className="border-t cl-border-border-color-default">
-                                        <td className="py-2 pr-4 cl-text-neutral-text-high-contrast">{f.family}</td>
-                                        <td className="py-2 pr-4"><CategoryTag category={f.category} /></td>
-                                        <td className="py-2 pr-4">{f.count}</td>
-                                        <td className="py-2 whitespace-nowrap">{formatWhen(f.lastSeen)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <FamiliesTable families={families} />
                 )}
             </Section>
 
@@ -214,6 +289,17 @@ function TrackerBody() {
             </Section>
 
             <Section title="Recent activity">
+                {/* Said plainly when it happens. A store that refuses every body
+                    read produces exactly the same rows as fifty crawlers that
+                    sent no user-agent, and the difference matters: one is a
+                    fact about the traffic, the other is a broken read path. */}
+                {userAgentRead?.error && (
+                    <p className="mb-4 cl-text-100 cl-text-neutral-text-medium-contrast border-l-2 cl-border-semantic-warning-border pl-3">
+                        User-agents could not be read for these rows
+                        {userAgentRead.resolved > 0 && ` (${userAgentRead.resolved} of ${userAgentRead.attempted} succeeded)`}
+                        . The store reported: <code>{userAgentRead.error}</code>
+                    </p>
+                )}
                 {recent.length === 0 ? (
                     <Empty>Nothing recorded yet.</Empty>
                 ) : (
