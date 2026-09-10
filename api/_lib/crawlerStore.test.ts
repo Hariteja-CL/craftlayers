@@ -727,9 +727,9 @@ describe('attachUserAgents — read report', () => {
 
     it('counts what it attempted and what it resolved', async () => {
         stubGet(() => okBody('SomeBot/1.0'));
-        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
         await attachUserAgents([stored(0), stored(1), stored(2)], report);
-        expect(report).toEqual({ attempted: 3, resolved: 3 });
+        expect(report).toEqual({ attempted: 3, resolved: 3, failed: 0 });
         expect(report.error).toBeUndefined();
     });
 
@@ -738,7 +738,7 @@ describe('attachUserAgents — read report', () => {
         stubGet(() => {
             throw new Error('Access denied');
         });
-        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
         const rows = await attachUserAgents(Array.from({ length: 50 }, (_, i) => stored(i)), report);
         expect(rows.every((r) => r.userAgent === undefined)).toBe(true);
         expect(report.attempted).toBe(50);
@@ -755,7 +755,7 @@ describe('attachUserAgents — read report', () => {
             if (/%2Fr\d*[13579]\.json$/.test(pathname)) throw new Error('transient');
             return okBody('SomeBot/1.0');
         });
-        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
         const rows = await attachUserAgents(Array.from({ length: 20 }, (_, i) => stored(i)), report);
         expect(report.attempted).toBe(20);
         expect(report.resolved).toBe(10);
@@ -764,7 +764,7 @@ describe('attachUserAgents — read report', () => {
 
     it('distinguishes a missing object from a rejected read', async () => {
         stubGet(() => null);
-        const report: UserAgentReadReport = { attempted: 0, resolved: 0 };
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
         await attachUserAgents([stored(0)], report);
         expect(report.error).toBe('not-found');
     });
@@ -774,5 +774,143 @@ describe('attachUserAgents — read report', () => {
         stubGet(() => okBody('SomeBot/1.0'));
         const rows = await attachUserAgents([stored(0)]);
         expect(rows[0].userAgent).toBe('SomeBot/1.0');
+    });
+});
+
+/**
+ * The two production failures, as tests.
+ *
+ * Neither was hypothetical. After PR #113 shipped, no row on the live
+ * dashboard carried a user-agent; after PR #115 added diagnostics, the
+ * endpoint stopped answering at all and the page sat on "Loading…" — a worse
+ * failure than the one the diagnostics were added to explain.
+ */
+describe('attachUserAgents — production regressions', () => {
+    const stored = (i: number, url?: string): StoredHit => ({
+        at: 3000 + i,
+        path: `/x${i}`,
+        family: 'Unrecognised bot',
+        category: 'unknown',
+        // The literal percent-escapes are the point: these are what the store
+        // actually holds, and what get() interpolates into a URL unencoded.
+        pathname: `crawlers/2026-09-09/${3000 + i}-cc33dd__unknown__Unrecognised%20bot__%2Fblog.json`,
+        ...(url ? { url } : {}),
+    });
+
+    const okBody = (ua: string) => ({
+        statusCode: 200,
+        stream: new Response(JSON.stringify({ ua })).body,
+        headers: new Headers(),
+        blob: {},
+    });
+
+    beforeEach(() => {
+        process.env.BLOB_READ_WRITE_TOKEN = 'test-token';
+        mockGet.mockReset();
+    });
+
+    afterEach(() => {
+        delete process.env.BLOB_READ_WRITE_TOKEN;
+    });
+
+    /**
+     * `get()` builds its request URL by interpolating the pathname into a
+     * template with no encoding at all:
+     *
+     *     `https://${storeId}.${access}.blob.vercel-storage.com/${pathname}`
+     *
+     * These pathnames carry their own percent-escapes, so who decodes them is
+     * ambiguous. The listing already hands back a canonical URL; use it.
+     */
+    it('reads by the canonical URL from the listing, not the pathname', async () => {
+        const url = 'https://store123.private.blob.vercel-storage.com/crawlers/2026-09-09/x.json';
+        const seen: string[] = [];
+        mockGet.mockImplementation((async (target: string) => {
+            seen.push(target);
+            return okBody('SomeBot/1.0');
+        }) as unknown as typeof get);
+
+        await attachUserAgents([stored(0, url)]);
+        expect(seen).toEqual([url]);
+        expect(seen[0]).not.toContain('%2F');
+    });
+
+    /** Rows written before the listing URL was carried still have to work. */
+    it('falls back to the pathname when the listing gave no URL', async () => {
+        const seen: string[] = [];
+        mockGet.mockImplementation((async (target: string) => {
+            seen.push(target);
+            return okBody('SomeBot/1.0');
+        }) as unknown as typeof get);
+
+        await attachUserAgents([stored(0)]);
+        expect(seen[0]).toBe(stored(0).pathname);
+    });
+
+    it('never puts the internal URL on a returned row', async () => {
+        mockGet.mockImplementation((async () => okBody('SomeBot/1.0')) as unknown as typeof get);
+        const out = await attachUserAgents([
+            stored(0, 'https://store123.private.blob.vercel-storage.com/a.json'),
+        ]);
+        expect(out[0]).not.toHaveProperty('url');
+        expect(out[0]).not.toHaveProperty('pathname');
+        expect(JSON.stringify(out)).not.toContain('blob.vercel-storage.com');
+    });
+
+    /**
+     * The failure that broke the dashboard. A read that never settles ignores
+     * its own per-read abort, so the ceiling cannot depend on the read
+     * cooperating. Partial data beats no answer.
+     */
+    it('returns within the deadline even when every read hangs forever', async () => {
+        mockGet.mockImplementation((() => new Promise(() => {})) as unknown as typeof get);
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
+
+        const started = Date.now();
+        const out = await attachUserAgents(
+            Array.from({ length: 50 }, (_, i) => stored(i)),
+            report,
+        );
+        const elapsed = Date.now() - started;
+
+        expect(out).toHaveLength(50);
+        expect(out.every((r) => r.userAgent === undefined)).toBe(true);
+        expect(report.error).toBe('deadline-exceeded');
+        // Comfortably under any serverless function limit.
+        expect(elapsed).toBeLessThan(9000);
+    }, 15000);
+
+    /** A slow store should still contribute whatever it managed to return. */
+    it('keeps the rows that resolved before the deadline', async () => {
+        mockGet.mockImplementation((async (target: string) => {
+            if (target.includes('3000-')) return okBody('FastBot/1.0');
+            return new Promise(() => {});
+        }) as unknown as typeof get);
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
+
+        const out = await attachUserAgents(
+            Array.from({ length: 20 }, (_, i) => stored(i)),
+            report,
+        );
+
+        expect(out[0].userAgent).toBe('FastBot/1.0');
+        expect(report.resolved).toBe(1);
+        expect(report.error).toBe('deadline-exceeded');
+    }, 15000);
+
+    /** A thrown BlobError is what a real 404 looks like — get() throws rather
+     *  than returning null for any non-200. */
+    it('counts failures and reports the first error', async () => {
+        mockGet.mockImplementation((async () => {
+            throw new Error('Vercel Blob: Not found');
+        }) as unknown as typeof get);
+        const report: UserAgentReadReport = { attempted: 0, resolved: 0, failed: 0 };
+
+        await attachUserAgents(Array.from({ length: 6 }, (_, i) => stored(i)), report);
+
+        expect(report.attempted).toBe(6);
+        expect(report.failed).toBe(6);
+        expect(report.resolved).toBe(0);
+        expect(report.error).toMatch(/Not found/);
     });
 });
