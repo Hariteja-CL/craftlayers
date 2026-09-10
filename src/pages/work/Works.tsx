@@ -18,6 +18,7 @@ import { getCases, type EvidenceCase } from '../../data/evidence';
 function toCard(c: EvidenceCase): WorkCardProps {
     return {
         title: c.title,
+        productContext: c.productContext,
         problem: c.problem,
         contribution: c.contribution,
         method: c.method,

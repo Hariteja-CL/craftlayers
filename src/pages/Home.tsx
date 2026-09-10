@@ -130,27 +130,45 @@ export function Home() {
                 <Section
                     eyebrow="02 · Selected evidence"
                     title="Start here"
-                    intro="If you want to understand how I approach complex product problems, start with these two cases. Both are written up in full, including what the evidence did and did not support."
+                    intro="Three cases, in reading order: finding the real problem, making complex data readable, and keeping one decision consistent across three products."
                 >
                     <div className="grid gap-5 md:grid-cols-2">
-                        {/* Contribution and Method are deliberately not passed here.
-                            The homepage card answers "why should I open this?" — the
-                            case study itself answers "what exactly did you do?".
-                            Both fields stay in the evidence library and still render
-                            on /work and /for/:slug. */}
-                        {getCases(START_HERE_IDS).map((c) => (
-                            <WorkCard
+                        {/* Contribution IS passed now. It was previously withheld on
+                            the reasoning that the card answers "why open this?" and the
+                            case answers "what did you do?" — but that left a recruiter
+                            unable to judge ownership without committing to a 7-minute
+                            read, and /work (the lower-intent page) was showing more than
+                            the homepage. Method still stays on /work: it is useful when
+                            comparing cases side by side, not when deciding to open one. */}
+                        {getCases(START_HERE_IDS).map((c, i, arr) => (
+                            /* With an odd number of cards the last one would sit
+                               alone at half width, which reads as a gap rather
+                               than as a third case. The system story is last and
+                               is a different kind of entry — /work already files
+                               it under its own heading — so letting it run the
+                               full width reads as hierarchy instead. */
+                            <div
                                 key={c.id}
-                                title={c.title}
-                                problem={c.problem}
-                                status={c.status}
-                                confidentiality={c.confidentiality}
-                                evidenceLabel={c.evidenceLabel}
-                                evidenceSummary={c.evidenceSummary}
-                                readTime={c.readTime}
-                                cta="See the decision story"
-                                href={c.href}
-                            />
+                                className={
+                                    arr.length % 2 === 1 && i === arr.length - 1
+                                        ? 'md:col-span-2'
+                                        : undefined
+                                }
+                            >
+                                <WorkCard
+                                    title={c.title}
+                                    productContext={c.productContext}
+                                    problem={c.problem}
+                                    contribution={c.contribution}
+                                    status={c.status}
+                                    confidentiality={c.confidentiality}
+                                    evidenceLabel={c.evidenceLabel}
+                                    evidenceSummary={c.evidenceSummary}
+                                    readTime={c.readTime}
+                                    cta="See the decision story"
+                                    href={c.href}
+                                />
+                            </div>
                         ))}
                     </div>
                     <Link
