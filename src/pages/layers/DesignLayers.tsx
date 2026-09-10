@@ -31,13 +31,16 @@ import { ArrowRight } from 'lucide-react';
  * live nowhere in this file. When the protected layer is built, that is the
  * content it takes — none of it has to be recovered from git first.
  *
- * PROVENANCE NOTE. The product context here (EnCulture at NHR Technologies,
- * governing Assessments, Multi-Rater and Culture Intelligence) matches the
- * evidence library and the homepage card. The previous version of this page
- * carried no product context at all and closed by saying CraftLayers was the
- * primary consumer of the system. Those are different claims; this page now
- * states the approved one, and keeps the part of the old caveat that is
- * independently true — nothing here is a measured organisational outcome.
+ * PROVENANCE. The product context — EnCulture at NHR Technologies, governing
+ * Assessments, Multi-Rater and Culture Intelligence — is the confirmed source
+ * of truth, and it matches the evidence library and the homepage card word for
+ * word. An earlier version of this page named no product at all and described
+ * a different consumer for the system; that wording was confirmed stale on
+ * 2026-09-10 and removed. If it resurfaces anywhere, it is wrong.
+ *
+ * What survives from the old caveat is the half that is independently true and
+ * unaffected by that correction: nothing on this page is a measured
+ * organisational outcome, and none is claimed.
  */
 
 const PROSE = 'text-[17px] md:text-lg leading-[1.75] cl-text-neutral-text-medium-contrast max-w-[65ch]';
