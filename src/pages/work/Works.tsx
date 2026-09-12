@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { WorkCard, type WorkCardProps } from '../../components/work/WorkCard';
-import { getCases, type EvidenceCase } from '../../data/evidence';
+import {
+    DashboardHero,
+    DesignSystemHero,
+    RespondentHero,
+} from '../../components/work/CaseHeroes';
+import { getCases, type EvidenceCase, type EvidenceCaseId } from '../../data/evidence';
 
 /**
  * Work — three clearly separated categories.
@@ -14,21 +19,36 @@ import { getCases, type EvidenceCase } from '../../data/evidence';
  * same cases on the homepage, which is exactly the drift the library prevents.
  */
 
-/** Evidence-library entry to card props. Earlier work is not in the library. */
+/** Which hero belongs to which case. Kept beside the cards rather than in the
+ *  evidence library: the library describes the work, not how a page pictures
+ *  it. Earlier experiments deliberately have none — a hero on every entry
+ *  would flatten the hierarchy between flagship work and experiments. */
+const CASE_HERO: Partial<Record<EvidenceCaseId, React.ReactNode>> = {
+    'respondent-experience': <RespondentHero />,
+    'dashboard-explainability': <DashboardHero />,
+    'design-system': <DesignSystemHero />,
+};
+
+/**
+ * Evidence-library entry to card props. Earlier work is not in the library.
+ *
+ * Contribution, method, product context and evidence summary are no longer
+ * passed to a card that has a hero: with a visual on top, nine text blocks
+ * underneath turn the card back into the article preview the hero was added to
+ * replace. Every one of those fields is still in the library and still renders
+ * on the case pages.
+ */
 function toCard(c: EvidenceCase): WorkCardProps {
     return {
         title: c.title,
-        productContext: c.productContext,
         problem: c.problem,
-        contribution: c.contribution,
-        method: c.method,
         status: c.status,
-        confidentiality: c.confidentiality,
         evidenceLabel: c.evidenceLabel,
-        evidenceSummary: c.evidenceSummary,
         readTime: c.readTime,
         cta: 'See the decision story',
         href: c.href,
+        hero: CASE_HERO[c.id],
+        cardLine: c.cardLine,
     };
 }
 
