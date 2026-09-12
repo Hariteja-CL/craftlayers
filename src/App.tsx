@@ -25,6 +25,7 @@ import { CrawlerTracker } from './pages/CrawlerTracker';
 import { Works } from './pages/work/Works';
 import { RespondentExperience } from './pages/work/RespondentExperience';
 import { DashboardExplainability } from './pages/work/DashboardExplainability';
+import { DesignSystemGovernance } from './pages/work/DesignSystemGovernance';
 import { Governance } from './pages/work/Governance';
 import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/work/respondent-experience" element={<RespondentExperience />} />
           <Route path="/work/dashboard-explainability" element={<DashboardExplainability />} />
           <Route path="/work/design" element={<DesignLayers />} />
+          <Route path="/work/design-system-governance" element={<DesignSystemGovernance />} />
 
           <Route path="/work/architecturing-governance" element={<ArchitecturingGovernance />} />
           <Route path="/work/ai" element={<AILayers />} />

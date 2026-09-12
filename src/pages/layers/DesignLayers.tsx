@@ -260,19 +260,29 @@ export function DesignLayers() {
                     route — there is no access flow yet and this page does not
                     pretend otherwise. The list here is also the manifest for the
                     protected layer when it is built. */}
-                <Section id="deeper" label="08 · Going deeper" title="The detailed case study">
+                <Section id="deeper" label="08 · Going deeper" title="How the thinking got here">
                     <p className={PROSE}>
-                        The full model behind this — the rule anatomy, the implementation chain, the token
-                        architecture, the AI constraints and the review procedures — includes internal product
-                        material. Detailed project evidence is available for hiring and review conversations.
+                        The long version is a field note: how my thinking about design systems changed while
+                        working through AI-assisted product development — reading my own system the way a machine
+                        would, why the first assumption failed, and how the rules ended up leaving Figma.
                     </p>
-                    <div className="mt-7">
+                    <p className={`${PROSE} mt-5`}>
+                        It is written generically, without product or client specifics. Detailed project evidence
+                        beyond that remains available for hiring and review conversations.
+                    </p>
+                    <div className="mt-7 flex flex-wrap gap-3">
                         <Link
-                            to="/contact"
+                            to="/work/design-system-governance"
                             className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[15px] font-semibold cl-bg-brand-primary-base cl-text-white hover:cl-bg-brand-primary-interaction transition-colors cl-focus-ring"
                         >
-                            Get in touch
+                            Read the field note
                             <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className="inline-flex items-center gap-2 rounded-xl border cl-border-border-color-strong px-5 py-3 text-[15px] font-semibold cl-text-neutral-text-high-contrast hover:cl-bg-neutral-surface-level-2 transition-colors cl-focus-ring"
+                        >
+                            Get in touch
                         </Link>
                     </div>
                 </Section>

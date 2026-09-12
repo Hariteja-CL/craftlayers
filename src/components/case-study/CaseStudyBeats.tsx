@@ -76,16 +76,32 @@ export function Statement({ children, tone = 'neutral' }: { children: React.Reac
  * Points — two to four short supporting lines. Never a paragraph.
  * ------------------------------------------------------------------ */
 
-export function Points({ items, columns = 1 }: { items: React.ReactNode[]; columns?: 1 | 2 }) {
+export function Points({
+    items,
+    columns = 1,
+    ordered = false,
+}: {
+    items: React.ReactNode[];
+    columns?: 1 | 2;
+    /** Numbers instead of bullets, for a sequence where the order is the point. */
+    ordered?: boolean;
+}) {
+    const List = ordered ? 'ol' : 'ul';
     return (
-        <ul className={`mt-7 grid gap-x-10 gap-y-3 ${columns === 2 ? 'sm:grid-cols-2' : ''}`}>
+        <List className={`mt-7 grid gap-x-10 gap-y-3 ${columns === 2 ? 'sm:grid-cols-2' : ''}`}>
             {items.map((item, i) => (
                 <li key={i} className="flex gap-3 text-[16px] leading-relaxed cl-text-neutral-text-medium-contrast">
-                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2.5 shrink-0" />
+                    {ordered ? (
+                        <span aria-hidden="true" className="shrink-0 font-mono text-sm font-bold cl-text-brand-primary-base pt-0.5 w-5">
+                            {i + 1}
+                        </span>
+                    ) : (
+                        <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full cl-bg-brand-primary-base mt-2.5 shrink-0" />
+                    )}
                     <span>{item}</span>
                 </li>
             ))}
-        </ul>
+        </List>
     );
 }
 
@@ -325,6 +341,200 @@ export function NotProven({ headline, items }: { headline: React.ReactNode; item
                     </li>
                 ))}
             </ul>
+        </div>
+    );
+}
+
+/* ------------------------------------------------------------------ *
+ * Fanout — one source, several outcomes.
+ *
+ * Used for the two moments in a story where a single thing produced
+ * divergent results: one colour that could mean three things, and one brand
+ * that produced several different-looking products. The source is the anchor;
+ * the outcomes are deliberately equal in weight, because the point is that
+ * none of them is obviously wrong.
+ * ------------------------------------------------------------------ */
+
+export function Fanout({
+    source,
+    outcomes,
+    tone = 'problem',
+}: {
+    source: { label: string; value: string };
+    outcomes: { name: string; note?: string }[];
+    tone?: Tone;
+}) {
+    return (
+        <div className="grid md:grid-cols-[minmax(0,220px)_1fr] gap-8 md:gap-10 items-center">
+            <div className="rounded-2xl border-2 cl-border-border-color-strong cl-bg-neutral-surface-level-0 px-6 py-7 text-center">
+                <div className={`${MICRO} cl-text-neutral-text-low-contrast mb-2`}>{source.label}</div>
+                <div className="text-xl md:text-2xl font-bold cl-text-neutral-text-high-contrast leading-snug">
+                    {source.value}
+                </div>
+            </div>
+            <ul className="space-y-3">
+                {outcomes.map((o) => (
+                    <li
+                        key={o.name}
+                        style={toneBorder(tone)}
+                        className="border-l-2 pl-4"
+                    >
+                        <span className="block text-lg font-semibold cl-text-neutral-text-high-contrast leading-snug">
+                            {o.name}
+                        </span>
+                        {o.note && (
+                            <span className="block mt-0.5 text-[15px] cl-text-neutral-text-medium-contrast leading-snug">
+                                {o.note}
+                            </span>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+/* ------------------------------------------------------------------ *
+ * Ladder — a chain where each step narrows the one above it.
+ *
+ * Vertical rather than horizontal on purpose: the steps are a descent from
+ * belief to build, not a timeline, and a vertical rule makes the dependency
+ * visible without an arrow graphic that a screen reader would skip.
+ * ------------------------------------------------------------------ */
+
+export function Ladder({ steps }: { steps: { name: string; line?: string }[] }) {
+    return (
+        <ol className="border-l-2 cl-border-border-color-strong pl-6 space-y-5">
+            {steps.map((s, i) => (
+                <li key={s.name} className="relative">
+                    <span
+                        aria-hidden="true"
+                        style={
+                            i === steps.length - 1
+                                ? { backgroundColor: 'var(--cl-color-brand-primary-base)' }
+                                : undefined
+                        }
+                        className={
+                            'absolute -left-[1.92rem] top-2 w-3 h-3 rounded-full border-2 ' +
+                            (i === steps.length - 1
+                                ? 'border-transparent'
+                                : 'cl-border-border-color-strong cl-bg-neutral-surface-level-0')
+                        }
+                    />
+                    <span className="block text-lg font-bold cl-text-neutral-text-high-contrast leading-snug">
+                        {s.name}
+                    </span>
+                    {s.line && (
+                        <span className="block mt-1 text-[15px] cl-text-neutral-text-medium-contrast leading-snug">
+                            {s.line}
+                        </span>
+                    )}
+                </li>
+            ))}
+        </ol>
+    );
+}
+
+/* ------------------------------------------------------------------ *
+ * QuadMap — several things that look alike and must not be confused.
+ *
+ * Each cell carries what it is for and, more importantly, what must never
+ * use it. The prohibition is the half that does the work: a rule without one
+ * is a suggestion.
+ * ------------------------------------------------------------------ */
+
+export function QuadMap({
+    items,
+}: {
+    items: { name: string; role: string; never?: string }[];
+}) {
+    return (
+        <ul className="grid gap-4 sm:grid-cols-2">
+            {items.map((it) => (
+                <li
+                    key={it.name}
+                    className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 p-5"
+                >
+                    <p className={`${MICRO} cl-text-brand-primary-base mb-2`}>{it.name}</p>
+                    <p className="text-[15px] cl-text-neutral-text-high-contrast leading-snug">{it.role}</p>
+                    {it.never && (
+                        <p className="mt-3 pt-3 border-t cl-border-border-color-default text-[14px] cl-text-neutral-text-medium-contrast leading-snug">
+                            <span className="font-bold cl-text-neutral-text-high-contrast">Never: </span>
+                            {it.never}
+                        </p>
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+/* ------------------------------------------------------------------ *
+ * DecisionLoop — a governance rule with a branch, and a way back.
+ *
+ * The branch is the whole point. Most system diagrams show the happy path;
+ * this one exists to make the other path a legitimate, named route rather
+ * than the moment somebody improvises.
+ * ------------------------------------------------------------------ */
+
+export function DecisionLoop({
+    need,
+    question,
+    yesPath,
+    noPath,
+    returns,
+}: {
+    need: string;
+    question: string;
+    yesPath: { label: string; steps: string[] };
+    noPath: { label: string; steps: string[] };
+    returns: string;
+}) {
+    const branch = (
+        path: { label: string; steps: string[] },
+        tone: Tone,
+    ) => (
+        <div
+            style={toneBorder(tone)}
+            className="rounded-2xl border-2 cl-bg-neutral-surface-level-0 p-5"
+        >
+            <p className={`${MICRO} cl-text-neutral-text-high-contrast mb-3`}>{path.label}</p>
+            <ol className="space-y-2">
+                {path.steps.map((s) => (
+                    <li key={s} className="text-[15px] cl-text-neutral-text-medium-contrast leading-snug">
+                        {s}
+                    </li>
+                ))}
+            </ol>
+        </div>
+    );
+
+    return (
+        <div className="space-y-5">
+            <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-0 p-5">
+                <p className={`${MICRO} cl-text-neutral-text-low-contrast mb-1.5`}>Start</p>
+                <p className="text-[15px] font-semibold cl-text-neutral-text-high-contrast">{need}</p>
+            </div>
+
+            <div
+                style={{ borderColor: 'var(--cl-color-brand-primary-base)' }}
+                className="rounded-2xl border-2 cl-bg-neutral-surface-level-0 p-5"
+            >
+                <p className={`${MICRO} cl-text-brand-primary-base mb-1.5`}>The question</p>
+                <p className="text-lg font-semibold cl-text-neutral-text-high-contrast leading-snug">
+                    {question}
+                </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+                {branch(yesPath, 'suggestion')}
+                {branch(noPath, 'insight')}
+            </div>
+
+            <div className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-5">
+                <p className={`${MICRO} cl-text-neutral-text-low-contrast mb-1.5`}>Either way</p>
+                <p className="text-[15px] font-semibold cl-text-neutral-text-high-contrast">{returns}</p>
+            </div>
         </div>
     );
 }
