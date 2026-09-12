@@ -109,13 +109,13 @@ const OWNERSHIP: {
         group: 'Design systems',
         handles: 'Tokens, components, interaction states, naming and the rules that hold them together.',
         outcome: 'Teams build consistently as the product and the team grow.',
-        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+        evidence: { label: 'From Figma Library to Executable Product Rules', href: '/work/design' },
     },
     {
         group: 'AI-enabled product workflows',
         handles: 'AI-assisted research, synthesis, documentation and concept development.',
         outcome: 'Delivery speeds up without losing human review of what ships.',
-        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+        evidence: { label: 'From Figma Library to Executable Product Rules', href: '/work/design' },
     },
     {
         group: 'Accessibility',
@@ -133,7 +133,7 @@ const OWNERSHIP: {
         group: 'Implementation alignment',
         handles: 'Developer handoff — turning decisions into rules, states and edge cases engineers can build from.',
         outcome: 'What ships matches what was decided.',
-        evidence: { label: 'Turning Design Decisions into Implementation Rules', href: '/work/design' },
+        evidence: { label: 'From Figma Library to Executable Product Rules', href: '/work/design' },
     },
 ];
 

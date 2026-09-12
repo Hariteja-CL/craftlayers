@@ -22,7 +22,7 @@ import {
 import {
     BigMetric,
     CaseMeta,
-    EvidenceBlock,
+    Compare,
     NotProven,
     Panel,
     Points,
@@ -35,23 +35,39 @@ import { ArrowRight } from 'lucide-react';
 /**
  * /work/dashboard-explainability — the public case.
  *
- * Built as visual beats rather than as a document. Each section is a diagram,
- * one strong statement, and two to four short points; the prose supports that
- * structure instead of carrying the story alone.
+ * Shape: this happened → who was reading it → what I observed → what that
+ * changed → what I designed → what was and was not implemented → what is still
+ * unknown. Deliberately not the same structure as /work/respondent-experience;
+ * the two share clarity, not a template.
  *
- * The test this is written against: hide every paragraph, and the headings,
- * diagrams and callouts alone should still say what the product is, what was
- * wrong, what was decided, what changed and what is not proven.
+ * HIERARCHY — the thing most likely to erode in a later edit.
  *
- * Section numbering is gone. The jump nav already handles navigation, and
- * "01 ·" on every heading was most of what made the page feel like
- * documentation.
+ *   1. Read → Interpret → Trust → Act is the primary story model.
+ *   2. "Trust is created through inspectability" is the primary insight.
+ *   3. The four explanation rules SUPPORT the model. They are deliberately not
+ *      numbered, not headed, and not given equal billing — promoting them into
+ *      a second framework is the failure mode this comment exists to prevent.
+ *      "Disclose detail on demand" cuts across all four rather than being a
+ *      fifth of the same kind.
+ *   4. "One metric, one insight, one next action" is a component-level rule and
+ *      sits inside a paragraph, not on a heading.
+ *
+ * The two story anchors are the relationship manager and the 72. Everything
+ * else is support.
+ *
+ * SOURCE. The dashboard-explainability knowledge base
+ * (Craftlayers V2/Hariteja Knowledge base/case-study-dashboard-explainability.md)
+ * and the copy approved on 2026-09-12. The author is the source of truth for
+ * this story; do not reinterpret it from other material.
  *
  * NOTHING REAL IS SHOWN. Every figure is a reconstruction on synthetic data —
- * no client value, formula or threshold appears. The operating detail (card
- * hierarchy rules, colour-role model, evidence-to-decision trace,
- * recommendation traceability, implementation status) is named in the closing
- * section and lives nowhere in this file.
+ * no client value, formula or threshold appears. The 72 is illustrative.
+ *
+ * STATUS LANGUAGE IS EXACT. The implementation table uses the approved wording:
+ * accepted design direction / implemented design solution / not formally
+ * measured. Do not soften these into "positive feedback" or "informed later
+ * work", and do not add an item whose status the record marks as unverified —
+ * the export item is omitted for exactly that reason.
  */
 
 /** Hero — an abstract reporting surface, not a product screenshot. Built from
@@ -102,31 +118,89 @@ const CALLOUTS = [
 ];
 
 const STAGES = [
-    { name: 'Read', line: 'I can see the metric.' },
-    { name: 'Interpret', line: 'I understand how it was produced.' },
-    { name: 'Trust', line: 'I can inspect the reasoning.', pivot: 'The stage that was missing' },
-    { name: 'Act', line: 'I know what I can do next.' },
+    { name: 'Read', line: 'What am I seeing?' },
+    { name: 'Interpret', line: 'What does it mean?' },
+    { name: 'Trust', line: 'Can I inspect how this was produced?', pivot: 'The stage that was missing' },
+    { name: 'Act', line: 'What should happen next?' },
 ];
 
+/** The four explanation rules. Presented as a definition list under a lowercase
+ *  lead-in, never as a numbered manifesto — see the hierarchy note above. */
+const RULES: [string, string][] = [
+    ['Explain the number', 'What it represents, what contributed, what it means, what action it supports.'],
+    ['Explain the colour', 'Brand colour identifies the product; data colour has to explain the data. Semantic consistency, not a mandated palette.'],
+    ['Show the evidence', 'Scores and recommendations connect back to contributing metrics, charts and qualitative evidence.'],
+    ['Support the decision', 'Why it matters, what to do, who owns it, what makes it defensible.'],
+];
+
+/** Who reads the dashboard, and at what depth. The depth difference is the
+ *  point — treating every role the same was part of the problem. */
+const READERS: [string, string][] = [
+    ['Leadership and senior decision-makers', 'The essential signal first.'],
+    ['Managers and HR/programme owners', 'The signal, plus enough context to act at their level.'],
+    ['Client-facing operational users', 'Metric definitions, calculation context, contributing inputs and supporting evidence — because they have to defend the number out loud.'],
+];
+
+/**
+ * Implementation status.
+ *
+ * Wording is fixed by the record and must not be paraphrased. Anything the
+ * record marks "verify status" is omitted rather than published at a guess.
+ */
+const STATUS: [string, string][] = [
+    ['Dashboard UX philosophy', 'Accepted design direction'],
+    ['Read → Interpret → Trust → Act', 'Accepted design direction'],
+    ['Philosophy applied across dashboard work', 'Implemented design solution'],
+    ['Metric, chart and summary-card explanation', 'Implemented in the recommended design'],
+    ['Colour semantics', 'Implemented or incorporated'],
+    ['Adoption, trust, decision quality', 'Not formally measured'],
+];
+
+function StatusTable() {
+    return (
+        <dl className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 divide-y cl-divide-border-color-default">
+            {STATUS.map(([item, status]) => {
+                const unmeasured = status === 'Not formally measured';
+                return (
+                    <div
+                        key={item}
+                        className="p-5 md:px-6 grid gap-1.5 md:grid-cols-[1fr_minmax(0,260px)] md:gap-6 md:items-baseline"
+                    >
+                        <dt className="text-[15px] md:text-base cl-text-neutral-text-high-contrast leading-snug">{item}</dt>
+                        <dd
+                            style={unmeasured ? { color: 'var(--cl-color-semantic-warning-text)' } : undefined}
+                            className={
+                                'text-[13px] font-bold uppercase tracking-[0.14em] leading-snug ' +
+                                (unmeasured ? '' : 'cl-text-neutral-text-medium-contrast')
+                            }
+                        >
+                            {status}
+                        </dd>
+                    </div>
+                );
+            })}
+        </dl>
+    );
+}
+
 const JUMP_TARGETS = [
-    { id: 'problem', label: 'Problem' },
-    { id: 'decision', label: 'Decision' },
-    { id: 'example', label: 'Example' },
-    { id: 'evidence', label: 'Evidence' },
-    { id: 'limitations', label: 'Limitations' },
+    { id: 'happened', label: 'What happened' },
+    { id: 'observed', label: 'What I observed' },
+    { id: 'understanding', label: 'The model' },
+    { id: 'designed', label: 'What I designed' },
+    { id: 'implemented', label: 'Status' },
 ];
 
 /** Narration index → section id. Same order as NARRATION_SECTIONS; the two
  *  files must be edited together. */
 const NARRATION_TO_SECTION: string[] = [
-    'overview',
-    'problem',
-    'decision',
-    'example',
-    'scope',
-    'evidence',
-    'response',
-    'limitations',
+    'happened',
+    'readers',
+    'observed',
+    'understanding',
+    'designed',
+    'implemented',
+    'unknown',
 ];
 
 const NARRATION_WORDS = NARRATION_SECTIONS.reduce(
@@ -134,6 +208,8 @@ const NARRATION_WORDS = NARRATION_SECTIONS.reduce(
     0
 );
 const LISTEN_MINUTES = minutesFor(NARRATION_WORDS, NARRATION_WPM);
+
+const PROSE = 'text-[17px] md:text-lg leading-[1.7] cl-text-neutral-text-medium-contrast max-w-[62ch]';
 
 function Heading({ label, title, id }: { label: string; title: string; id: string }) {
     return (
@@ -233,7 +309,8 @@ export function DashboardExplainability() {
                     </h1>
 
                     <p className="text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-relaxed font-medium max-w-3xl">
-                        Decision-makers could read the numbers, but not the reasoning behind them.
+                        The numbers were legible. The reasoning behind them was not, so a person had to
+                        supply it.
                     </p>
 
                     <div className="mt-9">
@@ -272,20 +349,63 @@ export function DashboardExplainability() {
 
             <div ref={proseRef} className="max-w-4xl mx-auto px-6">
 
-                {/* The idea the whole case exists to land */}
-                <section aria-labelledby="overview" {...narratable('overview')}>
-                    <h2 id="overview" className="sr-only scroll-mt-28">Overview</h2>
-                    <NowReading id="overview" />
-                    <Statement>
-                        A number is not useful if people cannot understand what produced it, what it means, and
-                        what they can do next.
-                    </Statement>
+                {/* 1 — the trigger, and the two jobs */}
+                <section {...narratable('happened')}>
+                    <NowReading id="happened" />
+                    <Heading label="What happened" id="happened" title="Someone had to explain the screen" />
+                    <p className={PROSE}>
+                        Interpreting the dashboard frequently depended on somebody from the product team
+                        explaining it.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        A client-facing relationship manager who used the dashboard operationally was the
+                        one surfacing this. She supported clients through participation, reviewed results
+                        with them, and kept bringing back the same questions and interpretation gaps from
+                        those conversations.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        So the dashboard had two jobs — and the second was failing, which exposed weaknesses
+                        in the first.
+                    </p>
+
+                    <div className="mt-8">
+                        <Compare
+                            left={{
+                                label: 'Job one',
+                                headline: 'Help decision-makers understand and act',
+                                items: ['Leadership, managers, HR and programme owners'],
+                            }}
+                            right={{
+                                label: 'Job two',
+                                headline: 'Help client-facing teams explain it consistently',
+                                items: ['Operational users, in front of a client'],
+                                tone: 'problem',
+                            }}
+                        />
+                    </div>
                 </section>
 
-                {/* Beat 1 — the problem, as a number that answers nothing */}
-                <section {...narratable('problem')}>
-                    <NowReading id="problem" />
-                    <Heading label="The problem" id="problem" title="A score with no reasoning attached" />
+                {/* 2 — readers, and the depth difference */}
+                <section {...narratable('readers')}>
+                    <NowReading id="readers" />
+                    <Heading label="Who was reading it" id="readers" title="Not everyone needed the same depth" />
+                    <p className={PROSE}>
+                        Treating every reader as if they did was part of the problem.
+                    </p>
+                    <dl className="mt-8 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 divide-y cl-divide-border-color-default">
+                        {READERS.map(([role, depth]) => (
+                            <div key={role} className="p-5 md:px-6 grid gap-1.5 md:grid-cols-[minmax(0,260px)_1fr] md:gap-6 md:items-baseline">
+                                <dt className="text-base font-bold cl-text-neutral-text-high-contrast leading-snug">{role}</dt>
+                                <dd className="text-[15px] md:text-base leading-snug cl-text-neutral-text-medium-contrast">{depth}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </section>
+
+                {/* 3 — the observation, anchored on the number */}
+                <section {...narratable('observed')}>
+                    <NowReading id="observed" />
+                    <Heading label="What I observed" id="observed" title="A score with no reasoning attached" />
                     <Panel
                         tone="problem"
                         caption="Three questions the screen did not answer — so a person had to."
@@ -302,59 +422,77 @@ export function DashboardExplainability() {
                     </Panel>
                     <Points
                         items={[
-                            'Interpretation depended on someone from the product team explaining it.',
-                            'The explanation burden had moved out of the product and into a person\'s workflow.',
-                            'The weakest layer was not the layout — it was the reasoning around the number.',
+                            'The explanation burden had moved out of the product and into a person\'s working day.',
+                            'The weakest signals were not in the layout — they were in the explanation around the metrics, colours, evidence and actions.',
                         ]}
                     />
                 </section>
 
-                {/* Beat 2 — the decision, as the central diagram */}
-                <section {...narratable('decision')}>
-                    <NowReading id="decision" />
-                    <Heading label="The decision" id="decision" title="Read, interpret, trust, act" />
-                    <Panel caption="Trust sits in the middle because it is what carries someone from understanding a number to being willing to act on it.">
-                        <Stages steps={STAGES} />
-                    </Panel>
+                {/* 4 — the model, and the insight under it */}
+                <section {...narratable('understanding')}>
+                    <NowReading id="understanding" />
+                    <Heading label="What that changed in my understanding" id="understanding" title="Four things have to happen before someone can act" />
+                    <p className={PROSE}>
+                        A reader doesn't trust a score because it's displayed. Organisations often already
+                        use their own models, weightings and rating scales, and a number that disagrees with
+                        one has to show its working.
+                    </p>
                     <div className="mt-8">
+                        <Panel caption="When one stage is weak, readers lean on someone else's explanation or decide with incomplete context. This is a working model from this review, not a general law.">
+                            <Stages steps={STAGES} />
+                        </Panel>
+                    </div>
+                    <div className="mt-10">
                         <Statement>Trust is created through inspectability.</Statement>
                     </div>
-                    <Points
-                        items={[
-                            'A reader does not trust a score because it is displayed.',
-                            'Organisations often already use their own models and rating scales.',
-                            'A number that disagrees with an existing method has to show its working.',
-                        ]}
-                    />
                 </section>
 
-                {/* Beat 3 — one concrete example, annotated rather than described */}
-                <section {...narratable('example')}>
-                    <NowReading id="example" />
-                    <Heading label="What changed" id="example" title="The explanation moved into the component" />
+                {/* 5 — what was designed. The four rules support the model above;
+                    they are not a second framework. */}
+                <section {...narratable('designed')}>
+                    <NowReading id="designed" />
+                    <Heading label="What I designed" id="designed" title="Four rules for making a stage hold" />
+                    <dl className="space-y-5 max-w-[62ch]">
+                        {RULES.map(([name, body]) => (
+                            <div key={name}>
+                                <dt className="text-lg font-bold cl-text-neutral-text-high-contrast">{name}</dt>
+                                <dd className="mt-1 text-[16px] leading-relaxed cl-text-neutral-text-medium-contrast">{body}</dd>
+                            </div>
+                        ))}
+                    </dl>
 
-                    <Panel caption="The card is live — open the info affordance, focus the score, or move across the bar segments.">
-                        <div className="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-8 items-start">
-                            <SyntheticMetricCard />
-                            <ol className="space-y-4">
-                                {CALLOUTS.map((c, i) => (
-                                    <li key={c.title} className="flex gap-3">
-                                        <span className="shrink-0 w-6 h-6 rounded-full border cl-border-border-color-strong cl-bg-neutral-surface-level-0 flex items-center justify-center text-[11px] font-bold font-mono cl-text-brand-primary-base">
-                                            {i + 1}
-                                        </span>
-                                        <div>
-                                            <p className="text-sm font-bold cl-text-neutral-text-high-contrast">{c.title}</p>
-                                            <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">{c.body}</p>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ol>
-                        </div>
-                        <PrototypeLabel />
-                    </Panel>
+                    <p className={`${PROSE} mt-8`}>
+                        And one that cuts across all four: <strong className="cl-text-neutral-text-high-contrast">disclose detail on
+                        demand.</strong> The default view stays concise; the reasoning stays available.
+                    </p>
 
-                    <div className="mt-8">
-                        <Statement>Clarity is not showing everything. It is showing the right level at the right moment.</Statement>
+                    <div className="mt-10">
+                        <Statement tone="insight">
+                            Clarity does not mean showing everything. It means showing the right level at the
+                            right moment.
+                        </Statement>
+                    </div>
+
+                    <div className="mt-10">
+                        <Panel caption="The card is live — open the info affordance, focus the score, or move across the bar segments.">
+                            <div className="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-8 items-start">
+                                <SyntheticMetricCard />
+                                <ol className="space-y-4">
+                                    {CALLOUTS.map((c, i) => (
+                                        <li key={c.title} className="flex gap-3">
+                                            <span className="shrink-0 w-6 h-6 rounded-full border cl-border-border-color-strong cl-bg-neutral-surface-level-0 flex items-center justify-center text-[11px] font-bold font-mono cl-text-brand-primary-base">
+                                                {i + 1}
+                                            </span>
+                                            <div>
+                                                <p className="text-sm font-bold cl-text-neutral-text-high-contrast">{c.title}</p>
+                                                <p className="text-sm cl-text-neutral-text-medium-contrast leading-relaxed">{c.body}</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+                            <PrototypeLabel />
+                        </Panel>
                     </div>
 
                     <div className="mt-8">
@@ -385,61 +523,37 @@ export function DashboardExplainability() {
                             <PrototypeLabel />
                         </Panel>
                     </div>
+
+                    <p className={`${PROSE} mt-8`}>
+                        At card level the rule is one metric, one insight, one next action. The same logic
+                        applies to colour: an evaluative index, a participation state and a categorical
+                        distribution aren't the same kind of thing, and one universal card treatment would
+                        create false meaning. Pending is a state, not a risk.
+                    </p>
                 </section>
 
-                {/* Scope */}
-                <section {...narratable('scope')}>
-                    <NowReading id="scope" />
-                    <Heading label="Scope" id="scope" title="What I owned" />
-                    <Points
-                        columns={2}
-                        items={[
-                            <><strong className="cl-text-neutral-text-high-contrast">Analytics UX</strong> — what each role sees first, and what they can open.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Explainability</strong> — how a metric, a colour and a recommendation account for themselves.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Information architecture</strong> — what belongs on the summary and what belongs a layer down.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Product reasoning</strong> — connecting a number to the decision it supports.</>,
-                        ]}
-                    />
+                {/* 6 — status, in the exact approved language */}
+                <section {...narratable('implemented')}>
+                    <NowReading id="implemented" />
+                    <Heading label="What was implemented" id="implemented" title="And what was not" />
+                    <StatusTable />
+                    <p className={`${PROSE} mt-8`}>
+                        The direction received positive response in demos and client-facing reviews. No
+                        formal post-implementation measurement was conducted.
+                    </p>
                 </section>
 
-                {/* Evidence */}
-                <section {...narratable('evidence')}>
-                    <NowReading id="evidence" />
-                    <Heading label="Evidence" id="evidence" title="What this rests on" />
-                    <EvidenceBlock
-                        items={[
-                            'Product review',
-                            'Artifact review',
-                            'Operational-user feedback',
-                            'Client questions, reported second-hand',
-                        ]}
-                        note="Feedback came from a client-facing relationship manager who used the product daily — direct evidence from her own use, indirect evidence from her client conversations. It was not a formally moderated client-user study, and it is not described as one."
-                    />
-                </section>
-
-                {/* Response */}
-                <section {...narratable('response')}>
-                    <NowReading id="response" />
-                    <Heading label="Response" id="response" title="What was accepted" />
-                    <Points
-                        items={[
-                            'The dashboard philosophy was accepted as a design direction and informed later dashboard work.',
-                            'The recommended direction received positive feedback in demos and client-facing reviews.',
-                            'A high-fidelity concept demonstrated the interaction model; production used different data and product-specific logic.',
-                        ]}
-                    />
-                </section>
-
-                {/* Limitations */}
-                <section {...narratable('limitations')}>
-                    <NowReading id="limitations" />
-                    <Heading label="Limitations" id="limitations" title="What this does not prove" />
+                {/* 7 — limitations */}
+                <section {...narratable('unknown')}>
+                    <NowReading id="unknown" />
+                    <Heading label="What remains unknown" id="unknown" title="What this does not prove" />
                     <NotProven
                         headline="No measured business outcome is claimed. This case demonstrates explainability, information hierarchy and decision-support reasoning."
                         items={[
                             'No formally moderated client-user study was conducted.',
-                            'Client evidence was mediated rather than gathered directly.',
-                            'No post-implementation measurement exists — no claim of increased trust, adoption or decision quality.',
+                            'Client evidence was mediated through the relationship manager, not gathered directly.',
+                            'No post-implementation measurement exists — no claim of improved trust, adoption or decision quality.',
+                            'The exact implementation scope of some elements still needs verification.',
                             'Every public example uses synthetic data.',
                         ]}
                     />

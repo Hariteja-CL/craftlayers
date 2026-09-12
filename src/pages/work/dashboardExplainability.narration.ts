@@ -6,54 +6,55 @@ import type { NarrationSection } from '../../components/case-study/CaseStudyList
  * One section per visible section, in the same order — the page maps narration
  * index to section id, so the two files have to be edited together.
  *
- * This narrates the INSIGHT BEHIND each visual, not the labels inside it.
- * Reading a diagram aloud node by node produces a transcript nobody can follow
- * and tells a listener nothing the picture did not already say.
+ * This is a spoken transposition of the approved page copy, not a second
+ * version of the story. It narrates the insight behind each visual rather than
+ * the labels inside it; reading a diagram aloud node by node produces a
+ * transcript nobody can follow.
+ *
+ * The same hierarchy the page holds, the narration holds: Read, Interpret,
+ * Trust, Act is the model; inspectability is the insight; the four explanation
+ * rules support the model and are spoken as support, not announced as a second
+ * framework; the card rule is a closing clause.
  *
  * Public-safe: the employer and product environment are named because they are
- * approved public context, but no client, tenant or participant name appears,
- * no real values, formulas or thresholds, and design artifacts are described as
- * created and accepted, never as measured outcomes.
+ * approved public context. The relationship manager is described only by role.
+ * No real score, formula, threshold or client name is spoken, and the
+ * implementation statuses are spoken in their approved wording.
  */
 export const NARRATION_SECTIONS: NarrationSection[] = [
     {
-        title: 'Overview',
+        title: 'What happened',
         body:
-            'Designing dashboards people can read, trust and act on. This is the EnCulture analytics reporting at NHR Technologies — multi-role dashboards where the same screen serves a senior decision-maker who needs a conclusion and a client-facing user who has to explain that conclusion to somebody else. The idea the whole case rests on is simple: a number is not useful if people cannot understand what produced it, what it means, and what they can do next.',
+            'Interpreting the dashboard frequently depended on somebody from the product team explaining it. A client-facing relationship manager who used the dashboard operationally was the one surfacing this. She supported clients through participation, reviewed results with them, and kept bringing back the same questions and interpretation gaps from those conversations. So the dashboard had two jobs: help decision-makers understand and act, and help client-facing teams explain the same information consistently. The second was failing, which exposed weaknesses in the first.',
     },
     {
-        title: 'The problem',
+        title: 'Who was reading it',
         body:
-            'Decision-makers could read the numbers, but not the reasoning behind them. A culture score would appear on screen and answer none of the three questions a reader actually has: what produced this number, what does this colour mean, and why is this action being recommended. Because the screen did not answer them, a person had to. The explanation burden had moved out of the product and into somebody\'s workflow — usually whoever was standing closest to the client. The weakest layer was never the layout. It was the reasoning around the number.',
+            'Not everyone needed the same depth, and treating every reader as if they did was part of the problem. Leadership and senior decision-makers needed the essential signal first. Managers and HR and programme owners needed that signal plus enough context to act at their level. Client-facing operational users needed metric definitions, calculation context, contributing inputs and supporting evidence, because they have to defend the number out loud.',
     },
     {
-        title: 'The decision',
+        title: 'What I observed',
         body:
-            'Four things a reader needs, in order. Read: I can see the metric. Interpret: I understand how it was produced. Trust: I can inspect the reasoning. Act: I know what I can do next. Trust was the stage that was missing, and it sits in the middle for a reason — it is what carries somebody from understanding a number to being willing to act on it. Trust is created through inspectability. A reader does not trust a score because it is displayed, and organisations often already use their own models and rating scales, so a number that disagrees with an existing method has to show its working.',
+            'A score with no reasoning attached. A number on a card, and three questions the screen did not answer: what produced this number, what does this colour mean, and why is this action recommended? Someone had to answer them, so the explanation burden had moved out of the product and into a person\'s working day. The weakest signals were not in the layout. They were in the explanation around the metrics, the colours, the evidence and the actions.',
     },
     {
-        title: 'One concrete example',
+        title: 'What that changed in my understanding',
         body:
-            'The explanation moved into the component itself. A summary card carries three separate layers of context — what the metric is, how the score was produced, and what a category band means — and they are kept apart deliberately, because one combined tooltip would have to answer three different questions at once. The governing principle is that clarity is not showing everything; it is showing the right level at the right moment. Shown side by side with a version that exposes everything at once, nothing has actually been removed. The same detail is present. It simply waits until somebody asks for it.',
+            'A reader does not trust a score because it is displayed. Organisations often already use their own models, weightings and rating scales, and a number that disagrees with one has to show its working. Four things have to happen before someone can act on a number. Read: what am I seeing? Interpret: what does it mean? Trust: can I inspect how this was produced? And act: what should happen next? Trust was the stage that was missing. When one stage is weak, readers lean on someone else\'s explanation or decide with incomplete context — a working model from this review, not a general law. Trust is created through inspectability.',
     },
     {
-        title: 'Scope',
+        title: 'What I designed',
         body:
-            'Analytics user experience, the explainability model, information architecture for the reporting surface, and the product reasoning that connects a number to the decision it is supposed to support.',
+            'Four rules for making a stage hold. Explain the number: what it represents, what contributed, what it means, what action it supports. Explain the colour: brand colour identifies the product, and data colour has to explain the data — semantic consistency, not a mandated palette. Show the evidence: scores and recommendations connect back to contributing metrics, charts and qualitative evidence. And support the decision: why it matters, what to do, who owns it, what makes it defensible. One thing cuts across all four — disclose detail on demand. The default view stays concise and the reasoning stays available. Clarity does not mean showing everything; it means showing the right level at the right moment. Nothing was removed between the dense version of a card and the layered one. The same detail is present, it simply waits until someone asks. At card level the rule is one metric, one insight, one next action. The same logic applies to colour: an evaluative index, a participation state and a categorical distribution are not the same kind of thing, and one universal card treatment would create false meaning. Pending is a state, not a risk.',
     },
     {
-        title: 'Evidence',
+        title: 'What was implemented',
         body:
-            'Product review and artifact review, together with feedback from a client-facing relationship manager who used the product daily. That gave direct evidence from her own use and indirect evidence from her client conversations. It was not a formally moderated client-user study, and it is not described as one.',
+            'The dashboard philosophy was an accepted design direction, and so was the read, interpret, trust, act model. The philosophy was applied across dashboard work as an implemented design solution, and metric, chart and summary-card explanation were implemented in the recommended design. Colour semantics were implemented or incorporated. Adoption, trust and decision quality were not formally measured. The direction received positive response in demos and client-facing reviews, and no formal post-implementation measurement was conducted.',
     },
     {
-        title: 'Response',
+        title: 'What remains unknown',
         body:
-            'The dashboard philosophy was accepted as a design direction and informed later dashboard work, and the recommended direction received positive feedback during demos and client-facing reviews. A high-fidelity concept demonstrated the interaction model; the production implementation used different data and product-specific logic.',
-    },
-    {
-        title: 'Limitations',
-        body:
-            'No measured business outcome is claimed. What this case demonstrates is explainability, information hierarchy and decision-support reasoning. There was no formally moderated client-user study, client evidence was mediated rather than gathered directly, and no post-implementation measurement exists — so there is no claim of increased trust, increased adoption or improved decision quality. Every public example uses synthetic data. The strongest contribution was not a new layout. It was moving the explanation from a person\'s workflow back into the product, where both the decision-maker and the person explaining the data can reach it.',
+            'No measured business outcome is claimed. What this case demonstrates is explainability, information hierarchy and decision-support reasoning. No formally moderated client-user study was conducted, and client evidence was mediated through the relationship manager rather than gathered directly. No post-implementation measurement exists, so there is no claim of improved trust, adoption or decision quality. The exact implementation scope of some elements still needs verification, and every public example uses synthetic data.',
     },
 ];
