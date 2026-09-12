@@ -16,11 +16,7 @@ import {
 } from '../../components/case-study/readingTime';
 import {
     CaseMeta,
-    Compare,
-    EvidenceBlock,
-    Flow,
     NotProven,
-    Panel,
     Points,
     Statement,
 } from '../../components/case-study/CaseStudyBeats';
@@ -30,21 +26,27 @@ import { ArrowRight } from 'lucide-react';
 /**
  * /work/respondent-experience — the public case.
  *
- * Built as visual beats rather than as a document, using the same vocabulary
- * as the dashboard case so the two read as one portfolio.
+ * Shape: this happened → I looked into it → this is what I found → this changed
+ * my understanding → this is what I recommended → this is what was tested →
+ * this is what is still unknown. Deliberately not the same template as
+ * /work/dashboard-explainability; the two share clarity, not structure.
  *
- * The test this is written against: hide every paragraph, and the headings,
- * diagrams and callouts alone should still say what the product is, what was
- * wrong, what was decided, what changed and what is not proven.
+ * SOURCE. Every statement traces to the respondent-experience knowledge base
+ * (Craftlayers V2/Hariteja Knowledge base/case-study-respondent-experience.md)
+ * and to the copy approved on 2026-09-12. The author is the source of truth for
+ * this story; do not reinterpret it from other material.
  *
- * NO PILOT FIGURES. Invitation count, participation rate and per-cycle
- * response count are internal analytics from one organisation and appear
- * neither here nor in the narration. The argument does not need them: it turns
- * on why a two-minute survey goes unanswered, which holds at any sample size.
+ * NO PILOT FIGURES. Invitation count, response count and participation rate are
+ * internal analytics and appear neither here nor in the narration. The public
+ * statement is qualitative: the response base was too small to support
+ * confident interpretation. Do not compute or publish a derived percentage.
  *
- * The detailed journey, the welcome and reminder communications, the
- * evidence-to-decision trace, the feedback-loop model and the ownership model
- * are named in the closing section and live nowhere in this file.
+ * NO INTERNAL PROGRAMME NAME. The recurring cycle's internal label is not
+ * published and is not approved for public use.
+ *
+ * NOTHING SHIPPED. Every recommendation is a recommendation. None shipped, none
+ * has post-change measurement, none is validated — and the page says so in its
+ * own section rather than burying it in a caveat.
  */
 
 /** Hero — the shape of the respondent's experience, not a product screenshot.
@@ -78,33 +80,138 @@ function SurveyHeroVisual() {
     );
 }
 
-const JOURNEY = [
-    { name: 'Invitation' },
-    { name: 'Understanding', weak: true },
-    { name: 'Trust', weak: true },
-    { name: 'Questions' },
-    { name: 'Response' },
-    { name: 'Feedback', weak: true },
+/**
+ * The journey, in the respondent's own words.
+ *
+ * Type, not diagram. These six lines are the most important evidence on the
+ * page, so they are set as quotations at reading size and given the room to be
+ * read — boxing them into a flow chart would shrink them to labels and lose the
+ * thing that makes them land, which is that they sound like a person.
+ *
+ * The two breaks are marked between the quotes they fall between, because the
+ * gap is the finding: it is what happens *between* these moments that failed,
+ * not the moments themselves.
+ */
+const VOICE: { quote: string; breakAfter?: string }[] = [
+    { quote: 'Another workplace email.', breakAfter: 'The welcome was often missed' },
+    { quote: 'What is this about again?' },
+    { quote: 'Is my answer really anonymous?' },
+    { quote: 'Who will see this?', breakAfter: 'Nothing visible happened next' },
+    { quote: 'Did anything happen?' },
+    { quote: 'Why should I answer again?' },
 ];
 
+function RespondentVoice() {
+    return (
+        <figure className="border-l-2 cl-border-border-color-strong pl-6 md:pl-8 space-y-6">
+            {VOICE.map((v) => (
+                <div key={v.quote}>
+                    <p className="text-xl md:text-3xl font-medium cl-text-neutral-text-high-contrast leading-[1.4] max-w-[22ch] md:max-w-[26ch]">
+                        <span aria-hidden="true" className="cl-text-neutral-text-low-contrast">“</span>
+                        {v.quote}
+                        <span aria-hidden="true" className="cl-text-neutral-text-low-contrast">”</span>
+                    </p>
+                    {v.breakAfter && (
+                        <p
+                            style={{ color: 'var(--cl-color-semantic-error-text)' }}
+                            className="mt-5 -ml-6 md:-ml-8 pl-6 md:pl-8 border-l-2 border-transparent text-[11px] font-bold uppercase tracking-[0.18em]"
+                        >
+                            <span aria-hidden="true">↓ </span>
+                            {v.breakAfter}
+                        </p>
+                    )}
+                </div>
+            ))}
+        </figure>
+    );
+}
+
+/** The five conditions, as questions rather than as a labelled framework. */
+const CONDITIONS: [string, string][] = [
+    ['Relevance', 'Why does this matter, and why am I being asked again?'],
+    ['Effort', 'What does responding require beyond the time in the form?'],
+    ['Safety', 'Can I answer honestly without being personally exposed?'],
+    ['Impact', 'What happens after I submit?'],
+    ['Ownership', 'Who is responsible for acting?'],
+];
+
+/** Evidence → what it meant → decision. The middle column is the work. */
+const DECISIONS: [string, string, string][] = [
+    [
+        'The reminder had become the real entry point',
+        'The experience could not depend on the welcome being remembered',
+        'Make every reminder independently understandable',
+    ],
+    [
+        '“Anonymous” was stated but not explained',
+        'An abstract privacy claim does not create felt safety',
+        'Explain grouped reporting, open-text handling and minimum-response protection',
+    ],
+    [
+        'Respondents saw no impact after submitting',
+        'A recurring request had not earned the next response',
+        'Add a visible closure loop',
+    ],
+    [
+        'Governance and manager ownership were blurred',
+        'No role clearly owned “what happens next”',
+        'Separate governance from action ownership',
+    ],
+];
+
+function DecisionTable() {
+    return (
+        <div className="space-y-4">
+            {DECISIONS.map(([evidence, meaning, decision]) => (
+                <div
+                    key={decision}
+                    className="rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 p-5 md:p-6 grid gap-4 md:grid-cols-3 md:gap-6"
+                >
+                    <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] cl-text-neutral-text-low-contrast mb-2">
+                            Evidence
+                        </p>
+                        <p className="text-[15px] leading-snug cl-text-neutral-text-high-contrast">{evidence}</p>
+                    </div>
+                    <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] cl-text-neutral-text-low-contrast mb-2">
+                            What it meant
+                        </p>
+                        <p className="text-[15px] leading-snug cl-text-neutral-text-medium-contrast">{meaning}</p>
+                    </div>
+                    <div>
+                        <p
+                            style={{ color: 'var(--cl-color-brand-primary-base)' }}
+                            className="text-[11px] font-bold uppercase tracking-[0.18em] mb-2"
+                        >
+                            Decision
+                        </p>
+                        <p className="text-[15px] font-semibold leading-snug cl-text-neutral-text-high-contrast">{decision}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
 const JUMP_TARGETS = [
-    { id: 'problem', label: 'Problem' },
-    { id: 'journey', label: 'Journey' },
-    { id: 'decision', label: 'Decision' },
-    { id: 'evidence', label: 'Evidence' },
-    { id: 'limitations', label: 'Limitations' },
+    { id: 'happened', label: 'What happened' },
+    { id: 'found', label: 'What I found' },
+    { id: 'conditions', label: 'Five conditions' },
+    { id: 'recommended', label: 'Recommendations' },
+    { id: 'unknown', label: 'Unknowns' },
 ];
 
 /** Narration index → section id. Same order as NARRATION_SECTIONS; the two
  *  files must be edited together. */
 const NARRATION_TO_SECTION: string[] = [
-    'overview',
-    'problem',
-    'journey',
-    'decision',
-    'scope',
-    'evidence',
-    'limitations',
+    'happened',
+    'looked',
+    'found',
+    'conditions',
+    'recommended',
+    'tested',
+    'unknown',
 ];
 
 const NARRATION_WORDS = NARRATION_SECTIONS.reduce(
@@ -112,6 +219,8 @@ const NARRATION_WORDS = NARRATION_SECTIONS.reduce(
     0
 );
 const LISTEN_MINUTES = minutesFor(NARRATION_WORDS, NARRATION_WPM);
+
+const PROSE = 'text-[17px] md:text-lg leading-[1.7] cl-text-neutral-text-medium-contrast max-w-[62ch]';
 
 function Heading({ label, title, id }: { label: string; title: string; id: string }) {
     return (
@@ -211,8 +320,8 @@ export function RespondentExperience() {
                     </h1>
 
                     <p className="text-lg md:text-2xl cl-text-neutral-text-medium-contrast leading-relaxed font-medium max-w-3xl">
-                        The survey was short, but respondents still lacked context, trust and a clear reason to
-                        participate.
+                        A short survey people had stopped answering, and what the investigation found
+                        upstream of it.
                     </p>
 
                     <div className="mt-9">
@@ -251,129 +360,136 @@ export function RespondentExperience() {
 
             <div ref={proseRef} className="max-w-4xl mx-auto px-6">
 
-                {/* The idea the whole case exists to land */}
-                <section aria-labelledby="overview" {...narratable('overview')}>
-                    <h2 id="overview" className="sr-only scroll-mt-28">Overview</h2>
-                    <NowReading id="overview" />
-                    <Statement>Three questions were not the problem. Trust and communication were.</Statement>
-                </section>
-
-                {/* Beat 1 — short does not mean clear */}
-                <section {...narratable('problem')}>
-                    <NowReading id="problem" />
-                    <Heading label="The problem" id="problem" title="Short does not mean clear" />
-                    <Panel caption="The interaction was simple. The surrounding experience was not.">
-                        <Compare
-                            left={{
-                                label: 'What the product saw',
-                                headline: '3 questions, under 2 minutes',
-                                items: ['Low interaction effort', 'Nothing obvious to fix'],
-                            }}
-                            right={{
-                                label: 'What the respondent may ask',
-                                headline: 'Three questions of their own',
-                                items: [
-                                    'Why am I receiving this?',
-                                    'Is it anonymous?',
-                                    'What happens after I answer?',
-                                ],
-                                tone: 'problem',
-                            }}
-                        />
-                    </Panel>
-                    <Points
-                        items={[
-                            'Friction was the assumed cause, and the survey had almost none.',
-                            'A one-time form can succeed on novelty; a recurring one has to earn each response.',
-                            'It competes with the respondent\'s memory of what happened — or didn\'t — last time.',
-                        ]}
-                    />
-                </section>
-
-                {/* Beat 2 — the journey, with the weak points named */}
-                <section {...narratable('journey')}>
-                    <NowReading id="journey" />
-                    <Heading label="The journey" id="journey" title="Where the experience thinned" />
-                    <Panel caption="Three of the six stages were carrying no weight — and none of them was the form.">
-                        <Flow steps={JOURNEY} weakLabel="weak" />
-                    </Panel>
-                    <Points
-                        items={[
-                            <><strong className="cl-text-neutral-text-high-contrast">Understanding</strong> — the reminder had become the real entry point, not the welcome message.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Trust</strong> — anonymity was asserted as a word rather than explained in practice.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Feedback</strong> — nothing visible happened after submitting.</>,
-                        ]}
-                    />
-                </section>
-
-                {/* Beat 3 — the decision, as a reframe */}
-                <section {...narratable('decision')}>
-                    <NowReading id="decision" />
-                    <Heading label="The decision" id="decision" title="A different problem to solve" />
-                    <Panel caption="It arrived as a dashboard-value question — the data is thin, so fix the reporting. It left as an upstream respondent-experience problem.">
-                        <Compare
-                            left={{ label: 'Before', headline: '“Make the survey shorter.”' }}
-                            right={{
-                                label: 'After',
-                                headline: '“Make the purpose, safety and follow-through clearer.”',
-                                tone: 'suggestion',
-                            }}
-                        />
-                    </Panel>
-                    <Points
-                        items={[
-                            <><strong className="cl-text-neutral-text-high-contrast">Explain why</strong> — every reminder has to stand on its own.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Establish safety</strong> — show how grouping and thresholds protect an answer.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Close the loop</strong> — a request that shows no consequence has not earned the next one.</>,
-                        ]}
-                    />
+                {/* 1 — the trigger */}
+                <section {...narratable('happened')}>
+                    <NowReading id="happened" />
+                    <Heading label="What happened" id="happened" title="A dashboard with limited value" />
+                    <p className={PROSE}>
+                        A recurring feedback cycle was feeding a dashboard, and the dashboard had limited
+                        value. The response base was too small to interpret anything with confidence.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        The obvious explanation was that the survey asked too much. It didn't. Three
+                        questions, about two minutes — and participation was still falling with each round.
+                    </p>
                     <div className="mt-10">
-                        <Statement tone="insight">Completion does not automatically equal candour.</Statement>
+                        <Statement>
+                            So I stopped looking at the survey and started looking at everything around it.
+                        </Statement>
                     </div>
                 </section>
 
-                {/* Scope */}
-                <section {...narratable('scope')}>
-                    <NowReading id="scope" />
-                    <Heading label="Scope" id="scope" title="What I owned" />
+                {/* 2 — the investigation */}
+                <section {...narratable('looked')}>
+                    <NowReading id="looked" />
+                    <Heading label="What I went looking for" id="looked" title="Five questions, none about the form" />
                     <Points
-                        columns={2}
+                        ordered
                         items={[
-                            <><strong className="cl-text-neutral-text-high-contrast">Research</strong> — interviews, communication review, journey walk-through.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Problem diagnosis</strong> — establishing the reported problem was downstream of the real one.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Behavioural analytics</strong> — where people dropped away, read alongside the qualitative evidence.</>,
-                            <><strong className="cl-text-neutral-text-high-contrast">Interaction design</strong> — the experience around the form.</>,
+                            'How were people introduced to the cycle?',
+                            'Did they understand why they were being asked?',
+                            'Did they trust that answers were anonymous?',
+                            'Did they know what would happen with what they said?',
+                            'Had answering last time visibly changed anything?',
                         ]}
                     />
                 </section>
 
-                {/* Evidence */}
-                <section {...narratable('evidence')}>
-                    <NowReading id="evidence" />
-                    <Heading label="Evidence" id="evidence" title="What informed the decision" />
-                    <EvidenceBlock
-                        label="What informed the decision"
-                        items={[
-                            'Communication review',
-                            'Respondent journey review',
-                            'Interviews and stakeholder evidence',
-                            'Behavioural analytics',
-                        ]}
-                        note="Early qualitative research intended to surface hypotheses — not a statistically representative study, and conducted inside one organisation. It does not explain all survey non-response, and it is not presented as if it does."
-                    />
+                {/* 3 — findings, led by the respondent's own voice */}
+                <section {...narratable('found')}>
+                    <NowReading id="found" />
+                    <Heading label="What I found" id="found" title="The reminder had become the entry point" />
+                    <p className={PROSE}>
+                        The welcome communication was often missed. The reminder was becoming the entry
+                        point — people were arriving at the survey without having read the thing that
+                        explained it.
+                    </p>
+
+                    <div className="mt-10">
+                        <RespondentVoice />
+                    </div>
+
+                    <p className={`${PROSE} mt-10`}>
+                        The experience broke in two places: between the invitation and the reminder, and
+                        between submitting and seeing any consequence.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        Anonymity was stated as a word rather than explained as a practice. In small teams
+                        people weren't sure they couldn't be identified, and open text felt personally
+                        traceable. After submitting, nothing visible happened.
+                    </p>
                 </section>
 
-                {/* Limitations */}
-                <section {...narratable('limitations')}>
-                    <NowReading id="limitations" />
-                    <Heading label="Limitations" id="limitations" title="What this does not prove" />
+                {/* 4 — the reframe */}
+                <section {...narratable('conditions')}>
+                    <NowReading id="conditions" />
+                    <Heading label="What that changed in my understanding" id="conditions" title="Five conditions, not one problem" />
+                    <p className={PROSE}>
+                        Participation wasn't one problem. It was five conditions the experience had to
+                        answer for the person being asked, and the cycle was weak on most of them.
+                    </p>
+
+                    <dl className="mt-8 rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 divide-y cl-divide-border-color-default">
+                        {CONDITIONS.map(([name, question]) => (
+                            <div key={name} className="p-5 md:px-6 grid gap-1.5 md:grid-cols-[minmax(0,150px)_1fr] md:gap-6 md:items-baseline">
+                                <dt className="text-base font-bold cl-text-neutral-text-high-contrast">{name}</dt>
+                                <dd className="text-[15px] md:text-base leading-snug cl-text-neutral-text-medium-contrast">
+                                    {question}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+
+                    <p className={`${PROSE} mt-8`}>
+                        I didn't bring these with me. They are the questions the experience kept failing to
+                        answer, written down.
+                    </p>
+
+                    <div className="mt-10">
+                        <Statement tone="insight">
+                            A recurring survey has to earn the next response.
+                        </Statement>
+                    </div>
+                </section>
+
+                {/* 5 — recommendations, traced */}
+                <section {...narratable('recommended')}>
+                    <NowReading id="recommended" />
+                    <Heading label="What I recommended, and why" id="recommended" title="Four decisions, each with its evidence" />
+                    <DecisionTable />
+                    <p className={`${PROSE} mt-8`}>
+                        Alongside these: a clearer explanation of cadence, a neutral “no blocker this week”
+                        path, and a review of repeatedly negative question framing.
+                    </p>
+                </section>
+
+                {/* 6 — status, stated plainly rather than buried */}
+                <section {...narratable('tested')}>
+                    <NowReading id="tested" />
+                    <Heading label="What was tested" id="tested" title="Nothing" />
+                    <p className={PROSE}>
+                        Every item above is a recommendation. None shipped, none has post-change
+                        measurement, none is validated.
+                    </p>
+                    <p className={`${PROSE} mt-5`}>
+                        What they rest on: a respondent interview, an HR/governance interview, management
+                        feedback, reviews of the welcome and reminder communications, a walk-through of the
+                        respondent journey, and a review of how roles moved through the dashboards.
+                    </p>
+                </section>
+
+                {/* 7 — limitations */}
+                <section {...narratable('unknown')}>
+                    <NowReading id="unknown" />
+                    <Heading label="What remains unknown" id="unknown" title="What this does not prove" />
                     <NotProven
                         headline="This case does not claim that communication changes alone increased participation. It shows how the investigation reframed the problem from questionnaire length to respondent context and trust."
                         items={[
-                            'Early and directional, with a small interview sample and no quantitative validation.',
+                            'Early and directional — one respondent interview, no quantitative validation.',
                             'Conducted in one organisation.',
                             'Management input was stakeholder feedback, not a formal interview.',
-                            'Everything proposed is a recommendation: none has shipped, none has post-change measurement.',
+                            'It does not explain all survey non-response, and is not presented as if it does.',
+                            'Whether any recommendation would have worked.',
                         ]}
                     />
                 </section>

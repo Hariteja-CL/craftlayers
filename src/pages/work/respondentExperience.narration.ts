@@ -6,49 +6,53 @@ import type { NarrationSection } from '../../components/case-study/CaseStudyList
  * One section per visible section, in the same order — the page maps narration
  * index to section id, so the two files have to be edited together.
  *
- * This narrates the INSIGHT BEHIND each visual, not the labels inside it.
- * Reading a diagram aloud node by node produces a transcript nobody can follow.
+ * This is a spoken transposition of the approved page copy, not a second
+ * version of the story. It narrates the insight behind each visual rather than
+ * the labels inside it; reading a diagram aloud node by node produces a
+ * transcript nobody can follow. The one place it deliberately reads verbatim is
+ * the respondent's own six lines, because those are the evidence.
  *
  * Public-safe: the employer and product environment are named because they are
- * approved public context, but no participant, client or tenant name appears,
- * and no pilot figures — invitation counts, participation rates or response
- * counts — are spoken. Those are internal analytics and belong to the
- * protected layer.
+ * approved public context. No participant, client or tenant name appears, the
+ * recurring cycle's internal label is never spoken, and no pilot figures —
+ * invitation counts, response counts or participation rates — are spoken. Those
+ * are internal analytics. The public statement is qualitative: the response base
+ * was too small for confident interpretation.
  */
 export const NARRATION_SECTIONS: NarrationSection[] = [
     {
-        title: 'Overview',
+        title: 'What happened',
         body:
-            'Three questions were not the problem. Trust and communication were. This is the assessment experience inside EnCulture at NHR Technologies — a B2B culture analytics platform where everything downstream, the dashboards and the insight and the recommendations, depends on people answering, and answering honestly. That makes the respondent experience an upstream product problem rather than a survey-design detail.',
+            'A recurring feedback cycle was feeding a dashboard, and the dashboard had limited value. The response base was too small to interpret anything with confidence. The obvious explanation was that the survey asked too much. It did not. Three questions, about two minutes — and participation was still falling with each round. So I stopped looking at the survey and started looking at everything around it.',
     },
     {
-        title: 'The problem',
+        title: 'What I went looking for',
         body:
-            'Short does not mean clear. What the product saw was three questions taking under two minutes — low interaction effort, nothing obvious to fix. What the respondent had were three questions of their own: why am I receiving this, is it anonymous, and what happens after I answer? Friction was the assumed cause, and the survey had almost none of it. A one-time form can succeed on novelty. A recurring one has to earn each response, and it competes with the respondent\'s memory of what happened, or did not happen, last time.',
+            'Five questions, none of them about the form. How were people introduced to the cycle? Did they understand why they were being asked? Did they trust that answers were anonymous? Did they know what would happen with what they said? And had answering last time visibly changed anything?',
     },
     {
-        title: 'The journey',
+        title: 'What I found',
         body:
-            'Following the experience end to end, three of six stages were carrying no weight — and none of them was the form itself. Understanding was weak, because the reminder had quietly become the real entry point rather than the welcome message, and it did not stand on its own. Trust was weak, because anonymity was asserted as a word rather than explained in practice. And feedback was weak, because nothing visible happened after submitting.',
+            'The welcome communication was often missed. The reminder was becoming the entry point — people were arriving at the survey without having read the thing that explained it. In the respondent\'s own words: another workplace email. What is this about again? Is my answer really anonymous? Who will see this? Did anything happen? Why should I answer again? The experience broke in two places: between the invitation and the reminder, and between submitting and seeing any consequence. Anonymity was stated as a word rather than explained as a practice. In small teams people were not sure they could not be identified, and open text felt personally traceable. After submitting, nothing visible happened.',
     },
     {
-        title: 'The decision',
+        title: 'What that changed in my understanding',
         body:
-            'The problem was reframed. It arrived as a dashboard-value question — the data is thin, so fix the reporting — and it left as an upstream respondent-experience problem. Before, the proposed fix was to make the survey shorter. After, it was to make the purpose, the safety and the follow-through clearer. Three principles follow: explain why, so every reminder stands on its own; establish safety, by showing how grouping and thresholds protect an answer; and close the loop, because a request that shows no consequence has not earned the next one. Underneath all of it sits the harder idea — completion does not automatically equal candour. A survey can be fully completed and still be worth very little.',
+            'Participation was not one problem. It was five conditions the experience had to answer for the person being asked, and the cycle was weak on most of them. Relevance: why does this matter, and why am I being asked again? Effort: what does responding require beyond the time in the form? Safety: can I answer honestly without being personally exposed? Impact: what happens after I submit? And ownership: who is responsible for acting? I did not bring these with me. They are the questions the experience kept failing to answer, written down. A recurring survey has to earn the next response.',
     },
     {
-        title: 'Scope',
+        title: 'What I recommended, and why',
         body:
-            'Research and problem diagnosis, behavioural analytics read alongside the qualitative evidence rather than instead of it, and the interaction design of the experience surrounding the form.',
+            'Four decisions, each traced to its evidence. The reminder had become the real entry point, which meant the experience could not depend on the welcome being remembered — so every reminder had to be independently understandable. Anonymous was stated but not explained, and an abstract privacy claim does not create felt safety — so grouped reporting, open-text handling and minimum-response protection had to be explained. Respondents saw no impact after submitting, which meant a recurring request had not earned the next response — so the loop needed a visible close. And governance and manager ownership were blurred, with no role clearly owning what happens next — so governance and action ownership had to be separated. Alongside these: a clearer explanation of cadence, a neutral no-blocker-this-week path, and a review of repeatedly negative question framing.',
     },
     {
-        title: 'Evidence',
+        title: 'What was tested',
         body:
-            'Communication review, respondent journey review, interviews and stakeholder evidence, and behavioural analytics. This was early qualitative research intended to surface hypotheses, not a statistically representative study, and it was conducted inside one organisation. It does not explain all survey non-response, and it is not presented as if it does.',
+            'Nothing. Every item is a recommendation. None shipped, none has post-change measurement, none is validated. What they rest on: a respondent interview, an HR and governance interview, management feedback, reviews of the welcome and reminder communications, a walk-through of the respondent journey, and a review of how roles moved through the dashboards.',
     },
     {
-        title: 'Limitations',
+        title: 'What remains unknown',
         body:
-            'This case does not claim that communication changes alone increased participation. What it shows is how the investigation reframed the problem, from questionnaire length to respondent context and trust. The study was early and directional, with a small interview sample and no quantitative validation, conducted in one organisation. Management input was stakeholder feedback rather than a formal interview. Everything proposed is a recommendation: none has shipped and none has post-change measurement, so none is validated.',
+            'This case does not claim that communication changes alone increased participation. What it shows is how the investigation reframed the problem, from questionnaire length to respondent context and trust. The study was early and directional, with one respondent interview and no quantitative validation, conducted in one organisation. Management input was stakeholder feedback rather than a formal interview. It does not explain all survey non-response, and it is not presented as if it does. And whether any recommendation would have worked is unknown.',
     },
 ];

@@ -118,7 +118,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         href: '/work/respondent-experience',
         status: 'Public case study',
         confidentiality: 'Public · Anonymised',
-        readTime: '7 min read',
+        readTime: '3 min read',
         productContext: 'EnCulture at NHR Technologies · B2B culture analytics · assessment workflows',
         cardLine: 'The survey was three questions. That was never the problem.',
         problem:
@@ -153,7 +153,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         href: '/work/dashboard-explainability',
         status: 'Sanitised case study',
         confidentiality: 'Sanitised enterprise case',
-        readTime: '7 min read',
+        readTime: '5 min read',
         productContext: 'EnCulture at NHR Technologies · multi-role dashboards · role-based reporting',
         cardLine: 'Decision-makers could read the numbers, but not the reasoning behind them.',
         // Was: "Created a four-step model for making dashboards easier to
@@ -189,12 +189,12 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
     },
     {
         id: 'design-system',
-        title: 'Turning Design Decisions into Implementation Rules',
+        title: 'From Figma Library to Executable Product Rules',
         href: '/work/design',
         status: 'System story',
         productContext:
             'EnCulture Design System at NHR Technologies · governing three products: Assessments, Multi-Rater and Culture Intelligence',
-        cardLine: 'One decision, three products, and three different answers.',
+        cardLine: 'Everyone was using the brand. Nobody was using the same product language.',
         problem:
             'Three products with different implementation foundations were solving the same problems differently, and design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
         contribution:
