@@ -129,21 +129,19 @@ export function WorkCard({
                     of the width instead, and drops back to 16:10 when stacked. */}
                 <div
                     className={
-                        'border-b cl-border-border-color-default ' +
-                        // 16:9 rather than 16:10: at 16:10 the hero took 57% of
-                        // a stacked card, above the 45-55% the layout targets.
-                        // 16:9 lands at 54% and still leads the card.
-                        // The ratio tracks CARD width, not viewport width, and
-                        // the two diverge: at 768 a default card is only 319px
-                        // wide while the feature card spans 657px. One ratio for
-                        // both gives a 37% hero on one and 69% on the other.
-                        //
-                        // Default: 4:3 while the card is narrow, 16:9 once it is
-                        // ~478px at lg. Feature: 4:3 on a phone, then very wide
-                        // while it is stacked and full-bleed, then side-by-side.
+                        // overflow-hidden + min-h-0 are load-bearing, not tidying. In a
+                        // column flex container an item's automatic minimum size is its
+                        // content, so a hero image at its intrinsic 1.61 ratio pushed this
+                        // box past the aspect-ratio it was given — the frame silently became
+                        // the image's shape and card heights moved with it.
+                        'border-b cl-border-border-color-default overflow-hidden min-h-0 ' +
+                        // One ratio now, matched to the source renders (1.61), so nothing
+                        // meaningful is cropped at any width. The earlier 4:3 / 16:9 split
+                        // existed to keep drawn diagrams legible; these renders carry their
+                        // own composition, and cropping into them loses the subject.
                         (isFeature
-                            ? 'aspect-[4/3] sm:aspect-[3/1] lg:aspect-auto lg:border-b-0 lg:border-r lg:w-[44%] lg:shrink-0'
-                            : 'aspect-[4/3] lg:aspect-[16/9]')
+                            ? 'aspect-[16/10] lg:aspect-auto lg:border-b-0 lg:border-r lg:w-[44%] lg:shrink-0'
+                            : 'aspect-[16/10]')
                     }
                 >
                     {hero}
