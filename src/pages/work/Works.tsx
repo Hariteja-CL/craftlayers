@@ -59,6 +59,11 @@ const PRODUCT_CASES: WorkCardProps[] = getCases([
 
 const SYSTEMS: WorkCardProps[] = getCases(['design-system']).map(toCard);
 
+// The Architecturing Governance entry is also gone: that page is retired and
+// its route now redirects to /work/design-system-governance. The governance
+// story is carried by /work/design and, for the long version, by the field note
+// it links to. Do not re-list the retired route.
+//
 // The Enculture entry is deliberately absent. Its route names the client, and
 // the two flagship cases anonymise that same client — so listing it here, even
 // under a generic title, would undo the anonymisation. The route stays alive to
@@ -70,15 +75,6 @@ const EARLIER: WorkCardProps[] = [
         status: 'Earlier experiment',
         category: 'SaaS · Analytics',
         href: '/work/inwards',
-    },
-    {
-        // Listed once. /work/governance stays reachable but is not listed
-        // separately; this points at the stronger public-safe destination.
-        title: 'Design-System Governance',
-        problem: 'Keeping AI-generated and hand-written UI from drifting apart as a product grows.',
-        status: 'Earlier experiment',
-        category: 'Design Systems · Governance',
-        href: '/work/architecturing-governance',
     },
     {
         title: 'Culture dashboard concept',

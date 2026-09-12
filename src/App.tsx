@@ -31,7 +31,6 @@ import { DesignLayers } from './pages/layers/DesignLayers';
 import { AILayers } from './pages/layers/AILayers';
 import { SecurityLayers } from './pages/layers/SecurityLayers';
 
-import { ArchitecturingGovernance } from './pages/work/ArchitecturingGovernance';
 
 import { ScrollToTop as ScrollHandler } from './components/layout/ScrollToTop';
 
@@ -67,7 +66,18 @@ function App() {
           <Route path="/work/design" element={<DesignLayers />} />
           <Route path="/work/design-system-governance" element={<DesignSystemGovernance />} />
 
-          <Route path="/work/architecturing-governance" element={<ArchitecturingGovernance />} />
+          {/* Architecturing Governance is retired. Its story is now told twice
+              and better: /work/design is the short recruiter-readable case and
+              /work/design-system-governance is the deeper field note. The route
+              redirects rather than 404s because external links to it may exist.
+              Client-side redirect for in-app navigation; vercel.json handles
+              direct requests. ArchitecturingGovernance.tsx and its four
+              Fluentia visuals are retained on disk but no longer routed, and
+              so no longer reach the bundle. */}
+          <Route
+              path="/work/architecturing-governance"
+              element={<Navigate to="/work/design-system-governance" replace />}
+          />
           <Route path="/work/ai" element={<AILayers />} />
           <Route path="/work/security" element={<SecurityLayers />} />
           <Route path="/work/inwards" element={<Inwards />} />
