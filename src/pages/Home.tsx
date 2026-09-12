@@ -2,7 +2,12 @@ import { Link } from 'react-router-dom';
 import { HeroSection } from '../components/portfolio/HeroSection';
 import { WorkCard } from '../components/work/WorkCard';
 import { ArrowRight } from 'lucide-react';
-import { START_HERE_IDS, getCases } from '../data/evidence';
+import { START_HERE_IDS, getCases, type EvidenceCaseId } from '../data/evidence';
+import {
+    DashboardHero,
+    DesignSystemHero,
+    RespondentHero,
+} from '../components/work/CaseHeroes';
 
 /**
  * Home — four sections under the hero, down from seven.
@@ -56,6 +61,16 @@ const PILLARS = [
     },
 ];
 
+
+/** Which hero belongs to which case. Kept beside the cards that use it rather
+ *  than in the evidence library: the library describes the work, not how a
+ *  page chooses to picture it. */
+const CASE_HERO: Partial<Record<EvidenceCaseId, React.ReactNode>> = {
+    'respondent-experience': <RespondentHero />,
+    'dashboard-explainability': <DashboardHero />,
+    'design-system': <DesignSystemHero />,
+};
+
 function Section({
     id,
     eyebrow,
@@ -104,12 +119,13 @@ export function Home() {
                     intro="Three cases, in reading order: finding the real problem, making complex data readable, and keeping one decision consistent across three products."
                 >
                     <div className="grid gap-5 md:grid-cols-2">
-                        {/* Contribution IS passed here. The card answers "why open
-                            this?" and the case answers "what did you do?" — but
-                            withholding ownership left a recruiter unable to judge it
-                            without committing to a 7-minute read. Method still stays
-                            on /work: useful when comparing cases side by side, not
-                            when deciding which to open. */}
+                        {/* Contribution, method, product context and "why this
+                            matters" are no longer passed. The card had nine text
+                            blocks and about 110 words, which made it an article
+                            preview rather than a card; with a hero above it, prose
+                            at that volume defeats the hero. All four fields stay in
+                            the evidence library and still render on the case pages
+                            and on /for/:slug. */}
                         {getCases(START_HERE_IDS).map((c, i, arr) => (
                             /* With an odd number of cards the last one would sit
                                alone at half width, which reads as a gap rather
@@ -127,16 +143,19 @@ export function Home() {
                             >
                                 <WorkCard
                                     title={c.title}
-                                    productContext={c.productContext}
                                     problem={c.problem}
-                                    contribution={c.contribution}
                                     status={c.status}
-                                    confidentiality={c.confidentiality}
                                     evidenceLabel={c.evidenceLabel}
-                                    evidenceSummary={c.evidenceSummary}
                                     readTime={c.readTime}
                                     cta="See the decision story"
                                     href={c.href}
+                                    hero={CASE_HERO[c.id]}
+                                    cardLine={c.cardLine}
+                                    variant={
+                                        arr.length % 2 === 1 && i === arr.length - 1
+                                            ? 'feature'
+                                            : 'default'
+                                    }
                                 />
                             </div>
                         ))}

@@ -56,6 +56,29 @@ export interface WorkCardProps {
     /** Overrides the default "Read more". */
     cta?: string;
     href: string;
+
+    /**
+     * A card hero. When present the card switches to the compressed anatomy —
+     * visual, label, title, one line — because the point of a hero is to be
+     * seen before any prose, and nine stacked text blocks underneath it would
+     * defeat that.
+     *
+     * Cards without a hero render exactly as before, which is what keeps
+     * /for/:slug and the earlier-experiment entries working untouched.
+     */
+    hero?: React.ReactNode;
+    /**
+     * The one sentence a hero card gets. Deliberately not `problem`: that
+     * field is two or three sentences written for a page, and shortening it
+     * here would mean two versions of the same text drifting apart.
+     */
+    cardLine?: string;
+    /**
+     * 'feature' lays the hero beside the content instead of above it, for the
+     * card that occupies a full-width grid slot. A 16:10 hero at 976px would
+     * be nearly 400px tall and swallow the page.
+     */
+    variant?: 'default' | 'feature';
 }
 
 export function WorkCard({
@@ -72,9 +95,90 @@ export function WorkCard({
     readTime,
     cta,
     href,
+    hero,
+    cardLine,
+    variant = 'default',
 }: WorkCardProps) {
     const tagline = evidenceLabel ?? category;
     const meta = [status, confidentiality, readTime].filter(Boolean) as string[];
+
+    /* ---------------------------------------------------------------- *
+     * Hero cards. A separate return rather than conditionals threaded
+     * through the original markup: the two layouts share a title and a CTA
+     * and almost nothing else, and interleaving them would make both harder
+     * to read than having them side by side.
+     * ---------------------------------------------------------------- */
+    if (hero) {
+        const isFeature = variant === 'feature';
+        return (
+            <Link
+                to={href}
+                className={
+                    'group rounded-2xl border cl-border-border-color-default cl-bg-neutral-surface-level-1 ' +
+                    'overflow-hidden hover:cl-border-border-color-strong hover:shadow-lg transition-all cl-focus-ring ' +
+                    // h-full so cards in a row match height: without it a card
+                    // with a one-line title is shorter than its neighbour, and
+                    // the hero's share of the card drifts between them.
+                    // lg, not md: at 768 a side-by-side feature card gives the hero only
+                    // ~290px and squeezes the text beside it. Tablet stacks.
+                    (isFeature ? 'flex flex-col lg:flex-row lg:items-stretch' : 'flex flex-col h-full')
+                }
+            >
+                {/* Fixed ratio so cards in a row align regardless of how long
+                    a title runs. On the feature card the hero takes a fraction
+                    of the width instead, and drops back to 16:10 when stacked. */}
+                <div
+                    className={
+                        'border-b cl-border-border-color-default ' +
+                        // 16:9 rather than 16:10: at 16:10 the hero took 57% of
+                        // a stacked card, above the 45-55% the layout targets.
+                        // 16:9 lands at 54% and still leads the card.
+                        // The ratio tracks CARD width, not viewport width, and
+                        // the two diverge: at 768 a default card is only 319px
+                        // wide while the feature card spans 657px. One ratio for
+                        // both gives a 37% hero on one and 69% on the other.
+                        //
+                        // Default: 4:3 while the card is narrow, 16:9 once it is
+                        // ~478px at lg. Feature: 4:3 on a phone, then very wide
+                        // while it is stacked and full-bleed, then side-by-side.
+                        (isFeature
+                            ? 'aspect-[4/3] sm:aspect-[3/1] lg:aspect-auto lg:border-b-0 lg:border-r lg:w-[44%] lg:shrink-0'
+                            : 'aspect-[4/3] lg:aspect-[16/9]')
+                    }
+                >
+                    {hero}
+                </div>
+
+                <div className={'p-6 flex flex-col ' + (isFeature ? 'lg:flex-1 lg:justify-center lg:p-8' : 'flex-1')}>
+                    <p className="text-[10px] font-bold uppercase tracking-wider cl-text-neutral-text-low-contrast">
+                        {tagline ?? status}
+                    </p>
+
+                    <h3 className="mt-2 text-xl md:text-2xl font-bold cl-text-neutral-text-high-contrast tracking-tight leading-snug group-hover:cl-text-brand-primary-base transition-colors">
+                        {title}
+                    </h3>
+
+                    {cardLine && (
+                        <p className="mt-3 text-base cl-text-neutral-text-medium-contrast leading-relaxed">
+                            {cardLine}
+                        </p>
+                    )}
+
+                    <div className="mt-5 pt-1 flex flex-wrap items-center gap-x-3 gap-y-2 sm:mt-auto">
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold cl-text-brand-primary-base">
+                            {cta ?? 'Read more'}
+                            <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </span>
+                        {readTime && (
+                            <span className="text-[11px] font-semibold uppercase tracking-wider cl-text-neutral-text-low-contrast">
+                                {readTime}
+                            </span>
+                        )}
+                    </div>
+                </div>
+            </Link>
+        );
+    }
 
     return (
         <Link

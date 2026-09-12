@@ -75,6 +75,16 @@ export interface EvidenceCase {
      */
     productContext?: string;
 
+    /**
+     * The single line a card with a hero gets.
+     *
+     * Kept separate from `problem` on purpose. `problem` is two or three
+     * sentences written for a page; a card needs one sentence written for a
+     * card, and deriving one from the other would leave two versions of the
+     * same claim drifting apart.
+     */
+    cardLine?: string;
+
     /** What was wrong, in one line. */
     problem: string;
     /** What Hari actually did. */
@@ -110,6 +120,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         confidentiality: 'Public · Anonymised',
         readTime: '7 min read',
         productContext: 'EnCulture at NHR Technologies · B2B culture analytics · assessment workflows',
+        cardLine: 'The survey was three questions. That was never the problem.',
         problem:
             'The real problem was not the dashboard. Too few people understood why the survey mattered, whether it was safe to answer honestly, or what happened after they responded.',
         contribution: 'Diagnosed the cause and set out what would need to change.',
@@ -144,6 +155,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         confidentiality: 'Sanitised enterprise case',
         readTime: '7 min read',
         productContext: 'EnCulture at NHR Technologies · multi-role dashboards · role-based reporting',
+        cardLine: 'Decision-makers could read the numbers, but not the reasoning behind them.',
         // Was: "Created a four-step model for making dashboards easier to
         // understand…" — which described the solution. A card that opens with
         // the answer gives a reader nothing to be curious about, and it made
@@ -182,6 +194,7 @@ export const EVIDENCE_CASES: EvidenceCase[] = [
         status: 'System story',
         productContext:
             'EnCulture Design System at NHR Technologies · governing three products: Assessments, Multi-Rater and Culture Intelligence',
+        cardLine: 'One decision, three products, and three different answers.',
         problem:
             'Three products with different implementation foundations were solving the same problems differently, and design decisions kept being re-litigated because they lived in files and conversations rather than in rules a team could build against.',
         contribution:
