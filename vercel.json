@@ -9,6 +9,11 @@
       "source": "/resume.pdf",
       "destination": "/Hariteja-Nandipati-Resume.pdf",
       "permanent": true
+    },
+    {
+      "source": "/work/architecturing-governance",
+      "destination": "/work/design-system-governance",
+      "permanent": true
     }
   ],
   "rewrites": [
